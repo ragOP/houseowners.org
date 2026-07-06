@@ -7,8 +7,8 @@
   <meta name="description" content="Home Equity Agreement (HEA) — cash out up to $600k from your home's equity without selling or monthly payments.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <script type="text/javascript" src="https://trk.smartselecttoday.online/track.js?rtkcmpid=6a4bbabc0dfad19c45f8c5c0"></script>
+  <link rel="preload" as="image" href="hero.webp" type="image/webp">
+  <link rel="preload" as="image" href="logo.webp" type="image/webp">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -68,13 +68,22 @@
       margin-right: auto;
     }
 
+    .hero-picture {
+      display: block;
+      width: 100%;
+      margin: 0 auto 28px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #e8e8e8;
+    }
+
     .hero-img {
       width: 100%;
+      height: auto;
       max-height: 420px;
-      border-radius: 14px;
       object-fit: cover;
       display: block;
-      margin: 0 auto 28px;
+      aspect-ratio: 1200 / 665;
     }
 
     p {
@@ -161,10 +170,13 @@
         margin-bottom: 32px;
       }
 
-      .hero-img {
-        max-height: 460px;
+      .hero-picture {
         border-radius: 16px;
         margin-bottom: 32px;
+      }
+
+      .hero-img {
+        max-height: 460px;
       }
 
       p {
@@ -189,13 +201,19 @@
 </head>
 <body>
   <header class="topbar">
-    <img class="logo" src="logo.png" alt="Houseowners News">
+    <picture>
+      <source srcset="logo.webp" type="image/webp">
+      <img class="logo" src="logo.png" alt="Houseowners News" width="400" height="80" fetchpriority="high" decoding="async">
+    </picture>
   </header>
 
   <main class="content">
     <h1>Homeowners Are Getting Up to $600,000 Without Selling Or Monthly Payments Under This Gov. Appoved Program!</h1>
 
-    <img class="hero-img" src="hero.png" alt="Suburban home">
+    <picture class="hero-picture">
+      <source srcset="hero.webp" type="image/webp">
+      <img class="hero-img" src="hero.jpg" alt="Suburban home" width="1200" height="665" fetchpriority="high" decoding="async">
+    </picture>
 
     <p>This program is called HEA (Home Equity Agreement) that allows you to <strong>cash out up to $600k from your home's equity</strong> without selling, without any monthly payments, no loan or interest to pay back.</p>
 
@@ -211,5 +229,6 @@
       <a href="https://trk.smartselecttoday.online/click" class="cta" id="cta-link">Check and Claim Now</a>
     </div>
   </main>
+  <script defer src="https://trk.smartselecttoday.online/track.js?rtkcmpid=6a4bbabc0dfad19c45f8c5c0"></script>
 </body>
 </html>

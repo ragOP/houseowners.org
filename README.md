@@ -2,10 +2,10 @@
 
 Landing page for Houseowners News — HEA (Home Equity Agreement) program.
 
-## Setup
+## Assets
 
-- Replace the hero image placeholder in `index.html` with your photo.
-- Replace the SVG logo in the header with your logo file.
+- `hero.webp` / `hero.jpg` — optimized hero (WebP preferred, JPEG fallback)
+- `logo.webp` / `logo.png` — header logo
 
 ## Local preview
 
