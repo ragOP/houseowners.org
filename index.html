@@ -17,6 +17,7 @@
         })(window, document, "clarity", "script", "xia9amqtze");
     </script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     :root {
       --ink: #111111;
@@ -109,13 +110,28 @@
       text-align: center;
     }
 
+    .cta-arrow {
+      margin-bottom: 20px;
+      margin-top: -10px;
+      text-align: center;
+    }
+
+    .cta-arrow i {
+      font-size: 24px;
+      color: var(--ink);
+      line-height: 1;
+    }
+
     .cta {
       position: relative;
       overflow: hidden;
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
       width: 100%;
       max-width: 500px;
-      padding: 14px 20px;
+      padding: 17px 20px;
       background: #009648;
       color: var(--white);
       font-family: inherit;
@@ -157,6 +173,14 @@
 
     .cta:active {
       transform: translateY(0);
+    }
+
+    .cta-arr {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
     }
 
     /* ---------- FOOTER ---------- */
@@ -221,7 +245,7 @@
       max-width: none;
       width: 100%;
       font-size: clamp(16px, 3.5vw, 20px);
-      padding: 14px 20px;
+      padding: 17px 20px;
     }
 
     @media (min-width: 768px) {
@@ -297,7 +321,8 @@
     <p>Click below and answer a few simple questions on the next page to see how much you can cashout instantly!</p>
 
     <div class="cta-wrap" id="main-cta">
-      <a href="https://trk.smartselecttoday.online/click" class="cta" id="cta-link">Check and Claim Now</a>
+      <div class="cta-arrow" aria-hidden="true"><i class="fa-solid fa-angle-down"></i></div>
+      <a href="https://trk.smartselecttoday.online/click" class="cta" id="cta-link">Check and Claim Now<svg class="cta-arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
   </main>
 
@@ -311,7 +336,7 @@
 
   <div class="sticky" id="sticky">
     <div class="sticky-in">
-      <a href="https://trk.smartselecttoday.online/click" class="cta">Check and Claim Now</a>
+      <a href="https://trk.smartselecttoday.online/click" class="cta">Check and Claim Now<svg class="cta-arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
   </div>
 
