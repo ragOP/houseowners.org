@@ -153,6 +153,71 @@
       transform: translateY(0);
     }
 
+    /* ---------- FOOTER ---------- */
+    footer {
+      max-width: var(--content-max);
+      margin: 0 auto;
+      padding: 28px 20px 100px;
+      text-align: center;
+      border-top: 1px solid #e5e5e5;
+    }
+
+    footer .flinks {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px 20px;
+      margin-bottom: 14px;
+    }
+
+    footer .flinks a {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      text-decoration: none;
+    }
+
+    footer .flinks a:hover {
+      text-decoration: underline;
+    }
+
+    footer .copyr {
+      font-size: 13px;
+      color: #666;
+    }
+
+    /* ---------- STICKY CTA ---------- */
+    .sticky {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid #e5e5e5;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+      padding: 12px 16px;
+      transform: translateY(120%);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .sticky.show {
+      transform: translateY(0);
+    }
+
+    .sticky-in {
+      max-width: var(--content-max);
+      margin: 0 auto;
+    }
+
+    .sticky .cta {
+      max-width: none;
+      width: 100%;
+      font-size: clamp(16px, 3.5vw, 20px);
+      padding: 14px 20px;
+    }
+
     @media (min-width: 768px) {
       .topbar {
         padding: 18px 32px;
@@ -225,10 +290,44 @@
 
     <p>Click below and answer a few simple questions on the next page to see how much you can cashout instantly!</p>
 
-    <div class="cta-wrap">
+    <div class="cta-wrap" id="main-cta">
       <a href="https://trk.smartselecttoday.online/click" class="cta" id="cta-link">Check and Claim Now</a>
     </div>
   </main>
+
+  <footer>
+    <div class="flinks">
+      <a href="about.html">About Us</a>
+      <a href="terms.html">Terms</a>
+    </div>
+    <p class="copyr">© 2026 Houseowners News · All rights reserved</p>
+  </footer>
+
+  <div class="sticky" id="sticky">
+    <div class="sticky-in">
+      <a href="https://trk.smartselecttoday.online/click" class="cta">Check and Claim Now</a>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var sticky = document.getElementById('sticky');
+      var mainCta = document.getElementById('main-cta');
+      if (!sticky || !mainCta) return;
+
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            sticky.classList.remove('show');
+          } else {
+            sticky.classList.add('show');
+          }
+        });
+      }, { threshold: 0, rootMargin: '0px 0px -8px 0px' });
+
+      obs.observe(mainCta);
+    })();
+  </script>
   <script defer src="https://trk.smartselecttoday.online/track.js?rtkcmpid=6a4bbabc0dfad19c45f8c5c0"></script>
 </body>
 </html>
