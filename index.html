@@ -7,6 +7,8 @@
   <meta name="description" content="Home Equity Agreement (HEA) — cash out up to $600k from your home's equity without selling or monthly payments.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -96,21 +98,22 @@
       overflow: hidden;
       display: inline-block;
       width: 100%;
-      max-width: 380px;
-      padding: 18px 28px;
-      background: var(--green);
+      max-width: 500px;
+      padding: 14px 20px;
+      background: #009648;
       color: var(--white);
       font-family: inherit;
-      font-size: clamp(15px, 2vw, 17px);
+      font-size: clamp(20px, 4vw, 24px);
       font-weight: 800;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.02em;
       text-transform: uppercase;
       text-decoration: none;
       border: none;
-      border-radius: 999px;
+      border-radius: 12px;
+      text-align: center;
       cursor: pointer;
-      transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
-      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.28);
+      box-shadow: 0 0 12px 4px rgba(0, 150, 72, 0.6);
+      transition: box-shadow 0.3s ease, transform 0.15s ease;
     }
 
     .cta::after {
@@ -133,9 +136,8 @@
     }
 
     .cta:hover {
-      background: var(--green-dark);
+      box-shadow: 0 0 18px 6px rgba(0, 150, 72, 0.8);
       transform: translateY(-1px);
-      box-shadow: 0 12px 28px rgba(16, 185, 129, 0.38);
     }
 
     .cta:active {
