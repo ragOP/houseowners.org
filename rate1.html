@@ -265,17 +265,18 @@
         .cta-button {
             position: relative;
             overflow: hidden;
+            z-index: 0;
             display: inline-block;
             background-color: #ffc107;
             color: #1a1a1a;
-            padding: 16px 40px;
-            font-size: 1.1em;
+            padding: 18px 46px;
+            font-size: 1.265em;
             font-weight: 700;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
@@ -284,15 +285,17 @@
             position: absolute;
             top: 0;
             left: -120%;
+            z-index: 1;
+            display: block;
             width: 55%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
             transform: skewX(-20deg);
-            animation: shine 3.4s infinite;
+            animation: cta-shine 3.4s infinite;
             pointer-events: none;
         }
 
-        @keyframes shine {
+        @keyframes cta-shine {
             0% { left: -120%; }
             55% { left: 140%; }
             100% { left: 140%; }
@@ -367,8 +370,8 @@
             }
             
             .cta-button {
-                padding: 14px 30px;
-                font-size: 1em;
+                padding: 16px 35px;
+                font-size: 1.15em;
             }
         }
 
