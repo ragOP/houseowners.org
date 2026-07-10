@@ -7,6 +7,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="image" href="logo.webp" type="image/webp">
+    <link rel="preload" as="image" href="hero.webp" type="image/webp">
+    <script type="text/javascript" src="https://trk.wiseselectchoice.online/track.js?rtkcmpid=6a513af239adcd06a50fbd4b"></script>
     <script type="text/javascript">
         (function(c,l,a,r,i,t,y){
             c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -78,6 +80,25 @@
             font-size: 0.9em;
             color: #999;
             font-style: italic;
+            margin-top: 4px;
+        }
+
+        .hero-picture {
+            display: block;
+            width: 100%;
+            margin: 20px auto 16px;
+            border-radius: 6px;
+            overflow: hidden;
+            background: #e8e8e8;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: auto;
+            max-height: 420px;
+            object-fit: cover;
+            display: block;
+            aspect-ratio: 1200 / 665;
         }
         
         .content {
@@ -120,6 +141,12 @@
             padding: 15px;
             text-align: left;
             font-weight: 600;
+        }
+
+        .comparison-table thead th,
+        .comparison-table thead th.heloc-bad,
+        .comparison-table thead th.hea-good {
+            color: #fff;
         }
         
         .comparison-table td {
@@ -189,6 +216,8 @@
         }
         
         .cta-button {
+            position: relative;
+            overflow: hidden;
             display: inline-block;
             background-color: #ffc107;
             color: #1a1a1a;
@@ -201,6 +230,25 @@
             text-decoration: none;
             transition: all 0.3s ease;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 55%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+            transform: skewX(-20deg);
+            animation: shine 3.4s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shine {
+            0% { left: -120%; }
+            55% { left: 140%; }
+            100% { left: 140%; }
         }
         
         .cta-button:hover {
@@ -285,6 +333,14 @@
             .topbar .logo {
                 height: 44px;
             }
+
+            .hero-picture {
+                border-radius: 8px;
+            }
+
+            .hero-img {
+                max-height: 460px;
+            }
         }
 
         @media (min-width: 1024px) {
@@ -305,7 +361,11 @@
         <header class="article-header">
             <h1>Why Smart Homeowners Are Ditching HELOCs for HEAs in 2026</h1>
             <p class="subheader">The Financial Secret Banks Don't Want You to Know</p>
-            <p class="byline">Published: January 2026 | Updated: Today</p>
+            <picture class="hero-picture">
+                <source srcset="hero.webp" type="image/webp">
+                <img class="hero-img" src="hero.jpg" alt="Suburban home" width="1200" height="665" decoding="async">
+            </picture>
+            <p class="byline">Published: June 2026 | Updated: Today</p>
         </header>
 
         <div class="content">
@@ -421,7 +481,7 @@
             <div class="cta-section">
                 <h2>Check Your HEA Eligibility Today</h2>
                 <p>See how much you can access with zero monthly payments. Takes less than 60 seconds.</p>
-                <a href="https://www.hometap.com/overview/affiliate" class="cta-button">Check My Eligibility →</a>
+                <a href="https://trk.wiseselectchoice.online/click" class="cta-button">Check My Eligibility →</a>
             </div>
 
             <h2>Frequently Asked Questions</h2>
@@ -444,7 +504,7 @@
             <div class="cta-section">
                 <h2>Ready to Ditch Your HELOC?</h2>
                 <p>See how much you can access with zero monthly payments.</p>
-                <a href="https://www.hometap.com/overview/affiliate" class="cta-button">Check My Eligibility →</a>
+                <a href="https://trk.wiseselectchoice.online/click" class="cta-button">Check My Eligibility →</a>
             </div>
         </div>
 

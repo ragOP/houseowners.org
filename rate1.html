@@ -7,6 +7,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="image" href="logo.webp" type="image/webp">
+    <script type="text/javascript" src="https://trk.wiseselectchoice.online/track.js?rtkcmpid=6a513af239adcd06a50fbd4b"></script>
+    <link rel="preload" as="image" href="hero.webp" type="image/webp">
     <script type="text/javascript">
         (function(c,l,a,r,i,t,y){
             c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -78,6 +80,25 @@
             font-size: 0.9em;
             color: #999;
             font-style: italic;
+            margin-top: 4px;
+        }
+
+        .hero-picture {
+            display: block;
+            width: 100%;
+            margin: 20px auto 16px;
+            border-radius: 6px;
+            overflow: hidden;
+            background: #e8e8e8;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: auto;
+            max-height: 420px;
+            object-fit: cover;
+            display: block;
+            aspect-ratio: 1200 / 665;
         }
         
         .content {
@@ -189,12 +210,12 @@
             color: #1a1a1a;
         }
         
-        .comparison-table .bad {
+        .comparison-table td.bad {
             color: #d32f2f;
             font-weight: 600;
         }
         
-        .comparison-table .good {
+        .comparison-table td.good {
             color: #2196F3;
             font-weight: 600;
         }
@@ -242,6 +263,8 @@
         }
         
         .cta-button {
+            position: relative;
+            overflow: hidden;
             display: inline-block;
             background-color: #ffc107;
             color: #1a1a1a;
@@ -254,6 +277,25 @@
             text-decoration: none;
             transition: all 0.3s ease;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 55%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+            transform: skewX(-20deg);
+            animation: shine 3.4s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shine {
+            0% { left: -120%; }
+            55% { left: 140%; }
+            100% { left: 140%; }
         }
         
         .cta-button:hover {
@@ -338,6 +380,14 @@
             .topbar .logo {
                 height: 44px;
             }
+
+            .hero-picture {
+                border-radius: 8px;
+            }
+
+            .hero-img {
+                max-height: 460px;
+            }
         }
 
         @media (min-width: 1024px) {
@@ -356,9 +406,13 @@
     </header>
     <div class="container">
         <header class="article-header">
-            <h1>Why You Should Never Refinance Your Mortgage to Get Cash Out</h1>
-            <p class="subheader">The Rate Protection Secret Smart Homeowners Know</p>
-            <p class="byline">Published: January 2026 | Updated: Today</p>
+            <h1>Why You Should Never Refinance Your Mortgage to Get Cash Out (Do This Instead)</h1>
+            <p class="subheader">The Little-Known "Rate Protection Secret" Smart Homeowners Are Choosing in 2026.</p>
+            <picture class="hero-picture">
+                <source srcset="hero.webp" type="image/webp">
+                <img class="hero-img" src="hero.jpg" alt="Suburban home" width="1200" height="665" decoding="async">
+            </picture>
+            <p class="byline">Published: June 2026 | Updated: Today</p>
         </header>
 
         <div class="content">
@@ -385,51 +439,9 @@
             
             <p>That's $669,600 extra over the life of the loan. For $150,000 in cash.</p>
 
-            <h2>Calculate Your Refinance Cost</h2>
-            <div class="calculator-box">
-                <h3>Refinance Impact Calculator</h3>
-                <div class="calc-input-group">
-                    <label for="current-balance">Current Mortgage Balance:</label>
-                    <input type="number" id="current-balance" placeholder="$400,000" value="400000">
-                </div>
-                <div class="calc-input-group">
-                    <label for="current-rate">Current Rate:</label>
-                    <input type="number" id="current-rate" placeholder="3.5" value="3.5" min="0" max="15" step="0.1">
-                    <small style="color: #666;">%</small>
-                </div>
-                <div class="calc-input-group">
-                    <label for="new-rate">Refinance Rate:</label>
-                    <input type="number" id="new-rate" placeholder="7" value="7" min="0" max="15" step="0.1">
-                    <small style="color: #666;">%</small>
-                </div>
-                <div class="calc-input-group">
-                    <label for="cash-needed">Cash You Need:</label>
-                    <input type="number" id="cash-needed" placeholder="$150,000" value="150000">
-                </div>
-                
-                <button onclick="calculateRefiCost()" style="width: 100%; padding: 12px; background-color: #2196F3; color: white; border: none; border-radius: 4px; font-size: 1em; font-weight: 600; cursor: pointer; margin-top: 15px;">Calculate My Cost</button>
-                
-                <div id="calc-results" style="display: none; margin-top: 20px;">
-                    <div class="calc-result">
-                        <div class="calc-result-label">Current Monthly Payment:</div>
-                        <div class="calc-result-value" id="current-payment">$0</div>
-                    </div>
-                    <div class="calc-result" style="margin-top: 10px;">
-                        <div class="calc-result-label">New Monthly Payment (After Refi):</div>
-                        <div class="calc-result-value" id="new-payment">$0</div>
-                    </div>
-                    <div class="calc-result" style="margin-top: 10px;">
-                        <div class="calc-result-label">Monthly Payment Increase:</div>
-                        <div class="calc-result-value" id="payment-increase" style="color: #d32f2f;">$0</div>
-                    </div>
-                    <div class="calc-result" style="margin-top: 10px; background-color: #ffebee; border-left-color: #d32f2f;">
-                        <div class="calc-result-label">Total Extra Cost Over 30 Years:</div>
-                        <div class="calc-result-value" id="total-extra-cost" style="color: #d32f2f;">$0</div>
-                    </div>
-                </div>
-            </div>
+         
 
-            <h2>The Alternative: Home Equity Agreements</h2>
+            <h2>The Perfect Alternative: Home Equity Agreements</h2>
             <p>There's a better way. A Home Equity Agreement (HEA) lets you access your equity without refinancing your mortgage. You keep your low rate. You get the cash you need. And you pay zero monthly payments.</p>
             
             <div class="highlight">
@@ -506,7 +518,7 @@
             <div class="cta-section">
                 <h2>Keep Your Rate. Get Your Cash.</h2>
                 <p>See how much you can access with an HEA without touching your mortgage rate. Takes less than 60 seconds.</p>
-                <a href="https://www.hometap.com/overview/affiliate" class="cta-button">Check My Eligibility →</a>
+                <a href="https://trk.wiseselectchoice.online/click" class="cta-button">Check My Eligibility →</a>
             </div>
 
             <h2>Frequently Asked Questions</h2>
@@ -532,7 +544,7 @@
             <div class="cta-section">
                 <h2>Don't Refinance. Use HEA Instead.</h2>
                 <p>Keep your low mortgage rate and access the cash you need.</p>
-                <a href="https://www.hometap.com/overview/affiliate" class="cta-button">Check My Eligibility →</a>
+                <a href="https://trk.wiseselectchoice.online/click" class="cta-button">Check My Eligibility →</a>
             </div>
         </div>
 
