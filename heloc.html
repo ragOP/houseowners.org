@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Why Smart Homeowners Are Ditching HELOCs for HEAs in 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="image" href="logo.webp" type="image/webp">
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "xia9amqtze");
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,10 +23,28 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             line-height: 1.6;
             color: #333;
             background-color: #f9f9f9;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .topbar {
+            background: #111111;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .topbar .logo {
+            height: 38px;
+            width: auto;
+            max-width: min(100%, 420px);
+            object-fit: contain;
+            display: block;
+            image-rendering: -webkit-optimize-contrast;
         }
         
         .container {
@@ -25,7 +54,7 @@
             background-color: white;
         }
         
-        header {
+        .article-header {
             text-align: center;
             margin-bottom: 40px;
             padding-bottom: 20px;
@@ -247,11 +276,33 @@
                 font-size: 1em;
             }
         }
+
+        @media (min-width: 768px) {
+            .topbar {
+                padding: 18px 32px;
+            }
+
+            .topbar .logo {
+                height: 44px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .topbar .logo {
+                height: 48px;
+            }
+        }
     </style>
 </head>
 <body>
+    <header class="topbar">
+        <picture>
+            <source srcset="logo.webp" type="image/webp">
+            <img class="logo" src="logo.png" alt="Houseowners News" width="400" height="80" fetchpriority="high" decoding="async">
+        </picture>
+    </header>
     <div class="container">
-        <header>
+        <header class="article-header">
             <h1>Why Smart Homeowners Are Ditching HELOCs for HEAs in 2026</h1>
             <p class="subheader">The Financial Secret Banks Don't Want You to Know</p>
             <p class="byline">Published: January 2026 | Updated: Today</p>
