@@ -8,17 +8,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="logo.webp" type="image/webp">
 <style>
   :root {
-    --navy: #13233f;
-    --navy-2: #0e1b33;
-    --gold: #c5a059;
-    --gold-2: #e0c07a;
-    --red: #7a2424;
-    --green: #1f9d55;
-    --paper: #eef1f6;
-    --ink: #122033;
+    --navy: #1a3a5c;
+    --navy-2: #0f2640;
+    --gold: #c8a84e;
+    --gold-2: #c8a84e;
+    --red: #b91c1c;
+    --green: #16a34a;
+    --paper: #f3f5f7;
+    --ink: #1a2332;
     --offer: https://trk.pickwisely.online/click;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,49 +31,82 @@
   }
   a { color: inherit; }
   .notice {
-    background: #6b1d1d;
+    background: var(--red);
     color: #fff;
     text-align: center;
-    font-size: 13.5px;
+    font-size: 0.82rem;
     font-weight: 600;
-    padding: 10px 14px;
+    letter-spacing: .3px;
+    padding: 10px 16px;
     padding-top: max(10px, env(safe-area-inset-top));
   }
+  .notice-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .notice svg { flex-shrink: 0; display: block; }
   header.brand {
     background: var(--navy);
     color: #fff;
-    text-align: center;
-    padding: 16px 16px 14px;
-    border-bottom: 2px solid var(--gold);
+    padding: 14px 24px;
+    border-bottom: 3px solid var(--gold);
   }
-  header.brand img { height: 42px; width: auto; margin: 0 auto 8px; display: block; }
-  header.brand .portal {
-    color: var(--gold);
-    font-size: 11px;
-    letter-spacing: .16em;
+  .header-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+  }
+  .header-seal {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: block;
+  }
+  .header-text { display: flex; flex-direction: column; }
+  .header-title {
+    font-family: Merriweather, Georgia, serif;
+    color: #fff;
+    font-size: 1.15rem;
     font-weight: 700;
+    line-height: 1.3;
+  }
+  .header-subtitle {
+    color: var(--gold);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
+    margin-top: 2px;
   }
   .hero {
     background: linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
     color: #fff;
     text-align: center;
-    padding: 28px 16px 22px;
+    padding: 36px 20px 50px;
   }
   .badge {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    border: 1px solid var(--gold);
-    border-radius: 999px;
-    padding: 7px 14px;
+    gap: 6px;
+    background: rgba(200, 168, 78, .15);
+    border: 1px solid rgba(200, 168, 78, .4);
+    border-radius: 20px;
+    padding: 6px 16px;
     color: var(--gold);
-    font-size: 12px;
+    font-size: 0.76rem;
     font-weight: 700;
-    letter-spacing: .08em;
+    letter-spacing: 1px;
     text-transform: uppercase;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
   }
+  .badge svg { display: block; flex-shrink: 0; }
   h1 {
     font-family: Merriweather, Georgia, serif;
     font-size: clamp(24px, 5.6vw, 36px);
@@ -84,30 +116,32 @@
     margin: 0 auto 14px;
   }
   h1 em { color: var(--gold-2); font-style: normal; }
-  .lead { max-width: 640px; margin: 0 auto 18px; font-size: 16.5px; opacity: .95; }
+  .lead { max-width: 520px; margin: 0 auto 24px; font-size: 1.05rem; line-height: 1.65; color: #c5d0dc; }
   .lead b { color: #fff; }
   .checks {
     display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 18px;
     margin: 0 auto 22px; max-width: 720px; font-size: 14px; font-weight: 700;
   }
-  .checks span::before { content: "✓ "; color: #3ddc84; }
+  .checks span::before { content: "✓ "; color: var(--green); }
   .stats {
     display: grid; grid-template-columns: repeat(3, 1fr);
     gap: 8px; max-width: 640px; margin: 0 auto 20px;
   }
-  .stats b { display: block; color: var(--gold-2); font-size: clamp(18px, 4vw, 26px); font-weight: 800; }
-  .stats i { font-style: normal; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; opacity: .8; }
+  .stats b { display: block; color: var(--gold); font-size: 1.6rem; font-weight: 800; }
+  .stats i { font-style: normal; font-size: 0.72rem; font-weight: 500; letter-spacing: .5px; text-transform: uppercase; color: #8fa3b8; }
   .timerbar {
-    background: #0a1426;
+    background: #0f1a2a;
     color: #fff;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 8px 14px;
-    padding: 12px 10px;
-    font-size: 13px;
+    gap: 12px;
+    padding: 14px 20px;
+    font-size: 0.85rem;
     font-weight: 600;
+    border-top: 1px solid rgba(200,168,78,.2);
+    border-bottom: 1px solid rgba(200,168,78,.2);
   }
   .timerbar-clock {
     display: flex;
@@ -119,23 +153,26 @@
   .timerbar .box {
     background: var(--red);
     color: #fff;
-    min-width: 44px;
-    padding: 8px 6px;
+    min-width: 38px;
+    padding: 4px 10px;
     border-radius: 4px;
-    font-size: 20px;
-    font-weight: 800;
-    letter-spacing: .04em;
+    font-size: 0.95rem;
+    font-weight: 700;
     text-align: center;
   }
   .timerbar .sep {
-    color: #fff;
-    font-weight: 800;
-    font-size: 18px;
-    line-height: 1;
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 1.1rem;
+    line-height: 1.8;
   }
   .secure {
-    background: #1a2d52; color: #d7e0f0; text-align: center;
-    padding: 11px; font-size: 13.5px; font-weight: 600;
+    background: linear-gradient(90deg, var(--navy), #264a6e);
+    color: #fff;
+    text-align: center;
+    padding: 16px 24px;
+    font-size: 0.9rem;
+    font-weight: 600;
   }
   .quiz { max-width: 720px; margin: 0 auto; padding: 28px 16px 40px; }
   .steps { display: flex; gap: 8px; margin-bottom: 22px; }
@@ -172,7 +209,7 @@
     box-shadow: 0 0 0 1px rgba(255,255,255,.25) inset, 0 0 22px rgba(197,160,89,.45);
   }
   .cta span { display: block; font-size: 12.5px; font-weight: 600; margin-top: 4px; }
-  .warn { margin-top: 12px; font-size: 13.5px; color: #7a2424; font-weight: 600; text-align: center; }
+  .warn { margin-top: 12px; font-size: 13.5px; color: var(--red); font-weight: 600; text-align: center; }
   .revs { margin-top: 36px; }
   .revs h3 { margin-bottom: 14px; }
   .rev { background: #fff; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
@@ -196,26 +233,48 @@
     .stats { gap: 4px; }
     .stats b { font-size: 16px; }
     h1 { font-size: 23px; }
+    .header-title { font-size: 1.05rem; }
     .timerbar { flex-direction: column; gap: 8px; }
-    .timerbar .box { min-width: 42px; font-size: 18px; }
+    .timerbar .box { min-width: 38px; font-size: 0.95rem; }
   }
 </style>
 </head>
 <body>
 
-<div class="notice">NOTICE: 2026 Senior Home Equity Benefit enrollment closes Thursday, August 20 — Check eligibility now</div>
+<div class="notice">
+  <div class="notice-inner">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+    <span>NOTICE: 2026 Senior Home Equity Benefit enrollment closes Friday, August 21 — Check eligibility now</span>
+  </div>
+</div>
 <header class="brand">
-  <a href="index.html">
-    <picture>
-      <source srcset="logo.webp" type="image/webp">
-      <img src="logo.png" alt="Houseowners News" width="400" height="80">
-    </picture>
+  <a class="header-inner" href="index.html">
+    <svg class="header-seal" viewBox="0 0 52 52" width="52" height="52" aria-hidden="true">
+      <defs>
+        <radialGradient id="sealGold" cx="32%" cy="28%" r="72%">
+          <stop offset="0%" stop-color="#ead48c"/>
+          <stop offset="50%" stop-color="#c8a84e"/>
+          <stop offset="100%" stop-color="#8f6f28"/>
+        </radialGradient>
+      </defs>
+      <circle cx="26" cy="26" r="26" fill="url(#sealGold)"/>
+      <circle cx="26" cy="26" r="22.5" fill="none" stroke="#1a3a5c" stroke-width="1.35"/>
+      <circle cx="26" cy="26" r="20" fill="none" stroke="#1a3a5c" stroke-width=".5" opacity=".7"/>
+      <path fill="#1a3a5c" d="M26 14.2 38.2 24.4v13.8H31V29.6H21v8.6h-7.2V24.4Z"/>
+      <rect x="24.15" y="31.4" width="3.7" height="6.8" rx=".4" fill="#c8a84e"/>
+    </svg>
+    <div class="header-text">
+      <span class="header-title">Houseowners News</span>
+      <span class="header-subtitle">Senior Home Equity Benefits Portal</span>
+    </div>
   </a>
-  <div class="portal">Senior Home Equity Benefits Portal</div>
 </header>
 
 <section class="hero">
-  <div class="badge">2026 Benefit Program — Now Open</div>
+  <div class="badge">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#c8a84e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
+    2026 Benefit Program — Now Open
+  </div>
   <h1>New 2026 Program Lets Homeowners 62+ Unlock Up To <em>$500,000</em> From Their Home Equity</h1>
   <p class="lead">Access tax-free cash from your home equity — <b>no monthly repayments required</b>. Check if you qualify in under 60 seconds.</p>
   <div class="checks">
