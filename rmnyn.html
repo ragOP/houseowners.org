@@ -9,30 +9,41 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="hero.webp" type="image/webp">
+<link rel="preload" as="image" href="logo.webp" type="image/webp">
 <style>
   :root {
     --navy: #163a8a;
-    --header: #6b1d1d;
+    --header: #111111;
     --green: #1f9d4a;
+    --gold: #c5a059;
+    --ink: #122033;
+    --paper: #eef1f6;
     --offer: https://trk.smartselecttoday.online/click;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { overflow-x: hidden; }
   body {
     font-family: Inter, Arial, Helvetica, sans-serif;
-    background: #fff;
-    color: #111;
+    background: var(--paper);
+    color: var(--ink);
     -webkit-font-smoothing: antialiased;
   }
   a { color: inherit; text-decoration: none; }
   .head {
     background: var(--header);
-    color: #fff;
-    text-align: center;
-    font-weight: 800;
-    font-size: 18px;
-    padding: 14px 12px;
-    padding-top: max(14px, env(safe-area-inset-top));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    padding-top: max(10px, env(safe-area-inset-top));
+  }
+  .head .logo {
+    height: 25px;
+    width: auto;
+    max-width: min(100%, 420px);
+    object-fit: contain;
+    display: block;
+    image-rendering: -webkit-optimize-contrast;
   }
   .live {
     background: var(--green);
@@ -59,29 +70,6 @@
     width: 8px; height: 8px; border-radius: 50%;
     background: var(--green); box-shadow: 0 0 0 3px #d7f5e2;
   }
-  .pulse {
-    animation: pulse 1s ease-in-out infinite;
-    background-color: #22c55e;
-    border-radius: 50%;
-    box-shadow: 0 0 8px #22c55e80;
-    height: 10px;
-    width: 10px;
-    flex-shrink: 0;
-  }
-  @keyframes pulse {
-    0% { opacity: 1; transform: scale(1); }
-    50% { opacity: .7; transform: scale(1.2); }
-    100% { opacity: 1; transform: scale(1); }
-  }
-  #image-container {
-    position: absolute;
-    top: 30px;
-    z-index: 10000;
-    width: 100%;
-    display: none;
-    pointer-events: none;
-  }
-  #image-container img { width: 100%; }
   .wrap { max-width: 560px; margin: 0 auto; padding: 18px 20px 24px; text-align: center; }
   h1 { font-size: clamp(25px, 6.9vw, 32px); font-weight: 800; line-height: 1.25; margin: 0 0 14px; }
   .hero {
@@ -91,7 +79,7 @@
     margin: 6px auto 22px;
     background: #eee;
   }
-  .hero img { width: 100%; height: auto; display: block; }
+  .hero img { width: 90%; height: 90%; border-radius: 8px; }
   .copy { font-size: 16px; font-weight: 700; line-height: 1.45; margin: 0 0 12px; }
   .stats {
     display: grid;
@@ -104,7 +92,6 @@
     margin: 0 auto 18px;
     overflow: hidden;
   }
-  .checking .stats { margin: 16px auto 0; }
   .stats > div {
     position: relative;
     padding: 10px 6px 9px;
@@ -143,161 +130,87 @@
     line-height: 1;
   }
   .chev svg { width: 24px; height: 24px; display: block; margin: 0 auto; }
-  .banner {
-    background: var(--navy);
-    color: #fff;
-    font-size: 14px;
-    font-weight: 800;
-    padding: 15px 5px;
-    border-radius: 15px;
-    box-shadow: 0 5px 0 var(--green);
-    margin-bottom: 8px;
-  }
-  .survey {
-    background: #f1f1f1;
-    padding: 14px 16px 16px;
-    border-radius: 0 0 10px 10px;
-  }
-  .survey h2 { font-size: 20px; margin: 0 0 14px; }
+  .quiz { max-width: 560px; margin: 0 auto; padding: 0 20px 40px; text-align: left; }
+  .steps { display: flex; gap: 8px; margin-bottom: 22px; }
+  .steps i { flex: 1; height: 6px; background: #d5dbe6; border-radius: 99px; }
+  .steps i.on { background: var(--navy); }
+  .steps i.done { background: var(--green); }
+  .panel { display: none; background: #fff; border-radius: 14px; padding: 22px 18px; box-shadow: 0 8px 28px rgba(18,32,51,.08); }
+  .panel.on { display: block; }
+  .quiz h2 { font-size: clamp(22px, 4.5vw, 28px); margin-bottom: 8px; font-weight: 800; color: var(--ink); }
+  .hint { color: #5b6778; margin-bottom: 16px; font-weight: 400; }
+  .opts { display: grid; gap: 10px; }
   .opt {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 56px;
-    background-color: rgb(34, 197, 94);
-    color: #fff;
-    border: 0;
-    border-radius: 0.5rem;
-    padding: 0 12px;
-    font-size: 18px;
-    line-height: 1;
-    font-weight: 800;
-    font-family: inherit;
-    text-transform: capitalize;
-    cursor: pointer;
-    margin: 0 0 10px;
+    display: block; width: 100%; text-align: left;
+    background: #fff; border: 1.5px solid #d5dbe6; border-radius: 12px;
+    padding: 14px 16px; font-size: 16px; font-weight: 700; color: var(--ink);
+    cursor: pointer; font-family: inherit;
   }
-  .opt:hover { background-color: rgb(59, 236, 124); }
-  .now {
-    display: flex; justify-content: center; align-items: center; gap: 8px;
-    font-size: 14px; font-style: italic; color: #333; margin-top: 8px;
+  .opt:hover, .opt.on { border-color: var(--navy); background: #f3f6fb; }
+  .analyze { text-align: center; padding: 36px 10px; }
+  .spin { width: 48px; height: 48px; margin: 0 auto 16px; border: 4px solid #dbe3f0; border-top-color: var(--navy); border-radius: 50%; animation: spin .8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .alist { list-style: none; max-width: 360px; margin: 16px auto 0; text-align: left; }
+  .alist li { padding: 7px 0 7px 26px; position: relative; color: #445; opacity: .35; }
+  .alist li.show { opacity: 1; }
+  .alist li::before { content: "✓"; position: absolute; left: 0; color: var(--green); font-weight: 800; }
+  .ok { color: var(--green); font-weight: 800; letter-spacing: .08em; text-transform: uppercase; font-size: 12px; margin-bottom: 8px; }
+  .bens { margin: 14px 0 18px; }
+  .bens li { margin: 0 0 8px 4px; list-style: none; padding-left: 22px; position: relative; }
+  .bens li::before { content: "✓"; position: absolute; left: 0; color: var(--green); font-weight: 800; }
+  .cta {
+    display: block; width: 100%; text-align: center; text-decoration: none;
+    background: var(--gold); color: #1a1408 !important;
+    font-weight: 800; font-size: 17px; padding: 16px 14px; border-radius: 10px;
+    box-shadow: 0 0 0 1px rgba(255,255,255,.25) inset, 0 0 22px rgba(197,160,89,.45);
   }
-  .now b { color: #22c55e; font-style: normal; }
-  .hidden { display: none !important; }
-  .checking {
-    text-align: center;
-    padding: 1.5rem;
-    background-color: #e9f2ff;
-    border-top: 2px solid rgb(59, 130, 246);
-    margin: 1rem auto;
-    max-width: 48rem;
-    font-size: 1.125rem;
-    line-height: 1.75rem;
-    color: #1f2937;
-    font-weight: 700;
-  }
-  .congrats {
-    font-size: 1.5rem;
-    line-height: 2rem;
-    color: rgb(34, 197, 94);
-    font-weight: 700;
-  }
-  .top-description-5 {
-    margin-top: 0.5rem;
-    font-size: 1.5rem;
-    line-height: 2rem;
-    font-weight: 500;
-    background-color: rgb(254, 240, 138);
-    padding: 12px 10px;
-  }
-  .spots-count {
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-    font-weight: 700;
-    padding: 0.5rem 1rem;
-    background-color: rgb(253, 224, 71);
-    margin: 1rem auto;
-    border-radius: 0.5rem;
-    width: max-content;
-  }
-  .call-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 56px;
-    font-size: 18px;
-    line-height: 1;
-    color: #fff !important;
-    text-transform: capitalize;
-    font-weight: 800;
-    padding: 0 12px;
-    background-color: rgb(34, 197, 94);
-    margin: 1rem 0;
-    cursor: pointer;
-    border-radius: 0.5rem;
-    animation: glow 1.5s infinite alternate;
-  }
-  .call-btn:hover { background-color: rgb(59, 236, 124); }
-  @keyframes glow {
-    0% { box-shadow: 0 0 5px #34C759, 0 0 10px #34C759; }
-    50% { box-shadow: 0 0 10px #34C759, 0 0 20px #34C759; }
-    100% { box-shadow: 0 0 5px #34C759, 0 0 10px #34C759; }
-  }
-  .sub-description {
-    font-size: 1rem;
-    line-height: 1.5rem;
-    margin: 1rem 0;
-    font-weight: 400;
-  }
-  .timer {
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-    background: transparent;
-    padding: 0.25rem 1rem;
-    color: red;
-    border: 2px dashed red;
-    margin-top: 0.5rem;
-    margin-left: auto;
-    margin-right: auto;
-    width: max-content;
-    display: flex;
-    flex-direction: row;
-    font-weight: 800;
-  }
-  .beware { font-size: 12px; color: #555; line-height: 1.45; margin: 22px 0 12px; text-align: left; font-weight: 400; }
+  .cta span { display: block; font-size: 12.5px; font-weight: 600; margin-top: 4px; }
+  .warn { margin-top: 12px; font-size: 13.5px; color: #7a2424; font-weight: 600; text-align: center; }
+  .revs { margin-top: 36px; }
+  .revs h3 { margin-bottom: 14px; font-size: 18px; }
+  .rev { background: #fff; border-radius: 12px; padding: 16px; margin-bottom: 12px; border: 1px solid #e8ecf3; }
+  .rev .who { display: flex; gap: 10px; align-items: center; margin-bottom: 8px; }
+  .av { width: 40px; height: 40px; border-radius: 50%; background: #dfe7f5; color: var(--navy); font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .rev p { font-size: 14.5px; font-weight: 400; line-height: 1.5; }
+  .meta { font-size: 12px; color: #667; }
+  .stars { color: var(--gold); letter-spacing: 1px; font-size: 13px; }
   footer {
     text-align: center;
     font-size: 13px;
-    padding: 141px 20px 28px;
+    padding: 24px 20px 28px;
     padding-bottom: max(28px, calc(16px + env(safe-area-inset-bottom)));
-    background: #fff;
+    background: var(--paper);
   }
   footer a { color: var(--navy); font-weight: 700; text-decoration: none; }
   @media (max-width: 768px) {
     .wrap { padding: 14px 18px 20px; }
     h1 { font-size: 25px; margin-bottom: 12px; }
     .hero { width: 84%; margin: 10px auto 28px; }
-    .copy { font-size: 15px; margin: 4px 0 14px; }
+    .copy { font-size: 15px; margin: 16px 0 14px; }
     .stats > div { padding: 9px 4px 8px; }
     .stats b { font-size: 15px; }
     .stats span { font-size: 8px; letter-spacing: .05em; }
-    .congrats { font-size: 1.25rem; line-height: 1.75rem; }
-    .top-description-5 { font-size: 1.25rem; line-height: 1.75rem; }
-    .top-description-5 b { font-weight: 700; }
-    .call-btn, .opt { font-size: 17px; height: 52px; }
-    .sub-description { font-size: .875rem; line-height: 1.25rem; }
-    .checking { margin: 1.25rem 1rem; }
+    .quiz { padding: 0 18px 32px; }
+  }
+  @media (min-width: 768px) {
+    .head { padding: 12px 32px; }
+    .head .logo { height: 29px; }
+  }
+  @media (min-width: 1024px) {
+    .head .logo { height: 31px; }
   }
 </style>
 </head>
 <body>
 
-<div id="image-container">
-  <img src="baarish.GIF" alt="">
+<div class="head">
+  <a href="index.html">
+    <picture>
+      <source srcset="logo.webp" type="image/webp">
+      <img class="logo" src="logo.png" alt="Houseowners News" width="400" height="80" fetchpriority="high" decoding="async">
+    </picture>
+  </a>
 </div>
-
-<div class="head">Houseowners News</div>
 <div class="live">
   <span class="pill"><i class="dot"></i> LIVE</span>
   <b id="enroll">22,618</b> Seniors Enrolled In Last 24 Hours!
@@ -318,45 +231,87 @@
   <div class="chev" aria-hidden="true">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>
   </div>
-  <div class="banner">Answer The Question Below To Proceed:</div>
-  <div class="survey">
-    <h2 id="quizQuestion">What's Your Age Range?</h2>
-    <div id="answerOptions">
-      <button class="opt" type="button" data-next="own">70+</button>
-      <button class="opt" type="button" data-next="own">60 – 70</button>
-      <button class="opt" type="button" data-next="own">55 – 59</button>
-      <button class="opt" type="button" data-next="own">Under 55</button>
+</div>
+
+<main class="quiz">
+  <div class="steps" id="steps"><i class="on"></i><i></i><i></i><i></i></div>
+
+  <div class="panel on" id="p1">
+    <h2>Tap Your Age to See If You Qualify</h2>
+    <p class="hint">Select your age range below to check your eligibility for the 2026 Home Equity Benefit.</p>
+    <div class="opts" data-q="age">
+      <button class="opt" type="button" data-v="70">70+</button>
+      <button class="opt" type="button" data-v="60">60 – 70</button>
+      <button class="opt" type="button" data-v="55">55 – 59</button>
+      <button class="opt" type="button" data-v="u55">Under 55</button>
     </div>
-    <p class="now"><span class="pulse"></span><span><b id="claiming">69</b> People Are Claiming Right Now!</span></p>
   </div>
-</div>
 
-<div class="checking hidden" id="status">
-  <span id="statusMessage">Reviewing Your Answers...</span>
-</div>
+  <div class="panel" id="p2">
+    <h2>Do You Own Your Home?</h2>
+    <p class="hint">Tell us about your homeownership status.</p>
+    <div class="opts" data-q="own">
+      <button class="opt" type="button" data-v="free">Yes — I own it free and clear</button>
+      <button class="opt" type="button" data-v="mort">Yes — I still have a mortgage</button>
+      <button class="opt" type="button" data-v="rent">No — I rent</button>
+    </div>
+  </div>
 
-<div class="checking hidden" id="congratulations">
-  <div class="congrats">Congratulations, You Qualify 🎉</div>
-  <div class="top-description-5">
-    Complete the next page to claim your <b id="amt">$250,000</b> Home Equity Benefit now — tax-free, with no monthly repayments required.
+  <div class="panel" id="p3">
+    <h2>Estimated Home Value?</h2>
+    <p class="hint">Select the approximate value of your home.</p>
+    <div class="opts" data-q="val">
+      <button class="opt" type="button" data-v="500">$500,000 or more</button>
+      <button class="opt" type="button" data-v="300">$300,000 – $500,000</button>
+      <button class="opt" type="button" data-v="150">$150,000 – $300,000</button>
+      <button class="opt" type="button" data-v="low">Under $150,000</button>
+    </div>
   </div>
-  <div class="spots-count">Spots remaining: 4</div>
-  <a class="call-btn" href="https://trk.smartselecttoday.online/click">CHECK AND CLAIM NOW</a>
-  <div class="sub-description">
-    Due to high volume, your spot is held for only <b>3 minutes</b>, then it will not be reserved.
+
+  <div class="panel" id="p4">
+    <div class="analyze">
+      <div class="spin"></div>
+      <h2>Checking your eligibility...</h2>
+      <ul class="alist">
+        <li id="a1">Reviewing home equity programs...</li>
+        <li id="a2">Validating age &amp; homeowner eligibility...</li>
+        <li id="a3">Calculating estimated tax-free benefit...</li>
+      </ul>
+    </div>
   </div>
-  <div class="timer">
-    <div id="minutes">3</div>
-    <div>&nbsp;:&nbsp;</div>
-    <div id="seconds">00</div>
+
+  <div class="panel" id="p5">
+    <div class="ok">Pre-Qualified</div>
+    <h2 id="rTitle">Great News! You Pre-Qualify for Up to $250,000 in Tax-Free Cash</h2>
+    <p id="rLead">Based on your answers, you may be eligible to access your home's hidden equity — tax-free, with no monthly repayments. Just one more step to go!</p>
+    <p style="font-weight:700;margin:14px 0 8px">Your Potential Benefits Include</p>
+    <ul class="bens">
+      <li>Up to <b id="amt">$250,000</b> in tax-free cash</li>
+      <li>No monthly repayment required</li>
+      <li>Stay in your home — no selling required</li>
+      <li>Use funds for anything you need</li>
+    </ul>
+    <p class="hint">Final Step: Click below and fill out your details on the next page to receive your personalized benefit information and complete your pre-qualification.</p>
+    <a class="cta" href="https://trk.smartselecttoday.online/click">See My Benefit Details →<span>Secure · Confidential · No cost to check</span></a>
+    <p class="warn">Only <b id="spots">43</b> spots remaining for seniors in your area</p>
   </div>
-  <div class="stats">
-    <div><b>$2.1B+</b><span>Equity<br>Unlocked</span></div>
-    <div><b>38,400+</b><span>Seniors<br>Approved</span></div>
-    <div><b>50</b><span>States Eligible</span></div>
+
+  <div class="revs">
+    <h3>Seniors Who Accessed Their Home Equity</h3>
+    <article class="rev">
+      <div class="who"><div class="av">DR</div><div><b>Dorothy R.</b><div class="meta">Florida · Age 72 · Verified</div><div class="stars">★★★★★</div></div></div>
+      <p>“I had no idea I was sitting on that much equity. I got $185,000 tax-free and I don't have to make any monthly payments. This changed my retirement completely.”</p>
+    </article>
+    <article class="rev">
+      <div class="who"><div class="av">RM</div><div><b>Robert M.</b><div class="meta">Texas · Age 68 · Verified</div><div class="stars">★★★★★</div></div></div>
+      <p>“My wife and I used $120,000 from our home equity to pay off medical bills and renovate the house. We still live here and owe nothing monthly.”</p>
+    </article>
+    <article class="rev">
+      <div class="who"><div class="av">PW</div><div><b>Patricia W.</b><div class="meta">California · Age 74 · Verified</div><div class="stars">★★★★★</div></div></div>
+      <p>“At 74, I thought I had no options. I accessed $95,000 tax-free and never had to leave my home. The process was simple and fast.”</p>
+    </article>
   </div>
-  <p class="beware">Beware of other fraudulent &amp; similar-looking websites that might look exactly like ours, we have no affiliation with them. This is an information page for the Home Equity Agreement program. We are not a lender and this is not a government site.</p>
-</div>
+</main>
 
 <footer>
   <a href="terms.html">Terms &amp; Conditions</a> | <a href="about.html">Privacy Policy</a>
@@ -365,86 +320,48 @@
 <script>
 (function () {
   var OFFER = 'https://trk.smartselecttoday.online/click';
-  document.querySelectorAll('a.call-btn').forEach(function (a) { a.href = OFFER; });
-
-  var quizQuestion = document.getElementById('quizQuestion');
-  var answerOptions = document.getElementById('answerOptions');
-  var mainContent = document.getElementById('mainContent');
-  var statusDiv = document.getElementById('status');
-  var statusMessage = document.getElementById('statusMessage');
-  var congratulationsDiv = document.getElementById('congratulations');
-  var imageContainer = document.getElementById('image-container');
-  var minutesEl = document.getElementById('minutes');
-  var secondsEl = document.getElementById('seconds');
-  var amt = '$250,000';
-
-  var questions = {
-    own: {
-      title: 'Do You Own Your Home?',
-      html:
-        '<button class="opt" type="button" data-next="val">Yes — I own it free and clear</button>' +
-        '<button class="opt" type="button" data-next="val">Yes — I still have a mortgage</button>' +
-        '<button class="opt" type="button" data-next="val">No — I rent</button>'
-    },
-    val: {
-      title: 'Estimated Home Value?',
-      html:
-        '<button class="opt" type="button" data-next="ok" data-val="250">$500,000 or more</button>' +
-        '<button class="opt" type="button" data-next="ok" data-val="180">$300,000 – $500,000</button>' +
-        '<button class="opt" type="button" data-next="ok" data-val="95">$150,000 – $300,000</button>' +
-        '<button class="opt" type="button" data-next="ok" data-val="45">Under $150,000</button>'
-    }
-  };
-
-  answerOptions.addEventListener('click', function (e) {
-    var btn = e.target.closest('.opt');
-    if (!btn) return;
-    var next = btn.getAttribute('data-next');
-    var val = btn.getAttribute('data-val');
-    if (val) amt = '$' + val + ',000';
-    if (next === 'ok') {
-      stepProcess();
-      return;
-    }
-    var q = questions[next];
-    quizQuestion.textContent = q.title;
-    answerOptions.innerHTML = q.html;
-    window.scrollTo({ top: document.querySelector('.banner').offsetTop - 8, behavior: 'smooth' });
-  });
-
-  function stepProcess() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    mainContent.classList.add('hidden');
-    statusDiv.classList.remove('hidden');
-    statusMessage.textContent = 'Reviewing Your Answers...';
-    setTimeout(function () {
-      statusMessage.textContent = 'Verifying Availability...';
+  document.querySelectorAll('a.cta').forEach(function (a) { a.href = OFFER; });
+  var ans = {}, step = 1;
+  function show(n) {
+    document.querySelectorAll('.panel').forEach(function (p) { p.classList.remove('on'); });
+    document.getElementById('p' + n).classList.add('on');
+    document.querySelectorAll('#steps i').forEach(function (el, i) {
+      el.className = i < n - 1 ? 'done' : (i === n - 1 ? 'on' : '');
+    });
+    if (n === 5) {
       setTimeout(function () {
-        statusMessage.textContent = 'Confirming Eligibility...';
-        setTimeout(showCongratulations, 1500);
-      }, 1500);
-    }, 1500);
+        var cta = document.querySelector('a.cta');
+        if (cta) cta.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 80);
+    } else {
+      window.scrollTo({ top: document.querySelector('.quiz').offsetTop - 8, behavior: 'smooth' });
+    }
   }
-
-  function showCongratulations() {
-    document.getElementById('amt').textContent = amt;
-    statusDiv.classList.add('hidden');
-    congratulationsDiv.classList.remove('hidden');
-    imageContainer.style.display = 'block';
-    startTimer();
-    setTimeout(function () { imageContainer.style.display = 'none'; }, 2000);
-    setTimeout(function () { window.scrollTo({ top: 0, behavior: 'smooth' }); }, 100);
-  }
-
-  function startTimer() {
-    var totalSeconds = 180;
-    setInterval(function () {
-      if (totalSeconds < 0) return;
-      minutesEl.textContent = Math.floor(totalSeconds / 60);
-      var s = totalSeconds % 60;
-      secondsEl.textContent = s < 10 ? '0' + s : '' + s;
-      totalSeconds--;
-    }, 1000);
+  document.querySelectorAll('.opts').forEach(function (box) {
+    box.addEventListener('click', function (e) {
+      var btn = e.target.closest('.opt'); if (!btn) return;
+      ans[box.getAttribute('data-q')] = btn.getAttribute('data-v');
+      if (step === 1) { step = 2; show(2); }
+      else if (step === 2) { step = 3; show(3); }
+      else { step = 4; show(4); run(); }
+    });
+  });
+  function run() {
+    ['a1','a2','a3'].forEach(function (id, i) {
+      setTimeout(function () { document.getElementById(id).classList.add('show'); }, 500 * (i + 1));
+    });
+    setTimeout(function () {
+      var map = { '500': '$250,000', '300': '$180,000', '150': '$95,000', 'low': '$45,000' };
+      var amt = map[ans.val] || '$250,000';
+      document.getElementById('amt').textContent = amt;
+      if (ans.own === 'rent' || ans.age === 'u55') {
+        document.getElementById('rTitle').textContent = 'You may still have options — complete the next step';
+        document.getElementById('rLead').textContent = 'Based on your answers, a specialist can confirm whether a home equity agreement or another cash-out option is available in your state.';
+      } else {
+        document.getElementById('rTitle').textContent = 'Great News! You Pre-Qualify for Up to ' + amt + ' in Tax-Free Cash';
+      }
+      show(5);
+    }, 2200);
   }
 
   var n = 22618;
@@ -452,12 +369,6 @@
     n += 1;
     document.getElementById('enroll').textContent = n.toLocaleString('en-US');
   }, 3500);
-
-  setInterval(function () {
-    var el = document.getElementById('claiming');
-    if (!el) return;
-    el.textContent = String(parseInt(el.textContent, 10) + 1);
-  }, 3000);
 })();
 </script>
 </body>
