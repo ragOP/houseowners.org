@@ -262,6 +262,7 @@
     <source type="image/webp" srcset="hero.webp">
     <img src="hero.jpg" alt="Home equity benefit" width="1200" height="665">
   </picture>
+  <p class="copy">Access tax-free cash from your home equity - no monthly repayments required. Check if you qualify in under 60 seconds.</p>
   <div class="chev" aria-hidden="true">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>
   </div>
@@ -366,8 +367,9 @@
       el.className = i < n - 1 ? 'done' : (i === n - 1 ? 'on' : '');
     });
     if (n === 5) {
-      var topArrow = document.querySelector('.chev');
-      if (topArrow) topArrow.classList.add('hidden');
+      document.querySelectorAll('.copy, .chev').forEach(function (el) {
+        el.classList.add('hidden');
+      });
       setTimeout(function () {
         var congo = document.getElementById('p5');
         if (!congo) return;
