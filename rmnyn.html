@@ -92,6 +92,49 @@
   }
   .hero img { width: 100%; height: auto; display: block; }
   .copy { font-size: 16px; font-weight: 700; line-height: 1.45; margin: 0 0 12px; }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background: #fff;
+    border: 1px solid #d5dbe8;
+    border-top: 2px solid var(--green);
+    border-radius: 8px;
+    max-width: 560px;
+    margin: 16px auto 0;
+    overflow: hidden;
+  }
+  .stats > div {
+    position: relative;
+    padding: 10px 6px 9px;
+  }
+  .stats > div + div::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 16%;
+    bottom: 16%;
+    width: 1px;
+    background: #d5dbe8;
+  }
+  .stats b {
+    display: block;
+    color: var(--navy);
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: -.03em;
+    line-height: 1;
+    margin-bottom: 4px;
+    font-variant-numeric: tabular-nums;
+  }
+  .stats span {
+    display: block;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    line-height: 1.2;
+    color: #64708a;
+  }
   .chev {
     margin: -10px 0 20px;
     color: #111;
@@ -215,6 +258,9 @@
     h1 { font-size: 22px; margin-bottom: 14px; }
     .hero { width: 84%; margin: 10px auto 28px; }
     .copy { font-size: 15px; margin: 4px 0 14px; }
+    .stats > div { padding: 9px 4px 8px; }
+    .stats b { font-size: 15px; }
+    .stats span { font-size: 8px; letter-spacing: .05em; }
     .congrats { font-size: 1.25rem; line-height: 1.75rem; }
     .top-description-5 { font-size: 1.25rem; line-height: 1.75rem; }
     .top-description-5 b { font-weight: 700; }
@@ -257,6 +303,11 @@
     </div>
     <p class="now"><span class="pulse"></span><span><b id="claiming">69</b> People Are Claiming Right Now!</span></p>
   </div>
+  <div class="stats">
+    <div><b>$2.1B+</b><span>Equity<br>Unlocked</span></div>
+    <div><b>38,400+</b><span>Seniors<br>Approved</span></div>
+    <div><b>50</b><span>States Eligible</span></div>
+  </div>
 </div>
 
 <div class="checking hidden" id="status">
@@ -277,6 +328,11 @@
     <div id="minutes">3</div>
     <div>&nbsp;:&nbsp;</div>
     <div id="seconds">00</div>
+  </div>
+  <div class="stats">
+    <div><b>$2.1B+</b><span>Equity<br>Unlocked</span></div>
+    <div><b>38,400+</b><span>Seniors<br>Approved</span></div>
+    <div><b>50</b><span>States Eligible</span></div>
   </div>
   <p class="beware">Beware of other fraudulent &amp; similar-looking websites that might look exactly like ours, we have no affiliation with them. This is an information page for the Home Equity Agreement program. We are not a lender and this is not a government site.</p>
 </div>
