@@ -99,12 +99,39 @@
   .stats i { font-style: normal; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; opacity: .8; }
   .timerbar {
     background: #0a1426;
-    display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px;
-    padding: 12px; font-size: 13px; font-weight: 600;
+    color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px 14px;
+    padding: 12px 10px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .timerbar-clock {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: nowrap;
+    white-space: nowrap;
   }
   .timerbar .box {
-    background: var(--red); min-width: 46px; padding: 8px 6px; border-radius: 4px;
-    font-size: 20px; font-weight: 800; letter-spacing: .04em;
+    background: var(--red);
+    color: #fff;
+    min-width: 44px;
+    padding: 8px 6px;
+    border-radius: 4px;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: .04em;
+    text-align: center;
+  }
+  .timerbar .sep {
+    color: #fff;
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 1;
   }
   .secure {
     background: #1a2d52; color: #d7e0f0; text-align: center;
@@ -169,6 +196,8 @@
     .stats { gap: 4px; }
     .stats b { font-size: 16px; }
     h1 { font-size: 23px; }
+    .timerbar { flex-direction: column; gap: 8px; }
+    .timerbar .box { min-width: 42px; font-size: 18px; }
   }
 </style>
 </head>
@@ -200,10 +229,15 @@
     <div><b>50</b><i>States Eligible</i></div>
   </div>
 </section>
-<div class="timerbar">Enrollment Window Closes In:
-  <span class="box" id="h">04</span> :
-  <span class="box" id="m">59</span> :
-  <span class="box" id="s">59</span>
+<div class="timerbar">
+  <span>Enrollment Window Closes In:</span>
+  <div class="timerbar-clock">
+    <span class="box" id="h">04</span>
+    <span class="sep">:</span>
+    <span class="box" id="m">59</span>
+    <span class="sep">:</span>
+    <span class="box" id="s">59</span>
+  </div>
 </div>
 <div class="secure">Secure Eligibility Check — Your information is protected</div>
 
@@ -307,7 +341,14 @@
     document.querySelectorAll('#steps i').forEach(function (el, i) {
       el.className = i < n - 1 ? 'done' : (i === n - 1 ? 'on' : '');
     });
-    window.scrollTo({ top: document.querySelector('.quiz').offsetTop - 8, behavior: 'smooth' });
+    if (n === 5) {
+      setTimeout(function () {
+        var cta = document.querySelector('a.cta');
+        if (cta) cta.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 80);
+    } else {
+      window.scrollTo({ top: document.querySelector('.quiz').offsetTop - 8, behavior: 'smooth' });
+    }
   }
   document.querySelectorAll('.opts').forEach(function (box) {
     box.addEventListener('click', function (e) {
