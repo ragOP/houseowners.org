@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Houseowners News | Check Eligibility In Your ZIP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root { --navy: #163a8a; --green: #1f9d4a; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { overflow-x: hidden; }
+  body {
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    background: #fff; color: #111; -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  .head {
+    background: var(--navy); color: #fff; text-align: center;
+    font-weight: 800; font-size: 18px; padding: 14px 12px;
+    padding-top: max(14px, env(safe-area-inset-top));
+  }
+  .live {
+    background: var(--green); color: #fff; text-align: center;
+    padding: 8px 10px; font-size: clamp(12px, 3.4vw, 15px);
+    font-style: italic; display: flex; align-items: center;
+    justify-content: center; gap: 6px; white-space: nowrap;
+  }
+  .live b { font-style: normal; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #fff; color: var(--green); font-style: normal; font-weight: 800;
+    font-size: 11px; letter-spacing: .06em;
+    border-radius: 999px; padding: 3px 8px 3px 6px; flex-shrink: 0;
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 3px #d7f5e2; }
+  .wrap { max-width: 520px; margin: 0 auto; padding: 22px 20px 40px; text-align: center; }
+  h1 { font-size: clamp(22px, 6vw, 28px); font-weight: 800; line-height: 1.25; margin: 0 0 10px; }
+  .copy { font-size: 16px; font-weight: 600; line-height: 1.45; margin: 0 0 20px; }
+  .pin {
+    width: 54px; height: 54px; border-radius: 50%; margin: 0 auto 14px;
+    background: #eef3fb; color: var(--navy); display: flex; align-items: center; justify-content: center;
+  }
+  .box {
+    background: #f4f6fa; border: 1px solid #d5dbe8; border-radius: 14px;
+    padding: 18px 16px 16px; text-align: left;
+  }
+  label { display: block; font-size: 13px; font-weight: 800; margin-bottom: 8px; }
+  .ziprow { display: flex; gap: 8px; }
+  input[type=tel] {
+    flex: 1; height: 54px; border: 1.5px solid #c9d1e3; border-radius: 10px;
+    padding: 0 14px; font-size: 22px; font-weight: 800; letter-spacing: .12em;
+    font-family: inherit; text-align: center; outline: none; background: #fff;
+  }
+  input[type=tel]:focus { border-color: var(--navy); }
+  .go {
+    height: 54px; padding: 0 18px; border: 0; border-radius: 10px;
+    background: var(--navy); color: #fff; font-weight: 800; font-size: 15px;
+    font-family: inherit; cursor: pointer; white-space: nowrap;
+  }
+  .err { color: #b42318; font-size: 13px; font-weight: 700; margin-top: 8px; display: none; }
+  .out {
+    display: none; margin-top: 14px; background: #fff; border-radius: 12px;
+    padding: 16px; text-align: center; border: 1px solid #d5dbe8;
+  }
+  .out.on { display: block; }
+  .badge {
+    display: inline-block; background: #e9f8ee; color: var(--green);
+    font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+    padding: 5px 10px; border-radius: 99px; margin-bottom: 8px;
+  }
+  .place { font-size: 22px; font-weight: 800; line-height: 1.25; margin-bottom: 6px; }
+  .out p { font-size: 14px; color: #444; font-weight: 600; }
+  .cta {
+    display: flex; align-items: center; justify-content: center;
+    height: 56px; background: var(--green); color: #fff !important;
+    font-weight: 800; font-size: 17px; border-radius: 10px; margin-top: 14px;
+  }
+  .stats {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    background: #fff; border: 1px solid #d5dbe8; border-top: 2px solid var(--green);
+    border-radius: 8px; margin: 18px auto 0; overflow: hidden;
+  }
+  .stats > div { position: relative; padding: 10px 6px 9px; }
+  .stats > div + div::before {
+    content: ""; position: absolute; left: 0; top: 16%; bottom: 16%; width: 1px; background: #d5dbe8;
+  }
+  .stats b { display: block; color: var(--navy); font-size: 17px; font-weight: 800; letter-spacing: -.03em; line-height: 1; margin-bottom: 4px; }
+  .stats span { display: block; font-size: 9px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; line-height: 1.2; color: #64708a; }
+  .beware { font-size: 12px; color: #555; line-height: 1.45; margin: 18px 0 0; text-align: left; }
+  footer { text-align: center; font-size: 13px; padding: 8px 12px 28px; }
+  footer a { color: var(--navy); font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="head">Houseowners News</div>
+<div class="live">
+  <span class="pill"><i class="dot"></i> LIVE</span>
+  <b id="enroll">22,618</b> Seniors Enrolled In Last 24 Hours!
+</div>
+
+<div class="wrap">
+  <div class="pin" aria-hidden="true">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.3"/></svg>
+  </div>
+  <h1>Check If Homeowners 62+ In Your ZIP Can Unlock Home Equity</h1>
+  <p class="copy">Available in all 50 states. Enter your ZIP to see if the 2026 program is offered in your area.</p>
+
+  <form class="box" id="form">
+    <label for="zip">Your ZIP code</label>
+    <div class="ziprow">
+      <input type="tel" id="zip" name="zip" inputmode="numeric" maxlength="5" pattern="[0-9]*" placeholder="90210" autocomplete="postal-code">
+      <button class="go" type="submit" id="go">Check</button>
+    </div>
+    <div class="err" id="err">Enter a valid 5-digit U.S. ZIP code.</div>
+    <div class="out" id="out">
+      <div class="badge" id="badge">Area eligible</div>
+      <div class="place" id="place">Los Angeles, California</div>
+      <p id="msg">Homeowners age 62+ in this area may qualify to unlock tax-free cash from home equity — with no monthly repayments required.</p>
+      <a class="cta" href="https://trk.smartselecttoday.online/click">See If I Qualify →</a>
+    </div>
+  </form>
+
+  <div class="stats">
+    <div><b>$2.1B+</b><span>Equity<br>Unlocked</span></div>
+    <div><b>38,400+</b><span>Seniors<br>Approved</span></div>
+    <div><b>50</b><span>States Eligible</span></div>
+  </div>
+  <p class="beware">This is an information page for the Home Equity Agreement program. We are not a lender and this is not a government site. Availability and amounts vary by state and homeowner. Always consult a qualified professional.</p>
+</div>
+
+<footer>
+  <a href="terms.html">Terms &amp; Conditions</a> | <a href="about.html">Privacy Policy</a>
+</footer>
+
+<script>
+(function () {
+  var OFFER = 'https://trk.smartselecttoday.online/click';
+  document.querySelectorAll('a.cta').forEach(function (a) { a.href = OFFER; });
+  var form = document.getElementById('form');
+  var zipEl = document.getElementById('zip');
+  var err = document.getElementById('err');
+  var out = document.getElementById('out');
+  var go = document.getElementById('go');
+
+  function showErr(on) { err.style.display = on ? 'block' : 'none'; }
+
+  function fallback(zip) {
+    document.getElementById('badge').textContent = 'Area eligible';
+    document.getElementById('place').textContent = 'ZIP ' + zip + ' · All 50 states';
+    document.getElementById('msg').textContent = 'This program is available nationwide. Homeowners age 62+ may qualify to unlock tax-free cash from home equity — with no monthly repayments required.';
+    out.classList.add('on');
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var zip = zipEl.value.replace(/\D/g, '').slice(0, 5);
+    zipEl.value = zip;
+    out.classList.remove('on');
+    if (zip.length !== 5) { showErr(true); zipEl.focus(); return; }
+    showErr(false);
+    go.textContent = '…';
+    go.disabled = true;
+    fetch('https://api.zippopotam.us/us/' + zip)
+      .then(function (r) { if (!r.ok) throw new Error('bad'); return r.json(); })
+      .then(function (data) {
+        var p = data.places && data.places[0];
+        var city = p ? p['place name'] : '';
+        var state = p ? p['state'] : '';
+        document.getElementById('badge').textContent = 'Available in ' + (p ? p['state abbreviation'] : 'your state');
+        document.getElementById('place').textContent = city && state ? (city + ', ' + state) : ('ZIP ' + zip);
+        document.getElementById('msg').textContent = 'Homeowners age 62+ in ' + (state || 'this area') + ' may qualify to unlock tax-free cash from home equity — with no monthly repayments required.';
+        out.classList.add('on');
+      })
+      .catch(function () { fallback(zip); })
+      .then(function () {
+        go.textContent = 'Check';
+        go.disabled = false;
+        out.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+  });
+
+  zipEl.addEventListener('input', function () {
+    zipEl.value = zipEl.value.replace(/\D/g, '').slice(0, 5);
+    showErr(false);
+  });
+
+  var n = 22618;
+  setInterval(function () {
+    if (Math.random() < 0.4) {
+      n += 1;
+      document.getElementById('enroll').textContent = n.toLocaleString('en-US');
+    }
+  }, 12000);
+})();
+</script>
+<script defer src="https://trk.smartselecttoday.online/track.js?rtkcmpid=6a4bbabc0dfad19c45f8c5c0"></script>
+</body>
+</html>
