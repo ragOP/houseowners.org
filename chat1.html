@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Houseowners News | Eligibility Chat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root { --navy: #163a8a; --green: #1f9d4a; --chat: #e8eef6; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; overflow: hidden; }
+  body {
+    font-family: Inter, -apple-system, Helvetica, sans-serif;
+    background: var(--chat); color: #111;
+    -webkit-font-smoothing: antialiased;
+    display: flex; flex-direction: column;
+  }
+  a { color: inherit; text-decoration: none; }
+  .top {
+    background: var(--navy); color: #fff;
+    padding: 12px 14px; padding-top: max(12px, env(safe-area-inset-top));
+    display: flex; align-items: center; gap: 10px;
+    flex-shrink: 0;
+  }
+  .av {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: #fff; color: var(--navy); font-weight: 800;
+    display: flex; align-items: center; justify-content: center; font-size: 12px;
+  }
+  .top b { display: block; font-size: 15px; }
+  .top span { display: block; font-size: 11px; opacity: .8; font-weight: 500; }
+  .live {
+    background: var(--green); color: #fff; text-align: center;
+    font-size: 12px; font-weight: 700; padding: 6px 10px; flex-shrink: 0;
+  }
+  .thread {
+    flex: 1; overflow-y: auto; padding: 16px 14px 12px;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .row { display: flex; }
+  .row.me { justify-content: flex-end; }
+  .bubble {
+    max-width: 82%; padding: 11px 14px; border-radius: 18px;
+    font-size: 15.5px; line-height: 1.4; font-weight: 500;
+  }
+  .bot { background: #fff; color: #122033; border-bottom-left-radius: 5px; box-shadow: 0 1px 2px rgba(18,32,51,.06); }
+  .me .bubble { background: var(--navy); color: #fff; border-bottom-right-radius: 5px; }
+  .dots { display: inline-flex; gap: 4px; padding: 4px 2px; }
+  .dots i {
+    width: 7px; height: 7px; border-radius: 50%; background: #9aa7bd;
+    animation: blink 1.1s infinite;
+  }
+  .dots i:nth-child(2) { animation-delay: .15s; }
+  .dots i:nth-child(3) { animation-delay: .3s; }
+  @keyframes blink { 0%, 80%, 100% { opacity: .3; } 40% { opacity: 1; } }
+  .choices {
+    flex-shrink: 0; padding: 10px 14px 16px;
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
+    background: #dfe6f1; border-top: 1px solid #cfd8e8;
+    display: grid; gap: 8px;
+  }
+  .choices.hidden { display: none; }
+  .yes, .no {
+    border: 0; border-radius: 22px; padding: 14px 16px;
+    font-size: 16px; font-weight: 800; font-family: inherit; cursor: pointer;
+  }
+  .yes { background: var(--green); color: #fff; }
+  .no { background: #fff; color: var(--navy); border: 1.5px solid var(--navy); padding: 13px 16px; }
+  .cta {
+    display: flex; align-items: center; justify-content: center;
+    height: 52px; background: var(--green); color: #fff !important;
+    font-weight: 800; font-size: 16px; border-radius: 22px; margin-top: 4px;
+  }
+  .tiny { font-size: 11px; color: #667; text-align: center; padding: 0 16px 10px; flex-shrink: 0; }
+  .tiny a { color: var(--navy); font-weight: 700; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="av">HN</div>
+  <div>
+    <b>Houseowners News</b>
+    <span>Eligibility check · Replies instantly</span>
+  </div>
+</header>
+<div class="live">2026 program · Homeowners 62+ · Up to $500,000</div>
+
+<div class="thread" id="thread"></div>
+<div class="choices" id="choices"></div>
+<p class="tiny">Not a lender · Not a government site · <a href="terms.html">Terms</a> · <a href="about.html">Privacy</a></p>
+
+<script>
+(function () {
+  var OFFER = 'https://trk.smartselecttoday.online/click';
+  var thread = document.getElementById('thread');
+  var choices = document.getElementById('choices');
+  var ans = {};
+
+  function scroll() { thread.scrollTop = thread.scrollHeight + 80; }
+
+  function bot(html) {
+    var row = document.createElement('div');
+    row.className = 'row';
+    row.innerHTML = '<div class="bubble bot">' + html + '</div>';
+    thread.appendChild(row);
+    scroll();
+  }
+
+  function me(text) {
+    var row = document.createElement('div');
+    row.className = 'row me';
+    row.innerHTML = '<div class="bubble">' + text + '</div>';
+    thread.appendChild(row);
+    scroll();
+  }
+
+  function typing(fn) {
+    var row = document.createElement('div');
+    row.className = 'row';
+    row.id = 'typing';
+    row.innerHTML = '<div class="bubble bot"><span class="dots"><i></i><i></i><i></i></span></div>';
+    thread.appendChild(row);
+    scroll();
+    setTimeout(function () {
+      var t = document.getElementById('typing');
+      if (t) t.remove();
+      fn();
+    }, 650);
+  }
+
+  function setChoices(html) {
+    choices.innerHTML = html;
+    choices.classList.remove('hidden');
+  }
+
+  function hideChoices() { choices.classList.add('hidden'); choices.innerHTML = ''; }
+
+  function qAge() {
+    bot('Hi — I can check if you may qualify for the 2026 home equity benefit. Two yes/no questions.');
+    setTimeout(function () {
+      bot('First — are you <b>62 or older</b>?');
+      setChoices(
+        '<button class="yes" type="button" data-q="age" data-v="yes">Yes — I am 62+</button>' +
+        '<button class="no" type="button" data-q="age" data-v="no">No — under 62</button>'
+      );
+    }, 400);
+  }
+
+  function qOwn() {
+    typing(function () {
+      bot('Do you <b>own your home</b>? A remaining mortgage is okay.');
+      setChoices(
+        '<button class="yes" type="button" data-q="own" data-v="yes">Yes — I own it</button>' +
+        '<button class="no" type="button" data-q="own" data-v="no">No — I rent</button>'
+      );
+    });
+  }
+
+  function done() {
+    var ok = ans.age === 'yes' && ans.own === 'yes';
+    typing(function () {
+      if (ok) {
+        bot('Great news. Homeowners 62+ who own their home may unlock <b>up to $500,000</b> in tax-free cash — with no monthly repayments required.');
+      } else {
+        bot('You may still have cash-out options. A specialist can confirm what’s available in your state — takes about 60 seconds.');
+      }
+      setChoices('<a class="cta" href="' + OFFER + '">See my benefit →</a>');
+    });
+  }
+
+  choices.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-q]');
+    if (!btn) return;
+    var q = btn.getAttribute('data-q');
+    var v = btn.getAttribute('data-v');
+    ans[q] = v;
+    me(btn.textContent);
+    hideChoices();
+    if (q === 'age') qOwn();
+    else done();
+  });
+
+  qAge();
+})();
+</script>
+<script defer src="https://trk.smartselecttoday.online/track.js?rtkcmpid=6a4bbabc0dfad19c45f8c5c0"></script>
+</body>
+</html>
