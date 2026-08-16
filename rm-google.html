@@ -400,7 +400,11 @@
 <script>
 (function () {
   var OFFER = 'https://trk.pickwisely.online/click';
-  document.querySelectorAll('a.cta').forEach(function (a) { a.href = OFFER; });
+  var OFFER_UNDER_60 = 'https://www.dxe7va1f.com/2ZX3ZT/FGXLG/';
+  function setCta(url) {
+    document.querySelectorAll('a.cta').forEach(function (a) { a.href = url; });
+  }
+  setCta(OFFER);
   var ans = {}, step = 1;
   function show(n) {
     document.querySelectorAll('.panel').forEach(function (p) { p.classList.remove('on'); });
@@ -440,6 +444,7 @@
       } else {
         document.getElementById('rTitle').textContent = 'Great News! You Pre-Qualify for Up to ' + amt + ' in Tax-Free Cash';
       }
+      setCta((ans.age === '55' || ans.age === 'u55') ? OFFER_UNDER_60 : OFFER);
       show(5);
     }, 2200);
   }
