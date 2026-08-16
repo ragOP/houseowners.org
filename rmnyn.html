@@ -18,7 +18,7 @@
     --gold: #c5a059;
     --ink: #122033;
     --paper: #eef1f6;
-    --offer: https://trk.smartselecttoday.online/click;
+    --offer: https://trk.pickwisely.online/click;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { overflow-x: hidden; }
@@ -76,7 +76,7 @@
     width: 86%;
     border-radius: 12px;
     overflow: hidden;
-    margin: 6px auto 22px;
+    margin: 6px auto 8px;
     background: #eee;
   }
   .hero img { width: 90%; height: 90%; border-radius: 8px; }
@@ -125,11 +125,25 @@
     color: #64708a;
   }
   .chev {
-    margin: -10px 0 20px;
+    margin: 14px 0 18px;
+    padding: 4px 0 8px;
     color: #111;
     line-height: 1;
+    text-align: center;
   }
-  .chev svg { width: 24px; height: 24px; display: block; margin: 0 auto; }
+  .chev svg,
+  .cta-arrow svg {
+    width: 28px;
+    height: 28px;
+    display: block;
+    margin: 0 auto;
+    animation: bounce 2s ease infinite;
+  }
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(8px); }
+    60% { transform: translateY(4px); }
+  }
   .quiz { max-width: 560px; margin: 0 auto; padding: 0 20px 40px; text-align: left; }
   .steps { display: flex; gap: 8px; margin-bottom: 22px; }
   .steps i { flex: 1; height: 6px; background: #d5dbe6; border-radius: 99px; }
@@ -159,12 +173,33 @@
   .bens li { margin: 0 0 8px 4px; list-style: none; padding-left: 22px; position: relative; }
   .bens li::before { content: "✓"; position: absolute; left: 0; color: var(--green); font-weight: 800; }
   .cta {
+    position: relative;
+    overflow: hidden;
     display: block; width: 100%; text-align: center; text-decoration: none;
     background: var(--green); color: #ffffff !important;
     font-weight: 800; font-size: 17px; padding: 16px 14px; border-radius: 10px;
     box-shadow: 0 0 0 1px rgba(255,255,255,.25) inset, 0 0 22px rgba(197,160,89,.45);
   }
+  .cta::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 55%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    transform: skewX(-20deg);
+    animation: shine 3.4s infinite;
+    pointer-events: none;
+  }
+  @keyframes shine {
+    0% { left: -120%; }
+    55% { left: 140%; }
+    100% { left: 140%; }
+  }
   .cta span { display: block; font-size: 12.5px; font-weight: 600; margin-top: 4px; }
+  .cta-arrow { margin: 4px 0 12px; color: #111; line-height: 1; }
+  .hidden { display: none !important; }
   .warn { margin-top: 12px; font-size: 13.5px; color: #7a2424; font-weight: 600; text-align: center; }
   .revs { margin-top: 36px; }
   .revs h3 { margin-bottom: 14px; font-size: 15px; }
@@ -184,8 +219,8 @@
   footer a { color: var(--navy); font-weight: 700; text-decoration: none; }
   @media (max-width: 768px) {
     .wrap { padding: 14px 18px 20px; }
-    h1 { font-size: 25px; margin-bottom: 12px; }
-    .hero { width: 84%; margin: 10px auto 28px; }
+    h1 { font-size: 25px; margin-bottom: 18px; }
+    .hero { width: 84%; margin: 10px auto 8px; }
     .copy { font-size: 15px; margin: 16px 0 14px; }
     .stats > div { padding: 9px 4px 8px; }
     .stats b { font-size: 15px; }
@@ -227,7 +262,6 @@
     <source type="image/webp" srcset="hero.webp">
     <img src="hero.jpg" alt="Home equity benefit" width="1200" height="665">
   </picture>
-  <p class="copy">Access tax-free cash from your home equity — no monthly repayments required. Check if you qualify in under 60 seconds.</p>
   <div class="chev" aria-hidden="true">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>
   </div>
@@ -241,8 +275,8 @@
     <p class="hint">Select your age range below to check your eligibility for the 2026 Home Equity Benefit.</p>
     <div class="opts" data-q="age">
       <button class="opt" type="button" data-v="70">70+</button>
-      <button class="opt" type="button" data-v="60">60 – 70</button>
-      <button class="opt" type="button" data-v="55">55 – 59</button>
+      <button class="opt" type="button" data-v="60">60 - 70</button>
+      <button class="opt" type="button" data-v="55">55 - 59</button>
       <button class="opt" type="button" data-v="u55">Under 55</button>
     </div>
   </div>
@@ -251,9 +285,9 @@
     <h2>Do You Own Your Home?</h2>
     <p class="hint">Tell us about your homeownership status.</p>
     <div class="opts" data-q="own">
-      <button class="opt" type="button" data-v="free">Yes — I own it free and clear</button>
-      <button class="opt" type="button" data-v="mort">Yes — I still have a mortgage</button>
-      <button class="opt" type="button" data-v="rent">No — I rent</button>
+      <button class="opt" type="button" data-v="free">Yes - I own it free and clear</button>
+      <button class="opt" type="button" data-v="mort">Yes - I still have a mortgage</button>
+      <button class="opt" type="button" data-v="rent">No - I rent</button>
     </div>
   </div>
 
@@ -262,8 +296,8 @@
     <p class="hint">Select the approximate value of your home.</p>
     <div class="opts" data-q="val">
       <button class="opt" type="button" data-v="500">$500,000 or more</button>
-      <button class="opt" type="button" data-v="300">$300,000 – $500,000</button>
-      <button class="opt" type="button" data-v="150">$150,000 – $300,000</button>
+      <button class="opt" type="button" data-v="300">$300,000 - $500,000</button>
+      <button class="opt" type="button" data-v="150">$150,000 - $300,000</button>
       <button class="opt" type="button" data-v="low">Under $150,000</button>
     </div>
   </div>
@@ -283,16 +317,19 @@
   <div class="panel" id="p5">
     <div class="ok">Pre-Qualified</div>
     <h2 id="rTitle">Great News! You Pre-Qualify for Up to $250,000 in Tax-Free Cash</h2>
-    <p id="rLead">Based on your answers, you may be eligible to access your home's hidden equity — tax-free, with no monthly repayments. Just one more step to go!</p>
+    <p id="rLead">Based on your answers, you may be eligible to access your home's hidden equity - tax-free, with no monthly repayments. Just one more step to go!</p>
     <p style="font-weight:700;margin:14px 0 8px">Your Potential Benefits Include</p>
     <ul class="bens">
       <li>Up to <b id="amt">$250,000</b> in tax-free cash</li>
       <li>No monthly repayment required</li>
-      <li>Stay in your home — no selling required</li>
+      <li>Stay in your home - no selling required</li>
       <li>Use funds for anything you need</li>
     </ul>
     <p class="hint">Final Step: Click below and fill out your details on the next page to receive your personalized benefit information and complete your pre-qualification.</p>
-    <a class="cta" href="https://trk.smartselecttoday.online/click">See My Benefit Details →<span>Secure · Confidential · No cost to check</span></a>
+    <div class="cta-arrow" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>
+    </div>
+    <a class="cta" href="https://trk.pickwisely.online/click">See My Benefit Details →<span>Secure · Confidential · No cost to check</span></a>
     <p class="warn">Only <b id="spots">43</b> spots remaining for seniors in your area</p>
   </div>
 
@@ -319,7 +356,7 @@
 
 <script>
 (function () {
-  var OFFER = 'https://trk.smartselecttoday.online/click';
+  var OFFER = 'https://trk.pickwisely.online/click';
   document.querySelectorAll('a.cta').forEach(function (a) { a.href = OFFER; });
   var ans = {}, step = 1;
   function show(n) {
@@ -329,10 +366,14 @@
       el.className = i < n - 1 ? 'done' : (i === n - 1 ? 'on' : '');
     });
     if (n === 5) {
+      var topArrow = document.querySelector('.chev');
+      if (topArrow) topArrow.classList.add('hidden');
       setTimeout(function () {
-        var cta = document.querySelector('a.cta');
-        if (cta) cta.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }, 80);
+        var congo = document.getElementById('p5');
+        if (!congo) return;
+        var y = congo.getBoundingClientRect().top + window.pageYOffset - 8;
+        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+      }, 120);
     } else {
       window.scrollTo({ top: document.querySelector('.quiz').offsetTop - 8, behavior: 'smooth' });
     }
@@ -355,7 +396,7 @@
       var amt = map[ans.val] || '$250,000';
       document.getElementById('amt').textContent = amt;
       if (ans.own === 'rent' || ans.age === 'u55') {
-        document.getElementById('rTitle').textContent = 'You may still have options — complete the next step';
+        document.getElementById('rTitle').textContent = 'You may still have options - complete the next step';
         document.getElementById('rLead').textContent = 'Based on your answers, a specialist can confirm whether a home equity agreement or another cash-out option is available in your state.';
       } else {
         document.getElementById('rTitle').textContent = 'Great News! You Pre-Qualify for Up to ' + amt + ' in Tax-Free Cash';
