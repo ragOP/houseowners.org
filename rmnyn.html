@@ -330,7 +330,7 @@
   </div>
 
   <div class="panel" id="p4">
-    <div class="analyze">
+    <div class="analyze" id="analyze">
       <div class="spin"></div>
       <h2>Checking your eligibility...</h2>
       <ul class="alist">
@@ -361,7 +361,7 @@
   </div>
 
   <div class="revs">
-    <div id="hb1rw" class="hero-benefits-row"><div id="hb1bn" class="hero-benefit"><img id="hb1ic" src="https://icons.ll-assets.com/lucide/check-circle.svg?color=%2316a34a" alt="Check" width="18" height="18"><span id="hb1tx" data-gjs-type="text" class="hero-benefit-text">NO Monthly Repayments</span></div><div id="hb2bn" class="hero-benefit"><img id="hb2ic" src="https://icons.ll-assets.com/lucide/check-circle.svg?color=%2316a34a" alt="Check" width="18" height="18"><span id="hb2tx" data-gjs-type="text" class="hero-benefit-text">NO Selling Your Home</span></div><div id="hb3bn" class="hero-benefit"><img id="hb3ic" src="https://icons.ll-assets.com/lucide/check-circle.svg?color=%2316a34a" alt="Check" width="18" height="18"><span id="hb3tx" data-gjs-type="text" class="hero-benefit-text">100% Tax FREE</span></div></div>
+    <!-- <div id="hb1rw" class="hero-benefits-row"><div id="hb1bn" class="hero-benefit"><img id="hb1ic" src="https://icons.ll-assets.com/lucide/check-circle.svg?color=%2316a34a" alt="Check" width="18" height="18"><span id="hb1tx" data-gjs-type="text" class="hero-benefit-text">NO Monthly Repayments</span></div><div id="hb2bn" class="hero-benefit"><img id="hb2ic" src="https://icons.ll-assets.com/lucide/check-circle.svg?color=%2316a34a" alt="Check" width="18" height="18"><span id="hb2tx" data-gjs-type="text" class="hero-benefit-text">NO Selling Your Home</span></div><div id="hb3bn" class="hero-benefit"><img id="hb3ic" src="https://icons.ll-assets.com/lucide/check-circle.svg?color=%2316a34a" alt="Check" width="18" height="18"><span id="hb3tx" data-gjs-type="text" class="hero-benefit-text">100% Tax FREE</span></div></div> -->
 
 <h3 style="margin-left: 10px;">Seniors Who Accessed Their Home Equity</h3>
     <article class="rev">
@@ -388,11 +388,21 @@
   var OFFER = 'https://trk.pickwisely.online/click';
   document.querySelectorAll('a.cta').forEach(function (a) { a.href = OFFER; });
   var ans = {}, step = 1;
-  function scrollToAccess() {
-    var line = document.querySelector('.copy');
-    if (!line) return;
-    var y = line.getBoundingClientRect().top + window.pageYOffset - 8;
+  function scrollTo(el, extraTop) {
+    if (!el) return;
+    var y = el.getBoundingClientRect().top + window.pageYOffset - (extraTop || 8);
     window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+  }
+  function scrollToAccess() {
+    scrollTo(document.querySelector('.copy'));
+  }
+  function scrollToAnalyze() {
+    var analyze = document.getElementById('analyze');
+    var access = document.querySelector('.copy');
+    var accessH = access && !access.classList.contains('hidden')
+      ? access.getBoundingClientRect().height + 12
+      : 8;
+    scrollTo(analyze, accessH);
   }
   function show(n) {
     document.querySelectorAll('.panel').forEach(function (p) { p.classList.remove('on'); });
@@ -418,7 +428,12 @@
       ans[box.getAttribute('data-q')] = btn.getAttribute('data-v');
       if (step === 1) { step = 2; show(2); scrollToAccess(); }
       else if (step === 2) { step = 3; show(3); scrollToAccess(); }
-      else { step = 4; show(4); run(); }
+      else {
+        step = 4;
+        show(4);
+        run();
+        setTimeout(scrollToAnalyze, 50);
+      }
     });
   });
   function run() {
