@@ -14,7 +14,7 @@
 <title>The 2026 Reverse Mortgage Update: Why Banks Don't Want Seniors to Know About the New Rules</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="hero.webp" type="image/webp">
 <style>
   :root {
@@ -24,6 +24,8 @@
     --hl: rgb(255, 227, 128);
     --cta: #68a339;
     --cta-d: #578a2f;
+    --btn: #0073e6;
+    --primary: #0059b3;
     --max: 720px;
     --offer: https://trk.pickwisely.online/click;
   }
@@ -89,26 +91,12 @@
   p { margin: 0 0 14px; }
   p.bold { font-weight: 700; }
 
-  .numsec {
-    display: grid;
-    grid-template-columns: 48px 1fr;
-    gap: 10px 14px;
-    align-items: start;
-    margin: 28px 0 12px;
-  }
-  .numsec .n {
-    font-size: 56px;
-    font-weight: 700;
-    color: #cfcfcf;
-    line-height: 0.9;
-    letter-spacing: -0.04em;
-  }
-  .numsec h2 {
+  h2 {
     font-size: clamp(22px, 4.2vw, 28px);
     font-weight: 700;
     line-height: 1.2;
     letter-spacing: -0.02em;
-    padding-top: 6px;
+    margin: 28px 0 12px;
   }
 
   h3.sub {
@@ -134,48 +122,116 @@
   }
 
   .cta {
-    display: block;
-    width: 100%;
-    background: var(--cta);
-    color: #fff !important;
-    text-align: center;
-    border-radius: 8px;
-    padding: 16px 14px;
-    margin: 18px 0 8px;
-    box-shadow: 0 2px 0 rgba(0,0,0,.08);
-    transition: background .15s ease, transform .15s ease;
-  }
-  .cta:hover { background: var(--cta-d); transform: translateY(-1px); }
-  .cta .t1 { display: block; font-size: 18px; font-weight: 700; line-height: 1.2; }
-  .cta .t2 { display: block; font-size: 13px; font-weight: 500; margin-top: 4px; opacity: .95; }
-
-  .sale {
-    background: #fff8e1;
-    border: 2px dashed #f0c94d;
-    border-radius: 10px;
-    padding: 18px 14px;
-    text-align: center;
-    margin: 26px 0;
-  }
-  .sale .miss { font-weight: 800; font-size: 18px; margin-bottom: 6px; }
-  .sale .gift { font-size: 22px; font-weight: 800; margin: 4px 0; }
-  .sale .off { font-size: 20px; font-weight: 700; color: #c43c00; }
-  .sale .lim { font-size: 13px; font-style: italic; color: #555; margin: 6px 0 12px; }
-  .timer {
-    display: flex;
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
-    gap: 10px;
-    margin: 10px 0 14px;
-  }
-  .timer > div {
-    background: #111;
-    color: #fff;
+    background: var(--btn);
+    color: #fff !important;
+    font-family: Inter, system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 28px;
+    padding: 28px 40px;
     border-radius: 8px;
-    min-width: 64px;
-    padding: 10px 8px;
+    margin: 0;
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -4px rgba(0,0,0,.1);
+    transition: all .15s ease;
+    text-align: center;
   }
-  .timer b { display: block; font-size: 22px; font-weight: 700; line-height: 1; }
-  .timer span { display: block; font-size: 10px; letter-spacing: .6px; margin-top: 4px; opacity: .8; }
+  .cta:hover {
+    background: #0068d1;
+    transform: scale(1.02);
+    box-shadow: 0 20px 25px -5px rgba(0,0,0,.1), 0 8px 10px -6px rgba(0,0,0,.1);
+  }
+  .cta-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 0 24px;
+    margin: 12px 0 8px;
+  }
+  .cta-mid {
+    background: rgba(241, 245, 249, .45);
+    border-radius: 8px;
+    padding: 32px 16px;
+    text-align: center;
+    margin: 36px 0;
+  }
+  .cta-mid-q {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 24px;
+  }
+  .cta-box {
+    background: linear-gradient(to right bottom, rgba(0, 89, 179, .1), rgba(22, 162, 73, .1));
+    border: 2px solid rgba(0, 89, 179, .2);
+    border-radius: 12px;
+    padding: 40px 24px;
+    text-align: center;
+    margin: 36px 0;
+  }
+  .cta-box h3 {
+    font-size: clamp(24px, 4vw, 30px);
+    font-weight: 700;
+    margin: 0 0 14px;
+    line-height: 1.25;
+  }
+  .cta-box-lead {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0 0 10px;
+  }
+  .cta-box-sub {
+    font-size: 16px;
+    color: #64748b;
+    margin: 0 0 28px;
+    font-weight: 400;
+  }
+  .cta-lock {
+    font-size: 14px;
+    color: #64748b;
+    margin: 24px 0 0;
+    font-weight: 400;
+  }
+  .steps-cta {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 6px;
+    margin: 0 0 24px;
+  }
+  .steps-cta .step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .steps-cta .circ {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--primary);
+    background: rgba(0, 89, 179, .1);
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .steps-cta .step span {
+    font-size: 12px;
+    color: #64748b;
+    margin-top: 4px;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .steps-cta .line {
+    width: 28px;
+    height: 2px;
+    background: #e1e7ef;
+    margin-top: 19px;
+    flex-shrink: 0;
+  }
 
   .compare {
     width: 100%;
@@ -255,22 +311,6 @@
   .bubble .txt { font-size: 14.5px; line-height: 1.4; }
   .actions { font-size: 12px; color: #65676b; margin: 4px 0 0 12px; font-weight: 600; }
 
-  .final {
-    text-align: center;
-    margin: 28px 0 10px;
-  }
-  .final h2 {
-    font-size: clamp(22px, 4vw, 28px);
-    font-weight: 700;
-    line-height: 1.25;
-    margin: 0 0 8px;
-  }
-  .final p {
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 12px;
-  }
-
   .disc {
     font-size: 12px;
     color: #777;
@@ -292,9 +332,7 @@
   }
   .sticky.show { transform: translateY(0); }
   .sticky .wrap { display: flex; gap: 10px; align-items: center; }
-  .sticky .cta { margin: 0; padding: 12px 10px; }
-  .sticky .cta .t1 { font-size: 15px; }
-  .sticky .cta .t2 { font-size: 11px; }
+  .sticky .cta { margin: 0; padding: 14px 18px; font-size: 16px; line-height: 1.2; width: auto; flex: 1.2; }
   .sticky .left {
     flex: 1;
     min-width: 0;
@@ -306,10 +344,12 @@
   @media (max-width: 560px) {
     body { font-size: 16.5px; }
     .announce { font-size: 13.5px; }
-    .numsec { grid-template-columns: 36px 1fr; gap: 6px 10px; }
-    .numsec .n { font-size: 42px; }
     .checks li { font-size: 15.5px; }
     .sticky .left { display: none; }
+    .cta { width: 100%; padding: 22px 16px; font-size: 18px; }
+    .cta-box { padding: 28px 16px; }
+    .steps-cta .line { width: 20px; }
+    .steps-cta .circ { width: 36px; height: 36px; }
   }
 </style>
 </head>
@@ -358,10 +398,7 @@
 
     <p>Today, Robert has $142,000 in the bank, his mortgage payment is $0, and he's sitting in the same kitchen chair his father used to sit in. He fixed the roof, paid off the taxes, and took his grandchildren to Disney World. Same house. Same key. Same life. Just without the constant money anxiety.</p>
 
-    <div class="numsec">
-      <div class="n">1</div>
-      <h2>The 2026 Changes That Have Banks Terrified</h2>
-    </div>
+    <h2>The 2026 Changes That Have Banks Terrified</h2>
 
     <p>For years, reverse mortgages were pushed by slick seminar salesmen. But the 2026 HUD guidelines transformed this program into what smart retirees now call “the ultimate wealth hack.” Here's what changed that has banks scrambling:</p>
 
@@ -374,15 +411,18 @@
     <h3 class="sub">3. Bulletproof Spouse Protection</h3>
     <p>New FHA rules for 2026 guarantee that both spouses are protected, even if one isn't 62 yet. No more horror stories of a widow being forced out of her home. The surviving spouse can stay in the home, payment-free, for life.</p>
 
-    <a class="cta" href="https://trk.pickwisely.online/click">
-      <span class="t1">Calculate Your 2026 Reverse Mortgage Amount →</span>
-      <span class="t2">Results in 60 seconds · No cost to check</span>
-    </a>
-
-    <div class="numsec">
-      <div class="n">2</div>
-      <h2>The “Zero Visual Difference” That Banks Hate</h2>
+    <div class="cta-wrap">
+      <div class="steps-cta">
+        <div class="step"><div class="circ">1</div><span>Home Details</span></div>
+        <div class="line"></div>
+        <div class="step"><div class="circ">2</div><span>Estimate</span></div>
+        <div class="line"></div>
+        <div class="step"><div class="circ">3</div><span>Options</span></div>
+      </div>
+      <a class="cta" href="https://trk.pickwisely.online/click">Calculate Your Amount</a>
     </div>
+
+    <h2>The “Zero Visual Difference” That Banks Hate</h2>
 
     <p>This is the part that drives traditional lenders crazy. With the 2026 Reverse Mortgage Update:</p>
     <div class="unchanged">
@@ -396,10 +436,7 @@
 
     <p>You remain the owner. You keep your name on the deed. You live there as long as you want without ever making a monthly mortgage payment. The loan is only repaid when you sell, move away permanently, or the last borrower passes away. Period.</p>
 
-    <div class="numsec">
-      <div class="n">3</div>
-      <h2>See real results without selling, without monthly payments</h2>
-    </div>
+    <h2>See real results without selling, without monthly payments</h2>
 
     <p>Imagine opening the same front door you always have — without a $650 monthly payment, without listing your home, and without ever leaving the kitchen your family knows.</p>
 
@@ -407,26 +444,12 @@
 
     <p class="bold">Thousands of homeowners 62+ are already doing it. You are next.</p>
 
-    <div class="sale">
-      <div class="miss">DON’T MISS IT!</div>
-      <div class="gift">🎁 2026 HUD GUIDELINES NOW LIVE 🎁</div>
-      <div class="off">Access Tax-Free Cash With $0 Monthly Payments</div>
-      <div class="lim">* Confidential · No obligation · Takes 60 seconds</div>
-      <div class="timer" aria-label="Countdown">
-        <div><b id="tH">04</b><span>HRS</span></div>
-        <div><b id="tM">44</b><span>MIN</span></div>
-        <div><b id="tS">30</b><span>SEC</span></div>
-      </div>
-      <a class="cta" href="https://trk.pickwisely.online/click" style="margin-top:0">
-        <span class="t1">Calculate Your 2026 Reverse Mortgage Amount →</span>
-        <span class="t2">See how much equity you can unlock</span>
-      </a>
+    <div class="cta-mid">
+      <p class="cta-mid-q">Could your home equity support your retirement?</p>
+      <a class="cta" href="https://trk.pickwisely.online/click">Explore My Options</a>
     </div>
 
-    <div class="numsec">
-      <div class="n">4</div>
-      <h2>Why Your Bank Will Never Tell You This</h2>
-    </div>
+    <h2>Why Your Bank Will Never Tell You This</h2>
 
     <p>Your local bank makes money from monthly payments. They profit when you take out a home equity loan that bleeds you dry with interest every single month. The reverse mortgage model — where you access equity without monthly payments — doesn't fit their greedy business model.</p>
 
@@ -439,10 +462,7 @@
 
     <p class="bold">The 2026 Reverse Mortgage eliminates their profit streams, which is why they're praying you never discover it.</p>
 
-    <div class="numsec">
-      <div class="n">5</div>
-      <h2>What Our Members Are Saying</h2>
-    </div>
+    <h2>What Our Members Are Saying</h2>
 
     <div class="quote">
       <p>“I was skeptical. I thought it was too good to be true. But I got $127,000, paid off my credit cards, and now I have $2,800 extra every month. I wish I'd done this 5 years ago.”</p>
@@ -457,10 +477,7 @@
       <div class="who">Dorothy S., 71, North Carolina</div>
     </div>
 
-    <div class="numsec">
-      <div class="n">6</div>
-      <h2>The Inheritance Truth Bomb: What Your Kids Actually Want</h2>
-    </div>
+    <h2>The Inheritance Truth Bomb: What Your Kids Actually Want</h2>
 
     <p>Many seniors hesitate because they want to leave the house to their children. But here's the brutal truth: your kids would rather see you enjoy retirement than struggle financially while they wait for an inheritance.</p>
 
@@ -509,10 +526,7 @@
       </tbody>
     </table>
 
-    <div class="numsec">
-      <div class="n">7</div>
-      <h2>Is the 2026 Reverse Mortgage Right for You?</h2>
-    </div>
+    <h2>Is the 2026 Reverse Mortgage Right for You?</h2>
 
     <p>This program is specifically designed for homeowners who:</p>
     <ul class="checks">
@@ -537,20 +551,19 @@
     <p>The 2026 Reverse Mortgage Update represents the single biggest opportunity for seniors to access their home equity without sacrificing the home they love. But like any financial decision, it's important to get all the facts.</p>
     <p>The first step is to see how much you could access under the new 2026 guidelines. There's no obligation, and the process is completely confidential.</p>
 
-    <div class="sale">
-      <div class="miss">DON’T MISS IT!</div>
-      <div class="gift">🎁 CHECK YOUR 2026 AMOUNT 🎁</div>
-      <div class="off">Unlock Equity Without Selling Your Home</div>
-      <div class="lim">* Only a 60-second confidential check</div>
-      <div class="timer" aria-label="Countdown">
-        <div><b class="tH">04</b><span>HRS</span></div>
-        <div><b class="tM">44</b><span>MIN</span></div>
-        <div><b class="tS">30</b><span>SEC</span></div>
+    <div class="cta-box">
+      <h3>Your Home Equity Is Waiting</h3>
+      <p class="cta-box-lead">See how much you can unlock without selling your home or making monthly payments.</p>
+      <p class="cta-box-sub">Free, no-obligation estimate in 60 seconds • No credit check • Confidential</p>
+      <div class="steps-cta">
+        <div class="step"><div class="circ">1</div><span>Home Details</span></div>
+        <div class="line"></div>
+        <div class="step"><div class="circ">2</div><span>Estimate</span></div>
+        <div class="line"></div>
+        <div class="step"><div class="circ">3</div><span>Options</span></div>
       </div>
-      <a class="cta" href="https://trk.pickwisely.online/click" style="margin-top:0">
-        <span class="t1">Calculate Your 2026 Reverse Mortgage Amount →</span>
-        <span class="t2">See how much equity you can unlock</span>
-      </a>
+      <a class="cta" href="https://trk.pickwisely.online/click">Calculate Your Amount</a>
+      <p class="cta-lock">🔒 Your information is secure and will never be shared</p>
     </div>
 
     <div class="fb">
@@ -670,22 +683,27 @@
       </div>
     </div>
 
-    <div class="final">
-      <h2>Click below and calculate your 2026 amount today</h2>
-      <p>See how much equity you can unlock without selling your home or making monthly payments.</p>
-      <a class="cta" href="https://trk.pickwisely.online/click">
-        <span class="t1">Calculate Your 2026 Reverse Mortgage Amount →</span>
-        <span class="t2">Results in 60 seconds · Confidential</span>
-      </a>
+    <div class="cta-box">
+      <h3>Calculate your 2026 amount today</h3>
+      <p class="cta-box-lead">See how much equity you can unlock without selling your home or making monthly payments.</p>
+      <p class="cta-box-sub">Results in 60 seconds • Confidential • No cost to check</p>
+      <div class="steps-cta">
+        <div class="step"><div class="circ">1</div><span>Home Details</span></div>
+        <div class="line"></div>
+        <div class="step"><div class="circ">2</div><span>Estimate</span></div>
+        <div class="line"></div>
+        <div class="step"><div class="circ">3</div><span>Options</span></div>
+      </div>
+      <a class="cta" href="https://trk.pickwisely.online/click">Calculate Your Amount</a>
+      <p class="cta-lock">🔒 Your information is secure and will never be shared</p>
     </div>
 
     <p class="bold" style="margin-top:18px">P.S. — The 2026 HUD guidelines are real. The borrowing limits are real. When your bank finally mentions this, the window may already be crowded.</p>
     <p class="bold">P.P.S. — If you are still reading, you are still hoping. Click the button. Take 60 seconds. There is no obligation and zero cost to check.</p>
 
-    <a class="cta" href="https://trk.pickwisely.online/click">
-      <span class="t1">Calculate Your 2026 Reverse Mortgage Amount →</span>
-      <span class="t2">See how much equity you can unlock</span>
-    </a>
+    <div class="cta-wrap">
+      <a class="cta" href="https://trk.pickwisely.online/click">Calculate Your Amount</a>
+    </div>
 
     <p class="disc">
       This content is provided for general informational purposes only and is not intended as financial, legal, tax, or lending advice. A reverse mortgage is a loan secured by your home. Eligibility, loan amounts, and terms vary by age, home value, interest rates, and HUD/FHA guidelines. Always consult a qualified professional. Individual results may vary. This page is an advertisement/advertorial. We may receive compensation for referrals made through our links. We are not a lender and are not affiliated with HUD, FHA, or any government agency.
@@ -701,10 +719,7 @@
       2026 Reverse Mortgage Update
       <span>Check your amount in 60 seconds</span>
     </div>
-    <a class="cta" href="https://trk.pickwisely.online/click" style="flex:1.2">
-      <span class="t1">Calculate Amount →</span>
-      <span class="t2">No cost to check</span>
-    </a>
+    <a class="cta" href="https://trk.pickwisely.online/click">Calculate Amount</a>
   </div>
 </div>
 
@@ -719,20 +734,6 @@
   window.addEventListener('scroll', function () {
     sticky.classList.toggle('show', window.scrollY > window.innerHeight * 0.4);
   }, { passive: true });
-
-  var end = Date.now() + ((4 * 3600) + (44 * 60) + 30) * 1000;
-  function pad(n) { return n < 10 ? '0' + n : '' + n; }
-  function tick() {
-    var left = Math.max(0, end - Date.now());
-    var s = Math.floor(left / 1000);
-    var h = Math.floor(s / 3600); s %= 3600;
-    var m = Math.floor(s / 60); s %= 60;
-    document.querySelectorAll('#tH, .tH').forEach(function (el) { el.textContent = pad(h); });
-    document.querySelectorAll('#tM, .tM').forEach(function (el) { el.textContent = pad(m); });
-    document.querySelectorAll('#tS, .tS').forEach(function (el) { el.textContent = pad(s); });
-  }
-  tick();
-  setInterval(tick, 1000);
 })();
 </script>
 </body>
