@@ -68,26 +68,31 @@
   .lead { margin: 0 0 14px; color: var(--ink); }
   .hl { background: var(--hl); padding: 0 2px; }
 
-  .stars {
+  .byline {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #65758b;
+    margin: 24px 0 18px;
+  }
+  .byline-who {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin: 14px 0 10px;
-    font-size: 15px;
-    font-weight: 600;
   }
-  .stars .s { color: #f5a623; letter-spacing: 1px; font-size: 18px; line-height: 1; }
-
-  .byline {
-    font-size: 15px;
-    margin: 0 0 18px;
-    color: var(--ink);
+  .byline-av {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    display: block;
   }
-  .byline strong { font-weight: 700; }
-  .byline em { font-style: italic; color: #333; }
 
   .shot { margin: 18px 0 22px; }
-  .shot img { width: 100%; border-radius: 0; }
+  .shot img { width: 100%; border-radius: 8px; }
 
   p { margin: 0 0 14px; font-weight: 400; }
   p.bold { font-weight: 700; }
@@ -153,18 +158,6 @@
     align-items: center;
     padding: 32px 0 24px;
     margin: 12px 0 8px;
-  }
-  .cta-mid {
-    background: rgba(241, 245, 249, .45);
-    border-radius: 8px;
-    padding: 32px 16px;
-    text-align: center;
-    margin: 36px 0;
-  }
-  .cta-mid-q {
-    font-size: 20px;
-    font-weight: 600;
-    margin: 0 0 24px;
   }
   .cta-box {
     background: linear-gradient(to right bottom, rgba(0, 89, 179, .1), rgba(22, 162, 73, .1));
@@ -378,15 +371,14 @@
       <span class="hl">the smartest way for homeowners 62+ to access their equity without selling or making monthly payments.</span>
     </p>
 
-    <div class="stars">
-      <span class="s">★★★★★</span>
-      <span>3,840 verified homeowners</span>
+    <div class="byline">
+      <span class="byline-who">
+        <img class="byline-av" src="author-avatar.png" alt="Sophia Brown" width="40" height="40">
+        <span>Sophia Brown</span>
+      </span>
+      <span>•</span>
+      <span>August 12, 2026</span>
     </div>
-
-    <p class="byline">
-      <strong>By Houseowners News</strong><br>
-      <em>Last updated August 22, 2026</em>
-    </p>
 
     <figure class="shot">
       <picture>
@@ -407,7 +399,7 @@
 
     <p>For years, reverse mortgages were pushed by slick seminar salesmen. But the 2026 HUD guidelines transformed this program into what smart retirees now call “the ultimate wealth hack.” Here's what changed that has banks scrambling:</p>
 
-    <h3 class="sub">1. MASSIVE New Borrowing Limits</h3>
+    <h3 class="sub" id="stickyStart">1. MASSIVE New Borrowing Limits</h3>
     <p>The 2026 HECM limit jumped to <strong>$1,249,125</strong>. If you have a high-value home, you can now unlock a life-changing amount of tax-free cash. We're seeing homeowners access well over $150,000, and many with high-value homes are getting over $250,000.</p>
 
     <h3 class="sub">2. The “No-Red-Tape” Refinance Rule</h3>
@@ -448,11 +440,6 @@
     <p>This program converts the equity sitting unused in your walls into tax-free cash you can use for bills, repairs, or retirement — while you stay put.</p>
 
     <p class="bold">Thousands of homeowners 62+ are already doing it. You are next.</p>
-
-    <div class="cta-mid">
-      <p class="cta-mid-q">Could your home equity support your retirement?</p>
-      <a class="cta" href="https://trk.pickwisely.online/click">Explore My Options</a>
-    </div>
 
     <h2>Why Your Bank Will Never Tell You This</h2>
 
@@ -736,9 +723,23 @@
   });
 
   var sticky = document.getElementById('sticky');
-  window.addEventListener('scroll', function () {
-    sticky.classList.toggle('show', window.scrollY > window.innerHeight * 0.4);
-  }, { passive: true });
+  var start = document.getElementById('stickyStart');
+  function inView(el) {
+    var r = el.getBoundingClientRect();
+    return r.bottom > 80 && r.top < window.innerHeight;
+  }
+  function updateSticky() {
+    if (!sticky || !start) return;
+    var started = start.getBoundingClientRect().top <= window.innerHeight * 0.75;
+    var ctaOnScreen = false;
+    document.querySelectorAll('.cta-wrap, .cta-box').forEach(function (el) {
+      if (inView(el)) ctaOnScreen = true;
+    });
+    sticky.classList.toggle('show', started && !ctaOnScreen);
+  }
+  updateSticky();
+  window.addEventListener('scroll', updateSticky, { passive: true });
+  window.addEventListener('resize', updateSticky);
 })();
 </script>
 </body>

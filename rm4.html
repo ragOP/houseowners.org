@@ -68,26 +68,31 @@
   .lead { margin: 0 0 14px; color: var(--ink); }
   .hl { background: var(--hl); padding: 0 2px; }
 
-  .stars {
+  .byline {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #65758b;
+    margin: 24px 0 18px;
+  }
+  .byline-who {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin: 14px 0 10px;
-    font-size: 15px;
-    font-weight: 600;
   }
-  .stars .s { color: #f5a623; letter-spacing: 1px; font-size: 18px; line-height: 1; }
-
-  .byline {
-    font-size: 15px;
-    margin: 0 0 18px;
-    color: var(--ink);
+  .byline-av {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    display: block;
   }
-  .byline strong { font-weight: 700; }
-  .byline em { font-style: italic; color: #333; }
 
   .shot { margin: 18px 0 22px; }
-  .shot img { width: 100%; border-radius: 0; }
+  .shot img { width: 100%; border-radius: 8px; }
 
   p { margin: 0 0 14px; font-weight: 400; }
   p.bold { font-weight: 700; }
@@ -153,18 +158,6 @@
     align-items: center;
     padding: 32px 0 24px;
     margin: 12px 0 8px;
-  }
-  .cta-mid {
-    background: rgba(241, 245, 249, .45);
-    border-radius: 8px;
-    padding: 32px 16px;
-    text-align: center;
-    margin: 36px 0;
-  }
-  .cta-mid-q {
-    font-size: 20px;
-    font-weight: 600;
-    margin: 0 0 24px;
   }
   .cta-box {
     background: linear-gradient(to right bottom, rgba(0, 89, 179, .1), rgba(22, 162, 73, .1));
@@ -378,15 +371,14 @@
       <span class="hl">federally-backed right to access a massive portion of your home equity without selling and without taking on a new monthly payment.</span>
     </p>
 
-    <div class="stars">
-      <span class="s">★★★★★</span>
-      <span>3,840 verified homeowners</span>
+    <div class="byline">
+      <span class="byline-who">
+        <img class="byline-av" src="author-avatar.png" alt="Sophia Brown" width="40" height="40">
+        <span>Sophia Brown</span>
+      </span>
+      <span>•</span>
+      <span>August 12, 2026</span>
     </div>
-
-    <p class="byline">
-      <strong>By Houseowners News</strong><br>
-      <em>Last updated August 22, 2026</em>
-    </p>
 
     <figure class="shot">
       <picture>
@@ -416,7 +408,7 @@
       <a class="cta" href="https://trk.pickwisely.online/click">Calculate My Amount</a>
     </div>
 
-    <h2>This is your money. You earned it.</h2>
+    <h2 id="stickyStart">This is your money. You earned it.</h2>
 
     <p>You paid for that house for decades. Now it's time to make it pay you back.</p>
 
@@ -431,11 +423,6 @@
 
     <p class="bold">Stop letting your bank, your realtor, or even your well-meaning kids dictate your financial life.</p>
     <p>You have options. You have power. You have a federally-backed right to the wealth locked in your walls.</p>
-
-    <div class="cta-mid">
-      <p class="cta-mid-q">Claim what’s yours. Find out how much you can access in the next 60 seconds.</p>
-      <a class="cta" href="https://trk.pickwisely.online/click">Explore My Options</a>
-    </div>
 
     <div class="cta-box">
       <h3>Claim what’s yours</h3>
@@ -544,9 +531,23 @@
     a.setAttribute('href', OFFER);
   });
   var sticky = document.getElementById('sticky');
-  window.addEventListener('scroll', function () {
-    sticky.classList.toggle('show', window.scrollY > window.innerHeight * 0.4);
-  }, { passive: true });
+  var start = document.getElementById('stickyStart');
+  function inView(el) {
+    var r = el.getBoundingClientRect();
+    return r.bottom > 80 && r.top < window.innerHeight;
+  }
+  function updateSticky() {
+    if (!sticky || !start) return;
+    var started = start.getBoundingClientRect().top <= window.innerHeight * 0.75;
+    var ctaOnScreen = false;
+    document.querySelectorAll('.cta-wrap, .cta-box').forEach(function (el) {
+      if (inView(el)) ctaOnScreen = true;
+    });
+    sticky.classList.toggle('show', started && !ctaOnScreen);
+  }
+  updateSticky();
+  window.addEventListener('scroll', updateSticky, { passive: true });
+  window.addEventListener('resize', updateSticky);
 })();
 </script>
 </body>
