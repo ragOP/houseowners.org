@@ -161,10 +161,25 @@
   .result-desc { font-size: 15px; color: #5b616b; margin: 0 0 24px; line-height: 1.6; }
 
   .cta-btn {
+    position: relative; overflow: hidden;
     display: block; width: 100%; background: #0071bc; color: #fff !important;
     border: none; border-radius: 6px; padding: 18px 24px;
     font-size: 18px; font-weight: 700; text-align: center;
     text-decoration: none; cursor: pointer;
+  }
+  .cta-btn::after {
+    content: "";
+    position: absolute; top: 0; left: -120%;
+    width: 55%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.5), transparent);
+    transform: skewX(-20deg);
+    animation: shine 3.4s infinite;
+    pointer-events: none;
+  }
+  @keyframes shine {
+    0% { left: -120%; }
+    55% { left: 140%; }
+    100% { left: 140%; }
   }
   .cta-btn:hover { background: #205493; }
   .cta-fine { text-align: center; font-size: 12px; color: #71767a; margin-top: 12px; }
@@ -226,8 +241,8 @@
         <p class="q-label">Question 1 of 3</p>
         <p class="q-text">Have you owned your home for 5 or more years?</p>
         <div class="answers">
-          <button type="button" class="answer-btn" data-next="2" data-own="5plus"><span class="radio"></span>Yes, 5+ years</button>
-          <button type="button" class="answer-btn" data-next="2" data-own="under5"><span class="radio"></span>Less than 5 years</button>
+          <button type="button" class="answer-btn" data-next="2"><span class="radio"></span>Yes, 5+ years</button>
+          <button type="button" class="answer-btn" data-next="2"><span class="radio"></span>Less than 5 years</button>
         </div>
       </div>
 
@@ -262,7 +277,7 @@
 
       <div id="sResult" class="screen">
         <div class="result-badge"><span class="check">✓</span><span> Eligible </span></div>
-        <h2 class="result-title" id="resultTitle">Based on 5+ Years of Homeownership, You May Qualify</h2>
+        <h2 class="result-title" id="resultTitle">Based on Your Homeownership, You May Qualify</h2>
         <div class="result-amount">Up to $185,000</div>
         <p class="result-desc">Based on your pre-screening responses, you appear to meet the initial eligibility criteria. Complete your full application to see your personalized cash-out amount in 60 seconds.</p>
         <a class="cta-btn" href="https://trk.toprateddaily.online/click">View My Personalized Offer →</a>
@@ -288,15 +303,13 @@
   var label = document.getElementById('progressLabel');
   var resultTitle = document.getElementById('resultTitle');
   var total = 3;
-  var ownedFivePlus = true;
 
   document.querySelectorAll('.answer-btn').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      var next = btn.getAttribute('data-next');
+      if (btn.disabled) return;
       var screen = btn.closest('.screen');
-      var own = btn.getAttribute('data-own');
-      if (own === 'under5') ownedFivePlus = false;
-      if (own === '5plus') ownedFivePlus = true;
+      var next = btn.getAttribute('data-next');
+      screen.querySelectorAll('.answer-btn').forEach(function (b) { b.disabled = true; });
       btn.classList.add('selected');
 
       setTimeout(function () {
@@ -308,9 +321,7 @@
           proc.classList.add('active');
           setTimeout(function () {
             proc.classList.remove('active');
-            resultTitle.textContent = ownedFivePlus
-              ? 'Based on 5+ Years of Homeownership, You May Qualify'
-              : 'Based on Your Homeownership, You May Qualify';
+            resultTitle.textContent = 'Based on Your Homeownership, You May Qualify';
             document.getElementById('sResult').classList.add('active');
             document.getElementById('progressRow').style.display = 'none';
             startReservationTimer();

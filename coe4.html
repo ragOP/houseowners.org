@@ -330,30 +330,6 @@
 			opacity: 0.95;
 		}
 		
-		.disqualification-section {
-			background: #fff3cd;
-			border: 2px solid #ffc107;
-			padding: 30px;
-			border-radius: 15px;
-			margin: 40px 0;
-			box-shadow: 0 6px 20px rgba(255, 193, 7, 0.3);
-			text-align: center;
-		}
-		
-		.disqualification-title {
-			font-size: 28px;
-			font-weight: 800;
-			margin-bottom: 15px;
-			color: #856404;
-		}
-		
-		.disqualification-text {
-			font-size: 18px;
-			line-height: 1.6;
-			margin-bottom: 20px;
-			color: #856404;
-		}
-		
 		.congratulations-section {
 			background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
 			color: #fff;
@@ -373,8 +349,26 @@
 		.congratulations-text {
 			font-size: 18px;
 			line-height: 1.6;
-			margin-bottom: 20px;
+			margin-bottom: 8px;
 			color: #fff;
+		}
+		
+		.cta-arrow {
+			text-align: center;
+			margin: 4px 0 12px;
+			color: #fff;
+			line-height: 1;
+		}
+		.cta-arrow svg {
+			width: 24px;
+			height: 24px;
+			display: block;
+			margin: 0 auto;
+			animation: arrowBounce 1.1s ease-in-out infinite;
+		}
+		@keyframes arrowBounce {
+			0%, 100% { transform: translateY(0); }
+			50% { transform: translateY(8px); }
 		}
 		
 		.video-cta {
@@ -692,16 +686,6 @@
 			</div>
 		</div>
 		
-		<!-- Disqualification Section -->
-		<div id="disqualificationSection" class="hidden">
-			<div class="disqualification-section">
-				<div class="disqualification-title">⚠️ Unfortunately, You Don't Qualify</div>
-				<div class="disqualification-text">
-					Based on your credit score, you don't currently qualify for this program. However, there may be other options available. Please check back in the future as programs and requirements may change.
-				</div>
-			</div>
-		</div>
-		
 		<!-- Congratulations Section -->
 		<div id="congratulationsSection" class="hidden">
 			<div class="congratulations-section">
@@ -709,6 +693,10 @@
 				<div class="congratulations-text">
 					But to unlock your personalized payout and see if you qualify for the full $185,000...<br><br>
 					First, you must go to the next page and give us some more basic details about your home, and you'll see if you qualify for the full $185,000.
+				</div>
+				
+				<div class="cta-arrow" aria-hidden="true">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>
 				</div>
 				
 				<a href="#" class="video-cta" id="videoLink" onclick="handleCtaClick(event)">
@@ -751,12 +739,6 @@
 		// Redirect URLs based on age
 		const redirectUrl65Plus = 'https://trk.toprateddaily.online/click';
 		const redirectUrlUnder65 = 'https://trk.toprateddaily.online/click';
-		
-		// Qualifying property types
-		const qualifyingProperties = ['Single Family Home', 'Townhome', 'Condominium', 'Multi Family Home'];
-		
-		// Qualifying credit scores
-		const qualifyingCredits = ['Excellent', 'Very Good', 'Good', 'Fair'];
 		
 		// Get redirect URL based on age answer
 		function getRedirectUrl() {
@@ -810,6 +792,19 @@
 			return Math.min(newPayout, 165000);
 		}
 		
+		// Scroll so newly revealed content below the fold is visible
+		function scrollToBottom() {
+			requestAnimationFrame(function() {
+				requestAnimationFrame(function() {
+					const top = Math.max(
+						document.body.scrollHeight,
+						document.documentElement.scrollHeight
+					);
+					window.scrollTo({ top: top, behavior: 'smooth' });
+				});
+			});
+		}
+		
 		// Update progress bar
 		function updateProgress() {
 			const progress = ((currentQuestion - 1) / totalQuestions) * 100;
@@ -822,6 +817,7 @@
 			document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
 			document.getElementById(`question${questionNumber}`).classList.add('active');
 			updateProgress();
+			scrollToBottom();
 		}
 		
 		// Select option
@@ -842,15 +838,6 @@
 				question2Payout = getBasePayout(selectedProperty);
 			} else if (questionNumber === 3) {
 				selectedCredit = option.dataset.value;
-				
-				// Check if credit is Poor - show disqualification
-				if (option.dataset.value === 'Poor') {
-					setTimeout(() => {
-						document.getElementById('quizSection').classList.add('hidden');
-						document.getElementById('disqualificationSection').classList.remove('hidden');
-					}, 2000);
-					return;
-				}
 			}
 			
 			// Show payout feedback (only for questions 2 and 3)
@@ -858,13 +845,14 @@
 				showPayoutFeedback(questionNumber);
 			}
 			
+			scrollToBottom();
+			
 			// Auto-advance to next question after showing feedback (or immediately for question 1)
 			setTimeout(() => {
-				if (currentQuestion < totalQuestions && selectedCredit !== 'Poor') {
+				if (currentQuestion < totalQuestions) {
 					currentQuestion++;
 					showQuestion(currentQuestion);
-				} else if (selectedCredit !== 'Poor') {
-					// Quiz completed - show analyzing
+				} else {
 					showAnalyzing();
 				}
 			}, questionNumber === 1 ? 500 : 2000);
@@ -916,6 +904,7 @@
 			document.querySelector('.cash-equity-section').style.display = 'none';
 			document.querySelector('.main-header').style.display = 'none';
 			document.querySelector('p[style*="font-size: 18px"]').style.display = 'none';
+			scrollToBottom();
 			
 			// Use the final payout from question 3
 			const mainPayout = finalPayout || 185000; // Fallback if somehow not set
@@ -948,6 +937,7 @@
 		// Show congratulations
 		function showCongratulations() {
 			document.getElementById('congratulationsSection').classList.remove('hidden');
+			scrollToBottom();
 			
 			// Update payout amount in congratulations section
 			const payoutAmount = finalPayout || 160000;
@@ -955,7 +945,7 @@
 			const titleElement = document.getElementById('congratulationsTitle');
 			
 			if (titleElement) {
-				titleElement.innerHTML = `🎉 CONGRATULATIONS!! YOU'VE QUALIFIED FOR A PAYOUT UP TO ${formattedPayout}!!`;
+				titleElement.innerHTML = `🎉 CONGRATULATIONS! YOU'VE QUALIFIED FOR A PAYOUT UP TO ${formattedPayout}!`;
 			}
 			
 			startCountdown();
