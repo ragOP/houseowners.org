@@ -11,11 +11,12 @@
     })(window, document, "clarity", "script", "y3rt3ntclc");
 </script>
 <meta name="robots" content="noindex, nofollow">
-<title>URGENT NOTICE FOR SENIOR HOMEOWNERS: The New "Senior Equity Release" Program Lets You Claim Up To $185,000 In Tax-Free Cash</title>
+<title>BREAKING: The New "Senior Equity Release" Program Lets You Claim Up To $185,000 In Tax-Free Cash</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="hero.webp" type="image/webp">
+<link rel="preload" as="image" href="logo.webp" type="image/webp">
 <style>
   :root {
     --ink: #111;
@@ -27,6 +28,7 @@
     --btn: #0073e6;
     --primary: #0059b3;
     --max: 720px;
+    --header: #111111;
     --offer: https://trk.toprateddaily.online/click;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -42,6 +44,22 @@
   img { max-width: 100%; height: auto; display: block; }
   a { color: inherit; text-decoration: none; }
   .wrap { max-width: var(--max); margin: 0 auto; padding: 0 16px; }
+
+  .topbar {
+    background: var(--header);
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .topbar .logo {
+    height: 38px;
+    width: auto;
+    max-width: min(100%, 420px);
+    object-fit: contain;
+    display: block;
+    image-rendering: -webkit-optimize-contrast;
+  }
 
   .announce {
     background: #fffdf5;
@@ -105,6 +123,25 @@
     letter-spacing: 0;
     margin: 28px 0 12px;
   }
+  .warn { color: #8B0000; }
+
+  .cta-arrow {
+    text-align: center;
+    margin: 4px 0 18px;
+    color: #111;
+    line-height: 1;
+  }
+  .cta-arrow svg {
+    width: 24px;
+    height: 24px;
+    display: block;
+    margin: 0 auto;
+    animation: arrowBounce 1.1s ease-in-out infinite;
+  }
+  @keyframes arrowBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
 
   h3.sub {
     font-family: Lora, Georgia, serif;
@@ -147,6 +184,14 @@
     transition: all .15s ease;
     text-align: center;
   }
+  .cta-short {
+    display: flex;
+    width: 100%;
+    padding: 16px 20px;
+    font-size: 18px;
+    line-height: 1.25;
+    margin-top: 8px;
+  }
   .cta:hover {
     background: #0068d1;
     transform: scale(1.02);
@@ -175,9 +220,11 @@
     line-height: 1.25;
   }
   .cta-box-lead {
-    font-size: 20px;
-    font-weight: 500;
-    margin: 0 0 10px;
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0 0 16px;
+    line-height: 1.3;
+    color: #444;
   }
   .cta-box-sub {
     font-size: 16px;
@@ -199,8 +246,16 @@
     border-radius: 999px;
     font-size: 13px;
     font-weight: 700;
-    padding: 6px 12px;
+    padding: 6px 14px;
     margin: 0 0 16px;
+    line-height: 1.35;
+    text-align: center;
+  }
+  .status-spots {
+    display: block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
   }
   .age-grid {
     display: grid;
@@ -364,12 +419,21 @@
   }
   .sticky .left span { display: block; font-weight: 500; color: #666; font-size: 12px; }
 
+  @media (min-width: 768px) {
+    .topbar { padding: 18px 32px; }
+    .topbar .logo { height: 44px; }
+  }
+  @media (min-width: 1024px) {
+    .topbar .logo { height: 48px; }
+  }
+
   @media (max-width: 560px) {
     body { font-size: 16.5px; }
     .announce { font-size: 13.5px; }
     .checks li { font-size: 15.5px; }
     .sticky .left { display: none; }
     .cta { width: 100%; padding: 22px 16px; font-size: 18px; }
+    .cta-short { padding: 14px 16px; font-size: 16px; }
     .cta-box { padding: 28px 16px; }
     .age-grid .cta { padding: 16px 8px; font-size: 16px; }
     .steps-cta .line { width: 20px; }
@@ -379,18 +443,17 @@
 
 </head>
 <body>
-
-<div class="announce">
-  <span style="font-size:18px;">🚨</span>
-  <span class="upd">URGENT:</span>
-  The new Senior Equity Release Program lets senior homeowners claim
-  <strong>up to $185,000 in tax-free cash</strong>. Local spots are limited by zip code.
-</div>
+<header class="topbar">
+  <picture>
+    <source srcset="logo.webp" type="image/webp">
+    <img class="logo" src="logo.png" alt="Houseowners News" width="400" height="80" fetchpriority="high" decoding="async">
+  </picture>
+</header>
 
 <main class="page">
   <div class="wrap">
 
-    <h1 class="hero">URGENT NOTICE FOR SENIOR HOMEOWNERS: The New “Senior Equity Release” Program Lets You Claim Up To $185,000 In Tax-Free Cash</h1>
+    <h1 class="hero">BREAKING: The New “Senior Equity Release” Program Lets You Claim Up To $185,000 In Tax-Free Cash</h1>
 
     <p class="lead">
       If you are over 60 and own a home, there is urgent news regarding your property's value.
@@ -442,7 +505,7 @@
       <a class="cta" href="https://trk.toprateddaily.online/click">Check Your Eligibility Below</a>
     </div>
 
-    <h2>WARNING: Local Spots Are Filling Up Fast</h2>
+    <h2><span class="warn">WARNING:</span> Local Spots Are Filling Up Fast</h2>
 
     <p>Because program funds are handed out based on where you live and what your home is worth, local spots are taking claimed very quickly. Once your area hits its limit for this round, you may have to wait months for another opening.</p>
 
@@ -456,21 +519,25 @@
     <p><strong>Step 2:</strong> Answer 3 simple questions about your home and zip code.</p>
     <p><strong>Step 3:</strong> See your cash estimate on the next page and claim your spot.</p>
 
+    <div class="cta-arrow" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>
+    </div>
+
     <div class="cta-box">
-      <p class="status-open">PROGRAM STATUS: OPEN (LIMITED SPOTS REMAINING)</p>
-      <h3>Tap Your Age Group To Check Your Zip Code</h3>
+      <p class="status-open">PROGRAM STATUS: OPEN<br><span class="status-spots">(LIMITED SPOTS REMAINING)</span></p>
+      <h3>Tap Your Age Group Below To Check Your Zip Code</h3>
       <p class="cta-box-lead">Free check takes less than 1 minute and will NOT affect your credit score.</p>
-      <p class="cta-box-sub">Check your eligibility below • No credit check • Confidential</p>
+      <!-- <p class="cta-box-sub">Check your eligibility below • No credit check • Confidential</p> -->
       <div class="age-grid">
         <a class="cta" href="https://trk.toprateddaily.online/click">50 – 59</a>
         <a class="cta" href="https://trk.toprateddaily.online/click">60 – 64</a>
         <a class="cta" href="https://trk.toprateddaily.online/click">65 – 74</a>
         <a class="cta" href="https://trk.toprateddaily.online/click">75+</a>
       </div>
-      <a class="cta" href="https://trk.toprateddaily.online/click" style="margin-top:8px;">Tap Here To See How Much Cash You Can Get Now</a>
+    
       <p class="cta-lock">🔒 Your information is secure and will never be shared</p>
     </div>
-
+    <a class="cta cta-short" href="https://trk.toprateddaily.online/click">Tap Here To See How Much Cash You Can Get Now</a>
     <div class="fb">
       <div class="fb-head">
         <span>48 Comments</span>
@@ -550,7 +617,7 @@
       Senior Equity Release Program
       <span>Check your zip code in 60 seconds</span>
     </div>
-    <a class="cta" href="https://trk.toprateddaily.online/click">Check Eligibility</a>
+    <a class="cta" href="https://trk.toprateddaily.online/click">Check Your Eligibility</a>
   </div>
 </div>
 
