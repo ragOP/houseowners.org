@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="robots" content="noindex, nofollow">
+	<script type="text/javascript">
+	    (function(c,l,a,r,i,t,y){
+	        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+	        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+	        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+	    })(window, document, "clarity", "script", "y3rt3ntclc");
+	</script>
+	<title>Homeowner Cashout Program</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		
+		body {
+			font-family: 'Segoe UI', Arial, sans-serif;
+			background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+			min-height: 100vh;
+			padding: 20px;
+			color: #333;
+		}
+		
+		.container {
+			max-width: 1200px;
+			margin: 0 auto;
+			background: #fff;
+			border-radius: 20px;
+			box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+			padding: 40px;
+			text-align: center;
+		}
+		
+		.header-section {
+			margin-bottom: 30px;
+			background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+			border-radius: 16px;
+			padding: 30px;
+			box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+			border: 1px solid #e9ecef;
+		}
+		
+		.cash-equity-section {
+			text-align: center;
+			margin: 30px 0;
+		}
+		
+		.cash-equity-label {
+			font-size: 1.08rem;
+			color: #444;
+			margin-bottom: 8px;
+		}
+		
+		.cash-equity-amount {
+			font-size: 2.8rem;
+			font-weight: 800;
+			letter-spacing: -1px;
+			color: #27ae60;
+			line-height: 1.1;
+			margin: 10px 0;
+			text-shadow: 0 2px 8px rgba(39, 174, 96, 0.2);
+			animation: pulseAmount 2s infinite;
+		}
+		
+		@keyframes pulseAmount {
+			0%, 100% { 
+				transform: scale(1);
+				opacity: 1;
+			}
+			50% { 
+				transform: scale(1.05);
+				opacity: 0.9;
+			}
+		}
+		
+		.cash-equity-subtext {
+			font-size: 1.08rem;
+			color: #444;
+			margin-top: 8px;
+		}
+		
+		.main-header {
+			font-size: 32px;
+			font-weight: 700;
+			color: #1a2233;
+			text-align: center;
+			margin-bottom: 28px;
+			margin-top: 0;
+			line-height: 1.18;
+			word-break: break-word;
+		}
+		
+		.progress-bar-container {
+			margin-bottom: 30px;
+		}
+		
+		.progress-bar-bg {
+			width: 100%;
+			height: 10px;
+			background: #e0e0e0;
+			border-radius: 6px;
+			overflow: hidden;
+		}
+		
+		.progress-bar-fill {
+			height: 100%;
+			background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+			border-radius: 6px;
+			transition: width 0.4s cubic-bezier(.4,1.4,.6,1);
+			width: 0%;
+		}
+		
+		.progress-text {
+			text-align: center;
+			color: #666;
+			font-size: 14px;
+			margin-top: 10px;
+		}
+		
+		.question {
+			display: none;
+			animation: fadeIn 0.5s ease;
+		}
+		
+		.question.active {
+			display: block;
+		}
+		
+		.question h2 {
+			font-size: 24px;
+			color: #333;
+			margin-bottom: 25px;
+			text-align: center;
+			font-weight: 700;
+		}
+		
+		.options {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 20px;
+			justify-content: center;
+			margin-bottom: 32px;
+		}
+		
+		.option {
+			flex: 1 1 140px;
+			min-width: 140px;
+			max-width: 180px;
+			width: 150px;
+			min-height: 120px;
+			background: #fff;
+			border: 2px solid #e0e4ea;
+			border-radius: 16px;
+			padding: 16px 8px 12px 8px;
+			text-align: center;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
+		
+		.option:hover {
+			transform: scale(1.05);
+			box-shadow: 0 8px 24px rgba(30,201,142,0.18);
+			z-index: 2;
+			border-color: #1ec98e;
+		}
+		
+		.option.selected {
+			border: 2px solid #1ec98e;
+			background: #e6faf3;
+			box-shadow: 0 4px 16px rgba(30,201,142,0.08);
+		}
+		
+		.option span {
+			display: block;
+			font-size: 1.1rem;
+			font-weight: 500;
+			color: #1a2233;
+			line-height: 1.2;
+			margin-top: 8px;
+		}
+		
+		#question1 .option span {
+			font-size: 1.5rem;
+			font-weight: 600;
+		}
+		
+		.property-icon {
+			display: block;
+			width: 64px;
+			height: 64px;
+			object-fit: contain;
+			flex-shrink: 0;
+			margin: 0 auto;
+		}
+		
+		.property-icon-wrapper {
+			height: 64px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-bottom: 8px;
+		}
+		
+		.credit-options-row {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 16px;
+			justify-content: center;
+			margin-bottom: 32px;
+			align-items: stretch;
+		}
+		
+		.credit-option {
+			color: #fff;
+			border-width: 3px;
+			border-radius: 16px;
+			border-style: solid;
+			background: #bbb;
+			box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+			transition: transform 0.18s, box-shadow 0.18s, border 0.18s, background 0.18s;
+			min-width: 140px;
+			max-width: 180px;
+			width: 17vw;
+			height: 80px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+			font-family: inherit;
+			position: relative;
+			border: 3px solid #222;
+			margin: 0;
+		}
+		
+		.credit-label {
+			font-size: 20px;
+			font-weight: 700;
+			color: #fff;
+			margin-bottom: 2px;
+			text-align: center;
+		}
+		
+		.credit-range {
+			font-size: 20px;
+			font-weight: 500;
+			color: #f7f8fa;
+			opacity: 0.95;
+			text-align: center;
+		}
+		
+		.credit-option.excellent {
+			background: #8dd22a;
+			border-color: #8dd22a;
+		}
+		
+		.credit-option.verygood {
+			background: #2d9cdb;
+			border-color: #2d9cdb;
+		}
+		
+		.credit-option.good {
+			background: #2dc6d7;
+			border-color: #2dc6d7;
+		}
+		
+		.credit-option.fair {
+			background: #f6a623;
+			border-color: #f6a623;
+		}
+		
+		.credit-option.poor {
+			background: #c0392b;
+			border-color: #c0392b;
+		}
+		
+		.credit-option.selected, .credit-option:hover {
+			transform: scale(1.07);
+			box-shadow: 0 8px 32px rgba(30,201,142,0.13), 0 2px 10px rgba(0,0,0,0.10);
+			border-color: #fff;
+			z-index: 2;
+		}
+		
+		.credit-option.selected .credit-label, .credit-option:hover .credit-label {
+			color: #fff;
+			text-shadow: 0 1px 2px rgba(0,0,0,0.04);
+		}
+		
+		.credit-option.selected .credit-range, .credit-option:hover .credit-range {
+			color: #fff;
+			opacity: 1;
+		}
+		
+		.payout-feedback {
+			background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+			color: #fff;
+			padding: 20px;
+			border-radius: 12px;
+			margin: 25px auto;
+			max-width: 600px;
+			text-align: center;
+			font-size: 18px;
+			font-weight: 600;
+			box-shadow: 0 4px 12px rgba(17, 153, 142, 0.3);
+			animation: fadeIn 0.5s ease;
+		}
+		
+		.payout-feedback .payout-display {
+			font-size: 32px;
+			font-weight: 800;
+			margin: 10px 0;
+			color: #fff;
+		}
+		
+		.payout-feedback .encouragement {
+			font-size: 16px;
+			margin-top: 10px;
+			opacity: 0.95;
+		}
+		
+		.disqualification-section {
+			background: #fff3cd;
+			border: 2px solid #ffc107;
+			padding: 30px;
+			border-radius: 15px;
+			margin: 40px 0;
+			box-shadow: 0 6px 20px rgba(255, 193, 7, 0.3);
+			text-align: center;
+		}
+		
+		.disqualification-title {
+			font-size: 28px;
+			font-weight: 800;
+			margin-bottom: 15px;
+			color: #856404;
+		}
+		
+		.disqualification-text {
+			font-size: 18px;
+			line-height: 1.6;
+			margin-bottom: 20px;
+			color: #856404;
+		}
+		
+		.congratulations-section {
+			background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+			color: #fff;
+			padding: 30px;
+			border-radius: 15px;
+			margin: 20px 0 40px 0;
+			box-shadow: 0 6px 20px rgba(17, 153, 142, 0.3);
+		}
+		
+		.congratulations-title {
+			font-size: 28px;
+			font-weight: 800;
+			margin-bottom: 15px;
+			color: #fff;
+		}
+		
+		.congratulations-text {
+			font-size: 18px;
+			line-height: 1.6;
+			margin-bottom: 20px;
+			color: #fff;
+		}
+		
+		.video-cta {
+			background: #fff;
+			color: #333;
+			padding: 20px 40px;
+			border-radius: 50px;
+			font-size: 20px;
+			font-weight: 700;
+			text-decoration: none;
+			display: inline-block;
+			margin: 20px 0;
+			box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+			transition: transform 0.3s;
+		}
+		
+		.video-cta:hover {
+			transform: translateY(-2px);
+		}
+		
+		.reviewing-content {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			min-height: 180px;
+		}
+		
+		.spinner {
+			border: 4px solid #e0e4ea;
+			border-top: 4px solid #1ec98e;
+			border-radius: 50%;
+			width: 48px;
+			height: 48px;
+			animation: spin 1s linear infinite;
+			margin-bottom: 24px;
+		}
+		
+		@keyframes spin {
+			0% { transform: rotate(0deg); }
+			100% { transform: rotate(360deg); }
+		}
+		
+		.rate-container {
+			display: flex;
+			justify-content: center;
+			gap: 15px;
+			margin: 40px 0;
+			flex-wrap: wrap;
+		}
+		
+		.rate-box {
+			width: 100px;
+			height: 100px;
+			background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+			border-radius: 15px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			font-size: 28px;
+			font-weight: 800;
+			color: #fff;
+			box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
+			animation: pulse 2s infinite;
+			position: relative;
+		}
+		
+		.rate-box .rate-label {
+			font-size: 12px;
+			font-weight: 500;
+			margin-top: 5px;
+			opacity: 0.9;
+		}
+		
+		@keyframes pulse {
+			0%, 100% { transform: scale(1); }
+			50% { transform: scale(1.05); }
+		}
+		
+		.warning-section {
+			background: #fff3cd;
+			border: 2px solid #ffc107;
+			padding: 20px;
+			border-radius: 10px;
+			margin: 30px 0;
+		}
+		
+		.warning-text {
+			font-size: 16px;
+			color: #856404;
+			font-weight: 600;
+			margin-bottom: 15px;
+		}
+		
+		.timer-section {
+			text-align: center;
+			margin: 20px 0;
+		}
+		
+		.timer-label {
+			font-size: 16px;
+			color: #666;
+			margin-bottom: 10px;
+		}
+		
+		.timer-display {
+			font-size: 48px;
+			font-weight: 800;
+			color: #e74c3c;
+			font-family: 'Courier New', monospace;
+			text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+		}
+		
+		.dont-waste {
+			font-size: 18px;
+			color: #e74c3c;
+			font-weight: 700;
+			margin-top: 15px;
+		}
+		
+		.hidden {
+			display: none !important;
+		}
+		
+		@keyframes fadeIn {
+			from { opacity: 0; transform: translateY(20px); }
+			to { opacity: 1; transform: translateY(0); }
+		}
+		
+		@media (max-width: 768px) {
+			body {
+				padding: 10px;
+			}
+			
+			.container {
+				padding: 15px 12px;
+				border-radius: 15px;
+			}
+			
+			.header-section {
+				margin-bottom: 15px;
+				padding: 18px 15px;
+			}
+			
+			.cash-equity-amount {
+				font-size: 2rem;
+			}
+			
+			.main-header {
+				font-size: 1.05rem !important;
+				font-weight: 600 !important;
+				padding: 8px 2vw 8px 2vw;
+				margin-bottom: 12px;
+				line-height: 1.35;
+			}
+			
+			.question h2 {
+				font-size: 20px;
+				margin-bottom: 20px;
+			}
+			
+			.option {
+				width: 95vw;
+				min-width: 140px;
+				max-width: 340px;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			
+			.credit-option {
+				width: 44vw;
+				min-width: 90px;
+				max-width: 120px;
+				height: 36px;
+				font-size: 1rem;
+				padding: 2px 1px 2px 1px;
+			}
+			
+			.rate-box {
+				width: 80px;
+				height: 80px;
+				font-size: 22px;
+			}
+			
+			.payout-feedback {
+				padding: 15px;
+				margin: 20px auto;
+				font-size: 16px;
+			}
+			
+			.payout-feedback .payout-display {
+				font-size: 28px;
+			}
+			
+			.payout-feedback .encouragement {
+				font-size: 14px;
+			}
+			
+			.timer-display {
+				font-size: 36px;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="main-header">
+			Homeowners Now Qualify Up To $185,000 To Use For Whatever They Need Thanks To This Stimulus Cashback Program
+		</div>
+		
+		<div class="cash-equity-section">
+			<div class="cash-equity-label">We've helped homeowners obtain</div>
+			<div class="cash-equity-amount" id="cashEquityAmount">$257,059,434</div>
+			<div class="cash-equity-subtext">in cash equity from their home & counting. Continue below to access your cash!</div>
+		</div>
+		
+		<p style="font-size: 18px; color: #666; margin-bottom: 30px; text-align: center;">
+			Answer a few quick questions to see if you qualify for a payout up to <strong style="color: #2a5298; font-size: 24px;">$185,000</strong>!
+		</p>
+		
+		<!-- Quiz Section -->
+		<div id="quizSection">
+			<div class="progress-bar-container">
+				<div class="progress-bar-bg">
+					<div class="progress-bar-fill" id="progressFill"></div>
+				</div>
+				<div class="progress-text" id="progressText">Question 1 of 3</div>
+			</div>
+			
+			<!-- Question 1: Age -->
+			<div class="question active" id="question1">
+				<h2>Are you 65 years old or older?</h2>
+				<div class="options">
+					<div class="option" data-value="Yes">
+						<span>Yes</span>
+					</div>
+					<div class="option" data-value="No">
+						<span>No</span>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Question 2: Property Type -->
+			<div class="question" id="question2">
+				<h2>What type of property do you have?</h2>
+				<div class="options">
+					<div class="option" data-value="Single Family Home">
+						<div class="property-icon-wrapper"><img src="images/house.png" alt="Single Family Home" class="property-icon" /></div>
+						<span>Single Family Home</span>
+					</div>
+					<div class="option" data-value="Townhome">
+						<div class="property-icon-wrapper"><img src="images/townhome.png" alt="Townhome" class="property-icon" /></div>
+						<span>Townhome</span>
+					</div>
+					<div class="option" data-value="Condominium">
+						<div class="property-icon-wrapper"><img src="images/apartment.png" alt="Condominium" class="property-icon" /></div>
+						<span>Condominium</span>
+					</div>
+					<div class="option" data-value="Multi Family Home">
+						<div class="property-icon-wrapper"><img src="images/multi-family.png" alt="Multi Family Home" class="property-icon" /></div>
+						<span>Multi Family Home</span>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Question 3: Credit Score -->
+			<div class="question" id="question3">
+				<h2>How is your credit score?</h2>
+				<div class="options credit-options-row">
+					<div class="option credit-option excellent" data-value="Excellent">
+						<span class="credit-label">Excellent</span>
+						<span class="credit-range">Above 800+</span>
+					</div>
+					<div class="option credit-option verygood" data-value="Very Good">
+						<span class="credit-label">Very Good</span>
+						<span class="credit-range">740 - 799</span>
+					</div>
+					<div class="option credit-option good" data-value="Good">
+						<span class="credit-label">Good</span>
+						<span class="credit-range">670 - 739</span>
+					</div>
+					<div class="option credit-option fair" data-value="Fair">
+						<span class="credit-label">Fair</span>
+						<span class="credit-range">580 - 669</span>
+					</div>
+					<div class="option credit-option poor" data-value="Poor">
+						<span class="credit-label">Poor</span>
+						<span class="credit-range">Below 579</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Analyzing Section -->
+		<div id="analyzingSection" class="hidden">
+			<div class="reviewing-content">
+				<div class="spinner"></div>
+				<h2>Reviewing your answers...</h2>
+			</div>
+			
+			<div class="rate-container">
+				<div class="rate-box" id="rate1">
+					<div>?</div>
+					<div class="rate-label">Rate</div>
+				</div>
+				<div class="rate-box" id="rate2">
+					<div>?</div>
+					<div class="rate-label">Rate</div>
+				</div>
+				<div class="rate-box" id="rate3">
+					<div>?</div>
+					<div class="rate-label">Rate</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Disqualification Section -->
+		<div id="disqualificationSection" class="hidden">
+			<div class="disqualification-section">
+				<div class="disqualification-title">⚠️ Unfortunately, You Don't Qualify</div>
+				<div class="disqualification-text">
+					Based on your credit score, you don't currently qualify for this program. However, there may be other options available. Please check back in the future as programs and requirements may change.
+				</div>
+			</div>
+		</div>
+		
+		<!-- Congratulations Section -->
+		<div id="congratulationsSection" class="hidden">
+			<div class="congratulations-section">
+				<div class="congratulations-title" id="congratulationsTitle">🎉 CONGRATULATIONS!! YOU'VE QUALIFIED FOR A PAYOUT UP TO $185,000!!</div>
+				<div class="congratulations-text">
+					But to unlock your personalized payout and see if you qualify for the full $185,000...<br><br>
+					First, you must go to the next page and give us some more basic details about your home, and you'll see if you qualify for the full $185,000.
+				</div>
+				
+				<a href="#" class="video-cta" id="videoLink" onclick="handleCtaClick(event)">
+					Click Here To See If You Qualify For The Full $185,000
+				</a>
+			</div>
+			
+			<div class="warning-section">
+				<div class="warning-text">
+					⚠️ <strong>WARNING:</strong> These exclusive payouts are limited and this offer expires soon.
+				</div>
+				
+				<div class="timer-section">
+					<div class="timer-label">Time Remaining:</div>
+					<div class="timer-display" id="finalCountdownTimer">05:00</div>
+					<div class="dont-waste">Don't waste your last chance to get your payout.</div>
+				</div>
+			</div>
+		</div>
+		<p style="margin-top:28px;font-size:13px;color:#777;">
+			<a href="terms.html" style="color:#555;">Terms &amp; Conditions</a>
+			&nbsp;·&nbsp;
+			<a href="about.html" style="color:#555;">About / Privacy</a>
+		</p>
+	</div>
+	
+	<script>
+		// State
+		let currentQuestion = 1;
+		let totalQuestions = 3;
+		let answers = {};
+		let countdownSeconds = 300;
+		let countdownInterval;
+		let selectedAge = null;
+		let selectedProperty = null;
+		let selectedCredit = null;
+		let question2Payout = null; // Store payout from question 2 (property type)
+		let finalPayout = null; // Store final payout from question 3
+		
+		// Redirect URLs based on age
+		const redirectUrl65Plus = 'https://trk.toprateddaily.online/click';
+		const redirectUrlUnder65 = 'https://trk.toprateddaily.online/click';
+		
+		// Qualifying property types
+		const qualifyingProperties = ['Single Family Home', 'Townhome', 'Condominium', 'Multi Family Home'];
+		
+		// Qualifying credit scores
+		const qualifyingCredits = ['Excellent', 'Very Good', 'Good', 'Fair'];
+		
+		// Get redirect URL based on age answer
+		function getRedirectUrl() {
+			// Ensure selectedAge is set, default to 'No' if somehow not set
+			if (!selectedAge) {
+				console.warn('selectedAge not set, defaulting to Under65');
+				return redirectUrlUnder65;
+			}
+			
+			// Check age answer and return appropriate URL
+			if (selectedAge === 'Yes') {
+				return redirectUrl65Plus;
+			} else if (selectedAge === 'No') {
+				return redirectUrlUnder65;
+			} else {
+				// Fallback if somehow an unexpected value
+				console.warn('Unexpected selectedAge value:', selectedAge);
+				return redirectUrlUnder65;
+			}
+		}
+		
+		// Calculate base payout based on property type
+		// These are capped lower so that after adding $25-30K in question 3, we stay within $160-165K
+		function getBasePayout(propertyType) {
+			if (propertyType === 'Single Family Home') {
+				// Random between $130,000 and $140,000 (so +$25-30K = $155-170K, but we'll cap at $165K)
+				return Math.floor(Math.random() * (140000 - 130000 + 1)) + 130000;
+			} else if (propertyType === 'Townhome') {
+				// Slightly lower - random between $120,000 and $135,000
+				return Math.floor(Math.random() * (135000 - 120000 + 1)) + 120000;
+			} else if (propertyType === 'Condominium') {
+				// Slightly lower - random between $115,000 and $130,000
+				return Math.floor(Math.random() * (130000 - 115000 + 1)) + 115000;
+			} else if (propertyType === 'Multi Family Home') {
+				// Slightly lower - random between $110,000 and $125,000
+				return Math.floor(Math.random() * (125000 - 110000 + 1)) + 110000;
+			}
+			// Default fallback
+			return 125000;
+		}
+		
+		// Calculate payout increase for third question (add $25-30K, cap final at $160-165K)
+		function getIncreasedPayout(basePayout) {
+			const increase = Math.floor(Math.random() * (30000 - 25000 + 1)) + 25000;
+			const newPayout = basePayout + increase;
+			// Cap at $160,000 - $165,000 range
+			if (newPayout > 165000) {
+				return Math.floor(Math.random() * (165000 - 160000 + 1)) + 160000;
+			}
+			// Ensure minimum is at least basePayout + minimum increase, but cap at $165K
+			return Math.min(newPayout, 165000);
+		}
+		
+		// Update progress bar
+		function updateProgress() {
+			const progress = ((currentQuestion - 1) / totalQuestions) * 100;
+			document.getElementById('progressFill').style.width = progress + '%';
+			document.getElementById('progressText').textContent = `Question ${currentQuestion} of ${totalQuestions}`;
+		}
+		
+		// Show question
+		function showQuestion(questionNumber) {
+			document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
+			document.getElementById(`question${questionNumber}`).classList.add('active');
+			updateProgress();
+		}
+		
+		// Select option
+		function selectOption(option, questionNumber) {
+			const question = document.getElementById(`question${questionNumber}`);
+			question.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+			option.classList.add('selected');
+			answers[questionNumber] = option.dataset.value;
+			
+			// Store selections
+			if (questionNumber === 1) {
+				selectedAge = option.dataset.value;
+				console.log('Age selected:', selectedAge, 'Value from dataset:', option.dataset.value);
+				// No payout feedback for age question, just advance
+			} else if (questionNumber === 2) {
+				selectedProperty = option.dataset.value;
+				// Calculate and store payout for question 2
+				question2Payout = getBasePayout(selectedProperty);
+			} else if (questionNumber === 3) {
+				selectedCredit = option.dataset.value;
+				
+				// Check if credit is Poor - show disqualification
+				if (option.dataset.value === 'Poor') {
+					setTimeout(() => {
+						document.getElementById('quizSection').classList.add('hidden');
+						document.getElementById('disqualificationSection').classList.remove('hidden');
+					}, 2000);
+					return;
+				}
+			}
+			
+			// Show payout feedback (only for questions 2 and 3)
+			if (questionNumber > 1) {
+				showPayoutFeedback(questionNumber);
+			}
+			
+			// Auto-advance to next question after showing feedback (or immediately for question 1)
+			setTimeout(() => {
+				if (currentQuestion < totalQuestions && selectedCredit !== 'Poor') {
+					currentQuestion++;
+					showQuestion(currentQuestion);
+				} else if (selectedCredit !== 'Poor') {
+					// Quiz completed - show analyzing
+					showAnalyzing();
+				}
+			}, questionNumber === 1 ? 500 : 2000);
+		}
+		
+		// Show payout feedback after answering
+		function showPayoutFeedback(questionNumber) {
+			// Remove any existing feedback
+			const existingFeedback = document.querySelector('.payout-feedback');
+			if (existingFeedback) {
+				existingFeedback.remove();
+			}
+			
+			let expectedPayout;
+			if (questionNumber === 2) {
+				// Use the stored payout from question 2
+				expectedPayout = question2Payout;
+			} else if (questionNumber === 3) {
+				// Increase payout from question 2 and store as final payout
+				expectedPayout = getIncreasedPayout(question2Payout);
+				finalPayout = expectedPayout; // Store final payout for analyzing section
+			} else {
+				expectedPayout = 125000; // Fallback
+			}
+			
+			const formattedPayout = '$' + expectedPayout.toLocaleString();
+			const question = document.getElementById(`question${questionNumber}`);
+			
+			// Create feedback element
+			const feedback = document.createElement('div');
+			feedback.className = 'payout-feedback';
+			feedback.innerHTML = `
+				<div>Your Expected Payout:</div>
+				<div class="payout-display">${formattedPayout}</div>
+				<div class="encouragement">
+					${questionNumber < totalQuestions ? 'Answer the next question to see if you can get an even higher payout!' : 'Finalizing your personalized payout...'}
+				</div>
+			`;
+			
+			// Insert after the question
+			question.appendChild(feedback);
+		}
+		
+		// Show analyzing section
+		function showAnalyzing() {
+			document.getElementById('quizSection').classList.add('hidden');
+			document.getElementById('analyzingSection').classList.remove('hidden');
+			// Hide cash equity section, headline, and call-to-action during analyzing
+			document.querySelector('.cash-equity-section').style.display = 'none';
+			document.querySelector('.main-header').style.display = 'none';
+			document.querySelector('p[style*="font-size: 18px"]').style.display = 'none';
+			
+			// Use the final payout from question 3
+			const mainPayout = finalPayout || 185000; // Fallback if somehow not set
+			const mainPayoutFormatted = '$' + Math.round(mainPayout / 1000) + 'K';
+			const backup1Payout = Math.max(mainPayout - 5000, 150000);
+			const backup1Formatted = '$' + Math.round(backup1Payout / 1000) + 'K';
+			const backup2Payout = Math.max(mainPayout - 10000, 145000);
+			const backup2Formatted = '$' + Math.round(backup2Payout / 1000) + 'K';
+			
+			// Show payout amounts progressively
+			setTimeout(() => {
+				document.getElementById('rate1').innerHTML = `<div>${mainPayoutFormatted}</div><div class="rate-label">Your Payout</div>`;
+			}, 2000);
+			
+			setTimeout(() => {
+				document.getElementById('rate2').innerHTML = `<div>${backup1Formatted}</div><div class="rate-label">Backup</div>`;
+			}, 3000);
+			
+			setTimeout(() => {
+				document.getElementById('rate3').innerHTML = `<div>${backup2Formatted}</div><div class="rate-label">Backup</div>`;
+			}, 4000);
+			
+			// Show congratulations after delay
+			setTimeout(() => {
+				document.getElementById('analyzingSection').classList.add('hidden');
+				showCongratulations();
+			}, 5000);
+		}
+		
+		// Show congratulations
+		function showCongratulations() {
+			document.getElementById('congratulationsSection').classList.remove('hidden');
+			
+			// Update payout amount in congratulations section
+			const payoutAmount = finalPayout || 160000;
+			const formattedPayout = '$' + payoutAmount.toLocaleString();
+			const titleElement = document.getElementById('congratulationsTitle');
+			
+			if (titleElement) {
+				titleElement.innerHTML = `🎉 CONGRATULATIONS!! YOU'VE QUALIFIED FOR A PAYOUT UP TO ${formattedPayout}!!`;
+			}
+			
+			startCountdown();
+		}
+		
+		// Start countdown timer
+		function startCountdown() {
+			countdownSeconds = 300; // Reset to 5 minutes
+			countdownInterval = setInterval(() => {
+				countdownSeconds--;
+				
+				const minutes = Math.floor(countdownSeconds / 60);
+				const seconds = countdownSeconds % 60;
+				
+				const timerElement = document.getElementById('finalCountdownTimer');
+				if (timerElement) {
+					timerElement.textContent = 
+						`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+				}
+				
+				if (countdownSeconds <= 0) {
+					clearInterval(countdownInterval);
+					if (timerElement) {
+						timerElement.textContent = '00:00';
+					}
+					window.location.href = getRedirectUrl();
+				}
+			}, 1000);
+		}
+		
+		// Handle CTA click
+		function handleCtaClick(event) {
+			event.preventDefault();
+			window.location.href = getRedirectUrl();
+		}
+		
+		// Initialize event listeners
+		document.addEventListener('DOMContentLoaded', function() {
+			// Initialize progress bar
+			updateProgress();
+			
+			// Add click listeners to all options
+			document.querySelectorAll('.option').forEach(option => {
+				option.addEventListener('click', function() {
+					const questionNumber = parseInt(this.closest('.question').id.replace('question', ''));
+					selectOption(this, questionNumber);
+				});
+			});
+		});
+		
+		// Animated Counter for cash equity amount
+		(function() {
+			const el = document.getElementById('cashEquityAmount');
+			if (!el) return;
+			let current = 257059434; // Starting amount
+			function format(num) {
+				return '$' + num.toLocaleString();
+			}
+			el.textContent = format(current);
+			function update() {
+				current += Math.floor(Math.random() * 90000) + 10000; // Increase by 10,000-99,999
+				if (current > 300000000) current = 257000000; // Reset if too high
+				el.textContent = format(current);
+			}
+			setInterval(update, 1700);
+		})();
+	</script>
+</body>
+</html>
+
