@@ -106,7 +106,7 @@
 
   .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
   .progress-track { flex: 1; height: 8px; background: #d6d7d9; border-radius: 4px; overflow: hidden; }
-  .progress-fill { height: 100%; width: 0%; background: #0071bc; border-radius: 4px; transition: width .45s ease; }
+  .progress-fill { height: 100%; width: 33.333%; background: #0071bc; border-radius: 4px; transition: width .45s ease; }
   .progress-label { font-size: 13px; color: #5b616b; white-space: nowrap; min-width: 80px; text-align: right; }
   .divider { border: none; border-top: 1px solid #dfe1e2; margin: 0 0 24px; }
 
@@ -143,6 +143,33 @@
     content: ""; position: absolute; top: 4px; left: 4px;
     width: 10px; height: 10px; background: #fff; border-radius: 50%;
   }
+  .answer-btn.popular {
+    border-color: #1b2a4a;
+    background: #f4f6f9;
+    position: relative;
+    overflow: visible;
+  }
+  .answer-btn.popular:hover {
+    border-color: #0071bc;
+    background: #e7f2fa;
+  }
+  .answer-btn .answer-text { white-space: nowrap; }
+  .popular-tag {
+    position: absolute;
+    top: -9px;
+    right: 10px;
+    background: #1b2a4a;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .3px;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    line-height: 1.2;
+  }
+  #s3 .answers { padding-top: 8px; overflow: visible; }
 
   .processing-text { text-align: center; padding: 40px 0; }
   .spinner {
@@ -282,7 +309,7 @@
     <div class="card-body">
       <div class="progress-row" id="progressRow">
         <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-        <div class="progress-label" id="progressLabel">0 of 3</div>
+        <div class="progress-label" id="progressLabel">1 of 3</div>
       </div>
       <hr class="divider">
 
@@ -313,7 +340,7 @@
         <div class="answers answers-split">
           <button type="button" class="answer-btn" data-next="processing" data-result="ineligible"><span class="radio"></span>Under $30,000</button>
           <button type="button" class="answer-btn" data-next="processing"><span class="radio"></span>$30,000 – $100,000</button>
-          <button type="button" class="answer-btn" data-next="processing"><span class="radio"></span>$100,000 – $200,000</button>
+          <button type="button" class="answer-btn popular" data-next="processing"><span class="radio"></span><span class="answer-text">$100,000 – $200,000</span><span class="popular-tag">Most Popular</span></button>
           <button type="button" class="answer-btn" data-next="processing"><span class="radio"></span>Over $200,000</button>
         </div>
       </div>
@@ -331,15 +358,48 @@
         <h2 class="result-title" id="resultTitle">Based on Your Homeownership, You May Qualify</h2>
         <div class="result-amount">Up to $185,000</div>
         <p class="result-desc">Based on your pre-screening responses, you appear to meet the initial eligibility criteria. Complete your full application to see your personalized cash-out amount in 60 seconds.</p>
-        <a class="cta-btn" href="https://trk.pickwisely.online/click" onclick="fireLead(event)">View My Personalized Offer →</a>
+        <a class="cta-btn" data-main-offer href="https://trk.pickwisely.online/click" onclick="fireLead(event)">View My Personalized Offer →</a>
         <p class="cta-fine">🔒 Secure • No SSN required • Free eligibility check • 60 seconds</p>
         <div class="reservation-timer">Your eligibility result expires in <span class="timer-value" id="reservationTimer">10:00</span></div>
+      </div>
+
+      <div id="sDq1" class="screen">
+        <p class="q-label">Additional Question</p>
+        <p class="q-text">Do you have over $15k in debt?</p>
+        <div class="answers answers-split">
+          <button type="button" class="answer-btn" data-next="DqDebt"><span class="radio"></span>YES</button>
+          <button type="button" class="answer-btn" data-next="Dq2"><span class="radio"></span>NO</button>
+        </div>
+      </div>
+
+      <div id="sDq2" class="screen">
+        <p class="q-label">Additional Question</p>
+        <p class="q-text">Would you like to boost your credit score by 100s of points in one phone call?</p>
+        <div class="answers answers-split">
+          <button type="button" class="answer-btn" data-next="DqCredit"><span class="radio"></span>YES</button>
+          <button type="button" class="answer-btn" data-next="Ineligible"><span class="radio"></span>NO</button>
+        </div>
+      </div>
+
+      <div id="sDqDebt" class="screen">
+        <p class="q-label">Based on your answers,</p>
+        <h2 class="result-title">You don't qualify, but you qualify for a 100% Debt Relief by the gov.</h2>
+        <p class="result-desc">Based on your responses we found that you're perfectly eligible for the Economic Debt Relief gov. program under which you can get all of your debt eliminated. Click on the button below and apply now, takes under 60 seconds.</p>
+        <a class="cta-btn" href="https://www.nz91nyfbo.com/ZZ2GX/4MQCFX/?sub1=DISQ_COE3" onclick="fireLead(event)">Claim My Debt Relief</a>
+        <p class="cta-fine">🔒 Secure • Free eligibility check • Under 60 seconds</p>
+      </div>
+
+      <div id="sDqCredit" class="screen">
+        <p class="q-label">Based on your answers,</p>
+        <h2 class="result-title">You don't qualify, but you qualify for a Credit Score Boost</h2>
+        <p class="result-desc">Based on your responses we found that you're perfectly eligible for the Credit Boost Program under which you can get a boost of up to 100s of points. Click on the button below and call the official agent that has been assigned to you right now.</p>
+        <a class="cta-btn" href="tel:xxx-xxx-xxxx" onclick="fireLead(event)">CALL xxx-xxx (xxxx)</a>
       </div>
 
       <div id="sIneligible" class="screen">
         <div class="result-badge ineligible"><span class="check">✕</span><span> Not Eligible </span></div>
         <h2 class="result-title">You Do Not Qualify at This Time</h2>
-        <p class="result-desc" id="ineligibleDesc">This program currently requires a credit score of 670 or higher. Based on your selection, you do not meet the initial eligibility criteria. You may reapply in a future cycle if your credit score improves.</p>
+        <p class="result-desc">Based on your selection, you do not meet the eligibility criteria for this program at this time.</p>
       </div>
     </div>
   </div>
@@ -381,11 +441,7 @@
             proc.classList.remove('active');
             document.getElementById('progressRow').style.display = 'none';
             if (result === 'ineligible') {
-              var ineligibleDesc = document.getElementById('ineligibleDesc');
-              if (screen.id === 's3') {
-                ineligibleDesc.textContent = 'This program currently requires a cash-out request of $30,000 or more. Based on your selection, you do not meet the initial eligibility criteria.';
-              }
-              document.getElementById('sIneligible').classList.add('active');
+              document.getElementById('sDq1').classList.add('active');
             } else {
               resultTitle.textContent = 'Based on Your Homeownership, You May Qualify';
               document.getElementById('sResult').classList.add('active');
@@ -393,10 +449,13 @@
             }
           }, 2200);
         } else {
-          var nextNum = parseInt(next, 10);
-          fill.style.width = ((nextNum - 1) / total * 100) + '%';
-          label.textContent = (nextNum - 1) + ' of ' + total;
-          document.getElementById('s' + next).classList.add('active');
+          var target = document.getElementById('s' + next);
+          if (/^\d+$/.test(next)) {
+            var nextNum = parseInt(next, 10);
+            fill.style.width = (nextNum / total * 100) + '%';
+            label.textContent = nextNum + ' of ' + total;
+          }
+          if (target) target.classList.add('active');
         }
       }, 300);
     });
@@ -418,7 +477,7 @@
     tick();
   }
 
-  document.querySelectorAll('a.cta-btn').forEach(function (a) {
+  document.querySelectorAll('a.cta-btn[data-main-offer]').forEach(function (a) {
     a.setAttribute('href', OFFER);
   });
 })();
