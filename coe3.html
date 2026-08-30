@@ -331,7 +331,7 @@
         <h2 class="result-title" id="resultTitle">Based on Your Homeownership, You May Qualify</h2>
         <div class="result-amount">Up to $185,000</div>
         <p class="result-desc">Based on your pre-screening responses, you appear to meet the initial eligibility criteria. Complete your full application to see your personalized cash-out amount in 60 seconds.</p>
-        <a class="cta-btn" href="https://trk.pickwisely.online/click">View My Personalized Offer →</a>
+        <a class="cta-btn" href="https://trk.pickwisely.online/click" onclick="fireLead(event)">View My Personalized Offer →</a>
         <p class="cta-fine">🔒 Secure • No SSN required • Free eligibility check • 60 seconds</p>
         <div class="reservation-timer">Your eligibility result expires in <span class="timer-value" id="reservationTimer">10:00</span></div>
       </div>
@@ -422,6 +422,33 @@
     a.setAttribute('href', OFFER);
   });
 })();
+
+function fireLead(e) {
+  e.preventDefault();
+  var destination = e.currentTarget.href;
+
+  var urlParams = new URLSearchParams(window.location.search);
+  var cookieMatch = document.cookie.match(/(?:rtkcid|clickid|subid)=([^;]+)/);
+  var clickid = urlParams.get('rtkcid')
+    || urlParams.get('clickid')
+    || urlParams.get('subid')
+    || (cookieMatch && cookieMatch[1])
+    || localStorage.getItem('rtkcid');
+
+  if (clickid) {
+    var postbackUrl = 'https://trk.pickwisely.online/postback?clickid=' + encodeURIComponent(clickid) + '&type=Lead';
+
+    if (window.fetch) {
+      fetch(postbackUrl, { method: 'GET', keepalive: true }).catch(function () {});
+    } else {
+      new Image().src = postbackUrl;
+    }
+  }
+
+  setTimeout(function () {
+    window.location.href = destination;
+  }, 150);
+}
 </script>
 </body>
 </html>
