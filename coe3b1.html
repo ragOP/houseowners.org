@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "y3rt3ntclc");
+</script>
+<meta name="robots" content="noindex, nofollow">
+<title>Senior Equity Release Program — Eligibility Screening</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    font-family: "Source Sans 3", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #f0f2f5;
+    color: #1b1b1b;
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .inner {
+    width: 100%;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .gov-banner {
+    background: #1b2a4a;
+    color: #fff;
+    font-size: 12px;
+    padding: 6px 16px;
+  }
+  .gov-banner .inner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .gov-banner span { opacity: .85; }
+
+  .site-header {
+    background: #112e51;
+    border-bottom: 4px solid #dce4ef;
+    padding: 12px 24px;
+  }
+  .site-header .inner {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .seal {
+    width: 46px; height: 46px;
+    background: #dce4ef;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; flex-shrink: 0;
+  }
+  .site-title { color: #fff; font-size: 18px; font-weight: 700; letter-spacing: .3px; }
+  .site-subtitle { color: #aec6e8; font-size: 12px; margin-top: 1px; }
+
+  .alert-bar {
+    background: #fad980;
+    border-left: 5px solid #e09600;
+    padding: 10px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #3b3000;
+  }
+
+  .main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+  }
+  .card {
+    background: #fff;
+    border: 1px solid #d6d7d9;
+    border-top: 6px solid #112e51;
+    border-radius: 4px;
+    max-width: 560px;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  }
+  .card-header { padding: 28px 32px 0; }
+  .card-body { padding: 20px 32px 32px; }
+  .form-number {
+    font-size: 11px; color: #71767a;
+    text-transform: uppercase; letter-spacing: 1px; margin: 0 0 6px;
+  }
+  .card-title {
+    font-size: 26px; font-weight: 700; color: #1b2a4a;
+    margin: 0 0 4px; line-height: 1.2;
+  }
+  .card-subtitle { font-size: 18px; color: #5b616b; margin: 0 0 20px; line-height: 1.5; }
+
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+  .progress-track { flex: 1; height: 8px; background: #d6d7d9; border-radius: 4px; overflow: hidden; }
+  .progress-fill { height: 100%; width: 33.333%; background: #0071bc; border-radius: 4px; transition: width .45s ease; }
+  .progress-label { font-size: 13px; color: #5b616b; white-space: nowrap; min-width: 80px; text-align: right; }
+  .divider { border: none; border-top: 1px solid #dfe1e2; margin: 0 0 24px; }
+
+  .screen { display: none; }
+  .screen.active { display: block; animation: fadeUp .3s ease; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .q-label {
+    font-size: 11px; color: #71767a; text-transform: uppercase;
+    letter-spacing: .8px; margin: 0 0 8px; font-weight: 600;
+  }
+  .q-text { font-size: 20px; font-weight: 700; color: #1b2a4a; margin: 0 0 24px; line-height: 1.3; }
+  .answers { display: flex; flex-direction: column; gap: 10px; }
+
+  .answer-btn {
+    display: flex; align-items: center; gap: 12px; width: 100%;
+    background: #fff; border: 2px solid #5b616b; border-radius: 6px;
+    padding: 16px 18px; font-size: 16px; font-weight: 600; color: #1b2a4a;
+    cursor: pointer; transition: all .15s ease; text-align: left;
+    font-family: inherit;
+  }
+  .answer-btn:hover { border-color: #0071bc; background: #e7f2fa; }
+  .answer-btn .radio {
+    width: 22px; height: 22px; border: 2px solid #5b616b;
+    border-radius: 50%; flex-shrink: 0; position: relative;
+  }
+  .answer-btn:hover .radio { border-color: #0071bc; }
+  .answer-btn.selected { border-color: #0071bc; background: #e7f2fa; }
+  .answer-btn.selected .radio { border-color: #0071bc; background: #0071bc; }
+  .answer-btn.selected .radio::after {
+    content: ""; position: absolute; top: 4px; left: 4px;
+    width: 10px; height: 10px; background: #fff; border-radius: 50%;
+  }
+  .answer-btn.popular {
+    border-color: #1b2a4a;
+    background: #f4f6f9;
+    position: relative;
+    overflow: visible;
+  }
+  .answer-btn.popular:hover {
+    border-color: #0071bc;
+    background: #e7f2fa;
+  }
+  .answer-btn .answer-text { white-space: nowrap; }
+  .popular-tag {
+    position: absolute;
+    top: -9px;
+    right: 10px;
+    background: #1b2a4a;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .3px;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    line-height: 1.2;
+  }
+  #s3 .answers { padding-top: 8px; overflow: visible; }
+
+  .processing-text { text-align: center; padding: 40px 0; }
+  .spinner {
+    width: 40px; height: 40px;
+    border: 4px solid #d6d7d9; border-top-color: #0071bc;
+    border-radius: 50%; animation: spin .8s linear infinite;
+    margin: 0 auto 16px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .processing-text p { font-size: 16px; color: #5b616b; margin: 4px 0; }
+  .processing-text .bold { color: #1b2a4a; font-weight: 700; }
+
+  .result-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #e7f4e4; border: 1px solid #94d082; color: #216e1f;
+    padding: 6px 14px; border-radius: 4px; font-size: 13px;
+    font-weight: 700; text-transform: uppercase; letter-spacing: .5px;
+    margin-bottom: 16px;
+  }
+  .result-badge .check {
+    width: 18px; height: 18px; background: #2e8540; border-radius: 50%;
+    color: #fff; font-size: 12px; display: flex; align-items: center; justify-content: center;
+  }
+  .result-badge.ineligible {
+    background: #f8d7da; border-color: #e31c3d; color: #981b1c;
+  }
+  .result-badge.ineligible .check { background: #e31c3d; }
+  .result-title { font-size: 24px; font-weight: 700; color: #1b2a4a; margin: 0 0 8px; line-height: 1.25; }
+  .result-amount { font-size: 40px; font-weight: 700; color: #2e8540; margin: 16px 0; }
+  .result-desc { font-size: 15px; color: #5b616b; margin: 0 0 24px; line-height: 1.6; }
+
+  .cta-btn {
+    position: relative; overflow: hidden;
+    display: block; width: 100%; background: #0071bc; color: #fff !important;
+    border: none; border-radius: 6px; padding: 18px 24px;
+    font-size: 18px; font-weight: 700; text-align: center;
+    text-decoration: none; cursor: pointer;
+  }
+  .cta-btn::after {
+    content: "";
+    position: absolute; top: 0; left: -120%;
+    width: 55%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.5), transparent);
+    transform: skewX(-20deg);
+    animation: shine 3.4s infinite;
+    pointer-events: none;
+  }
+  @keyframes shine {
+    0% { left: -120%; }
+    55% { left: 140%; }
+    100% { left: 140%; }
+  }
+  .cta-btn:hover { background: #205493; }
+  .cta-fine { text-align: center; font-size: 12px; color: #71767a; margin-top: 12px; }
+
+  .reservation-timer {
+    text-align: center; margin-top: 16px; padding: 10px 16px;
+    background: #fef3cd; border: 1px solid #ffeaa7; border-radius: 4px;
+    font-size: 14px; color: #856404; font-weight: 600;
+  }
+  .timer-value { font-weight: 700; font-variant-numeric: tabular-nums; }
+
+  .site-footer {
+    background: #1b2a4a; color: #aeb0b5; text-align: center;
+    padding: 20px 16px; font-size: 12px;
+  }
+  .footer-links { margin-bottom: 8px; }
+  .footer-links a { color: #aeb0b5; margin: 0 8px; text-decoration: underline; }
+  .footer-note { opacity: .85; }
+
+  @media (max-width: 560px) {
+    .card-header, .card-body { padding-left: 20px; padding-right: 20px; }
+    .card-title { font-size: 22px; }
+    .site-header { padding: 12px 16px; }
+    .gov-banner, .alert-bar { padding-left: 16px; padding-right: 16px; }
+  }
+
+  @media (min-width: 768px) {
+    .inner, .card { max-width: 720px; }
+    .gov-banner { font-size: 13px; padding: 8px 32px; }
+    .site-header { padding: 16px 32px; }
+    .seal { width: 56px; height: 56px; font-size: 28px; }
+    .site-title { font-size: 22px; }
+    .site-subtitle { font-size: 13px; }
+    .alert-bar { padding: 12px 32px; font-size: 15px; }
+    .main {
+      align-items: flex-start;
+      padding: 40px 24px 56px;
+    }
+    .card-header { padding: 36px 40px 0; }
+    .card-body { padding: 24px 40px 40px; }
+    .card-title { font-size: 32px; }
+    .q-text { font-size: 22px; }
+    .answer-btn { padding: 18px 22px; font-size: 17px; }
+    .answers-split { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .result-title { font-size: 28px; }
+    .result-amount { font-size: 48px; }
+    .cta-btn { padding: 20px 28px; font-size: 20px; }
+  }
+
+  @media (min-width: 1100px) {
+    .inner, .card { max-width: 800px; }
+    .main { padding: 48px 32px 72px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="gov-banner">
+  <div class="inner">
+    <span class="flag">🇺🇸</span>
+    <span>An official program eligibility screening service &nbsp;|&nbsp; Senior Equity Release Program</span>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="inner">
+    <div class="seal">🏛</div>
+    <div>
+      <div class="site-title">Senior Equity Release Program</div>
+      <div class="site-subtitle">Homeowner Benefit Review • Eligibility Screening Portal</div>
+    </div>
+  </div>
+</header>
+
+<div class="alert-bar">
+  <div class="inner">⚠️ Limited availability — Only homeowners who complete screening today will be reviewed this cycle</div>
+</div>
+
+<main class="main">
+  <div class="card">
+    <div class="card-header">
+      <p class="form-number">Form SERP-2026 • Eligibility Pre-Screening</p>
+      <h1 class="card-title">Homeowner Eligibility Check</h1>
+      <p class="card-subtitle">Answer 3 questions below to determine if you qualify for up to <strong>$185,000</strong> through the Senior Equity Release Program.</p>
+    </div>
+    <div class="card-body">
+      <div class="progress-row" id="progressRow">
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="progress-label" id="progressLabel">1 of 3</div>
+      </div>
+      <hr class="divider">
+
+      <div id="s1" class="screen active">
+        <p class="q-label">Question 1 of 3</p>
+        <p class="q-text">Have you owned your home for 5 or more years?</p>
+        <div class="answers answers-split">
+          <button type="button" class="answer-btn" data-next="2"><span class="radio"></span>Yes, 5+ years</button>
+          <button type="button" class="answer-btn" data-next="2"><span class="radio"></span>Less than 5 years</button>
+        </div>
+      </div>
+
+      <div id="s2" class="screen">
+        <p class="q-label">Question 2 of 3</p>
+        <p class="q-text">How is your credit score?</p>
+        <div class="answers">
+          <button type="button" class="answer-btn" data-next="3"><span class="radio"></span>Excellent (Above 800+)</button>
+          <button type="button" class="answer-btn" data-next="3"><span class="radio"></span>Very Good (740 - 799)</button>
+          <button type="button" class="answer-btn" data-next="3"><span class="radio"></span>Good (670 - 739)</button>
+          <button type="button" class="answer-btn" data-next="processing" data-result="ineligible"><span class="radio"></span>Fair (580 - 669)</button>
+          <button type="button" class="answer-btn" data-next="processing" data-result="ineligible"><span class="radio"></span>Poor (Below 579)</button>
+        </div>
+      </div>
+
+      <div id="s3" class="screen">
+        <p class="q-label">Question 3 of 3</p>
+        <p class="q-text">How much equity / cash do you need?</p>
+        <div class="answers answers-split">
+          <button type="button" class="answer-btn" data-next="processing" data-result="ineligible"><span class="radio"></span>Under $30,000</button>
+          <button type="button" class="answer-btn" data-next="processing"><span class="radio"></span>$30,000 – $100,000</button>
+          <button type="button" class="answer-btn popular" data-next="processing"><span class="radio"></span><span class="answer-text">$100,000 – $200,000</span><span class="popular-tag">Most Popular</span></button>
+          <button type="button" class="answer-btn" data-next="processing"><span class="radio"></span>Over $200,000</button>
+        </div>
+      </div>
+
+      <div id="sProcessing" class="screen">
+        <div class="processing-text">
+          <div class="spinner"></div>
+          <p class="bold">Checking eligibility…</p>
+          <p>Reviewing your responses against program requirements</p>
+        </div>
+      </div>
+
+      <div id="sResult" class="screen">
+        <div class="result-badge"><span class="check">✓</span><span> Eligible </span></div>
+        <h2 class="result-title" id="resultTitle">Based on Your Homeownership, You May Qualify</h2>
+        <div class="result-amount">Up to $185,000</div>
+        <p class="result-desc">Based on your pre-screening responses, you appear to meet the initial eligibility criteria. Complete your full application to see your personalized cash-out amount in 60 seconds.</p>
+        <a class="cta-btn" data-main-offer href="https://trk.pickwisely.online/click" onclick="fireLead(event)">Claim My Cash Equity Now</a>
+        <p class="cta-fine">🔒 Secure • No SSN required • Free eligibility check • 60 seconds</p>
+        <div class="reservation-timer">Your eligibility result expires in <span class="timer-value" id="reservationTimer">10:00</span></div>
+      </div>
+
+      <div id="sDq1" class="screen">
+        <p class="q-label">Additional Question</p>
+        <p class="q-text">Do you have over $15k in debt?</p>
+        <div class="answers answers-split">
+          <button type="button" class="answer-btn" data-next="DqDebt"><span class="radio"></span>YES</button>
+          <button type="button" class="answer-btn" data-next="Dq2"><span class="radio"></span>NO</button>
+        </div>
+      </div>
+
+      <div id="sDq2" class="screen">
+        <p class="q-label">Additional Question</p>
+        <p class="q-text">Would you like to boost your credit score by 100s of points in one phone call?</p>
+        <div class="answers answers-split">
+          <button type="button" class="answer-btn" data-next="DqCredit"><span class="radio"></span>YES</button>
+          <button type="button" class="answer-btn" data-next="Ineligible"><span class="radio"></span>NO</button>
+        </div>
+      </div>
+
+      <div id="sDqDebt" class="screen">
+        <p class="q-label">Based on your answers,</p>
+        <h2 class="result-title">You don't qualify, but you qualify for a 100% Debt Relief by the gov.</h2>
+        <p class="result-desc">Based on your responses we found that you're perfectly eligible for the Economic Debt Relief gov. program under which you can get all of your debt eliminated. Click on the button below and apply now, takes under 60 seconds.</p>
+        <a class="cta-btn" href="https://www.nz91nyfbo.com/ZZ2GX/4MQCFX/?sub1=DISQ_COE3" onclick="fireLead(event)">Claim My Debt Relief</a>
+        <p class="cta-fine">🔒 Secure • Free eligibility check • Under 60 seconds</p>
+      </div>
+
+      <div id="sDqCredit" class="screen">
+        <p class="q-label">Based on your answers,</p>
+        <h2 class="result-title">You don't qualify, but you qualify for a Credit Score Boost</h2>
+        <p class="result-desc">Based on your responses we found that you're perfectly eligible for the Credit Boost Program under which you can get a boost of up to 100s of points. Click on the button below and call the official agent that has been assigned to you right now.</p>
+        <a class="cta-btn" href="tel:xxx-xxx-xxxx" onclick="fireLead(event)">CALL xxx-xxx (xxxx)</a>
+      </div>
+
+      <div id="sIneligible" class="screen">
+        <div class="result-badge ineligible"><span class="check">✕</span><span> Not Eligible </span></div>
+        <h2 class="result-title">You Do Not Qualify at This Time</h2>
+        <p class="result-desc">Based on your selection, you do not meet the eligibility criteria for this program at this time.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="about.html">About / Privacy</a>
+    <a href="terms.html">Terms of Use</a>
+  </div>
+  <div class="footer-note">Senior Equity Release Program Eligibility Screening • National</div>
+</footer>
+
+<script>
+(function () {
+  var OFFER = 'https://trk.pickwisely.online/click';
+  var fill = document.getElementById('progressFill');
+  var label = document.getElementById('progressLabel');
+  var resultTitle = document.getElementById('resultTitle');
+  var total = 3;
+
+  document.querySelectorAll('.answer-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      if (btn.disabled) return;
+      var screen = btn.closest('.screen');
+      var next = btn.getAttribute('data-next');
+      var result = btn.getAttribute('data-result') || 'eligible';
+      screen.querySelectorAll('.answer-btn').forEach(function (b) { b.disabled = true; });
+      btn.classList.add('selected');
+
+      setTimeout(function () {
+        screen.classList.remove('active');
+        if (next === 'processing') {
+          fill.style.width = '100%';
+          label.textContent = total + ' of ' + total;
+          var proc = document.getElementById('sProcessing');
+          proc.classList.add('active');
+          setTimeout(function () {
+            proc.classList.remove('active');
+            document.getElementById('progressRow').style.display = 'none';
+            if (result === 'ineligible') {
+              document.getElementById('sDq1').classList.add('active');
+            } else {
+              resultTitle.textContent = 'Based on Your Homeownership, You May Qualify';
+              document.getElementById('sResult').classList.add('active');
+              startReservationTimer();
+            }
+          }, 2200);
+        } else {
+          var target = document.getElementById('s' + next);
+          if (/^\d+$/.test(next)) {
+            var nextNum = parseInt(next, 10);
+            fill.style.width = (nextNum / total * 100) + '%';
+            label.textContent = nextNum + ' of ' + total;
+          }
+          if (target) target.classList.add('active');
+        }
+      }, 300);
+    });
+  });
+
+  function startReservationTimer() {
+    var timerEl = document.getElementById('reservationTimer');
+    if (!timerEl) return;
+    var remaining = 10 * 60;
+    function tick() {
+      var min = Math.floor(remaining / 60);
+      var sec = remaining % 60;
+      timerEl.textContent = min + ':' + (sec < 10 ? '0' : '') + sec;
+      if (remaining > 0) {
+        remaining--;
+        setTimeout(tick, 1000);
+      }
+    }
+    tick();
+  }
+
+  document.querySelectorAll('a.cta-btn[data-main-offer]').forEach(function (a) {
+    a.setAttribute('href', OFFER);
+  });
+})();
+
+function fireLead(e) {
+  e.preventDefault();
+  var destination = e.currentTarget.href;
+
+  var urlParams = new URLSearchParams(window.location.search);
+  var cookieMatch = document.cookie.match(/(?:rtkcid|clickid|subid)=([^;]+)/);
+  var clickid = urlParams.get('rtkcid')
+    || urlParams.get('clickid')
+    || urlParams.get('subid')
+    || (cookieMatch && cookieMatch[1])
+    || localStorage.getItem('rtkcid');
+
+  if (clickid) {
+    var postbackUrl = 'https://trk.pickwisely.online/postback?clickid=' + encodeURIComponent(clickid) + '&type=Lead';
+
+    if (window.fetch) {
+      fetch(postbackUrl, { method: 'GET', keepalive: true }).catch(function () {});
+    } else {
+      new Image().src = postbackUrl;
+    }
+  }
+
+  setTimeout(function () {
+    window.location.href = destination;
+  }, 150);
+}
+</script>
+</body>
+</html>
