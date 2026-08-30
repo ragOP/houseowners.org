@@ -166,6 +166,10 @@
     width: 18px; height: 18px; background: #2e8540; border-radius: 50%;
     color: #fff; font-size: 12px; display: flex; align-items: center; justify-content: center;
   }
+  .result-badge.ineligible {
+    background: #f8d7da; border-color: #e31c3d; color: #981b1c;
+  }
+  .result-badge.ineligible .check { background: #e31c3d; }
   .result-title { font-size: 24px; font-weight: 700; color: #1b2a4a; margin: 0 0 8px; line-height: 1.25; }
   .result-amount { font-size: 40px; font-weight: 700; color: #2e8540; margin: 16px 0; }
   .result-desc { font-size: 15px; color: #5b616b; margin: 0 0 24px; line-height: 1.6; }
@@ -298,19 +302,19 @@
           <button type="button" class="answer-btn" data-next="3"><span class="radio"></span>Excellent (Above 800+)</button>
           <button type="button" class="answer-btn" data-next="3"><span class="radio"></span>Very Good (740 - 799)</button>
           <button type="button" class="answer-btn" data-next="3"><span class="radio"></span>Good (670 - 739)</button>
-          <button type="button" class="answer-btn" data-next="3"><span class="radio"></span>Fair (580 - 669)</button>
-          <button type="button" class="answer-btn" data-next="3"><span class="radio"></span>Poor (Below 579)</button>
+          <button type="button" class="answer-btn" data-next="processing" data-result="ineligible"><span class="radio"></span>Fair (580 - 669)</button>
+          <button type="button" class="answer-btn" data-next="processing" data-result="ineligible"><span class="radio"></span>Poor (Below 579)</button>
         </div>
       </div>
 
       <div id="s3" class="screen">
         <p class="q-label">Question 3 of 3</p>
-        <p class="q-text">What would you do with up to $185,000 in cash?</p>
+        <p class="q-text">How much equity / cash do you need?</p>
         <div class="answers answers-split">
-          <button type="button" class="answer-btn" data-next="processing"><span class="radio"></span>Pay off credit cards &amp; debt</button>
-          <button type="button" class="answer-btn" data-next="processing"><span class="radio"></span>Home renovations</button>
-          <button type="button" class="answer-btn" data-next="processing"><span class="radio"></span>Cover medical or family expenses</button>
-          <button type="button" class="answer-btn" data-next="processing"><span class="radio"></span>Build an emergency fund</button>
+          <button type="button" class="answer-btn" data-next="processing" data-result="ineligible"><span class="radio"></span>Under $30,000</button>
+          <button type="button" class="answer-btn" data-next="processing"><span class="radio"></span>$30,000 – $100,000</button>
+          <button type="button" class="answer-btn" data-next="processing"><span class="radio"></span>$100,000 – $200,000</button>
+          <button type="button" class="answer-btn" data-next="processing"><span class="radio"></span>Over $200,000</button>
         </div>
       </div>
 
@@ -330,6 +334,12 @@
         <a class="cta-btn" href="https://trk.pickwisely.online/click">View My Personalized Offer →</a>
         <p class="cta-fine">🔒 Secure • No SSN required • Free eligibility check • 60 seconds</p>
         <div class="reservation-timer">Your eligibility result expires in <span class="timer-value" id="reservationTimer">10:00</span></div>
+      </div>
+
+      <div id="sIneligible" class="screen">
+        <div class="result-badge ineligible"><span class="check">✕</span><span> Not Eligible </span></div>
+        <h2 class="result-title">You Do Not Qualify at This Time</h2>
+        <p class="result-desc" id="ineligibleDesc">This program currently requires a credit score of 670 or higher. Based on your selection, you do not meet the initial eligibility criteria. You may reapply in a future cycle if your credit score improves.</p>
       </div>
     </div>
   </div>
@@ -356,6 +366,7 @@
       if (btn.disabled) return;
       var screen = btn.closest('.screen');
       var next = btn.getAttribute('data-next');
+      var result = btn.getAttribute('data-result') || 'eligible';
       screen.querySelectorAll('.answer-btn').forEach(function (b) { b.disabled = true; });
       btn.classList.add('selected');
 
@@ -363,15 +374,23 @@
         screen.classList.remove('active');
         if (next === 'processing') {
           fill.style.width = '100%';
-          label.textContent = '3 of 3';
+          label.textContent = total + ' of ' + total;
           var proc = document.getElementById('sProcessing');
           proc.classList.add('active');
           setTimeout(function () {
             proc.classList.remove('active');
-            resultTitle.textContent = 'Based on Your Homeownership, You May Qualify';
-            document.getElementById('sResult').classList.add('active');
             document.getElementById('progressRow').style.display = 'none';
-            startReservationTimer();
+            if (result === 'ineligible') {
+              var ineligibleDesc = document.getElementById('ineligibleDesc');
+              if (screen.id === 's3') {
+                ineligibleDesc.textContent = 'This program currently requires a cash-out request of $30,000 or more. Based on your selection, you do not meet the initial eligibility criteria.';
+              }
+              document.getElementById('sIneligible').classList.add('active');
+            } else {
+              resultTitle.textContent = 'Based on Your Homeownership, You May Qualify';
+              document.getElementById('sResult').classList.add('active');
+              startReservationTimer();
+            }
           }, 2200);
         } else {
           var nextNum = parseInt(next, 10);
