@@ -482,29 +482,33 @@
   });
 })();
 
-function fireLead(e) {
-  e.preventDefault();
-  var destination = e.currentTarget.href;
+let leadFired = false;
 
-  var urlParams = new URLSearchParams(window.location.search);
-  var cookieMatch = document.cookie.match(/(?:rtkcid|clickid|subid)=([^;]+)/);
-  var clickid = urlParams.get('rtkcid')
+function fireLead(e) {
+  if (leadFired) return;
+  leadFired = true;
+
+  e.preventDefault();
+  const destination = e.currentTarget.href;
+
+  // Reads the rtkcid that RedTrack appended during the REDIRECT
+  const urlParams = new URLSearchParams(window.location.search);
+  const clickid = urlParams.get('rtkcid')
     || urlParams.get('clickid')
     || urlParams.get('subid')
-    || (cookieMatch && cookieMatch[1])
+    || document.cookie.match(/(?:rtkcid|clickid|subid)=([^;]+)/)?.[1]
     || localStorage.getItem('rtkcid');
 
   if (clickid) {
-    var postbackUrl = 'https://trk.pickwisely.online/postback?clickid=' + encodeURIComponent(clickid) + '&type=Lead';
-
+    const postbackUrl = `https://trk.pickwisely.online/postback?clickid=${encodeURIComponent(clickid)}&type=Lead`;
     if (window.fetch) {
-      fetch(postbackUrl, { method: 'GET', keepalive: true }).catch(function () {});
+      fetch(postbackUrl, { method: 'GET', keepalive: true }).catch(() => {});
     } else {
       new Image().src = postbackUrl;
     }
   }
 
-  setTimeout(function () {
+  setTimeout(() => {
     window.location.href = destination;
   }, 150);
 }
