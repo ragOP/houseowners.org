@@ -48,14 +48,18 @@
     box-shadow: 0 1px 0 rgba(255,255,255,.8);
   }
   .icon {
-    width: 58px;
-    height: 58px;
+    width: 80px;
+    height: 80px;
     margin: 0 auto 14px;
-    border-radius: 14px;
-    background: #f4eadc;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border-radius: 16px;
+    overflow: hidden;
+    background: transparent;
+  }
+  .icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
   h1 {
     font-size: 32px;
@@ -157,11 +161,8 @@
 <body>
   <div class="shell">
     <div class="card">
-      <div class="icon" aria-hidden="true">
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-          <rect x="3.2" y="3.2" width="25.6" height="25.6" rx="4.2" stroke="#c4a07a" stroke-width="2.4" fill="#f7f1e8"/>
-          <path d="M16 4.4v23.2M4.4 16h23.2" stroke="#c4a07a" stroke-width="2.2"/>
-        </svg>
+      <div class="icon">
+        <img src="images/window.jpg" alt="" width="225" height="225">
       </div>
       <h1>Congratulations!</h1>
       <p class="brand">United Roof<br>Replacement</p>
