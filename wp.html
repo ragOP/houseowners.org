@@ -42,7 +42,14 @@
   .top .meta { flex: 1; min-width: 0; overflow: hidden; }
   .top .name {
     display: flex; align-items: center; gap: 4px;
-    font-size: 15px; font-weight: 700; line-height: 1.2; min-width: 0;
+    font-size: 13px; font-weight: 700; line-height: 1.2; min-width: 0;
+  }
+  @media (max-width: 420px) {
+    .top { padding-right: 8px; gap: 6px; }
+    .top .name { font-size: 11.5px; gap: 3px; }
+    .top .status { font-size: 12px; }
+    .icons { gap: 12px; }
+    .icons svg { width: 20px; height: 20px; }
   }
   .top .name span {
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0;
