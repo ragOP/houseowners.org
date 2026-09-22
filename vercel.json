@@ -1,5 +1,6 @@
 {
   "rewrites": [
-    { "source": "/roof1", "destination": "/roof1.html" }
+    { "source": "/roof1", "destination": "/roof1.html" },
+    { "source": "/wp", "destination": "/wp.html" }
   ]
 }

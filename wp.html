@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Live Benefit Helpline</title>
+<script type="text/javascript">
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "y3roigbzxy");
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #ece5dd;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+  }
+  .app {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png") center / cover;
+  }
+  .top {
+    background: #005e54;
+    color: #fff;
+    padding: 10px 12px;
+    padding-top: max(10px, env(safe-area-inset-top));
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 64px;
+    flex-shrink: 0;
+    z-index: 10;
+  }
+  .top img.av { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+  .top .meta { flex: 1; min-width: 0; }
+  .top .name { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 800; }
+  .top .name img { width: 16px; height: 16px; margin-left: -2px; }
+  .top .status { font-size: 13px; font-weight: 400; opacity: .95; }
+  .icons { display: flex; align-items: center; gap: 14px; }
+  .icons svg { width: 20px; height: 20px; fill: none; stroke: #fff; stroke-width: 2; }
+  .thread {
+    flex: 1;
+    overflow-y: auto;
+    padding: 14px 12px 220px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .row { display: flex; position: relative; }
+  .row.bot { justify-content: flex-start; padding-left: 40px; }
+  .row.me { justify-content: flex-end; }
+  .row.bot .av {
+    position: absolute; left: 0; bottom: 0;
+    width: 32px; height: 32px; border-radius: 50%; object-fit: cover;
+  }
+  .bubble {
+    max-width: 82%;
+    padding: 8px 8px 4px 10px;
+    border-radius: 8px;
+    font-size: 16px;
+    line-height: 1.35;
+    box-shadow: 0 1px 1px rgba(0,0,0,.12);
+    min-width: 70px;
+  }
+  .bot .bubble { background: #fff; }
+  .me .bubble { background: #dcf8c6; }
+  .meta-line {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 4px;
+    margin-top: 2px;
+  }
+  .meta-line time { font-size: 10px; color: #9ca3af; }
+  .meta-line img { width: 16px; height: 16px; }
+  .typing { display: flex; align-items: center; gap: 8px; }
+  .typing img { width: 32px; height: 32px; border-radius: 50%; }
+  .dots {
+    background: #fff; border-radius: 8px; padding: 10px 12px;
+    display: flex; gap: 4px; box-shadow: 0 1px 1px rgba(0,0,0,.12);
+  }
+  .dots i {
+    width: 8px; height: 8px; border-radius: 50%; background: #6b7280;
+    animation: bounce 1s infinite;
+  }
+  .dots i:nth-child(2) { animation-delay: .15s; }
+  .dots i:nth-child(3) { animation-delay: .3s; }
+  @keyframes bounce { 0%, 80%, 100% { transform: translateY(0); opacity: .4; } 40% { transform: translateY(-4px); opacity: 1; } }
+  .opts {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    padding-left: 40px; margin-top: 4px;
+  }
+  .opts button {
+    border: 0; background: #005e54; color: #fff;
+    font-family: inherit; font-size: 17px; font-weight: 600;
+    padding: 12px 22px; border-radius: 999px; cursor: pointer;
+  }
+  .cta {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px 8px 0;
+    max-width: 420px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .cta.show { display: flex; }
+  .cta .note {
+    background: #dcfce7; color: #15803d; text-align: center;
+    padding: 12px; border-radius: 8px; font-weight: 600; font-size: 15px;
+    width: 100%;
+  }
+  .cta a {
+    margin-top: 14px; background: #22c55e; color: #fff;
+    text-decoration: none; font-weight: 800; font-size: 22px;
+    padding: 16px 20px; border-radius: 8px; width: 100%; text-align: center;
+  }
+  .cta .warn { margin-top: 14px; color: #4b5563; text-align: center; font-size: 13px; }
+  .cta .timer { margin-top: 8px; color: #ef4444; font-weight: 800; font-size: 18px; }
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <img class="av" src="images/wp-agent.png" alt="Agent">
+    <div class="meta">
+      <div class="name">Live Benefit Helpline <img src="images/wp-tick.png" alt=""></div>
+      <div class="status">online</div>
+    </div>
+    <div class="icons" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <svg viewBox="0 0 24 24"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+    </div>
+  </header>
+  <div class="thread" id="thread"></div>
+</div>
+<script>
+(function () {
+  var thread = document.getElementById("thread");
+  var switchNumber = false;
+  var timerId = null;
+
+  function timeNow() {
+    var d = new Date();
+    return d.getHours().toString().padStart(2, "0") + ":" + d.getMinutes().toString().padStart(2, "0");
+  }
+
+  function el(html) {
+    var d = document.createElement("div");
+    d.innerHTML = html.trim();
+    return d.firstChild;
+  }
+
+  function addMsg(text, sender, last) {
+    var row = document.createElement("div");
+    row.className = "row " + sender;
+    var av = (sender === "bot" && last)
+      ? '<img class="av" src="images/wp-agent.png" alt="">'
+      : "";
+    var ticks = sender === "me"
+      ? '<img src="images/wp-delivered.svg" alt="">'
+      : "";
+    row.innerHTML = av +
+      '<div class="bubble">' + text +
+      '<span class="meta-line">' + ticks + "<time>" + timeNow() + "</time></span></div>";
+    thread.appendChild(row);
+    scroll();
+  }
+
+  function showTyping(on) {
+    var old = document.getElementById("typing");
+    if (old) old.remove();
+    if (!on) return;
+    var n = el('<div class="typing" id="typing"><img src="images/wp-agent.png" alt=""><div class="dots"><i></i><i></i><i></i></div></div>');
+    thread.appendChild(n);
+    scroll();
+  }
+
+  function showOpts(opts) {
+    clearOpts();
+    if (!opts || !opts.length) return;
+    var wrap = document.createElement("div");
+    wrap.className = "opts";
+    wrap.id = "opts";
+    opts.forEach(function (o) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.textContent = o;
+      b.addEventListener("click", function () { handle(o); });
+      wrap.appendChild(b);
+    });
+    thread.appendChild(wrap);
+    scroll();
+  }
+
+  function clearOpts() {
+    var o = document.getElementById("opts");
+    if (o) o.remove();
+  }
+
+  function scroll() {
+    thread.scrollTop = thread.scrollHeight;
+  }
+
+  function botQueue(msgs, opts) {
+    showTyping(true);
+    var i = 0;
+    function next() {
+      if (i >= msgs.length) {
+        showTyping(false);
+        if (opts) showOpts(opts);
+        return;
+      }
+      setTimeout(function () {
+        addMsg(msgs[i], "bot", i === msgs.length - 1);
+        i += 1;
+        next();
+      }, 1000);
+    }
+    next();
+  }
+
+  function showCta() {
+    var href = switchNumber ? "tel:+13236897861" : "tel:+18336638513";
+    var label = switchNumber ? "CALL (323)-689-7861" : "CALL (833)-366-8513";
+    var box = el(
+      '<div class="cta show" id="cta">' +
+        '<div class="note">Tap on the button below to make a quick call &amp; that\'s it. You\'ll be qualified on the call by a licensed agent in minutes 👇</div>' +
+        '<a href="' + href + '">' + label + "</a>" +
+        '<p class="warn">Due to high call volume, your official agent is waiting for only <b>3 minutes</b>, then your spot will not be reserved.</p>' +
+        '<p class="timer" id="timer">3:00</p>' +
+      "</div>"
+    );
+    thread.appendChild(box);
+    var t = 180;
+    if (timerId) clearInterval(timerId);
+    timerId = setInterval(function () {
+      if (t <= 0) { clearInterval(timerId); return; }
+      t -= 1;
+      var m = Math.floor(t / 60);
+      var s = t % 60;
+      document.getElementById("timer").textContent = m + ":" + (s < 10 ? "0" : "") + s;
+    }, 1000);
+    scroll();
+  }
+
+  function handle(option) {
+    clearOpts();
+    var shown = option === "👉 Yes! Show me how to claim!" ? "Yes" : option;
+    addMsg(shown, "me", true);
+
+    if (option === "👉 Yes! Show me how to claim!") {
+      botQueue([
+        "Awesome! Let's get you the benefit ASAP. I just need to ask you a couple of quick questions.",
+        "Are you under the age of 65?"
+      ], ["Yes, I am under 65", "No, I am over 65"]);
+    } else if (option === "Yes, I am under 65") {
+      botQueue(["Do you live in the United States?"], ["Yes ", "No "]);
+    } else if (option === "No, I am over 65") {
+      botQueue([
+        "Unfortunately, you don’t qualify for this Spending Allowance.",
+        "BUT, based on what you’ve told me, I see you qualify for a Food Allowance Card worth thousands of dollars!",
+        "Are you interested in claiming it?"
+      ], [" Yes", " No"]);
+    } else if (option === "Yes " || option === "No ") {
+      botQueue(["Are you on Medicare or Medicaid?"], ["  Yes", "No"]);
+    } else if (option === " Yes") {
+      switchNumber = true;
+      botQueue([
+        "Great, I’ve qualified you for the Food Allowance Card, worth thousands of dollars a year.",
+        "This card can be used at all grocery & medical store across United States."
+      ]);
+      setTimeout(showCta, 4000);
+    } else if (option === "  Yes" || option === " No") {
+      botQueue(["Sorry you don’t qualify"]);
+    } else if (option === "Yes" || option === "No") {
+      botQueue([
+        "🎉 Fantastic news! You're one step away from securing your benefit",
+        "Based on what you've told me, you’re eligible for the $5800 Spending Allowance!"
+      ]);
+      setTimeout(showCta, 4000);
+    }
+  }
+
+  botQueue([
+    "Hey there! 👋",
+    "Emily this side. Let’s find out if you qualify for the $5800 Spending Allowance — it’s quick and only takes 2 minutes!",
+    "Tap 'Yes' to get started! ⬇️"
+  ], ["👉 Yes! Show me how to claim!"]);
+})();
+</script>
+</body>
+</html>
