@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Live Benefit Helpline</title>
+<title>Senior Equity Release Program</title>
 <script type="text/javascript">
   (function(c,l,a,r,i,t,y){
     c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -124,9 +124,11 @@
   }
   .cta a {
     margin-top: 14px; background: #22c55e; color: #fff;
-    text-decoration: none; font-weight: 800; font-size: 22px;
+    text-decoration: none; font-weight: 800; font-size: 18px;
     padding: 16px 20px; border-radius: 8px; width: 100%; text-align: center;
   }
+  .cta .amount { margin-top: 10px; color: #15803d; font-weight: 800; font-size: 28px; }
+  .cta .fine { margin-top: 10px; color: #6b7280; text-align: center; font-size: 12px; }
   .cta .warn { margin-top: 14px; color: #4b5563; text-align: center; font-size: 13px; }
   .cta .timer { margin-top: 8px; color: #ef4444; font-weight: 800; font-size: 18px; }
 </style>
@@ -136,7 +138,7 @@
   <header class="top">
     <img class="av" src="images/wp-agent.png" alt="Agent">
     <div class="meta">
-      <div class="name">Live Benefit Helpline <img src="images/wp-tick.png" alt=""></div>
+      <div class="name">Senior Equity Release Program <img src="images/wp-tick.png" alt=""></div>
       <div class="status">online</div>
     </div>
     <div class="icons" aria-hidden="true">
@@ -149,9 +151,12 @@
 </div>
 <script>
 (function () {
+  var OFFER = "https://trk.pickwisely.online/click";
+  var DEBT = "https://www.nz91nyfbo.com/ZZ2GX/5Q9RM9/?sub1=excludecoe";
+  var CREDIT = "tel:xxx-xxx-xxxx";
   var thread = document.getElementById("thread");
-  var switchNumber = false;
   var timerId = null;
+  var leadFired = false;
 
   function timeNow() {
     var d = new Date();
@@ -215,13 +220,14 @@
     thread.scrollTop = thread.scrollHeight;
   }
 
-  function botQueue(msgs, opts) {
+  function botQueue(msgs, opts, after) {
     showTyping(true);
     var i = 0;
     function next() {
       if (i >= msgs.length) {
         showTyping(false);
         if (opts) showOpts(opts);
+        if (after) after();
         return;
       }
       setTimeout(function () {
@@ -233,28 +239,120 @@
     next();
   }
 
-  function showCta() {
-    var href = switchNumber ? "tel:+13236897861" : "tel:+18336638513";
-    var label = switchNumber ? "CALL (323)-689-7861" : "CALL (833)-366-8513";
+  function fireLead(e) {
+    if (leadFired) return;
+    leadFired = true;
+    e.preventDefault();
+    var destination = e.currentTarget.href;
+    var urlParams = new URLSearchParams(window.location.search);
+    var clickid = urlParams.get("rtkcid")
+      || urlParams.get("clickid")
+      || urlParams.get("subid")
+      || (document.cookie.match(/(?:rtkcid|clickid|subid)=([^;]+)/) || [])[1]
+      || localStorage.getItem("rtkcid");
+    if (clickid) {
+      var postbackUrl = "https://trk.pickwisely.online/postback?clickid=" + encodeURIComponent(clickid) + "&type=Lead";
+      if (window.fetch) fetch(postbackUrl, { method: "GET", keepalive: true }).catch(function () {});
+      else new Image().src = postbackUrl;
+    }
+    setTimeout(function () { window.location.href = destination; }, 150);
+  }
+
+  function startTimer(el, seconds) {
+    if (timerId) clearInterval(timerId);
+    var t = seconds;
+    function tick() {
+      var m = Math.floor(t / 60);
+      var s = t % 60;
+      el.textContent = m + ":" + (s < 10 ? "0" : "") + s;
+      if (t > 0) t -= 1;
+      else clearInterval(timerId);
+    }
+    tick();
+    timerId = setInterval(tick, 1000);
+  }
+
+  function showEligible() {
     var box = el(
-      '<div class="cta show" id="cta">' +
-        '<div class="note">Tap on the button below to make a quick call &amp; that\'s it. You\'ll be qualified on the call by a licensed agent in minutes 👇</div>' +
-        '<a href="' + href + '">' + label + "</a>" +
-        '<p class="warn">Due to high call volume, your official agent is waiting for only <b>3 minutes</b>, then your spot will not be reserved.</p>' +
-        '<p class="timer" id="timer">3:00</p>' +
+      '<div class="cta show">' +
+        '<div class="note">Based on Your Homeownership, You May Qualify</div>' +
+        '<div class="amount">Up to $185,000</div>' +
+        '<p class="warn">Based on your pre-screening responses, you appear to meet the initial eligibility criteria. Complete your full application to see your personalized cash-out amount in 60 seconds.</p>' +
+        '<a class="offer" href="' + OFFER + '">View My Personalized Offer →</a>' +
+        '<p class="fine">🔒 Secure • No SSN required • Free eligibility check • 60 seconds</p>' +
+        '<p class="timer">Your eligibility result expires in <span id="timer">10:00</span></p>' +
       "</div>"
     );
     thread.appendChild(box);
-    var t = 180;
-    if (timerId) clearInterval(timerId);
-    timerId = setInterval(function () {
-      if (t <= 0) { clearInterval(timerId); return; }
-      t -= 1;
-      var m = Math.floor(t / 60);
-      var s = t % 60;
-      document.getElementById("timer").textContent = m + ":" + (s < 10 ? "0" : "") + s;
-    }, 1000);
+    box.querySelector("a.offer").addEventListener("click", fireLead);
+    startTimer(document.getElementById("timer"), 10 * 60);
     scroll();
+  }
+
+  function showDebt() {
+    var box = el(
+      '<div class="cta show">' +
+        '<div class="note">You don\'t qualify, but you qualify for a 100% Debt Relief by the gov.</div>' +
+        '<p class="warn">Based on your responses we found that you\'re perfectly eligible for the Economic Debt Relief gov. program under which you can get all of your debt eliminated. Click on the button below and apply now, takes under 60 seconds.</p>' +
+        '<a class="offer" href="' + DEBT + '">Claim My Debt Relief →</a>' +
+        '<p class="fine">🔒 Secure • Free eligibility check • Under 60 seconds</p>' +
+      "</div>"
+    );
+    thread.appendChild(box);
+    box.querySelector("a.offer").addEventListener("click", fireLead);
+    scroll();
+  }
+
+  function showCredit() {
+    var box = el(
+      '<div class="cta show">' +
+        '<div class="note">You don\'t qualify, but you qualify for a Credit Score Boost</div>' +
+        '<p class="warn">Based on your responses we found that you\'re perfectly eligible for the Credit Boost Program under which you can get a boost of up to 100s of points. Click on the button below and call the official agent that has been assigned to you right now.</p>' +
+        '<a class="offer" href="' + CREDIT + '">CALL xxx-xxx (xxxx) →</a>' +
+      "</div>"
+    );
+    thread.appendChild(box);
+    box.querySelector("a.offer").addEventListener("click", fireLead);
+    scroll();
+  }
+
+  function askHome() {
+    botQueue(["Have you owned your home for 5 or more years?"], ["Yes, 5+ years", "Less than 5 years"]);
+  }
+
+  function askCredit() {
+    botQueue(["How is your credit score?"], [
+      "Excellent (Above 800+)",
+      "Very Good (740 - 799)",
+      "Good (670 - 739)",
+      "Fair (580 - 669)",
+      "Poor (Below 579)"
+    ]);
+  }
+
+  function askEquity() {
+    botQueue(["How much equity / cash do you need?"], [
+      "Under $30,000",
+      "$30,000 – $100,000",
+      "$100,000 – $200,000",
+      "Over $200,000"
+    ]);
+  }
+
+  function goDqDebt() {
+    botQueue(["Do you have over $8k in debt?"], ["YES", "NO"]);
+  }
+
+  function goProcessingEligible() {
+    botQueue(["Checking eligibility… Reviewing your responses against program requirements."], null, function () {
+      setTimeout(showEligible, 1200);
+    });
+  }
+
+  function goProcessingDq() {
+    botQueue(["Checking eligibility… Reviewing your responses against program requirements."], null, function () {
+      setTimeout(goDqDebt, 1200);
+    });
   }
 
   function handle(option) {
@@ -265,39 +363,45 @@
     if (option === "👉 Yes! Show me how to claim!") {
       botQueue([
         "Awesome! Let's get you the benefit ASAP. I just need to ask you a couple of quick questions.",
-        "Are you under the age of 65?"
-      ], ["Yes, I am under 65", "No, I am over 65"]);
-    } else if (option === "Yes, I am under 65") {
-      botQueue(["Do you live in the United States?"], ["Yes ", "No "]);
-    } else if (option === "No, I am over 65") {
+        "Are you over the age of 65?"
+      ], ["Yes, I'm over 65", "No, I'm under 65"]);
+    } else if (option === "Yes, I'm over 65") {
+      askHome();
+    } else if (option === "No, I'm under 65") {
+      goProcessingDq();
+    } else if (option === "Yes, 5+ years" || option === "Less than 5 years") {
+      askCredit();
+    } else if (option === "Excellent (Above 800+)" || option === "Very Good (740 - 799)" || option === "Good (670 - 739)") {
+      askEquity();
+    } else if (option === "Fair (580 - 669)" || option === "Poor (Below 579)") {
+      goProcessingDq();
+    } else if (option === "Under $30,000") {
+      goProcessingDq();
+    } else if (option === "$30,000 – $100,000" || option === "$100,000 – $200,000" || option === "Over $200,000") {
+      goProcessingEligible();
+    } else if (option === "YES") {
       botQueue([
-        "Unfortunately, you don’t qualify for this Spending Allowance.",
-        "BUT, based on what you’ve told me, I see you qualify for a Food Allowance Card worth thousands of dollars!",
-        "Are you interested in claiming it?"
-      ], [" Yes", " No"]);
-    } else if (option === "Yes " || option === "No ") {
-      botQueue(["Are you on Medicare or Medicaid?"], ["  Yes", "No"]);
-    } else if (option === " Yes") {
-      switchNumber = true;
+        "You don't qualify, but you qualify for a 100% Debt Relief by the gov.",
+        "Based on your responses we found that you're perfectly eligible for the Economic Debt Relief gov. program under which you can get all of your debt eliminated."
+      ], null, function () { setTimeout(showDebt, 400); });
+    } else if (option === "NO") {
+      botQueue(["Would you like to boost your credit score by 100s of points in one phone call?"], ["Yes, boost my credit", "No thanks"]);
+    } else if (option === "Yes, boost my credit") {
       botQueue([
-        "Great, I’ve qualified you for the Food Allowance Card, worth thousands of dollars a year.",
-        "This card can be used at all grocery & medical store across United States."
+        "You don't qualify, but you qualify for a Credit Score Boost",
+        "Based on your responses we found that you're perfectly eligible for the Credit Boost Program under which you can get a boost of up to 100s of points."
+      ], null, function () { setTimeout(showCredit, 400); });
+    } else if (option === "No thanks") {
+      botQueue([
+        "You Do Not Qualify at This Time",
+        "Based on your selection, you do not meet the eligibility criteria for this program at this time."
       ]);
-      setTimeout(showCta, 4000);
-    } else if (option === "  Yes" || option === " No") {
-      botQueue(["Sorry you don’t qualify"]);
-    } else if (option === "Yes" || option === "No") {
-      botQueue([
-        "🎉 Fantastic news! You're one step away from securing your benefit",
-        "Based on what you've told me, you’re eligible for the $5800 Spending Allowance!"
-      ]);
-      setTimeout(showCta, 4000);
     }
   }
 
   botQueue([
     "Hey there! 👋",
-    "Emily this side. Let’s find out if you qualify for the $5800 Spending Allowance — it’s quick and only takes 2 minutes!",
+    "Emily this side. Let’s find out if you qualify to cash out up to $185,000 from your home equity — it’s quick and only takes 2 minutes!",
     "Tap 'Yes' to get started! ⬇️"
   ], ["👉 Yes! Show me how to claim!"]);
 })();
