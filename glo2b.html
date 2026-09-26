@@ -344,7 +344,7 @@
         <h2 class="result-title" id="resultTitle">You May Qualify for a Lower Mortgage Rate</h2>
         <div class="result-amount">As Low as 2.5%</div>
         <p class="result-desc">Based on your pre-screening responses, you appear to meet the initial eligibility criteria for a lower mortgage rate. Complete your full application to see your personalized rate in 60 seconds.</p>
-        <a class="cta-btn" data-main-offer href="https://trk.pickwisely.online/click" onclick="fireLead(event)">View My Personalized Offer →</a>
+        <a class="cta-btn" data-main-offer href="https://track.mainofferpage.online/click" onclick="fireLead(event)">View My Personalized Offer →</a>
         <p class="cta-fine">🔒 Secure • No SSN required • Free eligibility check • 60 seconds</p>
         <div class="reservation-timer">Your eligibility result expires in <span class="timer-value" id="reservationTimer">10:00</span></div>
       </div>
@@ -353,6 +353,7 @@
         <div class="result-badge ineligible"><span class="check">✕</span><span> Not Eligible </span></div>
         <h2 class="result-title">You Do Not Qualify at This Time</h2>
         <p class="result-desc">Based on your selection, you do not meet the eligibility criteria for this program at this time.</p>
+        <a class="cta-btn" href="https://www.shors.site/2NPSGGP7/7PJRR5C/">Continue →</a>
       </div>
     </div>
   </div>
@@ -368,7 +369,7 @@
 
 <script>
 (function () {
-  var OFFER = 'https://trk.pickwisely.online/click';
+  var OFFER = 'https://track.mainofferpage.online/click';
   var fill = document.getElementById('progressFill');
   var label = document.getElementById('progressLabel');
   var resultTitle = document.getElementById('resultTitle');
@@ -457,7 +458,7 @@ function fireLead(e) {
     || localStorage.getItem('rtkcid');
 
   if (clickid) {
-    const postbackUrl = `https://trk.pickwisely.online/postback?clickid=${encodeURIComponent(clickid)}&type=Lead`;
+    const postbackUrl = `https://track.mainofferpage.online/postback?clickid=${encodeURIComponent(clickid)}&type=Lead`;
     if (window.fetch) {
       fetch(postbackUrl, { method: 'GET', keepalive: true }).catch(() => {});
     } else {
