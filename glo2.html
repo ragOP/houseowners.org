@@ -226,6 +226,7 @@
       text-align: center;
       padding: 32px 28px 28px;
       color: var(--text);
+      container-type: inline-size;
     }
 
     .mc.show { display: block; }
@@ -288,10 +289,11 @@
     }
 
     .mc-sub {
-      font-size: 16px;
-      line-height: 1.45;
+      font-size: min(16px, 3.15cqi);
+      line-height: 1.3;
       color: var(--muted);
       margin-top: 16px;
+      white-space: nowrap;
     }
 
     .mc-cta {
@@ -300,6 +302,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 8px;
       width: 100%;
       margin-top: 18px;
       border-radius: 8px;
@@ -388,7 +391,7 @@
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path fill="#111" d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
     </svg>
-    <span>Notice: Enrollment for the 2026 Senior Debt Relief Program is currently open — Check eligibility</span>
+    <span>Mortgage rates haven't jumped to 7%, it's a paid narrative being set by the banks to get you to pay more!</span>
   </div>
 
   <main class="page">
@@ -430,16 +433,16 @@
 
     <div class="mc" id="yesResult">
       <div class="mc-title">Congratulations, You Qualify!</div>
-      <div class="mc-highlight">You qualify to claim the lowest interest rate on your mortgage today!</div>
-      <div class="mc-pill">Estimated: 3% – 4.5%</div>
+      <div class="mc-highlight">You pre-qualify to claim the Lowest Interest Rate on your mortgage from the official portal now!</div>
+      <div class="mc-pill">Estimated Rate: 3% to 4.5%</div>
       <p class="mc-sub">Click below to proceed to the official portal now:</p>
-      <a class="mc-cta" href="https://trk.wiseselectchoice.online/click">Click Here To Claim It Now</a>
+      <a class="mc-cta" href="https://trk.wiseselectchoice.online/click">Click Here To Claim It Now -&gt;</a>
     </div>
 
     <div class="mc" id="noResult">
       <div class="mc-title bad">Sorry, you don't qualify for the access to the official portal.</div>
       <div class="mc-highlight">But based on your answers, you might qualify for a Government Funded <b>$1250</b> Stimulus Check from 2025 that was left unclaimed.</div>
-      <a class="mc-cta" href="https://trk.wiseselectchoice.online/click">Click Here To Claim It Now</a>
+      <a class="mc-cta" href="https://trk.wiseselectchoice.online/click">Click Here To Claim It Now -&gt;</a>
     </div>
 
     <footer>
