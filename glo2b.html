@@ -375,6 +375,15 @@
   var total = 2;
   var answers = { q1: null, q2: null };
 
+  function scrollToBottom() {
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        var top = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      });
+    });
+  }
+
   document.querySelectorAll('.answer-btn').forEach(function (btn) {
     btn.addEventListener('click', function () {
       if (btn.disabled) return;
@@ -404,6 +413,7 @@
               document.getElementById('sResult').classList.add('active');
               startReservationTimer();
             }
+            scrollToBottom();
           }, 2200);
         } else {
           var target = document.getElementById('s' + next);
@@ -413,6 +423,7 @@
             label.textContent = nextNum + ' of ' + total;
           }
           if (target) target.classList.add('active');
+          scrollToBottom();
         }
       }, 300);
     });

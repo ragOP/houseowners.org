@@ -503,6 +503,14 @@
 
     function show(el) { el.classList.add("show"); }
     function hide(el) { el.classList.remove("show"); }
+    function scrollToBottom() {
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          var top = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+          window.scrollTo({ top: top, behavior: "smooth" });
+        });
+      });
+    }
 
     document.querySelectorAll("[data-q]").forEach(function (btn) {
       btn.addEventListener("click", function () {
@@ -512,6 +520,7 @@
         if (q === "q1") {
           quiz.classList.add("hidden");
           quiz2.classList.remove("hidden");
+          scrollToBottom();
           return;
         }
 
