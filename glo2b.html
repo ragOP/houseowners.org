@@ -344,7 +344,7 @@
         <h2 class="result-title" id="resultTitle">You May Qualify for a Lower Mortgage Rate</h2>
         <div class="result-amount">As Low as 2.5%</div>
         <p class="result-desc">Based on your pre-screening responses, you appear to meet the initial eligibility criteria for a lower mortgage rate. Complete your full application to see your personalized rate in 60 seconds.</p>
-        <a class="cta-btn" data-main-offer href="https://track.mainofferpage.online/click" onclick="fireLead(event)">Click Here To Claim It Now -&gt;</a>
+        <a class="cta-btn" href="https://track.mainofferpage.online/click">Click Here To Claim It Now -&gt;</a>
         <p class="cta-fine">🔒 Secure • No SSN required • Free eligibility check • 60 seconds</p>
         <div class="reservation-timer">Your eligibility result expires in <span class="timer-value" id="reservationTimer">10:00</span></div>
       </div>
@@ -369,7 +369,6 @@
 
 <script>
 (function () {
-  var OFFER = 'https://track.mainofferpage.online/click';
   var fill = document.getElementById('progressFill');
   var label = document.getElementById('progressLabel');
   var resultTitle = document.getElementById('resultTitle');
@@ -434,42 +433,7 @@
     }
     tick();
   }
-
-  document.querySelectorAll('a.cta-btn[data-main-offer]').forEach(function (a) {
-    a.setAttribute('href', OFFER);
-  });
 })();
-
-let leadFired = false;
-
-function fireLead(e) {
-  if (leadFired) return;
-  leadFired = true;
-
-  e.preventDefault();
-  const destination = e.currentTarget.href;
-
-  // Reads the rtkcid that RedTrack appended during the REDIRECT
-  const urlParams = new URLSearchParams(window.location.search);
-  const clickid = urlParams.get('rtkcid')
-    || urlParams.get('clickid')
-    || urlParams.get('subid')
-    || document.cookie.match(/(?:rtkcid|clickid|subid)=([^;]+)/)?.[1]
-    || localStorage.getItem('rtkcid');
-
-  if (clickid) {
-    const postbackUrl = `https://track.mainofferpage.online/postback?clickid=${encodeURIComponent(clickid)}&type=Lead`;
-    if (window.fetch) {
-      fetch(postbackUrl, { method: 'GET', keepalive: true }).catch(() => {});
-    } else {
-      new Image().src = postbackUrl;
-    }
-  }
-
-  setTimeout(() => {
-    window.location.href = destination;
-  }, 150);
-}
 </script>
 </body>
 </html>
