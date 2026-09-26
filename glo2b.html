@@ -349,39 +349,6 @@
         <div class="reservation-timer">Your eligibility result expires in <span class="timer-value" id="reservationTimer">10:00</span></div>
       </div>
 
-      <div id="sDq1" class="screen">
-        <p class="q-label">Additional Question</p>
-        <p class="q-text">Do you have over $8k in debt?</p>
-        <div class="answers answers-split">
-          <button type="button" class="answer-btn" data-next="DqDebt"><span class="radio"></span>YES</button>
-          <button type="button" class="answer-btn" data-next="Dq2"><span class="radio"></span>NO</button>
-        </div>
-      </div>
-
-      <div id="sDq2" class="screen">
-        <p class="q-label">Additional Question</p>
-        <p class="q-text">Would you like to boost your credit score by 100s of points in one phone call?</p>
-        <div class="answers answers-split">
-          <button type="button" class="answer-btn" data-next="DqCredit"><span class="radio"></span>YES</button>
-          <button type="button" class="answer-btn" data-next="Ineligible"><span class="radio"></span>NO</button>
-        </div>
-      </div>
-
-      <div id="sDqDebt" class="screen">
-        <p class="q-label">Based on your answers,</p>
-        <h2 class="result-title">You don't qualify, but you qualify for a 100% Debt Relief by the gov.</h2>
-        <p class="result-desc">Based on your responses we found that you're perfectly eligible for the Economic Debt Relief gov. program under which you can get all of your debt eliminated. Click on the button below and apply now, takes under 60 seconds.</p>
-        <a class="cta-btn" href="https://www.nz91nyfbo.com/ZZ2GX/5Q9RM9/?sub1=excludecoe" onclick="fireLead(event)">Claim My Debt Relief →</a>
-        <p class="cta-fine">🔒 Secure • Free eligibility check • Under 60 seconds</p>
-      </div>
-
-      <div id="sDqCredit" class="screen">
-        <p class="q-label">Based on your answers,</p>
-        <h2 class="result-title">You don't qualify, but you qualify for a Credit Score Boost</h2>
-        <p class="result-desc">Based on your responses we found that you're perfectly eligible for the Credit Boost Program under which you can get a boost of up to 100s of points. Click on the button below and call the official agent that has been assigned to you right now.</p>
-        <a class="cta-btn" href="tel:xxx-xxx-xxxx" onclick="fireLead(event)">CALL xxx-xxx (xxxx) →</a>
-      </div>
-
       <div id="sIneligible" class="screen">
         <div class="result-badge ineligible"><span class="check">✕</span><span> Not Eligible </span></div>
         <h2 class="result-title">You Do Not Qualify at This Time</h2>
@@ -431,7 +398,7 @@
             proc.classList.remove('active');
             document.getElementById('progressRow').style.display = 'none';
             if (result === 'ineligible') {
-              document.getElementById('sDq1').classList.add('active');
+              document.getElementById('sIneligible').classList.add('active');
             } else {
               resultTitle.textContent = 'You May Qualify for a Lower Mortgage Rate';
               document.getElementById('sResult').classList.add('active');
