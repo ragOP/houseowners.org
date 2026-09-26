@@ -122,14 +122,14 @@
 
     .lead,
     .rate-line {
-      font-size: clamp(16px, 3.2vw, 19px);
-      font-weight: 600;
-      line-height: 1.45;
+      font-size: clamp(15px, 2.8vw, 17px);
+      font-weight: 400;
+      line-height: 1.5;
       color: var(--text);
     }
 
     .rate-line strong {
-      font-weight: 800;
+      font-weight: 600;
       color: #1a7a32;
     }
 
@@ -396,7 +396,7 @@
       h1 { margin-bottom: 16px; }
 
       .copy { margin-top: 14px; gap: 10px; }
-      .lead, .rate-line { font-size: 16px; }
+      .lead, .rate-line { font-size: 15px; }
 
       .prompt {
         margin: 16px 10px 0;
@@ -529,8 +529,8 @@
           }
           clearInterval(timer);
           hide(processing);
-          if (answers.q1 === "no" && answers.q2 === "no") show(noResult);
-          else show(yesResult);
+          if (answers.q1 === "yes" && answers.q2 === "yes") show(yesResult);
+          else show(noResult);
           window.scrollTo({ top: 0, behavior: "smooth" });
         }, 800);
       });
