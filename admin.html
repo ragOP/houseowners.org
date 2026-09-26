@@ -2,233 +2,312 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>Quiz answers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root { color-scheme: light; }
+  :root {
+    --ink: #102033;
+    --muted: #5d6b7c;
+    --line: #e4eaf1;
+    --bg: #f3f6fa;
+    --card: #ffffff;
+    --blue: #0b63ce;
+    --navy: #102a4c;
+  }
   * { box-sizing: border-box; }
+  html, body { margin: 0; }
   body {
-    margin: 0;
-    font-family: "Source Sans 3", "Segoe UI", sans-serif;
-    background: #f4f6f8;
-    color: #1b1b1b;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    padding-bottom: calc(28px + env(safe-area-inset-bottom));
+    -webkit-font-smoothing: antialiased;
   }
-  header {
-    background: #112e51;
+  .top {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background: var(--navy);
     color: #fff;
-    padding: 18px 24px;
+    padding: calc(14px + env(safe-area-inset-top)) 16px 14px;
   }
-  header h1 { margin: 0; font-size: 22px; }
-  header p { margin: 4px 0 0; color: #c5d4e8; font-size: 14px; }
-  main { max-width: 1100px; margin: 0 auto; padding: 24px 16px 48px; }
-  .card {
-    background: #fff;
-    border: 1px solid #d6d7d9;
-    border-radius: 8px;
-    padding: 18px;
-    margin-bottom: 16px;
+  .top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
   }
-  label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px; }
-  input[type="password"] {
-    width: min(320px, 100%);
-    padding: 10px 12px;
-    font: inherit;
-    border: 1px solid #8d9297;
-    border-radius: 6px;
-  }
-  button, .filters button {
-    font: inherit;
-    font-weight: 700;
+  h1 { margin: 0; font-size: 22px; letter-spacing: -0.03em; }
+  .sub { margin: 3px 0 0; color: #c5d4e8; font-size: 13px; font-weight: 500; }
+  .refresh {
+    min-width: 44px;
+    min-height: 44px;
     border: 0;
-    border-radius: 6px;
-    background: #0071bc;
+    border-radius: 12px;
+    background: rgba(255,255,255,.14);
     color: #fff;
-    padding: 10px 14px;
-    cursor: pointer;
-  }
-  button.secondary { background: #5b616b; }
-  .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-  .error { color: #b50909; font-size: 14px; margin-top: 8px; }
-  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; }
-  .stat { background: #f7f9fb; border-radius: 6px; padding: 12px; }
-  .stat b { display: block; font-size: 24px; }
-  .stat span { color: #5b616b; font-size: 13px; }
-  table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #e6e6e6; vertical-align: top; }
-  th { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: #5b616b; }
-  .yes { color: #1f7a32; font-weight: 700; }
-  .no { color: #b50909; font-weight: 700; }
-  .pill {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 99px;
-    font-size: 12px;
+    font: inherit;
     font-weight: 700;
+    padding: 0 14px;
   }
-  .pill.qualified { background: #e7f4e4; color: #216e1f; }
-  .pill.disqualified { background: #f8d7da; color: #981b1c; }
-  .pill.progress { background: #fef3cd; color: #856404; }
-  .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
-  .filters button[aria-pressed="true"] { background: #112e51; }
-  .empty { color: #5b616b; }
-  .scroll { overflow-x: auto; }
+  .wrap { padding: 14px 14px 0; max-width: 720px; margin: 0 auto; }
+  .stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .stat {
+    background: var(--card);
+    border-radius: 16px;
+    padding: 14px 14px 12px;
+    box-shadow: 0 1px 2px rgba(16,32,51,.05);
+  }
+  .stat b {
+    display: block;
+    font-size: 28px;
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+  .stat span { display: block; margin-top: 6px; color: var(--muted); font-size: 13px; font-weight: 600; }
+  .filters {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    margin: 14px 0 12px;
+  }
+  .filters button {
+    min-height: 44px;
+    border: 0;
+    border-radius: 12px;
+    background: #fff;
+    color: var(--ink);
+    font: inherit;
+    font-weight: 700;
+    font-size: 15px;
+  }
+  .filters button[aria-pressed="true"] { background: var(--navy); color: #fff; }
+  .status { color: var(--muted); font-size: 15px; padding: 28px 8px; text-align: center; }
+  .visit {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 16px;
+    margin-bottom: 12px;
+    box-shadow: 0 1px 2px rgba(16,32,51,.05);
+  }
+  .visit-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .clock {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+  .zone { font-size: 13px; font-weight: 700; color: var(--muted); margin-left: 4px; }
+  .date { margin-top: 4px; color: var(--muted); font-size: 13px; font-weight: 600; }
+  .page {
+    border-radius: 999px;
+    background: #e8f1fc;
+    color: var(--blue);
+    font-size: 13px;
+    font-weight: 800;
+    padding: 6px 10px;
+  }
+  .qa { margin-top: 14px; display: flex; flex-direction: column; gap: 8px; }
+  .qa-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: #f6f8fb;
+    border-radius: 12px;
+    padding: 12px;
+  }
+  .q { font-size: 14px; font-weight: 600; line-height: 1.3; }
+  .ans {
+    flex-shrink: 0;
+    min-width: 58px;
+    text-align: center;
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 800;
+  }
+  .ans.yes { background: #e5f6ea; color: #157a32; }
+  .ans.no { background: #fde8ea; color: #c01424; }
+  .ans.wait { background: #eef1f4; color: #6b7785; }
+  .result { margin-top: 12px; font-size: 14px; font-weight: 800; }
+  .result.qualified { color: #157a32; }
+  .result.disqualified { color: #c01424; }
+  .result.progress { color: #8a5a00; }
+  .combos { margin-top: 6px; }
+  .combo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px 2px;
+    border-top: 1px solid var(--line);
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .combo:first-child { border-top: 0; }
+  .combo b { font-size: 18px; }
+  h2 { margin: 18px 2px 8px; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
 </style>
 </head>
 <body>
-<header>
-  <h1>Quiz answers</h1>
-  <p>glo2 and glo2b — which page, and how each visitor answered</p>
+<header class="top">
+  <div class="top-row">
+    <div>
+      <h1>Quiz answers</h1>
+      <p class="sub">Times in US Eastern</p>
+    </div>
+    <button class="refresh" id="refresh" type="button">Refresh</button>
+  </div>
 </header>
-<main>
-  <section class="card" id="login">
-    <label for="password">Admin password</label>
-    <div class="row">
-      <input id="password" type="password" autocomplete="current-password">
-      <button id="loginBtn" type="button">View answers</button>
+<main class="wrap">
+  <p class="status" id="status">Loading answers…</p>
+  <div id="app" hidden>
+    <div class="stats" id="stats"></div>
+    <div class="filters" id="filters">
+      <button type="button" data-page="all" aria-pressed="true">All</button>
+      <button type="button" data-page="glo2" aria-pressed="false">glo2</button>
+      <button type="button" data-page="glo2b" aria-pressed="false">glo2b</button>
     </div>
-    <p class="error" id="loginError" hidden></p>
-  </section>
-
-  <section id="dash" hidden>
-    <div class="card">
-      <div class="row" style="justify-content: space-between; margin-bottom: 12px;">
-        <strong id="updated"></strong>
-        <div class="row">
-          <button id="refreshBtn" type="button">Refresh</button>
-          <button id="logoutBtn" class="secondary" type="button">Log out</button>
-        </div>
-      </div>
-      <div class="stats" id="stats"></div>
-    </div>
-    <div class="card">
-      <h2 style="margin: 0 0 12px; font-size: 18px;">Answer combinations</h2>
-      <div class="scroll"><table id="combos"></table></div>
-    </div>
-    <div class="card">
-      <div class="filters" id="filters">
-        <button type="button" data-page="all" aria-pressed="true">All</button>
-        <button type="button" data-page="glo2" aria-pressed="false">glo2</button>
-        <button type="button" data-page="glo2b" aria-pressed="false">glo2b</button>
-      </div>
-      <div class="scroll"><table id="events"></table></div>
-      <p class="empty" id="empty" hidden>No answers yet.</p>
-    </div>
-  </section>
+    <div id="list"></div>
+    <h2>Combinations</h2>
+    <div class="combos" id="combos"></div>
+  </div>
 </main>
 <script>
 (function () {
-  var passwordInput = document.getElementById('password');
-  var loginError = document.getElementById('loginError');
-  var dash = document.getElementById('dash');
-  var login = document.getElementById('login');
   var data = null;
-  var filter = 'all';
+  var filter = "all";
+  var zone = "America/New_York";
 
-  function password() { return sessionStorage.getItem('quiz-admin-pass') || ''; }
-
-  function showError(message) {
-    loginError.hidden = false;
-    loginError.textContent = message;
-  }
-
-  function answerCell(value) {
-    if (value === 'yes') return '<span class="yes">YES</span>';
-    if (value === 'no') return '<span class="no">NO</span>';
-    return '—';
-  }
-
-  function resultPill(result) {
-    if (result === 'qualified') return '<span class="pill qualified">Qualified</span>';
-    if (result === 'disqualified') return '<span class="pill disqualified">Disqualified</span>';
-    return '<span class="pill progress">Question 1 only</span>';
-  }
-
-  function formatTime(iso) {
-    if (!iso) return '';
-    return new Intl.DateTimeFormat('en-IN', {
-      timeZone: 'Asia/Kolkata',
-      day: '2-digit', month: 'short', year: 'numeric',
-      hour: '2-digit', minute: '2-digit'
+  function clock(iso) {
+    return new Intl.DateTimeFormat("en-US", {
+      timeZone: zone,
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true
     }).format(new Date(iso));
   }
 
-  function render() {
-    var summary = data.summary;
-    var questions = data.questions;
-    document.getElementById('stats').innerHTML = [
-      stat(summary.total, 'Visitors recorded'),
-      stat(summary.byPage.glo2.total, 'glo2'),
-      stat(summary.byPage.glo2b.total, 'glo2b'),
-      stat(summary.byPage.glo2.qualified + summary.byPage.glo2b.qualified, 'Qualified'),
-      stat(summary.byPage.glo2.disqualified + summary.byPage.glo2b.disqualified, 'Disqualified')
-    ].join('');
-    document.getElementById('updated').textContent = 'Updated ' + formatTime(new Date().toISOString()) + ' IST';
+  function zoneName(iso) {
+    var parts = new Intl.DateTimeFormat("en-US", {
+      timeZone: zone,
+      timeZoneName: "short"
+    }).formatToParts(new Date(iso));
+    var name = parts.find(function (part) { return part.type === "timeZoneName"; });
+    return name ? name.value : "ET";
+  }
 
-    var comboRows = data.summary.combos.map(function (row) {
-      return '<tr><td>' + row.page + '</td><td>' + answerCell(row.q1) + '</td><td>' + answerCell(row.q2) + '</td><td>' + resultPill(row.result) + '</td><td>' + row.count + '</td></tr>';
-    }).join('');
-    document.getElementById('combos').innerHTML = '<thead><tr><th>Page</th><th>' + questions.q1 + '</th><th>' + questions.q2 + '</th><th>Result</th><th>Count</th></tr></thead><tbody>' + (comboRows || '<tr><td colspan="5">No answers yet.</td></tr>') + '</tbody>';
+  function day(iso) {
+    return new Intl.DateTimeFormat("en-US", {
+      timeZone: zone,
+      weekday: "short",
+      month: "short",
+      day: "numeric"
+    }).format(new Date(iso));
+  }
 
-    var events = data.events.filter(function (event) { return filter === 'all' || event.page === filter; });
-    document.getElementById('empty').hidden = events.length > 0;
-    document.getElementById('events').innerHTML = '<thead><tr><th>Time (IST)</th><th>Page</th><th>' + questions.q1 + '</th><th>' + questions.q2 + '</th><th>Result</th></tr></thead><tbody>' + events.map(function (event) {
-      return '<tr><td>' + formatTime(event.updatedAt) + '</td><td>' + event.page + '</td><td>' + answerCell(event.q1) + '</td><td>' + answerCell(event.q2) + '</td><td>' + resultPill(event.result) + '</td></tr>';
-    }).join('') + '</tbody>';
+  function answer(value) {
+    if (value === "yes") return '<span class="ans yes">YES</span>';
+    if (value === "no") return '<span class="ans no">NO</span>';
+    return '<span class="ans wait">—</span>';
+  }
+
+  function resultText(result) {
+    if (result === "qualified") return '<div class="result qualified">Qualified</div>';
+    if (result === "disqualified") return '<div class="result disqualified">Disqualified</div>';
+    return '<div class="result progress">Still on question 1</div>';
   }
 
   function stat(value, label) {
     return '<div class="stat"><b>' + value + '</b><span>' + label + '</span></div>';
   }
 
+  function render() {
+    var summary = data.summary;
+    var questions = data.questions;
+    document.getElementById("stats").innerHTML = [
+      stat(summary.total, "Visitors"),
+      stat(summary.byPage.glo2.qualified + summary.byPage.glo2b.qualified, "Qualified"),
+      stat(summary.byPage.glo2.total, "glo2"),
+      stat(summary.byPage.glo2b.total, "glo2b")
+    ].join("");
+
+    var events = data.events.filter(function (event) {
+      return filter === "all" || event.page === filter;
+    });
+    var list = document.getElementById("list");
+    if (!events.length) {
+      list.innerHTML = '<p class="status">No answers yet.</p>';
+    } else {
+      list.innerHTML = events.map(function (event) {
+        var when = event.updatedAt || event.startedAt;
+        return '<article class="visit">' +
+          '<div class="visit-top"><div><div class="clock">' + clock(when) + '<span class="zone">' + zoneName(when) + '</span></div><div class="date">' + day(when) + '</div></div><div class="page">' + event.page + '</div></div>' +
+          '<div class="qa">' +
+            '<div class="qa-row"><div class="q">' + questions.q1 + '</div>' + answer(event.q1) + '</div>' +
+            '<div class="qa-row"><div class="q">' + questions.q2 + '</div>' + answer(event.q2) + '</div>' +
+          '</div>' +
+          resultText(event.result) +
+        '</article>';
+      }).join("");
+    }
+
+    var combos = data.summary.combos.filter(function (row) {
+      return filter === "all" || row.page === filter;
+    });
+    document.getElementById("combos").innerHTML = combos.length ? combos.map(function (row) {
+      var label = row.page + " · " + (row.q1 || "—").toUpperCase() + " / " + (row.q2 || "—").toUpperCase();
+      return '<div class="combo"><span>' + label + '</span><b>' + row.count + '</b></div>';
+    }).join("") : '<p class="status">No combinations yet.</p>';
+  }
+
   function load() {
-    loginError.hidden = true;
-    return fetch('/api/events', { headers: { Authorization: 'Bearer ' + password() } })
+    var status = document.getElementById("status");
+    status.hidden = false;
+    status.textContent = "Loading answers…";
+    document.getElementById("app").hidden = true;
+    fetch("/api/events", { cache: "no-store" })
       .then(function (res) {
-        if (res.status === 401) throw new Error('Wrong password');
-        if (!res.ok) throw new Error('Could not load answers');
+        if (!res.ok) throw new Error("Could not load answers");
         return res.json();
       })
       .then(function (json) {
         data = json;
-        login.hidden = true;
-        dash.hidden = false;
+        status.hidden = true;
+        document.getElementById("app").hidden = false;
         render();
       })
-      .catch(function (err) {
-        sessionStorage.removeItem('quiz-admin-pass');
-        login.hidden = false;
-        dash.hidden = true;
-        showError(err.message);
+      .catch(function () {
+        status.hidden = false;
+        status.textContent = "Could not load answers. Tap Refresh.";
       });
   }
 
-  document.getElementById('loginBtn').addEventListener('click', function () {
-    sessionStorage.setItem('quiz-admin-pass', passwordInput.value);
-    load();
-  });
-  passwordInput.addEventListener('keydown', function (event) {
-    if (event.key === 'Enter') document.getElementById('loginBtn').click();
-  });
-  document.getElementById('refreshBtn').addEventListener('click', load);
-  document.getElementById('logoutBtn').addEventListener('click', function () {
-    sessionStorage.removeItem('quiz-admin-pass');
-    data = null;
-    dash.hidden = true;
-    login.hidden = false;
-    passwordInput.value = '';
-  });
-  document.getElementById('filters').addEventListener('click', function (event) {
-    var btn = event.target.closest('button');
+  document.getElementById("refresh").addEventListener("click", load);
+  document.getElementById("filters").addEventListener("click", function (event) {
+    var btn = event.target.closest("button");
     if (!btn) return;
-    filter = btn.getAttribute('data-page');
-    document.querySelectorAll('#filters button').forEach(function (item) {
-      item.setAttribute('aria-pressed', item === btn ? 'true' : 'false');
+    filter = btn.getAttribute("data-page");
+    document.querySelectorAll("#filters button").forEach(function (item) {
+      item.setAttribute("aria-pressed", item === btn ? "true" : "false");
     });
     if (data) render();
   });
-
-  if (password()) load();
+  load();
 })();
 </script>
 </body>
