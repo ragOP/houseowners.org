@@ -11,7 +11,7 @@
     })(window, document, "clarity", "script", "y3rt3ntclc");
 </script>
 <meta name="robots" content="noindex, nofollow">
-<title>Senior Equity Release Program — Eligibility Screening</title>
+<title>FHFA Mortgage Rate Reduction — Eligibility Screening</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
@@ -106,7 +106,7 @@
 
   .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
   .progress-track { flex: 1; height: 8px; background: #d6d7d9; border-radius: 4px; overflow: hidden; }
-  .progress-fill { height: 100%; width: 33.333%; background: #0071bc; border-radius: 4px; transition: width .45s ease; }
+  .progress-fill { height: 100%; width: 50%; background: #0071bc; border-radius: 4px; transition: width .45s ease; }
   .progress-label { font-size: 13px; color: #5b616b; white-space: nowrap; min-width: 80px; text-align: right; }
   .divider { border: none; border-top: 1px solid #dfe1e2; margin: 0 0 24px; }
 
@@ -281,7 +281,7 @@
 <div class="gov-banner">
   <div class="inner">
     <span class="flag">🇺🇸</span>
-    <span>An official program eligibility screening service &nbsp;|&nbsp; Senior Equity Release Program</span>
+    <span>An official program eligibility screening service &nbsp;|&nbsp; FHFA Mortgage Rate Reduction</span>
   </div>
 </div>
 
@@ -289,59 +289,45 @@
   <div class="inner">
     <div class="seal">🏛</div>
     <div>
-      <div class="site-title">Senior Equity Release Program</div>
-      <div class="site-subtitle">Homeowner Benefit Review • Eligibility Screening Portal</div>
+      <div class="site-title">Mortgage Rate Reduction Program</div>
+      <div class="site-subtitle">Homeowner Rate Review • Eligibility Screening Portal</div>
     </div>
   </div>
 </header>
 
 <div class="alert-bar">
-  <div class="inner">⚠️ Limited availability — Only homeowners who complete screening today will be reviewed this cycle</div>
+  <div class="inner">⚠️ Limited availability — Only homeowners who complete screening today will be reviewed for a lower rate this cycle</div>
 </div>
 
 <main class="main">
   <div class="card">
     <div class="card-header">
-      <p class="form-number">Form SERP-2026 • Eligibility Pre-Screening</p>
+      <p class="form-number">Form MRRP-2026 • Eligibility Pre-Screening</p>
       <h1 class="card-title">Homeowner Eligibility Check</h1>
-      <p class="card-subtitle">Answer 3 questions below to determine if you qualify for up to <strong>$185,000</strong> through the Senior Equity Release Program.</p>
+      <p class="card-subtitle">Answer 2 questions below to determine if you qualify for a lower mortgage rate under the Mortgage Rate Reduction Program</p>
     </div>
     <div class="card-body">
       <div class="progress-row" id="progressRow">
         <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-        <div class="progress-label" id="progressLabel">1 of 3</div>
+        <div class="progress-label" id="progressLabel">1 of 2</div>
       </div>
       <hr class="divider">
 
       <div id="s1" class="screen active">
-        <p class="q-label">Question 1 of 3</p>
-        <p class="q-text">Have you owned your home for 5 or more years?</p>
+        <p class="q-label">Question 1 of 2</p>
+        <p class="q-text">Is your credit score over 670?</p>
         <div class="answers answers-split">
-          <button type="button" class="answer-btn" data-next="2"><span class="radio"></span>Yes, 5+ years</button>
-          <button type="button" class="answer-btn" data-next="2"><span class="radio"></span>Less than 5 years</button>
+          <button type="button" class="answer-btn" data-next="2" data-answer="yes"><span class="radio"></span>YES</button>
+          <button type="button" class="answer-btn" data-next="2" data-answer="no"><span class="radio"></span>NO</button>
         </div>
       </div>
 
       <div id="s2" class="screen">
-        <p class="q-label">Question 2 of 3</p>
-        <p class="q-text">How is your credit score?</p>
-        <div class="answers">
-          <button type="button" class="answer-btn" data-next="3"><span class="radio"></span>Excellent (Above 800+)</button>
-          <button type="button" class="answer-btn" data-next="3"><span class="radio"></span>Very Good (740 - 799)</button>
-          <button type="button" class="answer-btn" data-next="3"><span class="radio"></span>Good (670 - 739)</button>
-          <button type="button" class="answer-btn" data-next="processing" data-result="ineligible"><span class="radio"></span>Fair (580 - 669)</button>
-          <button type="button" class="answer-btn" data-next="processing" data-result="ineligible"><span class="radio"></span>Poor (Below 579)</button>
-        </div>
-      </div>
-
-      <div id="s3" class="screen">
-        <p class="q-label">Question 3 of 3</p>
-        <p class="q-text">How much equity / cash do you need?</p>
+        <p class="q-label">Question 2 of 2</p>
+        <p class="q-text">Is your current mortgage balance over $150k?</p>
         <div class="answers answers-split">
-          <button type="button" class="answer-btn" data-next="processing" data-result="ineligible"><span class="radio"></span>Under $30,000</button>
-          <button type="button" class="answer-btn" data-next="processing"><span class="radio"></span>$30,000 – $100,000</button>
-          <button type="button" class="answer-btn popular" data-next="processing"><span class="radio"></span><span class="answer-text">$100,000 – $200,000</span><span class="popular-tag">Most Popular</span></button>
-          <button type="button" class="answer-btn" data-next="processing"><span class="radio"></span>Over $200,000</button>
+          <button type="button" class="answer-btn" data-next="processing" data-answer="yes"><span class="radio"></span>YES</button>
+          <button type="button" class="answer-btn" data-next="processing" data-answer="no"><span class="radio"></span>NO</button>
         </div>
       </div>
 
@@ -355,9 +341,9 @@
 
       <div id="sResult" class="screen">
         <div class="result-badge"><span class="check">✓</span><span> Eligible </span></div>
-        <h2 class="result-title" id="resultTitle">Based on Your Homeownership, You May Qualify</h2>
-        <div class="result-amount">Up to $185,000</div>
-        <p class="result-desc">Based on your pre-screening responses, you appear to meet the initial eligibility criteria. Complete your full application to see your personalized cash-out amount in 60 seconds.</p>
+        <h2 class="result-title" id="resultTitle">You May Qualify for a Lower Mortgage Rate</h2>
+        <div class="result-amount">As Low as 2.5%</div>
+        <p class="result-desc">Based on your pre-screening responses, you appear to meet the initial eligibility criteria for a lower mortgage rate. Complete your full application to see your personalized rate in 60 seconds.</p>
         <a class="cta-btn" data-main-offer href="https://trk.pickwisely.online/click" onclick="fireLead(event)">View My Personalized Offer →</a>
         <p class="cta-fine">🔒 Secure • No SSN required • Free eligibility check • 60 seconds</p>
         <div class="reservation-timer">Your eligibility result expires in <span class="timer-value" id="reservationTimer">10:00</span></div>
@@ -410,7 +396,7 @@
     <a href="about.html">About / Privacy</a>
     <a href="terms.html">Terms of Use</a>
   </div>
-  <div class="footer-note">Senior Equity Release Program Eligibility Screening • National</div>
+  <div class="footer-note">FHFA Mortgage Rate Reduction • Eligibility Screening • National</div>
 </footer>
 
 <script>
@@ -419,14 +405,18 @@
   var fill = document.getElementById('progressFill');
   var label = document.getElementById('progressLabel');
   var resultTitle = document.getElementById('resultTitle');
-  var total = 3;
+  var total = 2;
+  var answers = { q1: null, q2: null };
 
   document.querySelectorAll('.answer-btn').forEach(function (btn) {
     btn.addEventListener('click', function () {
       if (btn.disabled) return;
       var screen = btn.closest('.screen');
       var next = btn.getAttribute('data-next');
-      var result = btn.getAttribute('data-result') || 'eligible';
+      var answer = btn.getAttribute('data-answer');
+      if (screen.id === 's1') answers.q1 = answer;
+      if (screen.id === 's2') answers.q2 = answer;
+      var result = (answers.q1 === 'no' && answers.q2 === 'no') ? 'ineligible' : 'eligible';
       screen.querySelectorAll('.answer-btn').forEach(function (b) { b.disabled = true; });
       btn.classList.add('selected');
 
@@ -443,7 +433,7 @@
             if (result === 'ineligible') {
               document.getElementById('sDq1').classList.add('active');
             } else {
-              resultTitle.textContent = 'Based on Your Homeownership, You May Qualify';
+              resultTitle.textContent = 'You May Qualify for a Lower Mortgage Rate';
               document.getElementById('sResult').classList.add('active');
               startReservationTimer();
             }

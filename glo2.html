@@ -112,6 +112,26 @@
       object-position: center 30%;
     }
 
+    .copy {
+      margin-top: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .lead,
+    .rate-line {
+      font-size: clamp(16px, 3.2vw, 19px);
+      font-weight: 600;
+      line-height: 1.45;
+      color: var(--text);
+    }
+
+    .rate-line strong {
+      font-weight: 800;
+      color: #1a7a32;
+    }
+
     .quiz {
       background: var(--quiz-bg);
       margin: 22px 18px 18px;
@@ -194,35 +214,119 @@
 
     .btn-no:hover { background: var(--gray-btn-hover); }
 
-    .result {
-      display: none;
-    }
-
-    .result.show { display: block; }
     .quiz.hidden { display: none; }
 
-    .result p {
-      font-size: 16px;
-      color: var(--muted);
-      margin-bottom: 16px;
-    }
-
-    .result .btn {
+    .mc {
+      display: none;
       width: 100%;
-      max-width: 420px;
+      max-width: 640px;
+      background: var(--card);
+      border-radius: 14px;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      padding: 32px 28px 28px;
+      color: var(--text);
     }
 
-    .back {
-      display: inline-block;
-      margin-top: 12px;
-      background: none;
-      border: 0;
-      color: #666;
-      font-size: 14px;
-      text-decoration: underline;
-      cursor: pointer;
-      font-family: inherit;
+    .mc.show { display: block; }
+
+    .mc-status {
+      font-weight: 800;
+      font-size: clamp(18px, 3.4vw, 22px);
+      line-height: 1.35;
+      margin-top: 16px;
     }
+
+    .spinner {
+      width: 42px;
+      height: 42px;
+      margin: 8px auto 0;
+      border: 4px solid #e6e6e6;
+      border-top-color: var(--green);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .mc-title {
+      font-size: clamp(24px, 4.4vw, 32px);
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      color: #1a7a32;
+      font-weight: 800;
+    }
+
+    .mc-title.bad {
+      color: var(--text);
+      font-size: clamp(22px, 4vw, 28px);
+    }
+
+    .mc-highlight {
+      margin-top: 16px;
+      padding: 16px 14px;
+      border-radius: 10px;
+      background: var(--quiz-bg);
+      font-size: clamp(17px, 3.2vw, 20px);
+      line-height: 1.4;
+      font-weight: 600;
+    }
+
+    .mc-highlight b { font-weight: 800; color: #1a7a32; }
+
+    .mc-pill {
+      display: inline-block;
+      font-size: clamp(18px, 3.6vw, 24px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      padding: 10px 16px;
+      background: var(--yellow);
+      color: #111;
+      margin: 18px auto 0;
+      border-radius: 10px;
+      max-width: 100%;
+    }
+
+    .mc-sub {
+      font-size: 16px;
+      line-height: 1.45;
+      color: var(--muted);
+      margin-top: 16px;
+    }
+
+    .mc-cta {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin-top: 18px;
+      border-radius: 8px;
+      background: var(--green);
+      color: #fff;
+      font-weight: 800;
+      font-size: clamp(18px, 3.4vw, 22px);
+      line-height: 1.25;
+      padding: 16px 16px;
+      min-height: 56px;
+      text-decoration: none;
+      box-shadow: 0 2px 0 #1e8a36, 0 0 16px 6px rgba(45, 184, 76, 0.75);
+      animation: cta-glow 1.5s ease-in-out infinite;
+    }
+
+    .mc-cta::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      z-index: -1;
+      box-shadow: 0 0 0 0 rgba(45, 184, 76, 0.65);
+      animation: cta-ring 1.6s ease-out infinite;
+      pointer-events: none;
+    }
+
+    .mc-cta:hover { background: var(--green-hover); color: #fff; }
 
     footer {
       max-width: 640px;
@@ -259,6 +363,9 @@
 
       h1 { margin-bottom: 16px; }
 
+      .copy { margin-top: 14px; gap: 10px; }
+      .lead, .rate-line { font-size: 16px; }
+
       .quiz {
         margin: 16px 10px 12px;
         padding: 18px 12px 16px;
@@ -267,6 +374,8 @@
       .btns { gap: 10px; }
 
       .btn { font-size: 16px; min-height: 48px; }
+
+      .mc { padding: 24px 16px 20px; }
     }
 
     @media (max-width: 380px) {
@@ -283,35 +392,55 @@
   </div>
 
   <main class="page">
-    <section class="card">
+    <section class="card" id="lander">
       <div class="card-body">
-        <h1>Seniors Struggling With $15,000+ In Credit Card Debt May Be Eligible For Relief Through This Program</h1>
+        <h1>Homeowners with 670+ credit score are eligible to claim a mortgage rate reduction from the official portal.</h1>
         <div class="hero">
-          <img src="images/ssa-hero.jpg" alt="A family member helping a senior review program information on a phone">
+          <img src="images/ssa-hero.jpg" alt="Homeowner reviewing a lower mortgage rate offer">
         </div>
+        <div class="copy">
+          <p class="lead">Under the recent updates in FHFA, homeowners who have a good credit score are being granted a lower mortgage rate — much lower than the current going average.</p>
+          <p class="rate-line">If you're paying anything over <strong>5% APR</strong> on your mortgage, you can qualify for a much lower rate as low as <strong>2.5%</strong>.</p>
+        </div>
+        
       </div>
 
       <div class="quiz" id="quiz">
-        <h2>Do You Have $15,000+ In Credit Card Debt?</h2>
+        <h2>1. Is your credit score over 670?</h2>
         <div class="btns">
-          <a class="btn btn-yes" href="https://trk.wiseselectchoice.online/click" id="yesBtn">YES</a>
-          <a class="btn btn-no" href="https://trk.wiseselectchoice.online/click" id="noBtn">No</a>
+          <button class="btn btn-yes" type="button" data-q="q1" data-v="yes">YES</button>
+          <button class="btn btn-no" type="button" data-q="q1" data-v="no">NO</button>
         </div>
       </div>
 
-      <div class="quiz result" id="yesResult">
-        <h2>You May Qualify For Relief</h2>
-        <p>Based on your answer, you may be eligible for the 2026 Senior Debt Relief Program. Continue to review your options.</p>
-        <a class="btn btn-yes" href="https://trk.wiseselectchoice.online/click">Continue</a>
-        <button class="back" type="button" data-back>Start over</button>
+      <div class="quiz hidden" id="quiz2">
+        <h2>2. Is your current mortgage balance over $150k?</h2>
+        <div class="btns">
+          <button class="btn btn-yes" type="button" data-q="q2" data-v="yes">YES</button>
+          <button class="btn btn-no" type="button" data-q="q2" data-v="no">NO</button>
+        </div>
       </div>
 
-      <div class="quiz result" id="noResult">
-        <h2>This Program May Not Apply</h2>
-        <p>This program is intended for seniors with $15,000 or more in credit card debt.</p>
-        <button class="back" type="button" data-back>Start over</button>
-      </div>
     </section>
+
+    <div class="mc" id="processing">
+      <div class="spinner" aria-hidden="true"></div>
+      <p class="mc-status" id="statusMessage">Reviewing Your Answers...</p>
+    </div>
+
+    <div class="mc" id="yesResult">
+      <div class="mc-title">Congratulations, You Qualify!</div>
+      <div class="mc-highlight">You qualify to claim the lowest interest rate on your mortgage today!</div>
+      <div class="mc-pill">Estimated: 3% – 4.5%</div>
+      <p class="mc-sub">Click below to proceed to the official portal now:</p>
+      <a class="mc-cta" href="https://trk.wiseselectchoice.online/click">Click Here To Claim It Now</a>
+    </div>
+
+    <div class="mc" id="noResult">
+      <div class="mc-title bad">Sorry, you don't qualify for the access to the official portal.</div>
+      <div class="mc-highlight">But based on your answers, you might qualify for a Government Funded <b>$1250</b> Stimulus Check from 2025 that was left unclaimed.</div>
+      <a class="mc-cta" href="https://trk.wiseselectchoice.online/click">Click Here To Claim It Now</a>
+    </div>
 
     <footer>
       <a href="about.html">Privacy Policy</a>
@@ -321,15 +450,48 @@
   </main>
 
   <script>
-    const quiz = document.getElementById("quiz");
-    const yesResult = document.getElementById("yesResult");
-    const noResult = document.getElementById("noResult");
+    var answers = { q1: null, q2: null };
+    var quiz = document.getElementById("quiz");
+    var quiz2 = document.getElementById("quiz2");
+    var lander = document.getElementById("lander");
+    var processing = document.getElementById("processing");
+    var statusMessage = document.getElementById("statusMessage");
+    var yesResult = document.getElementById("yesResult");
+    var noResult = document.getElementById("noResult");
+    var steps = ["Reviewing Your Answers...", "Matching With Best Options...", "Confirming Eligibility..."];
 
-    document.querySelectorAll("[data-back]").forEach(function (btn) {
+    function show(el) { el.classList.add("show"); }
+    function hide(el) { el.classList.remove("show"); }
+
+    document.querySelectorAll("[data-q]").forEach(function (btn) {
       btn.addEventListener("click", function () {
-        quiz.classList.remove("hidden");
-        yesResult.classList.remove("show");
-        noResult.classList.remove("show");
+        var q = btn.getAttribute("data-q");
+        answers[q] = btn.getAttribute("data-v");
+
+        if (q === "q1") {
+          quiz.classList.add("hidden");
+          quiz2.classList.remove("hidden");
+          return;
+        }
+
+        lander.style.display = "none";
+        statusMessage.textContent = steps[0];
+        show(processing);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+
+        var i = 0;
+        var timer = setInterval(function () {
+          i += 1;
+          if (i < steps.length) {
+            statusMessage.textContent = steps[i];
+            return;
+          }
+          clearInterval(timer);
+          hide(processing);
+          if (answers.q1 === "no" && answers.q2 === "no") show(noResult);
+          else show(yesResult);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }, 800);
       });
     });
   </script>
