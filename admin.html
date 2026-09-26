@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Quiz answers</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Source Sans 3", "Segoe UI", sans-serif;
+    background: #f4f6f8;
+    color: #1b1b1b;
+  }
+  header {
+    background: #112e51;
+    color: #fff;
+    padding: 18px 24px;
+  }
+  header h1 { margin: 0; font-size: 22px; }
+  header p { margin: 4px 0 0; color: #c5d4e8; font-size: 14px; }
+  main { max-width: 1100px; margin: 0 auto; padding: 24px 16px 48px; }
+  .card {
+    background: #fff;
+    border: 1px solid #d6d7d9;
+    border-radius: 8px;
+    padding: 18px;
+    margin-bottom: 16px;
+  }
+  label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+  input[type="password"] {
+    width: min(320px, 100%);
+    padding: 10px 12px;
+    font: inherit;
+    border: 1px solid #8d9297;
+    border-radius: 6px;
+  }
+  button, .filters button {
+    font: inherit;
+    font-weight: 700;
+    border: 0;
+    border-radius: 6px;
+    background: #0071bc;
+    color: #fff;
+    padding: 10px 14px;
+    cursor: pointer;
+  }
+  button.secondary { background: #5b616b; }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .error { color: #b50909; font-size: 14px; margin-top: 8px; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; }
+  .stat { background: #f7f9fb; border-radius: 6px; padding: 12px; }
+  .stat b { display: block; font-size: 24px; }
+  .stat span { color: #5b616b; font-size: 13px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #e6e6e6; vertical-align: top; }
+  th { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: #5b616b; }
+  .yes { color: #1f7a32; font-weight: 700; }
+  .no { color: #b50909; font-weight: 700; }
+  .pill {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 99px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .pill.qualified { background: #e7f4e4; color: #216e1f; }
+  .pill.disqualified { background: #f8d7da; color: #981b1c; }
+  .pill.progress { background: #fef3cd; color: #856404; }
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+  .filters button[aria-pressed="true"] { background: #112e51; }
+  .empty { color: #5b616b; }
+  .scroll { overflow-x: auto; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Quiz answers</h1>
+  <p>glo2 and glo2b — which page, and how each visitor answered</p>
+</header>
+<main>
+  <section class="card" id="login">
+    <label for="password">Admin password</label>
+    <div class="row">
+      <input id="password" type="password" autocomplete="current-password">
+      <button id="loginBtn" type="button">View answers</button>
+    </div>
+    <p class="error" id="loginError" hidden></p>
+  </section>
+
+  <section id="dash" hidden>
+    <div class="card">
+      <div class="row" style="justify-content: space-between; margin-bottom: 12px;">
+        <strong id="updated"></strong>
+        <div class="row">
+          <button id="refreshBtn" type="button">Refresh</button>
+          <button id="logoutBtn" class="secondary" type="button">Log out</button>
+        </div>
+      </div>
+      <div class="stats" id="stats"></div>
+    </div>
+    <div class="card">
+      <h2 style="margin: 0 0 12px; font-size: 18px;">Answer combinations</h2>
+      <div class="scroll"><table id="combos"></table></div>
+    </div>
+    <div class="card">
+      <div class="filters" id="filters">
+        <button type="button" data-page="all" aria-pressed="true">All</button>
+        <button type="button" data-page="glo2" aria-pressed="false">glo2</button>
+        <button type="button" data-page="glo2b" aria-pressed="false">glo2b</button>
+      </div>
+      <div class="scroll"><table id="events"></table></div>
+      <p class="empty" id="empty" hidden>No answers yet.</p>
+    </div>
+  </section>
+</main>
+<script>
+(function () {
+  var passwordInput = document.getElementById('password');
+  var loginError = document.getElementById('loginError');
+  var dash = document.getElementById('dash');
+  var login = document.getElementById('login');
+  var data = null;
+  var filter = 'all';
+
+  function password() { return sessionStorage.getItem('quiz-admin-pass') || ''; }
+
+  function showError(message) {
+    loginError.hidden = false;
+    loginError.textContent = message;
+  }
+
+  function answerCell(value) {
+    if (value === 'yes') return '<span class="yes">YES</span>';
+    if (value === 'no') return '<span class="no">NO</span>';
+    return '—';
+  }
+
+  function resultPill(result) {
+    if (result === 'qualified') return '<span class="pill qualified">Qualified</span>';
+    if (result === 'disqualified') return '<span class="pill disqualified">Disqualified</span>';
+    return '<span class="pill progress">Question 1 only</span>';
+  }
+
+  function formatTime(iso) {
+    if (!iso) return '';
+    return new Intl.DateTimeFormat('en-IN', {
+      timeZone: 'Asia/Kolkata',
+      day: '2-digit', month: 'short', year: 'numeric',
+      hour: '2-digit', minute: '2-digit'
+    }).format(new Date(iso));
+  }
+
+  function render() {
+    var summary = data.summary;
+    var questions = data.questions;
+    document.getElementById('stats').innerHTML = [
+      stat(summary.total, 'Visitors recorded'),
+      stat(summary.byPage.glo2.total, 'glo2'),
+      stat(summary.byPage.glo2b.total, 'glo2b'),
+      stat(summary.byPage.glo2.qualified + summary.byPage.glo2b.qualified, 'Qualified'),
+      stat(summary.byPage.glo2.disqualified + summary.byPage.glo2b.disqualified, 'Disqualified')
+    ].join('');
+    document.getElementById('updated').textContent = 'Updated ' + formatTime(new Date().toISOString()) + ' IST';
+
+    var comboRows = data.summary.combos.map(function (row) {
+      return '<tr><td>' + row.page + '</td><td>' + answerCell(row.q1) + '</td><td>' + answerCell(row.q2) + '</td><td>' + resultPill(row.result) + '</td><td>' + row.count + '</td></tr>';
+    }).join('');
+    document.getElementById('combos').innerHTML = '<thead><tr><th>Page</th><th>' + questions.q1 + '</th><th>' + questions.q2 + '</th><th>Result</th><th>Count</th></tr></thead><tbody>' + (comboRows || '<tr><td colspan="5">No answers yet.</td></tr>') + '</tbody>';
+
+    var events = data.events.filter(function (event) { return filter === 'all' || event.page === filter; });
+    document.getElementById('empty').hidden = events.length > 0;
+    document.getElementById('events').innerHTML = '<thead><tr><th>Time (IST)</th><th>Page</th><th>' + questions.q1 + '</th><th>' + questions.q2 + '</th><th>Result</th></tr></thead><tbody>' + events.map(function (event) {
+      return '<tr><td>' + formatTime(event.updatedAt) + '</td><td>' + event.page + '</td><td>' + answerCell(event.q1) + '</td><td>' + answerCell(event.q2) + '</td><td>' + resultPill(event.result) + '</td></tr>';
+    }).join('') + '</tbody>';
+  }
+
+  function stat(value, label) {
+    return '<div class="stat"><b>' + value + '</b><span>' + label + '</span></div>';
+  }
+
+  function load() {
+    loginError.hidden = true;
+    return fetch('/api/events', { headers: { Authorization: 'Bearer ' + password() } })
+      .then(function (res) {
+        if (res.status === 401) throw new Error('Wrong password');
+        if (!res.ok) throw new Error('Could not load answers');
+        return res.json();
+      })
+      .then(function (json) {
+        data = json;
+        login.hidden = true;
+        dash.hidden = false;
+        render();
+      })
+      .catch(function (err) {
+        sessionStorage.removeItem('quiz-admin-pass');
+        login.hidden = false;
+        dash.hidden = true;
+        showError(err.message);
+      });
+  }
+
+  document.getElementById('loginBtn').addEventListener('click', function () {
+    sessionStorage.setItem('quiz-admin-pass', passwordInput.value);
+    load();
+  });
+  passwordInput.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') document.getElementById('loginBtn').click();
+  });
+  document.getElementById('refreshBtn').addEventListener('click', load);
+  document.getElementById('logoutBtn').addEventListener('click', function () {
+    sessionStorage.removeItem('quiz-admin-pass');
+    data = null;
+    dash.hidden = true;
+    login.hidden = false;
+    passwordInput.value = '';
+  });
+  document.getElementById('filters').addEventListener('click', function (event) {
+    var btn = event.target.closest('button');
+    if (!btn) return;
+    filter = btn.getAttribute('data-page');
+    document.querySelectorAll('#filters button').forEach(function (item) {
+      item.setAttribute('aria-pressed', item === btn ? 'true' : 'false');
+    });
+    if (data) render();
+  });
+
+  if (password()) load();
+})();
+</script>
+</body>
+</html>
