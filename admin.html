@@ -127,6 +127,81 @@
     color: #fff;
     box-shadow: 0 6px 16px rgba(29, 42, 58, 0.22);
   }
+  .filters.ranges button {
+    font-size: 13px;
+    padding: 0 2px;
+    white-space: nowrap;
+  }
+  .filters + .filters { margin-top: 0; }
+  .report { padding: 4px 6px 8px; margin-bottom: 12px; }
+  .leadline {
+    margin: 0;
+    padding: 12px 8px 2px;
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .block { padding: 14px 8px 12px; }
+  .block + .block { border-top: 1px solid var(--line); }
+  .kicker {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .ask {
+    margin: 4px 0 0;
+    font-size: 15px;
+    font-weight: 560;
+    line-height: 1.3;
+  }
+  .nums {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 12px;
+  }
+  .nums.two { grid-template-columns: 1fr 1fr; }
+  .nums > div { min-width: 0; padding: 0 8px; }
+  .nums > div + div { border-left: 1px solid var(--line); }
+  .nums b {
+    display: block;
+    font-family: Fraunces, Georgia, serif;
+    font-size: 28px;
+    font-weight: 560;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+  .nums span {
+    display: block;
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .nums small {
+    display: block;
+    margin-top: 2px;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 560;
+  }
+  .nums .yes b { color: var(--green); }
+  .nums .no b { color: var(--red); }
+  .nums.good b { color: var(--green); }
+  .nums.bad b { color: var(--red); }
+  .bar {
+    display: flex;
+    height: 8px;
+    margin: 12px 8px 0;
+    border-radius: 99px;
+    overflow: hidden;
+    background: #efeae4;
+  }
+  .bar i { display: block; height: 100%; }
+  .bar .yes { background: var(--green); }
+  .bar .no { background: var(--red); }
+  .bar .none { background: #ddd4ca; }
   .status {
     margin: 28px 8px;
     text-align: center;
@@ -273,24 +348,30 @@
   </header>
   <p class="status" id="status">Loading answers…</p>
   <div id="app" hidden>
-    <section class="sheet" aria-label="Totals">
-      <div class="stats" id="stats"></div>
-    </section>
-    <div class="filters" id="filters">
+    <div class="filters ranges" id="ranges" role="group" aria-label="Date range, US Eastern">
+      <button type="button" data-range="today" aria-pressed="true">Today</button>
+      <button type="button" data-range="yesterday" aria-pressed="false">Yesterday</button>
+      <button type="button" data-range="7" aria-pressed="false">7 days</button>
+      <button type="button" data-range="14" aria-pressed="false">14 days</button>
+    </div>
+    <div class="filters" id="filters" role="group" aria-label="Page">
       <button type="button" data-page="all" aria-pressed="true">All</button>
       <button type="button" data-page="glo2" aria-pressed="false">glo2</button>
       <button type="button" data-page="glo2b" aria-pressed="false">glo2b</button>
     </div>
+    <section class="sheet report" id="questions" aria-label="Question rates"></section>
+    <section class="sheet report" id="outcomes" aria-label="Result rates"></section>
+    <h2>Visits</h2>
     <div id="list"></div>
-    <h2>Combinations</h2>
-    <div id="combos"></div>
   </div>
 </div>
 <script>
 (function () {
   var data = null;
   var filter = "all";
+  var range = "today";
   var zone = "America/New_York";
+  var periods = { today: "Today", yesterday: "Yesterday", "7": "Last 7 days", "14": "Last 14 days" };
 
   function parts(iso) {
     var bits = new Intl.DateTimeFormat("en-US", {
@@ -315,64 +396,148 @@
     };
   }
 
+  function esc(value) {
+    return String(value == null ? "" : value).replace(/[&<>"]/g, function (ch) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch];
+    });
+  }
+
+  function dayKey(iso) {
+    var date = new Date(iso);
+    if (isNaN(date.getTime())) return "";
+    return new Intl.DateTimeFormat("en-CA", {
+      timeZone: zone,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit"
+    }).format(date);
+  }
+
+  function shiftKey(key, days) {
+    var bits = key.split("-");
+    var utc = new Date(Date.UTC(Number(bits[0]), Number(bits[1]) - 1, Number(bits[2]) + days));
+    var month = String(utc.getUTCMonth() + 1);
+    var day = String(utc.getUTCDate());
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
+    return utc.getUTCFullYear() + "-" + month + "-" + day;
+  }
+
+  function inRange(iso) {
+    var key = dayKey(iso);
+    if (!key) return false;
+    var today = dayKey(new Date().toISOString());
+    if (range === "today") return key === today;
+    if (range === "yesterday") return key === shiftKey(today, -1);
+    var start = range === "7" ? shiftKey(today, -6) : shiftKey(today, -13);
+    return key >= start && key <= today;
+  }
+
+  function saw(event, flag, resultName) {
+    if (event[flag] === true) return true;
+    if (event[flag] === false) return false;
+    return event.result === resultName;
+  }
+
   function answer(value) {
     if (value === "yes") return '<span class="ans yes">YES</span>';
     if (value === "no") return '<span class="ans no">NO</span>';
     return '<span class="ans wait">—</span>';
   }
 
-  function resultBlock(result) {
-    if (result === "qualified") return '<div class="result qualified">Qualified</div>';
-    if (result === "disqualified") return '<div class="result disqualified">Disqualified</div>';
+  function resultBlock(event) {
+    if (saw(event, "qualifyReached", "qualified")) {
+      return '<div class="result qualified">Congratulations' + (event.qualifyClick ? " · button clicked" : "") + "</div>";
+    }
+    if (saw(event, "disqualifyReached", "disqualified")) {
+      return '<div class="result disqualified">Disqualification' + (event.disqualifyClick ? " · button clicked" : "") + "</div>";
+    }
+    if (!event.q1) return '<div class="result progress">Opened the page</div>';
     return '<div class="result progress">Still on question 1</div>';
   }
 
-  function tone(result) {
-    if (result === "qualified" || result === "disqualified" || result === "progress") return result;
+  function tone(event) {
+    if (saw(event, "qualifyReached", "qualified")) return "qualified";
+    if (saw(event, "disqualifyReached", "disqualified")) return "disqualified";
     return "progress";
   }
 
-  function stat(value, label) {
-    return '<div class="stat"><b>' + value + '</b><span>' + label + '</span></div>';
+  function pct(count, total) {
+    if (!total) return "0%";
+    return Math.round((count / total) * 100) + "%";
+  }
+
+  function share(count, total) {
+    if (!total) return "0";
+    return count + " of " + total;
+  }
+
+  function width(count, total) {
+    if (!total || !count) return "0%";
+    return (count / total * 100) + "%";
+  }
+
+  function cell(cls, count, label, total) {
+    return '<div class="' + cls + '"><b>' + pct(count, total) + "</b><span>" + label + "</span><small>" + share(count, total) + "</small></div>";
+  }
+
+  function questionBlock(title, ask, yes, no, none, total) {
+    return '<div class="block"><p class="kicker">' + title + '</p><p class="ask">' + esc(ask) + "</p>" +
+      '<div class="nums">' + cell("yes", yes, "Yes", total) + cell("no", no, "No", total) + cell("", none, "No answer", total) + "</div>" +
+      '<div class="bar" aria-hidden="true"><i class="yes" style="width:' + width(yes, total) + '"></i><i class="no" style="width:' + width(no, total) + '"></i><i class="none" style="width:' + width(none, total) + '"></i></div></div>';
+  }
+
+  function outcomeBlock(title, reached, clicked, total, toneName) {
+    return '<div class="block"><p class="kicker">' + title + '</p><div class="nums two ' + toneName + '">' +
+      cell("", reached, "Reached", total) + cell("", clicked, "Button clicked", total) + "</div></div>";
   }
 
   function render() {
-    var summary = data.summary;
     var questions = data.questions;
-    document.getElementById("stats").innerHTML = [
-      stat(summary.total, "Visitors"),
-      stat(summary.byPage.glo2.qualified + summary.byPage.glo2b.qualified, "Qualified"),
-      stat(summary.byPage.glo2.total, "glo2"),
-      stat(summary.byPage.glo2b.total, "glo2b")
-    ].join("");
-
     var events = data.events.filter(function (event) {
-      return filter === "all" || event.page === filter;
+      if (filter !== "all" && event.page !== filter) return false;
+      return inRange(event.startedAt || event.updatedAt);
     });
+    var total = events.length;
+    var q1yes = 0, q1no = 0, q1none = 0, q2yes = 0, q2no = 0, q2none = 0;
+    var qualReached = 0, qualClick = 0, disReached = 0, disClick = 0;
+    events.forEach(function (event) {
+      if (event.q1 === "yes") q1yes += 1;
+      else if (event.q1 === "no") q1no += 1;
+      else q1none += 1;
+      if (event.q2 === "yes") q2yes += 1;
+      else if (event.q2 === "no") q2no += 1;
+      else q2none += 1;
+      if (saw(event, "qualifyReached", "qualified")) qualReached += 1;
+      if (event.qualifyClick) qualClick += 1;
+      if (saw(event, "disqualifyReached", "disqualified")) disReached += 1;
+      if (event.disqualifyClick) disClick += 1;
+    });
+
+    document.getElementById("questions").innerHTML =
+      '<p class="leadline">' + periods[range] + " · " + total + (total === 1 ? " visitor" : " visitors") + "</p>" +
+      questionBlock("Question 1", questions.q1, q1yes, q1no, q1none, total) +
+      questionBlock("Question 2", questions.q2, q2yes, q2no, q2none, total);
+    document.getElementById("outcomes").innerHTML =
+      outcomeBlock("Congratulations", qualReached, qualClick, total, "good") +
+      outcomeBlock("Disqualification", disReached, disClick, total, "bad");
+
     var list = document.getElementById("list");
     if (!events.length) {
-      list.innerHTML = '<p class="status">No answers yet.</p>';
+      list.innerHTML = '<p class="status">No visitors in this period.</p>';
     } else {
       list.innerHTML = events.map(function (event) {
-        var when = parts(event.updatedAt || event.startedAt);
-        return '<article class="visit ' + tone(event.result) + '">' +
-          '<div class="visit-top"><div><p class="clock">' + when.time + '<span>' + when.ampm + ' ' + when.zone + '</span></p><p class="when">' + when.day + '</p></div><div class="page">' + event.page + '</div></div>' +
+        var when = parts(event.startedAt || event.updatedAt);
+        return '<article class="visit ' + tone(event) + '">' +
+          '<div class="visit-top"><div><p class="clock">' + when.time + '<span>' + when.ampm + ' ' + when.zone + '</span></p><p class="when">' + when.day + '</p></div><div class="page">' + esc(event.page) + '</div></div>' +
           '<div class="qa">' +
-            '<div class="qa-row"><div class="q">' + questions.q1 + '</div>' + answer(event.q1) + '</div>' +
-            '<div class="qa-row"><div class="q">' + questions.q2 + '</div>' + answer(event.q2) + '</div>' +
+            '<div class="qa-row"><div class="q">' + esc(questions.q1) + '</div>' + answer(event.q1) + '</div>' +
+            '<div class="qa-row"><div class="q">' + esc(questions.q2) + '</div>' + answer(event.q2) + '</div>' +
           '</div>' +
-          resultBlock(event.result) +
+          resultBlock(event) +
         '</article>';
       }).join("");
     }
-
-    var combos = data.summary.combos.filter(function (row) {
-      return filter === "all" || row.page === filter;
-    });
-    document.getElementById("combos").innerHTML = combos.length ? combos.map(function (row) {
-      var label = row.page + " · " + (row.q1 || "—").toUpperCase() + " / " + (row.q2 || "—").toUpperCase();
-      return '<div class="combo"><span>' + label + '</span><b>' + row.count + '</b></div>';
-    }).join("") : '<p class="status">No combinations yet.</p>';
   }
 
   function load() {
@@ -398,6 +563,15 @@
   }
 
   document.getElementById("refresh").addEventListener("click", load);
+  document.getElementById("ranges").addEventListener("click", function (event) {
+    var btn = event.target.closest("button");
+    if (!btn) return;
+    range = btn.getAttribute("data-range");
+    document.querySelectorAll("#ranges button").forEach(function (item) {
+      item.setAttribute("aria-pressed", item === btn ? "true" : "false");
+    });
+    if (data) render();
+  });
   document.getElementById("filters").addEventListener("click", function (event) {
     var btn = event.target.closest("button");
     if (!btn) return;

@@ -9,20 +9,46 @@ const PAGES = new Set(['glo2', 'glo2b']);
 const ANSWERS = new Set(['yes', 'no']);
 const SESSION = /^[a-zA-Z0-9-]{16,80}$/;
 
+function readFlag(value) {
+  if (value === true) return true;
+  if (value === false) return false;
+  return null;
+}
+
 export function parseEvent(body) {
   if (!body || typeof body !== 'object') return null;
   const page = body.page;
   const session = body.session;
-  const q1 = body.q1 == null ? null : body.q1;
-  const q2 = body.q2 == null ? null : body.q2;
+  const q1 = body.q1 == null || body.q1 === '' ? null : body.q1;
+  const q2 = body.q2 == null || body.q2 === '' ? null : body.q2;
   if (!PAGES.has(page) || !SESSION.test(String(session || ''))) return null;
   if (q1 != null && !ANSWERS.has(q1)) return null;
   if (q2 != null && !ANSWERS.has(q2)) return null;
   if (q2 && !q1) return null;
-  if (!q1 && !q2) return null;
-  let result = null;
-  if (q1 && q2) result = q1 === 'yes' && q2 === 'yes' ? 'qualified' : 'disqualified';
-  return { page, session: String(session), q1, q2, result };
+  return {
+    page,
+    session: String(session),
+    q1,
+    q2,
+    qualifyReached: readFlag(body.qualifyReached),
+    disqualifyReached: readFlag(body.disqualifyReached),
+    qualifyClick: readFlag(body.qualifyClick),
+    disqualifyClick: readFlag(body.disqualifyClick)
+  };
+}
+
+function keepAnswer(incoming, previous) {
+  if (incoming === 'yes' || incoming === 'no') return incoming;
+  if (previous === 'yes' || previous === 'no') return previous;
+  return null;
+}
+
+function mergeReached(existing, key, incoming) {
+  const prev = existing ? existing[key] : undefined;
+  if (prev === true || incoming === true) return true;
+  if (prev === false) return false;
+  if (!existing) return false;
+  return null;
 }
 
 async function readEvent(pathname) {
@@ -38,25 +64,39 @@ async function readEvent(pathname) {
   return JSON.parse(Buffer.concat(chunks).toString('utf8'));
 }
 
+export function buildRecord(existing, event, now) {
+  const q1 = keepAnswer(event.q1, existing && existing.q1);
+  const q2 = keepAnswer(event.q2, existing && existing.q2);
+  let result = null;
+  if (q1 && q2) result = q1 === 'yes' && q2 === 'yes' ? 'qualified' : 'disqualified';
+  const record = {
+    session: event.session,
+    page: existing && existing.page ? existing.page : event.page,
+    q1,
+    q2,
+    result,
+    qualifyClick: Boolean((existing && existing.qualifyClick) || event.qualifyClick),
+    disqualifyClick: Boolean((existing && existing.disqualifyClick) || event.disqualifyClick),
+    startedAt: existing && existing.startedAt ? existing.startedAt : now,
+    updatedAt: now
+  };
+  const qualifyReached = mergeReached(existing, 'qualifyReached', event.qualifyReached);
+  const disqualifyReached = mergeReached(existing, 'disqualifyReached', event.disqualifyReached);
+  if (qualifyReached !== null) record.qualifyReached = qualifyReached;
+  if (disqualifyReached !== null) record.disqualifyReached = disqualifyReached;
+  return record;
+}
+
 export async function saveEvent(event) {
   const pathname = `quiz/${event.session}.json`;
   const now = new Date().toISOString();
-  let startedAt = now;
+  let existing = null;
   try {
-    const existing = await readEvent(pathname);
-    if (existing && existing.startedAt) startedAt = existing.startedAt;
+    existing = await readEvent(pathname);
   } catch (err) {
-    startedAt = now;
+    existing = null;
   }
-  const record = {
-    session: event.session,
-    page: event.page,
-    q1: event.q1,
-    q2: event.q2,
-    result: event.result,
-    startedAt,
-    updatedAt: now
-  };
+  const record = buildRecord(existing, event, now);
   await put(pathname, JSON.stringify(record), {
     access: 'public',
     addRandomSuffix: false,
