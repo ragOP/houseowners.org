@@ -256,6 +256,20 @@
     font-size: 13px;
     font-weight: 560;
   }
+  .where {
+    margin: 3px 0 0;
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 560;
+  }
+  .tags { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+  .sample {
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
   .page {
     flex: 0 0 auto;
     border-radius: 999px;
@@ -528,8 +542,10 @@
     } else {
       list.innerHTML = events.map(function (event) {
         var when = parts(event.startedAt || event.updatedAt);
+        var where = event.ip ? '<p class="where">' + esc(event.ip) + (event.place ? " · " + esc(event.place) : "") + "</p>" : "";
+        var sample = event.sample ? '<div class="sample">Sample</div>' : "";
         return '<article class="visit ' + tone(event) + '">' +
-          '<div class="visit-top"><div><p class="clock">' + when.time + '<span>' + when.ampm + ' ' + when.zone + '</span></p><p class="when">' + when.day + '</p></div><div class="page">' + esc(event.page) + '</div></div>' +
+          '<div class="visit-top"><div><p class="clock">' + when.time + '<span>' + when.ampm + ' ' + when.zone + '</span></p><p class="when">' + when.day + '</p>' + where + '</div><div class="tags"><div class="page">' + esc(event.page) + '</div>' + sample + '</div></div>' +
           '<div class="qa">' +
             '<div class="qa-row"><div class="q">' + esc(questions.q1) + '</div>' + answer(event.q1) + '</div>' +
             '<div class="qa-row"><div class="q">' + esc(questions.q2) + '</div>' + answer(event.q2) + '</div>' +
