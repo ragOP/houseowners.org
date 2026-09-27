@@ -2,6 +2,7 @@
   "rewrites": [
     { "source": "/roof1", "destination": "/roof1.html" },
     { "source": "/wp", "destination": "/wp.html" },
-    { "source": "/glo222b", "destination": "/glo2b.html" }
+    { "source": "/glo222b", "destination": "/glo2b.html" },
+    { "source": "/add", "destination": "/add.html" }
   ]
 }

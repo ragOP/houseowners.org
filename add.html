@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Add US visits</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1714;
+    --muted: #6f675f;
+    --line: rgba(26, 23, 20, 0.08);
+    --paper: #f6f3ee;
+    --card: #fffdfb;
+    --navy: #1d2a3a;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    min-height: 100%;
+    font-family: Outfit, "Segoe UI", sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    padding: calc(22px + env(safe-area-inset-top)) 18px calc(28px + env(safe-area-inset-bottom));
+    -webkit-font-smoothing: antialiased;
+  }
+  .shell { width: min(100%, 420px); margin: 0 auto; }
+  .eyebrow {
+    margin: 0 0 6px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  h1 {
+    margin: 0;
+    font-family: Fraunces, Georgia, serif;
+    font-size: 40px;
+    font-weight: 560;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+  }
+  .lead {
+    margin: 10px 0 0;
+    color: var(--muted);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  label {
+    display: block;
+    margin: 26px 0 8px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .stepper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .stepper button {
+    width: 64px;
+    height: 64px;
+    border: 0;
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 8px 24px rgba(26, 23, 20, 0.06);
+    font: inherit;
+    font-size: 32px;
+    line-height: 1;
+  }
+  .stepper b {
+    flex: 1;
+    text-align: center;
+    font-family: Fraunces, Georgia, serif;
+    font-size: 56px;
+    font-weight: 560;
+    letter-spacing: -0.05em;
+    line-height: 1;
+  }
+  .stack { display: grid; gap: 8px; }
+  .stack button, .pages button {
+    min-height: 52px;
+    border: 0;
+    border-radius: 16px;
+    background: #fff;
+    color: var(--ink);
+    font: inherit;
+    font-size: 17px;
+    font-weight: 700;
+    box-shadow: 0 8px 24px rgba(26, 23, 20, 0.04);
+  }
+  .stack button[aria-pressed="true"], .pages button[aria-pressed="true"] {
+    background: var(--navy);
+    color: #fff;
+  }
+  .pages { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .add {
+    width: 100%;
+    margin-top: 28px;
+    min-height: 58px;
+    border: 0;
+    border-radius: 18px;
+    background: var(--navy);
+    color: #fff;
+    font: inherit;
+    font-size: 18px;
+    font-weight: 700;
+  }
+  button:disabled { opacity: 0.45; }
+  .note {
+    margin: 16px 4px 0;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+  .made { margin: 18px 0 0; display: grid; gap: 8px; }
+  .made div {
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: #fff;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .made b { display: block; font-size: 15px; }
+  .made span { color: var(--muted); }
+  .foot {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 28px;
+  }
+  .foot button, .foot a {
+    border: 0;
+    background: none;
+    padding: 0;
+    color: var(--muted);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+  <p class="eyebrow">US Eastern</p>
+  <h1>Add visits</h1>
+  <p class="lead">Sample visits from US cities. They show up in the answer log marked Sample.</p>
+
+  <label for="count">How many</label>
+  <div class="stepper">
+    <button type="button" id="less" aria-label="Fewer">−</button>
+    <b id="count">10</b>
+    <button type="button" id="more" aria-label="More">+</button>
+  </div>
+
+  <label>When</label>
+  <div class="stack" id="when" role="group">
+    <button type="button" data-range="today" aria-pressed="true">Today</button>
+    <button type="button" data-range="yesterday" aria-pressed="false">Yesterday</button>
+    <button type="button" data-range="7" aria-pressed="false">Last 7 days</button>
+    <button type="button" data-range="14" aria-pressed="false">Last 14 days</button>
+  </div>
+
+  <label>Page</label>
+  <div class="pages" id="page" role="group">
+    <button type="button" data-page="mix" aria-pressed="true">Both</button>
+    <button type="button" data-page="glo2" aria-pressed="false">glo2</button>
+    <button type="button" data-page="glo2b" aria-pressed="false">glo2b</button>
+  </div>
+
+  <button type="button" class="add" id="add">Add these visits</button>
+  <p class="note" id="note" hidden></p>
+  <div class="made" id="made"></div>
+
+  <div class="foot">
+    <button type="button" id="clear">Remove samples</button>
+    <a href="/admin.html">Answer log</a>
+  </div>
+</div>
+<script>
+(function () {
+  var count = 10;
+  var range = "today";
+  var page = "mix";
+  var note = document.getElementById("note");
+  var made = document.getElementById("made");
+
+  function text(value) {
+    return String(value == null ? "" : value).replace(/[&<>"]/g, function (ch) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch];
+    });
+  }
+
+  function busy(on) {
+    ["less", "more", "add", "clear"].forEach(function (id) {
+      document.getElementById(id).disabled = on;
+    });
+    document.querySelectorAll("#when button, #page button").forEach(function (btn) {
+      btn.disabled = on;
+    });
+  }
+
+  function say(text) {
+    note.hidden = false;
+    note.textContent = text;
+  }
+
+  function pick(group, attr, value) {
+    document.querySelectorAll("#" + group + " button").forEach(function (btn) {
+      btn.setAttribute("aria-pressed", btn.getAttribute(attr) === value ? "true" : "false");
+    });
+  }
+
+  document.getElementById("less").addEventListener("click", function () {
+    count = Math.max(1, count - 1);
+    document.getElementById("count").textContent = String(count);
+  });
+  document.getElementById("more").addEventListener("click", function () {
+    count = Math.min(50, count + 1);
+    document.getElementById("count").textContent = String(count);
+  });
+  document.getElementById("when").addEventListener("click", function (event) {
+    var btn = event.target.closest("button");
+    if (!btn) return;
+    range = btn.getAttribute("data-range");
+    pick("when", "data-range", range);
+  });
+  document.getElementById("page").addEventListener("click", function (event) {
+    var btn = event.target.closest("button");
+    if (!btn) return;
+    page = btn.getAttribute("data-page");
+    pick("page", "data-page", page);
+  });
+  document.getElementById("add").addEventListener("click", function () {
+    busy(true);
+    made.innerHTML = "";
+    say("Adding…");
+    fetch("/api/samples", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ count: count, range: range, page: page })
+    })
+      .then(function (res) {
+        if (!res.ok) throw new Error("fail");
+        return res.json();
+      })
+      .then(function (json) {
+        say("Added " + json.added + ".");
+        made.innerHTML = (json.visits || []).map(function (visit) {
+          return "<div><b>" + text(visit.place) + "</b><span>" + text(visit.ip) + " · " + text(visit.page) + "</span></div>";
+        }).join("");
+      })
+      .catch(function () {
+        say("Could not add them. Try again.");
+      })
+      .then(function () { busy(false); });
+  });
+  document.getElementById("clear").addEventListener("click", function () {
+    if (!window.confirm("Remove all sample visits? Real visits stay.")) return;
+    busy(true);
+    made.innerHTML = "";
+    say("Removing…");
+    fetch("/api/samples", { method: "DELETE" })
+      .then(function (res) {
+        if (!res.ok) throw new Error("fail");
+        return res.json();
+      })
+      .then(function (json) {
+        say("Removed " + json.removed + ".");
+      })
+      .catch(function () {
+        say("Could not remove them. Try again.");
+      })
+      .then(function () { busy(false); });
+  });
+})();
+</script>
+</body>
+</html>

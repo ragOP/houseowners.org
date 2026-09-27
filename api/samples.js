@@ -178,7 +178,14 @@ export default async function handler(req, res) {
         res.status(400).json({ error: 'Choose a count from 1 to 50, a date range, and a page.' });
         return;
       }
-      res.status(200).json({ added: records.length });
+      res.status(200).json({
+        added: records.length,
+        visits: records.map((record) => ({
+          page: record.page,
+          ip: record.ip,
+          place: record.place
+        }))
+      });
       return;
     }
     if (req.method === 'DELETE') {

@@ -344,87 +344,6 @@
     font-size: 22px;
     font-weight: 560;
   }
-  .maker { padding: 16px 14px 14px; margin-bottom: 4px; }
-  .maker .ask { margin: 4px 0 0; color: var(--muted); font-size: 14px; line-height: 1.35; }
-  .stepper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 18px;
-    margin: 14px 0 4px;
-  }
-  .stepper button, .go, .quiet {
-    font: inherit;
-    font-weight: 700;
-  }
-  .stepper button {
-    width: 46px;
-    height: 46px;
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    background: #fff;
-    font-size: 24px;
-    line-height: 1;
-  }
-  .stepper b {
-    min-width: 52px;
-    text-align: center;
-    font-family: Fraunces, Georgia, serif;
-    font-size: 40px;
-    font-weight: 560;
-    letter-spacing: -0.04em;
-    line-height: 1;
-  }
-  .choices {
-    display: flex;
-    gap: 4px;
-    margin-top: 8px;
-    padding: 4px;
-    background: rgba(26, 23, 20, 0.05);
-    border-radius: 16px;
-  }
-  .choices button {
-    flex: 1;
-    min-height: 38px;
-    border: 0;
-    border-radius: 12px;
-    background: transparent;
-    color: var(--muted);
-    font: inherit;
-    font-size: 13px;
-    font-weight: 700;
-    white-space: nowrap;
-  }
-  .choices button[aria-pressed="true"] {
-    background: var(--navy);
-    color: #fff;
-  }
-  .actions { display: flex; gap: 8px; margin-top: 12px; }
-  .go, .quiet {
-    min-height: 48px;
-    border-radius: 14px;
-  }
-  .go {
-    flex: 1.4;
-    border: 0;
-    background: var(--navy);
-    color: #fff;
-  }
-  .quiet {
-    flex: 1;
-    border: 1px solid var(--line);
-    background: transparent;
-    color: var(--red);
-  }
-  .go:disabled, .quiet:disabled, .stepper button:disabled { opacity: 0.45; }
-  .hint {
-    margin: 10px 2px 0;
-    color: var(--muted);
-    font-size: 13px;
-    font-weight: 560;
-  }
-  .view-label { margin: 16px 4px 0; }
-  .view-label + .filters { margin-top: 8px; }
 </style>
 </head>
 <body>
@@ -443,32 +362,6 @@
   </header>
   <p class="status" id="status">Loading answers…</p>
   <div id="app" hidden>
-    <section class="sheet maker" aria-label="Add US sample visits">
-      <p class="kicker">Add US samples</p>
-      <p class="ask">Pick how many, which days, and which page. Each visit gets a US IP and is marked Sample.</p>
-      <div class="stepper">
-        <button type="button" id="less" aria-label="Fewer">−</button>
-        <b id="count">10</b>
-        <button type="button" id="more" aria-label="More">+</button>
-      </div>
-      <div class="choices" id="sample-range" role="group" aria-label="Sample dates, US Eastern">
-        <button type="button" data-range="today" aria-pressed="true">Today</button>
-        <button type="button" data-range="yesterday" aria-pressed="false">Yesterday</button>
-        <button type="button" data-range="7" aria-pressed="false">7 days</button>
-        <button type="button" data-range="14" aria-pressed="false">14 days</button>
-      </div>
-      <div class="choices" id="sample-page" role="group" aria-label="Sample page">
-        <button type="button" data-page="mix" aria-pressed="true">Mix</button>
-        <button type="button" data-page="glo2" aria-pressed="false">glo2</button>
-        <button type="button" data-page="glo2b" aria-pressed="false">glo2b</button>
-      </div>
-      <div class="actions">
-        <button type="button" class="go" id="add-samples">Add visits</button>
-        <button type="button" class="quiet" id="clear-samples">Remove samples</button>
-      </div>
-      <p class="hint" id="sample-hint" hidden></p>
-    </section>
-    <p class="kicker view-label">Showing</p>
     <div class="filters ranges" id="ranges" role="group" aria-label="Date range, US Eastern">
       <button type="button" data-range="today" aria-pressed="true">Today</button>
       <button type="button" data-range="yesterday" aria-pressed="false">Yesterday</button>
@@ -663,13 +556,11 @@
     }
   }
 
-  function load(quiet) {
+  function load() {
     var status = document.getElementById("status");
-    if (!quiet) {
-      status.hidden = false;
-      status.textContent = "Loading answers…";
-      document.getElementById("app").hidden = true;
-    }
+    status.hidden = false;
+    status.textContent = "Loading answers…";
+    document.getElementById("app").hidden = true;
     fetch("/api/events", { cache: "no-store" })
       .then(function (res) {
         if (!res.ok) throw new Error("Could not load answers");
@@ -680,99 +571,14 @@
         status.hidden = true;
         document.getElementById("app").hidden = false;
         render();
-        setBusy(false);
       })
       .catch(function () {
         status.hidden = false;
         status.textContent = "Could not load answers. Tap refresh.";
-        setBusy(false);
       });
   }
 
-  document.getElementById("refresh").addEventListener("click", function () { load(); });
-  var sampleCount = 10;
-  var sampleRange = "today";
-  var samplePage = "mix";
-  var hint = document.getElementById("sample-hint");
-
-  function showHint(text) {
-    hint.hidden = false;
-    hint.textContent = text;
-  }
-
-  function press(group, attr, value) {
-    document.querySelectorAll("#" + group + " button").forEach(function (item) {
-      item.setAttribute("aria-pressed", item.getAttribute(attr) === value ? "true" : "false");
-    });
-  }
-
-  function setBusy(busy) {
-    ["less", "more", "add-samples", "clear-samples"].forEach(function (id) {
-      document.getElementById(id).disabled = busy;
-    });
-  }
-
-  document.getElementById("less").addEventListener("click", function () {
-    sampleCount = Math.max(1, sampleCount - 1);
-    document.getElementById("count").textContent = String(sampleCount);
-  });
-  document.getElementById("more").addEventListener("click", function () {
-    sampleCount = Math.min(50, sampleCount + 1);
-    document.getElementById("count").textContent = String(sampleCount);
-  });
-  document.getElementById("sample-range").addEventListener("click", function (event) {
-    var btn = event.target.closest("button");
-    if (!btn) return;
-    sampleRange = btn.getAttribute("data-range");
-    press("sample-range", "data-range", sampleRange);
-  });
-  document.getElementById("sample-page").addEventListener("click", function (event) {
-    var btn = event.target.closest("button");
-    if (!btn) return;
-    samplePage = btn.getAttribute("data-page");
-    press("sample-page", "data-page", samplePage);
-  });
-  document.getElementById("add-samples").addEventListener("click", function () {
-    setBusy(true);
-    showHint("Adding US visits…");
-    fetch("/api/samples", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ count: sampleCount, range: sampleRange, page: samplePage })
-    })
-      .then(function (res) {
-        if (!res.ok) throw new Error("Could not add visits");
-        return res.json();
-      })
-      .then(function (json) {
-        range = sampleRange;
-        press("ranges", "data-range", range);
-        showHint("Added " + json.added + " US sample visits.");
-        load(true);
-      })
-      .catch(function () {
-        showHint("Could not add visits. Try again.");
-        setBusy(false);
-      });
-  });
-  document.getElementById("clear-samples").addEventListener("click", function () {
-    if (!window.confirm("Remove all sample visits? Real visits stay.")) return;
-    setBusy(true);
-    showHint("Removing samples…");
-    fetch("/api/samples", { method: "DELETE" })
-      .then(function (res) {
-        if (!res.ok) throw new Error("Could not remove samples");
-        return res.json();
-      })
-      .then(function (json) {
-        showHint("Removed " + json.removed + " sample visits.");
-        load(true);
-      })
-      .catch(function () {
-        showHint("Could not remove samples. Try again.");
-        setBusy(false);
-      });
-  });
+  document.getElementById("refresh").addEventListener("click", load);
   document.getElementById("ranges").addEventListener("click", function (event) {
     var btn = event.target.closest("button");
     if (!btn) return;
