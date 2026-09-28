@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t. src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "y3rt3ntclc");
+</script>
+<meta name="robots" content="noindex, nofollow">
+<title>FHFA Mortgage Rate Reduction — Eligibility Screening</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Source Sans 3", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background:
+      radial-gradient(1200px 420px at 50% -80px, #d9e6f5 0%, transparent 70%),
+      #eef1f4;
+    color: #1b1b1b;
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .inner { width: 100%; max-width: 560px; margin: 0 auto; }
+
+  .gov-banner {
+    background: #1b2a4a;
+    color: #fff;
+    font-size: 12px;
+    padding: 6px 16px;
+  }
+  .gov-banner .inner { display: flex; align-items: center; gap: 8px; }
+  .gov-banner span { opacity: .85; }
+
+  .site-header {
+    background: linear-gradient(180deg, #0d2344 0%, #112e51 100%);
+    border-bottom: 4px solid #fdb81e;
+    padding: 14px 24px;
+  }
+  .site-header .inner { display: flex; align-items: center; gap: 14px; }
+  .seal {
+    width: 48px; height: 48px;
+    background: #dce4ef;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; flex-shrink: 0;
+    box-shadow: inset 0 0 0 3px #112e51;
+  }
+  .site-title { color: #fff; font-size: 18px; font-weight: 700; letter-spacing: .2px; }
+  .site-subtitle { color: #aec6e8; font-size: 12px; margin-top: 1px; }
+  .cycle-pill {
+    margin-left: auto;
+    background: rgba(253, 184, 30, .16);
+    color: #fdb81e;
+    border: 1px solid rgba(253, 184, 30, .45);
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .4px;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    white-space: nowrap;
+  }
+
+  .alert-bar {
+    background: #fad980;
+    border-left: 5px solid #e09600;
+    padding: 10px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #3b3000;
+  }
+
+  .facts {
+    background: #fff;
+    border-bottom: 1px solid #d6d7d9;
+  }
+  .facts-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .facts-row div {
+    padding: 12px 8px;
+    text-align: center;
+    border-right: 1px solid #e6e8ea;
+  }
+  .facts-row div:last-child { border-right: none; }
+  .facts-row b {
+    display: block;
+    color: #112e51;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 1.1;
+  }
+  .facts-row span { display: block; color: #5b616b; font-size: 12px; margin-top: 2px; }
+
+  .main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 28px 16px 40px;
+  }
+  .card {
+    background: #fff;
+    border: 1px solid #d6d7d9;
+    border-top: 6px solid #112e51;
+    border-radius: 8px;
+    max-width: 560px;
+    width: 100%;
+    box-shadow: 0 10px 30px rgba(17, 46, 81, .08);
+    overflow: hidden;
+  }
+  .card.is-approved { border-top-color: #2e8540; box-shadow: 0 18px 50px rgba(46, 133, 64, .18); }
+  .card.is-denied { border-top-color: #e31c3d; }
+  .card.is-approved .card-header,
+  .card.is-denied .card-header,
+  .card.is-approved .progress-row,
+  .card.is-denied .progress-row,
+  .card.is-approved .divider,
+  .card.is-denied .divider { display: none; }
+  .card.is-approved .card-body,
+  .card.is-denied .card-body { padding: 0 0 28px; }
+
+  .card-header { padding: 28px 32px 0; }
+  .card-body { padding: 20px 32px 32px; }
+  .form-number {
+    font-size: 11px; color: #71767a;
+    text-transform: uppercase; letter-spacing: 1px; margin: 0 0 6px;
+  }
+  .card-title {
+    font-size: 26px; font-weight: 800; color: #1b2a4a;
+    margin: 0 0 6px; line-height: 1.2;
+  }
+  .card-subtitle { font-size: 17px; color: #5b616b; margin: 0 0 16px; line-height: 1.5; }
+
+  .trust-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
+  .trust-row span {
+    background: #f0f4f8;
+    color: #1b2a4a;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 10px;
+  }
+
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+  .progress-track { flex: 1; height: 8px; background: #d6d7d9; border-radius: 4px; overflow: hidden; }
+  .progress-fill { height: 100%; width: 50%; background: linear-gradient(90deg, #0071bc, #205493); border-radius: 4px; transition: width .45s ease; }
+  .progress-label { font-size: 13px; color: #5b616b; white-space: nowrap; min-width: 80px; text-align: right; font-weight: 700; }
+  .divider { border: none; border-top: 1px solid #dfe1e2; margin: 0 0 24px; }
+
+  .screen { display: none; }
+  .screen.active { display: block; animation: fadeUp .35s ease; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .q-label {
+    font-size: 11px; color: #0071bc; text-transform: uppercase;
+    letter-spacing: .8px; margin: 0 0 8px; font-weight: 800;
+  }
+  .q-text { font-size: 22px; font-weight: 800; color: #1b2a4a; margin: 0 0 8px; line-height: 1.25; }
+  .q-note { font-size: 14px; color: #5b616b; margin: 0 0 20px; }
+  .answers { display: flex; flex-direction: column; gap: 10px; }
+
+  .answer-btn {
+    display: flex; align-items: center; gap: 12px; width: 100%;
+    background: #fff; border: 2px solid #5b616b; border-radius: 8px;
+    padding: 16px 18px; font-size: 16px; font-weight: 700; color: #1b2a4a;
+    cursor: pointer; transition: border-color .15s ease, background .15s ease, transform .15s ease;
+    text-align: left; font-family: inherit;
+  }
+  .answer-btn:hover { border-color: #0071bc; background: #e7f2fa; transform: translateY(-1px); }
+  .answer-btn .radio {
+    width: 22px; height: 22px; border: 2px solid #5b616b;
+    border-radius: 50%; flex-shrink: 0; position: relative;
+  }
+  .answer-btn:hover .radio { border-color: #0071bc; }
+  .answer-btn.selected { border-color: #0071bc; background: #e7f2fa; }
+  .answer-btn.selected .radio { border-color: #0071bc; background: #0071bc; }
+  .answer-btn.selected .radio::after {
+    content: ""; position: absolute; top: 4px; left: 4px;
+    width: 10px; height: 10px; background: #fff; border-radius: 50%;
+  }
+
+  .processing-text { text-align: center; padding: 28px 0 12px; }
+  .spinner {
+    width: 46px; height: 46px;
+    border: 4px solid #d6d7d9; border-top-color: #0071bc;
+    border-radius: 50%; animation: spin .8s linear infinite;
+    margin: 0 auto 16px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .processing-text .bold { color: #1b2a4a; font-weight: 800; font-size: 18px; margin: 0 0 16px; }
+  .steps { list-style: none; margin: 0 auto; padding: 0; max-width: 320px; text-align: left; }
+  .steps li {
+    position: relative;
+    padding: 10px 12px 10px 40px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    background: #f7f8f9;
+    color: #71767a;
+    font-weight: 600;
+    font-size: 15px;
+  }
+  .steps li::before {
+    content: "";
+    position: absolute; left: 12px; top: 13px;
+    width: 16px; height: 16px; border-radius: 50%;
+    border: 2px solid #c9cdd1;
+  }
+  .steps li.on { color: #1b2a4a; background: #e7f2fa; }
+  .steps li.on::before { border-color: #0071bc; }
+  .steps li.done { color: #216e1f; background: #e7f4e4; }
+  .steps li.done::before {
+    content: "✓";
+    border: none;
+    background: #2e8540;
+    color: #fff;
+    font-size: 11px;
+    display: flex; align-items: center; justify-content: center;
+    line-height: 16px;
+    text-align: center;
+  }
+
+  .celebrate-banner {
+    position: relative;
+    background:
+      radial-gradient(420px 180px at 80% 0%, rgba(253, 184, 30, .28), transparent 60%),
+      linear-gradient(165deg, #0c3d22 0%, #1b7a3a 48%, #2e8540 100%);
+    color: #fff;
+    text-align: center;
+    padding: 32px 24px 28px;
+    overflow: hidden;
+  }
+  .celebrate-banner::after {
+    content: "";
+    position: absolute; inset: auto 0 0 0; height: 18px;
+    background: linear-gradient(180deg, transparent, rgba(0,0,0,.08));
+  }
+  .ribbon {
+    display: inline-block;
+    background: #fdb81e;
+    color: #3b3000;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .8px;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+  }
+  .seal-pop {
+    width: 72px; height: 72px; margin: 0 auto 12px;
+    border-radius: 50%;
+    background: #fff;
+    color: #2e8540;
+    font-size: 36px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 0 8px rgba(255,255,255,.18), 0 10px 24px rgba(0,0,0,.18);
+    animation: pop .55s cubic-bezier(.2, 1.5, .4, 1) both;
+  }
+  @keyframes pop {
+    from { transform: scale(.4); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  .congrats-kicker {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+    color: #fdb81e;
+  }
+  .congrats-title {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: 34px;
+    line-height: 1.12;
+    margin: 8px auto 10px;
+    max-width: 16ch;
+    font-weight: 700;
+  }
+  .congrats-lead {
+    margin: 0 auto;
+    max-width: 42ch;
+    font-size: 16px;
+    color: rgba(255,255,255,.92);
+  }
+  .celebrate-body { padding: 22px 24px 0; }
+
+  .rate-hero {
+    text-align: center;
+    border: 2px solid #94d082;
+    background: linear-gradient(180deg, #f3fbf1 0%, #fff 70%);
+    border-radius: 14px;
+    padding: 16px 16px 18px;
+    margin-bottom: 16px;
+  }
+  .rate-kicker {
+    display: block;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #216e1f;
+  }
+  .rate-note { display: block; font-size: 15px; color: #3d6b3c; font-weight: 700; margin-top: 4px; }
+  .rate-figure {
+    font-size: 72px;
+    font-weight: 800;
+    color: #146c2e;
+    line-height: .95;
+    letter-spacing: -2px;
+    margin: 2px 0 0;
+  }
+  .rate-figure span { font-size: .55em; letter-spacing: 0; }
+
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 8px;
+    align-items: stretch;
+    margin-bottom: 18px;
+  }
+  .compare-box {
+    border-radius: 10px;
+    padding: 12px 10px;
+    text-align: center;
+  }
+  .compare-box span { display: block; font-size: 12px; font-weight: 700; margin-bottom: 2px; }
+  .compare-box strong { display: block; font-size: 22px; line-height: 1.1; }
+  .compare-box.old { background: #f7f8f9; color: #5b616b; }
+  .compare-box.old strong { text-decoration: line-through; text-decoration-thickness: 2px; }
+  .compare-box.new { background: #e7f4e4; color: #146c2e; }
+  .compare-arrow {
+    align-self: center;
+    color: #2e8540;
+    font-size: 22px;
+    font-weight: 800;
+  }
+
+  .unlocks { list-style: none; margin: 0 0 18px; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .unlocks li {
+    display: flex; gap: 12px; align-items: flex-start;
+    background: #f7f9fb;
+    border: 1px solid #e1e5ea;
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .tick {
+    width: 24px; height: 24px; flex-shrink: 0;
+    border-radius: 50%; background: #2e8540; color: #fff;
+    font-size: 13px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 1px;
+  }
+  .unlocks b { display: block; color: #1b2a4a; font-size: 15px; }
+  .unlocks span { display: block; color: #5b616b; font-size: 13px; }
+
+  .cta-arrow { text-align: center; color: #2e8540; margin: 0 0 6px; }
+  .cta-arrow svg {
+    width: 22px; height: 22px; display: block; margin: 0 auto;
+    animation: arrowBounce 1.1s ease-in-out infinite;
+  }
+  @keyframes arrowBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(7px); }
+  }
+
+  .cta-btn {
+    position: relative; overflow: hidden;
+    display: block; width: 100%; background: #0071bc; color: #fff !important;
+    border: none; border-radius: 8px; padding: 18px 24px;
+    font-size: 18px; font-weight: 800; text-align: center;
+    text-decoration: none; cursor: pointer;
+    box-shadow: 0 8px 18px rgba(0, 113, 188, .28);
+  }
+  .card.is-approved .cta-btn { background: #146c2e; box-shadow: 0 10px 22px rgba(20, 108, 46, .28); }
+  .cta-btn::after {
+    content: "";
+    position: absolute; top: 0; left: -120%;
+    width: 55%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.45), transparent);
+    transform: skewX(-20deg);
+    animation: shine 3.2s infinite;
+    pointer-events: none;
+  }
+  @keyframes shine {
+    0% { left: -120%; }
+    55% { left: 140%; }
+    100% { left: 140%; }
+  }
+  .cta-btn:hover { filter: brightness(1.08); }
+  .cta-fine { text-align: center; font-size: 12px; color: #71767a; margin: 12px 0 0; }
+
+  .hold {
+    margin-top: 16px;
+    text-align: center;
+    background: #fff8e8;
+    border: 1px solid #f5d48a;
+    border-radius: 12px;
+    padding: 14px 14px 16px;
+  }
+  .hold p { margin: 0; color: #6b5208; font-size: 14px; font-weight: 700; }
+  .hold-time {
+    font-size: 48px;
+    font-weight: 800;
+    color: #b45309;
+    letter-spacing: 1px;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.05;
+    margin: 2px 0 4px;
+  }
+  .hold-sub { font-weight: 600 !important; color: #8a6a12 !important; font-size: 13px !important; }
+
+  .denied {
+    padding: 36px 28px 8px;
+    text-align: center;
+  }
+  .denied-mark {
+    width: 64px; height: 64px; margin: 0 auto 14px;
+    border-radius: 50%; background: #f8d7da; color: #981b1c;
+    font-size: 28px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .denied h2 { font-size: 26px; color: #1b2a4a; margin: 0 0 8px; }
+  .denied p { color: #5b616b; margin: 0 0 22px; }
+
+  .confetti {
+    position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 30;
+  }
+  .confetti i {
+    position: absolute; top: -16px; width: 8px; height: 14px;
+    border-radius: 2px; opacity: 0;
+    animation: fall linear forwards;
+  }
+  @keyframes fall {
+    0% { transform: translateY(0) rotate(0); opacity: 1; }
+    100% { transform: translateY(105vh) rotate(520deg); opacity: 0; }
+  }
+
+  .site-footer {
+    background: #1b2a4a; color: #aeb0b5; text-align: center;
+    padding: 20px 16px; font-size: 12px;
+  }
+  .footer-links { margin-bottom: 8px; }
+  .footer-links a { color: #aeb0b5; margin: 0 8px; text-decoration: underline; }
+  .footer-note { opacity: .85; }
+
+  @media (max-width: 560px) {
+    .cycle-pill { display: none; }
+    .card-header, .card-body { padding-left: 20px; padding-right: 20px; }
+    .card-title { font-size: 22px; }
+    .site-header { padding: 12px 16px; }
+    .gov-banner, .alert-bar { padding-left: 16px; padding-right: 16px; }
+    .congrats-title { font-size: 30px; }
+    .rate-figure { font-size: 64px; }
+    .celebrate-body { padding-left: 16px; padding-right: 16px; }
+    .compare { grid-template-columns: 1fr; }
+    .compare-arrow { transform: rotate(90deg); justify-self: center; }
+    .hold-time { font-size: 42px; }
+  }
+
+  @media (min-width: 768px) {
+    .inner, .card { max-width: 720px; }
+    .gov-banner { font-size: 13px; padding: 8px 32px; }
+    .site-header { padding: 16px 32px; }
+    .seal { width: 56px; height: 56px; font-size: 28px; }
+    .site-title { font-size: 22px; }
+    .site-subtitle { font-size: 13px; }
+    .facts-row b { font-size: 18px; }
+    .alert-bar { padding: 12px 32px; font-size: 15px; }
+    .main { align-items: flex-start; padding: 36px 24px 56px; }
+    .card-header { padding: 36px 40px 0; }
+    .card-body { padding: 24px 40px 40px; }
+    .card-title { font-size: 32px; }
+    .q-text { font-size: 24px; }
+    .answer-btn { padding: 18px 22px; font-size: 17px; }
+    .answers-split { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .celebrate-banner { padding: 42px 40px 36px; }
+    .congrats-title { font-size: 46px; max-width: 18ch; }
+    .celebrate-body { padding: 28px 40px 0; }
+    .unlocks { display: grid; grid-template-columns: 1fr; }
+    .cta-btn { padding: 20px 28px; font-size: 20px; }
+  }
+
+  @media (min-width: 1100px) {
+    .inner, .card { max-width: 800px; }
+    .main { padding: 48px 32px 72px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .confetti, .cta-btn::after, .cta-arrow svg { display: none; }
+    .seal-pop, .screen.active, .spinner { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="confetti" id="confetti" aria-hidden="true"></div>
+
+<div class="gov-banner">
+  <div class="inner">
+    <span class="flag">🇺🇸</span>
+    <span>An official program eligibility screening service &nbsp;|&nbsp; FHFA Mortgage Rate Reduction</span>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="inner">
+    <div class="seal">🏛</div>
+    <div>
+      <div class="site-title">Mortgage Rate Reduction Program</div>
+      <div class="site-subtitle">Homeowner Rate Review • Eligibility Screening Portal</div>
+    </div>
+    <div class="cycle-pill">2026 cycle open</div>
+  </div>
+</header>
+
+<div class="alert-bar">
+  <div class="inner">⚠️ Limited availability — Only homeowners who complete screening today will be reviewed for a lower rate this cycle</div>
+</div>
+
+<div class="facts">
+  <div class="inner facts-row">
+    <div><b>2.5%</b><span>Rates as low as</span></div>
+    <div><b>60 sec</b><span>To see your rate</span></div>
+    <div><b>No SSN</b><span>Needed to start</span></div>
+  </div>
+</div>
+
+<main class="main">
+  <div class="card" id="card">
+    <div class="card-header">
+      <p class="form-number">Form MRRP-2026 • Eligibility Pre-Screening</p>
+      <h1 class="card-title">Homeowner Eligibility Check</h1>
+      <p class="card-subtitle">Answer 2 questions below to determine if you qualify for a lower mortgage rate under the <strong>Mortgage Rate Reduction Program</strong></p>
+      <div class="trust-row">
+        <span>2 quick questions</span>
+        <span>Free to check</span>
+        <span>Secure screening</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="progress-row" id="progressRow">
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="progress-label" id="progressLabel">1 of 2</div>
+      </div>
+      <hr class="divider">
+
+      <div id="s1" class="screen active">
+        <p class="q-label">Question 1 of 2</p>
+        <p class="q-text">Is your credit score over 670?</p>
+        <p class="q-note">An estimate is fine. This check does not pull your credit.</p>
+        <div class="answers answers-split">
+          <button type="button" class="answer-btn" data-next="2" data-answer="yes"><span class="radio"></span>YES</button>
+          <button type="button" class="answer-btn" data-next="2" data-answer="no"><span class="radio"></span>NO</button>
+        </div>
+      </div>
+
+      <div id="s2" class="screen">
+        <p class="q-label">Question 2 of 2</p>
+        <p class="q-text">Is your current mortgage balance over $150k?</p>
+        <p class="q-note">Use the remaining balance, not the original loan amount.</p>
+        <div class="answers answers-split">
+          <button type="button" class="answer-btn" data-next="processing" data-answer="yes"><span class="radio"></span>YES</button>
+          <button type="button" class="answer-btn" data-next="processing" data-answer="no"><span class="radio"></span>NO</button>
+        </div>
+      </div>
+
+      <div id="sProcessing" class="screen">
+        <div class="processing-text">
+          <div class="spinner"></div>
+          <p class="bold">Checking eligibility…</p>
+          <ul class="steps" id="processSteps">
+            <li class="on">Reviewing your credit range</li>
+            <li>Checking your mortgage balance</li>
+            <li>Confirming program eligibility</li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="sResult" class="screen">
+        <div class="celebrate-banner">
+          <div class="ribbon">Eligibility approved</div>
+          <div class="seal-pop" aria-hidden="true">✓</div>
+          <p class="congrats-kicker">Congratulations</p>
+          <h2 class="congrats-title" id="resultTitle">You Qualify for a Lower Mortgage Rate</h2>
+          <p class="congrats-lead">Your answers match the opening requirements for the Mortgage Rate Reduction Program. A lower rate is available for you to claim.</p>
+        </div>
+        <div class="celebrate-body">
+          <div class="rate-hero">
+            <span class="rate-kicker">Pre-qualified rate</span>
+            <span class="rate-note">as low as</span>
+            <div class="rate-figure">2.5<span>%</span></div>
+          </div>
+          <div class="compare">
+            <div class="compare-box old">
+              <span>If you pay over</span>
+              <strong>5% APR</strong>
+            </div>
+            <div class="compare-arrow" aria-hidden="true">→</div>
+            <div class="compare-box new">
+              <span>You may qualify for</span>
+              <strong>2.5%</strong>
+            </div>
+          </div>
+          <ul class="unlocks">
+            <li><span class="tick">✓</span><div><b>Credit range accepted</b><span>A score over 670 meets the first requirement.</span></div></li>
+            <li><span class="tick">✓</span><div><b>Balance requirement met</b><span>A mortgage over $150,000 qualifies for this review.</span></div></li>
+            <li><span class="tick">✓</span><div><b>Today’s rate review is open</b><span>Finish the application to see your personalized rate in about 60 seconds.</span></div></li>
+          </ul>
+          <div class="cta-arrow" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" aria-hidden="true"><path fill="currentColor" d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>
+          </div>
+          <a class="cta-btn" data-track="qualify" href="https://track.mainofferpage.online/click">Click Here To Claim It Now -&gt;</a>
+          <p class="cta-fine">🔒 Secure • No SSN required • Free eligibility check • 60 seconds</p>
+          <div class="hold">
+            <p>This approval is reserved for</p>
+            <div class="hold-time" id="reservationTimer">10:00</div>
+            <p class="hold-sub">Complete your application before the timer ends.</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="sIneligible" class="screen">
+        <div class="denied">
+          <div class="denied-mark">✕</div>
+          <h2 class="result-title">You Do Not Qualify at This Time</h2>
+          <p>Based on your selection, you do not meet the eligibility criteria for this program at this time.</p>
+          <a class="cta-btn" data-track="disqualify" href="https://www.shors.site/2NPSGGP7/7PJRR5C/">Click Here To Claim It Now -&gt;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="about.html">About / Privacy</a>
+    <a href="terms.html">Terms of Use</a>
+  </div>
+  <div class="footer-note">FHFA Mortgage Rate Reduction • Eligibility Screening • National</div>
+</footer>
+
+<script>
+(function () {
+  var fill = document.getElementById('progressFill');
+  var label = document.getElementById('progressLabel');
+  var resultTitle = document.getElementById('resultTitle');
+  var card = document.getElementById('card');
+  var total = 2;
+  var answers = { q1: null, q2: null };
+
+  function scrollToCard() {
+    requestAnimationFrame(function () {
+      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+
+  function burstConfetti() {
+    var box = document.getElementById('confetti');
+    if (!box || box.childElementCount) return;
+    var colors = ['#fdb81e', '#fff', '#94d082', '#2e8540', '#0071bc', '#f4d35e'];
+    for (var i = 0; i < 56; i++) {
+      var piece = document.createElement('i');
+      piece.style.left = (Math.random() * 100) + '%';
+      piece.style.background = colors[i % colors.length];
+      piece.style.animationDelay = (Math.random() * 0.35) + 's';
+      piece.style.animationDuration = (1.7 + Math.random() * 1.3) + 's';
+      piece.style.transform = 'rotate(' + (Math.random() * 80) + 'deg)';
+      box.appendChild(piece);
+    }
+  }
+
+  function runProcessingSteps(done) {
+    var items = document.querySelectorAll('#processSteps li');
+    var i = 0;
+    items.forEach(function (item, index) {
+      item.classList.toggle('on', index === 0);
+      item.classList.remove('done');
+    });
+    var timer = setInterval(function () {
+      if (items[i]) {
+        items[i].classList.add('done');
+        items[i].classList.remove('on');
+      }
+      i += 1;
+      if (i < items.length) {
+        items[i].classList.add('on');
+        return;
+      }
+      clearInterval(timer);
+      done();
+    }, 750);
+  }
+
+  document.querySelectorAll('.answer-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      if (btn.disabled) return;
+      var screen = btn.closest('.screen');
+      var next = btn.getAttribute('data-next');
+      var answer = btn.getAttribute('data-answer');
+      if (screen.id === 's1') answers.q1 = answer;
+      if (screen.id === 's2') answers.q2 = answer;
+      var result = (answers.q1 === 'yes' && answers.q2 === 'yes') ? 'eligible' : 'ineligible';
+      screen.querySelectorAll('.answer-btn').forEach(function (b) { b.disabled = true; });
+      btn.classList.add('selected');
+
+      setTimeout(function () {
+        screen.classList.remove('active');
+        if (next === 'processing') {
+          fill.style.width = '100%';
+          label.textContent = total + ' of ' + total;
+          document.getElementById('sProcessing').classList.add('active');
+          scrollToCard();
+          runProcessingSteps(function () {
+            document.getElementById('sProcessing').classList.remove('active');
+            document.getElementById('progressRow').style.display = 'none';
+            if (result === 'ineligible') {
+              card.classList.add('is-denied');
+              document.getElementById('sIneligible').classList.add('active');
+            } else {
+              card.classList.add('is-approved');
+              resultTitle.textContent = 'You Qualify for a Lower Mortgage Rate';
+              document.getElementById('sResult').classList.add('active');
+              burstConfetti();
+              startReservationTimer();
+            }
+            scrollToCard();
+          });
+        } else {
+          var target = document.getElementById('s' + next);
+          if (/^\d+$/.test(next)) {
+            var nextNum = parseInt(next, 10);
+            fill.style.width = (nextNum / total * 100) + '%';
+            label.textContent = nextNum + ' of ' + total;
+          }
+          if (target) target.classList.add('active');
+          scrollToCard();
+        }
+      }, 280);
+    });
+  });
+
+  function startReservationTimer() {
+    var timerEl = document.getElementById('reservationTimer');
+    if (!timerEl) return;
+    var remaining = 10 * 60;
+    function tick() {
+      var min = Math.floor(remaining / 60);
+      var sec = remaining % 60;
+      timerEl.textContent = min + ':' + (sec < 10 ? '0' : '') + sec;
+      if (remaining > 0) {
+        remaining--;
+        setTimeout(tick, 1000);
+      }
+    }
+    tick();
+  }
+})();
+</script>
+<script src="/quiz-track.js" data-page="tobe"></script>
+</body>
+</html>

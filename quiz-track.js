@@ -1,7 +1,7 @@
 (function () {
   var script = document.currentScript;
   var page = script && script.getAttribute('data-page');
-  if (page !== 'glo2' && page !== 'glo2b') return;
+  if (page !== 'glo2' && page !== 'glo2b' && page !== 'tobe') return;
 
   var key = 'quiz-session-' + page;
   var session = sessionStorage.getItem(key);
