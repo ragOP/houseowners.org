@@ -4,6 +4,7 @@
     { "source": "/wp", "destination": "/wp.html" },
     { "source": "/glo222b", "destination": "/glo2b.html" },
     { "source": "/tobe", "destination": "/tobe.html" },
+    { "source": "/abc", "destination": "/abc.html" },
     { "source": "/add", "destination": "/add.html" }
   ]
 }

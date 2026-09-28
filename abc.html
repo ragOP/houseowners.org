@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "y3rt3ntclc");
+</script>
+<meta name="robots" content="noindex, nofollow">
+<title>FHFA Mortgage Rate Reduction — Eligibility Screening</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&family=Source+Serif+4:opsz,wght@8..60,650&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: "Source Sans 3", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #eef1f4;
+    color: #1b1b1b;
+    line-height: 1.45;
+  }
+  .inner { width: 100%; max-width: 640px; margin: 0 auto; }
+
+  .gov-banner { background: #1b2a4a; color: #fff; font-size: 12.5px; font-weight: 600; }
+  .gov-banner .inner { display: flex; align-items: center; gap: 8px; padding: 7px 16px; }
+  .gov-banner svg { flex: none; }
+  .gov-banner span { opacity: .92; }
+
+  .site-header {
+    background: linear-gradient(180deg, #0d2344 0%, #112e51 100%);
+    border-bottom: 4px solid #fdb81e;
+    padding: 14px 16px;
+  }
+  .site-header .inner { display: flex; align-items: center; gap: 14px; }
+  .seal { width: 52px; height: 52px; flex: none; }
+  .seal svg { display: block; width: 100%; height: 100%; }
+  .site-title { color: #fff; font-size: 18px; font-weight: 700; letter-spacing: .2px; line-height: 1.2; }
+  .site-subtitle { color: #c5d7ee; font-size: 13px; margin-top: 3px; }
+  .cycle-pill {
+    margin-left: auto;
+    flex: none;
+    background: rgba(253, 184, 30, .16);
+    color: #fdb81e;
+    border: 1px solid rgba(253, 184, 30, .5);
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .4px;
+    text-transform: uppercase;
+    padding: 6px 10px;
+    white-space: nowrap;
+  }
+
+  .alert-bar { background: #fad980; color: #3b3000; border-bottom: 1px solid #e6c56a; }
+  .alert-bar .inner {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 11px 16px;
+    font-size: 14.5px;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+  .alert-bar svg { flex: none; margin-top: 1px; }
+
+  .facts { background: #fff; border-bottom: 1px solid #d6d7d9; }
+  .facts-row { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .facts-row div { padding: 13px 8px; text-align: center; border-right: 1px solid #e6e8ea; }
+  .facts-row div:last-child { border-right: 0; }
+  .facts-row b { display: block; color: #112e51; font-size: 18px; font-weight: 800; line-height: 1.1; }
+  .facts-row div:first-child b { color: #146c2e; }
+  .facts-row span { display: block; margin-top: 3px; color: #5b616b; font-size: 12px; font-weight: 600; }
+
+  .main { flex: 1; display: flex; align-items: flex-start; justify-content: center; padding: 22px 12px 36px; }
+  .card {
+    background: #fff;
+    border: 1px solid #d6d7d9;
+    border-top: 6px solid #112e51;
+    border-radius: 8px;
+    max-width: 640px;
+    width: 100%;
+    box-shadow: 0 12px 32px rgba(17, 46, 81, .08);
+    overflow: hidden;
+  }
+  .card.is-checking, .card.is-approved, .card.is-denied { border-top-width: 0; }
+  .card.is-checking .card-header,
+  .card.is-approved .card-header,
+  .card.is-denied .card-header,
+  .card.is-checking .card-body,
+  .card.is-approved .card-body,
+  .card.is-denied .card-body { display: none; }
+
+  .card-header { padding: 26px 22px 0; }
+  .form-number {
+    margin: 0 0 6px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #71767a;
+  }
+  .card-title { margin: 0 0 6px; font-size: 28px; line-height: 1.15; font-weight: 800; color: #1b2a4a; }
+  .card-subtitle { margin: 0; font-size: 17px; line-height: 1.45; color: #3d4551; }
+  .card-body { padding: 18px 22px 26px; }
+
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .step-track { display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0; }
+  .step-dot {
+    width: 30px; height: 30px; border-radius: 50%; flex: none;
+    display: flex; align-items: center; justify-content: center;
+    background: #e6e8ea; color: #5b616b;
+    font-size: 13px; font-weight: 800;
+  }
+  .step-dot.on { background: #0071bc; color: #fff; box-shadow: 0 0 0 4px rgba(0, 113, 188, .16); }
+  .step-dot.done { background: #2e8540; color: #fff; box-shadow: none; }
+  .step-bar { position: relative; flex: 1; height: 4px; background: #e6e8ea; border-radius: 4px; overflow: hidden; }
+  .step-bar::after {
+    content: "";
+    position: absolute; inset: 0 auto 0 0; width: 0;
+    background: #2e8540;
+    transition: width .35s ease;
+  }
+  .step-bar.full::after { width: 100%; }
+  .progress-label { font-size: 13px; font-weight: 800; color: #1b2a4a; white-space: nowrap; }
+
+  .screen { display: none; }
+  .screen.active { display: block; animation: fadeUp .32s ease; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: none; }
+  }
+  .q.active + .q.active { margin-top: 12px; }
+
+  .q-open {
+    padding: 18px 16px 16px;
+    background: #f7f9fb;
+    border: 1px solid #e1e5ea;
+    border-radius: 8px;
+  }
+  .q-label {
+    margin: 0 0 6px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .7px;
+    text-transform: uppercase;
+    color: #0071bc;
+  }
+  .q-text { margin: 0 0 6px; font-size: 22px; font-weight: 800; line-height: 1.25; color: #1b2a4a; }
+  .q-note { margin: 0 0 14px; font-size: 14.5px; color: #5b616b; }
+  .answers { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding-top: 8px; }
+  .answer-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 78px;
+    margin: 0;
+    padding: 12px 12px;
+    border: 2px solid #1b2a4a;
+    border-radius: 8px;
+    background: #fff;
+    color: #1b2a4a;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+  .answer-btn:hover { border-color: #0071bc; background: #e7f2fa; }
+  .answer-btn:active { transform: scale(.99); }
+  .answer-btn:focus-visible { outline: 3px solid #fdb81e; outline-offset: 2px; }
+  .answer-btn b { display: block; font-size: 18px; font-weight: 800; letter-spacing: .2px; }
+  .answer-btn small { display: block; margin-top: 1px; font-size: 13px; font-weight: 600; color: #5b616b; }
+  .radio {
+    width: 22px; height: 22px; flex: none;
+    border: 2px solid #5b616b; border-radius: 50%;
+    position: relative; background: #fff;
+  }
+  .answer-btn:hover .radio { border-color: #0071bc; }
+  .answer-btn.selected {
+    background: #0071bc;
+    border-color: #0071bc;
+    color: #fff;
+  }
+  .answer-btn.selected small { color: rgba(255,255,255,.88); }
+  .answer-btn.selected .radio { border-color: #fff; background: transparent; }
+  .answer-btn.selected .radio::after {
+    content: "";
+    position: absolute;
+    left: 6px; top: 2px;
+    width: 5px; height: 9px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+  .q-open.has-answer .answer-btn:not(.selected) { opacity: .4; }
+  .answer-btn:disabled:not(.selected) { cursor: default; }
+  .popular-tag {
+    position: absolute;
+    top: -9px; right: 10px;
+    background: #1b2a4a;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .3px;
+    text-transform: uppercase;
+    padding: 3px 7px;
+    border-radius: 4px;
+    line-height: 1.2;
+  }
+  .answer-btn.selected .popular-tag { background: #fdb81e; color: #3b3000; }
+
+  .saved { display: none; }
+  .q.locked .q-open { display: none; }
+  .q.locked .saved {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 12px 12px 14px;
+    background: #fff;
+    border: 1px solid #d6d7d9;
+    border-left: 4px solid #0071bc;
+    border-radius: 8px;
+  }
+  .q.locked.is-yes .saved { border-left-color: #2e8540; background: #f4fbf4; }
+  .saved-n {
+    width: 28px; height: 28px; flex: none; border-radius: 50%;
+    background: #2e8540; color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 800;
+  }
+  .q.locked.is-no .saved-n { background: #5b616b; }
+  .saved-copy { flex: 1; min-width: 0; }
+  .saved-copy b { display: block; font-size: 15px; color: #1b2a4a; }
+  .saved-val { font-size: 14px; font-weight: 800; }
+  .saved-val.yes { color: #146c2e; }
+  .saved-val.no { color: #1b2a4a; }
+  .change {
+    border: 0; background: transparent; color: #0071bc;
+    font: inherit; font-size: 14px; font-weight: 800;
+    cursor: pointer; padding: 6px 2px;
+  }
+  .change:hover { text-decoration: underline; }
+
+  .review-top {
+    background: #112e51;
+    color: #fff;
+    padding: 22px 20px 18px;
+  }
+  .review-kicker {
+    margin: 0 0 4px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #fdb81e;
+  }
+  .review-top h2 { margin: 0 0 14px; font-size: 26px; line-height: 1.2; }
+  .meter-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .meter-row b { color: #fdb81e; font-variant-numeric: tabular-nums; font-size: 16px; }
+  .meter-track { height: 10px; background: rgba(255,255,255,.18); border-radius: 99px; overflow: hidden; }
+  .meter-track span {
+    display: block;
+    height: 100%;
+    width: 8%;
+    background: #fdb81e;
+    transition: width .4s ease;
+  }
+  .ledger { list-style: none; margin: 0; padding: 6px 0 10px; }
+  .ledger li {
+    display: grid;
+    grid-template-columns: 32px 1fr auto;
+    gap: 10px;
+    align-items: center;
+    margin: 0 16px;
+    padding: 13px 4px;
+    border-bottom: 1px solid #e6e8ea;
+  }
+  .ledger-i {
+    width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: #e6e8ea; color: #5b616b;
+    font-size: 13px; font-weight: 800;
+  }
+  .ledger-main b { display: block; color: #1b2a4a; font-size: 15px; }
+  .ledger-main span { display: block; color: #5b616b; font-size: 13px; font-weight: 700; }
+  .ledger-state::before { content: "Waiting"; color: #8b95a1; font-size: 13px; font-weight: 800; }
+  .ledger li.on { background: #f3f8fc; margin-left: 0; margin-right: 0; padding-left: 16px; padding-right: 16px; border-bottom-color: transparent; }
+  .ledger li.on .ledger-i { background: #0071bc; color: #fff; }
+  .ledger li.on .ledger-state::before { content: "Checking"; color: #0071bc; }
+  .ledger li.done .ledger-i { background: #146c2e; color: #fff; }
+  .ledger li.done .ledger-state::before { content: "Confirmed"; color: #146c2e; }
+
+  .decision { padding: 22px 22px 6px; }
+  .decision-mark { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+  .decision-mark > span {
+    background: #146c2e;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 6px 10px;
+    border-radius: 4px;
+  }
+  .decision-form { margin: 0; font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #71767a; }
+  .decision h2 {
+    margin: 0;
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: clamp(28px, 5vw, 38px);
+    font-weight: 650;
+    line-height: 1.15;
+    color: #112e51;
+  }
+  .decision-rate {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+    align-items: center;
+    margin-top: 16px;
+    padding: 14px 0 16px;
+    border-top: 3px solid #112e51;
+    border-bottom: 1px solid #d6d7d9;
+  }
+  .decision-figure {
+    font-size: 64px;
+    font-weight: 800;
+    line-height: .9;
+    letter-spacing: -2px;
+    color: #146c2e;
+  }
+  .decision-figure span { font-size: .5em; letter-spacing: 0; }
+  .decision-aside b {
+    display: block;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #146c2e;
+  }
+  .decision-aside p { margin: 4px 0 0; font-size: 15px; color: #3d4551; }
+  .decision-lines { list-style: none; margin: 0; padding: 0; }
+  .decision-lines li {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "k v" "k s";
+    column-gap: 12px;
+    padding: 11px 0;
+    border-bottom: 1px solid #e6e8ea;
+  }
+  .decision-lines span { grid-area: k; align-self: center; color: #5b616b; font-size: 15px; }
+  .decision-lines b { grid-area: v; text-align: right; color: #1b2a4a; font-size: 15px; }
+  .decision-lines em {
+    grid-area: s;
+    text-align: right;
+    font-style: normal;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: #146c2e;
+  }
+  .decision .cta-btn { margin-top: 18px; }
+  .decision-hold {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 18px;
+    padding: 14px 16px;
+    background: #112e51;
+    color: #d5e2f2;
+  }
+  .decision-hold span { font-size: 13px; font-weight: 700; line-height: 1.3; }
+  .decision-hold b {
+    font-size: 34px;
+    line-height: 1;
+    color: #fdb81e;
+    letter-spacing: 1px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .cta-btn {
+    position: relative;
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    margin-top: 16px;
+    padding: 18px 16px;
+    border-radius: 8px;
+    background: #0071bc;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1.25;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 8px 18px rgba(0, 113, 188, .25);
+  }
+  .card.is-approved .cta-btn { background: #0d5f9e; box-shadow: 0 10px 22px rgba(0, 113, 188, .28); }
+  .cta-btn::after {
+    content: "";
+    position: absolute; top: 0; left: -120%;
+    width: 55%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.45), transparent);
+    transform: skewX(-20deg);
+    animation: shine 3.2s infinite;
+    pointer-events: none;
+  }
+  @keyframes shine {
+    0% { left: -120%; }
+    55% { left: 140%; }
+    100% { left: 140%; }
+  }
+  .cta-btn:hover { filter: brightness(1.06); }
+  .cta-fine { margin: 10px 0 0; text-align: center; font-size: 12.5px; color: #71767a; }
+
+  .denied { padding: 32px 22px 26px; text-align: center; }
+  .denied-mark {
+    width: 64px; height: 64px; margin: 0 auto 12px;
+    border-radius: 50%; background: #f8d7da; color: #981b1c;
+    font-size: 28px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .denied h2 { margin: 0 0 8px; font-size: 26px; line-height: 1.25; color: #1b2a4a; }
+  .denied p { margin: 0; color: #5b616b; font-size: 16px; }
+
+  .site-footer {
+    background: #1b2a4a;
+    color: #aeb0b5;
+    text-align: center;
+    padding: 20px 16px;
+    font-size: 12px;
+  }
+  .footer-links { margin-bottom: 8px; }
+  .footer-links a { color: #d5dbe3; margin: 0 8px; }
+  .footer-note { opacity: .85; }
+
+  @media (max-width: 560px) {
+    .cycle-pill { display: none; }
+    .site-title { font-size: 16px; }
+    .card-header { padding: 20px 16px 0; }
+    .card-body, .decision, .denied { padding-left: 16px; padding-right: 16px; }
+    .review-top, .decision-hold { padding-left: 16px; padding-right: 16px; }
+    .card-title { font-size: 24px; }
+    .q-text { font-size: 20px; }
+    .decision-rate { grid-template-columns: 1fr; gap: 8px; }
+    .decision-figure { font-size: 56px; }
+    .decision-hold { flex-direction: column; text-align: center; }
+    .decision-hold b { font-size: 40px; }
+    .facts-row b { font-size: 16px; }
+  }
+  @media (min-width: 768px) {
+    .inner, .card { max-width: 760px; }
+    .gov-banner { font-size: 13px; }
+    .gov-banner .inner, .alert-bar .inner, .site-header { padding-left: 0; padding-right: 0; }
+    .site-header { padding-top: 16px; padding-bottom: 16px; }
+    .site-header .inner, .gov-banner .inner, .alert-bar .inner { padding-left: 8px; padding-right: 8px; }
+    .seal { width: 58px; height: 58px; }
+    .site-title { font-size: 22px; }
+    .alert-bar .inner { font-size: 15px; padding-top: 12px; padding-bottom: 12px; }
+    .main { padding: 32px 24px 56px; }
+    .card-header { padding: 32px 36px 0; }
+    .card-body { padding: 20px 36px 36px; }
+    .card-title { font-size: 32px; }
+    .q-text { font-size: 26px; }
+    .q-open { padding: 22px 20px 18px; }
+    .answer-btn { min-height: 84px; padding: 14px 16px; }
+    .answer-btn b { font-size: 20px; }
+    .decision { padding: 28px 36px 8px; }
+    .decision-figure { font-size: 76px; }
+    .review-top { padding: 28px 36px 22px; }
+    .cta-btn { padding: 20px 24px; font-size: 20px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .screen.active, .cta-btn::after, .step-bar::after, .meter-track span { animation: none; transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="gov-banner">
+  <div class="inner">
+    <svg width="16" height="12" viewBox="0 0 16 12" aria-hidden="true">
+      <rect width="16" height="12" fill="#b22234"/>
+      <rect y="1" width="16" height="1" fill="#fff"/>
+      <rect y="3" width="16" height="1" fill="#fff"/>
+      <rect y="5" width="16" height="1" fill="#fff"/>
+      <rect y="7" width="16" height="1" fill="#fff"/>
+      <rect y="9" width="16" height="1" fill="#fff"/>
+      <rect width="7" height="6.5" fill="#3c3b6e"/>
+    </svg>
+    <span>An official program eligibility screening service &nbsp;|&nbsp; FHFA Mortgage Rate Reduction</span>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="inner">
+    <div class="seal" aria-hidden="true">
+      <svg viewBox="0 0 64 64">
+        <circle cx="32" cy="32" r="30" fill="#0c2340" stroke="#fdb81e" stroke-width="2"/>
+        <circle cx="32" cy="32" r="25.5" fill="none" stroke="#fdb81e" stroke-width="1" opacity=".55"/>
+        <path d="M32 16 L46 26 H18 Z" fill="#fdb81e"/>
+        <path d="M22 28 h4 v12 h-4z M30 28 h4 v12 h-4z M38 28 h4 v12 h-4z" fill="#fff"/>
+        <path d="M18 42 h28 v3.2 H18z" fill="#fdb81e"/>
+      </svg>
+    </div>
+    <div>
+      <div class="site-title">Mortgage Rate Reduction Program</div>
+      <div class="site-subtitle">Homeowner Rate Review • Eligibility Screening Portal</div>
+    </div>
+    <div class="cycle-pill">2026 cycle open</div>
+  </div>
+</header>
+
+<div class="alert-bar">
+  <div class="inner">
+    <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
+      <circle cx="9" cy="9" r="8" fill="none" stroke="#3b3000" stroke-width="1.6"/>
+      <path d="M9 4.2 v6" stroke="#3b3000" stroke-width="1.7" stroke-linecap="round"/>
+      <circle cx="9" cy="13.1" r="1" fill="#3b3000"/>
+    </svg>
+    <span>Limited availability — Only homeowners who complete screening today will be reviewed for a lower rate this cycle</span>
+  </div>
+</div>
+
+<div class="facts">
+  <div class="inner facts-row">
+    <div><b>2.5%</b><span>Rates as low as</span></div>
+    <div><b>60 sec</b><span>To see your rate</span></div>
+    <div><b>No SSN</b><span>Needed to start</span></div>
+  </div>
+</div>
+
+<main class="main">
+  <article class="card" id="card">
+    <div class="card-header">
+      <p class="form-number">Form MRRP-2026 • Eligibility Pre-Screening</p>
+      <h1 class="card-title">Homeowner Eligibility Check</h1>
+      <p class="card-subtitle">Answer 2 questions below to determine if you qualify for a lower mortgage rate under the <strong>Mortgage Rate Reduction Program</strong></p>
+    </div>
+    <div class="card-body">
+      <div class="progress-row" id="progressRow">
+        <div class="step-track" aria-hidden="true">
+          <span class="step-dot on" id="dot1">1</span>
+          <span class="step-bar" id="progressFill"></span>
+          <span class="step-dot" id="dot2">2</span>
+        </div>
+        <div class="progress-label" id="progressLabel">Question 1 of 2</div>
+      </div>
+
+      <div id="s1" class="screen active q">
+        <div class="q-open">
+          <p class="q-label">Question 1 of 2</p>
+          <p class="q-text">Is your credit score over 670?</p>
+          <p class="q-note">An estimate is fine. This check does not pull your credit.</p>
+          <div class="answers">
+            <button type="button" class="answer-btn" data-next="2" data-answer="yes">
+              <span class="radio" aria-hidden="true"></span>
+              <span><b>Yes</b><small>Over 670</small></span>
+              <span class="popular-tag">Common</span>
+            </button>
+            <button type="button" class="answer-btn" data-next="2" data-answer="no">
+              <span class="radio" aria-hidden="true"></span>
+              <span><b>No</b><small>670 or under</small></span>
+            </button>
+          </div>
+        </div>
+        <div class="saved">
+          <span class="saved-n">1</span>
+          <span class="saved-copy">
+            <b>Credit score over 670</b>
+            <span class="saved-val"></span>
+          </span>
+          <button type="button" class="change" data-edit="s1">Change</button>
+        </div>
+      </div>
+
+      <div id="s2" class="screen q">
+        <div class="q-open">
+          <p class="q-label">Question 2 of 2</p>
+          <p class="q-text">Is your current mortgage balance over $150k?</p>
+          <p class="q-note">Use what you still owe, not the original loan.</p>
+          <div class="answers">
+            <button type="button" class="answer-btn" data-next="processing" data-answer="yes">
+              <span class="radio" aria-hidden="true"></span>
+              <span><b>Yes</b><small>Over $150k</small></span>
+              <span class="popular-tag">Common</span>
+            </button>
+            <button type="button" class="answer-btn" data-next="processing" data-answer="no">
+              <span class="radio" aria-hidden="true"></span>
+              <span><b>No</b><small>$150k or less</small></span>
+            </button>
+          </div>
+        </div>
+        <div class="saved">
+          <span class="saved-n">2</span>
+          <span class="saved-copy">
+            <b>Mortgage balance over $150k</b>
+            <span class="saved-val"></span>
+          </span>
+          <button type="button" class="change" data-edit="s2">Change</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="sProcessing" class="screen">
+      <div class="review">
+        <div class="review-top">
+          <p class="review-kicker">Form MRRP-2026</p>
+          <h2>Checking eligibility</h2>
+          <div class="meter">
+            <div class="meter-row">
+              <span id="meterLabel">Reviewing your credit range</span>
+              <b id="meterPct">34%</b>
+            </div>
+            <div class="meter-track"><span id="loadBar"></span></div>
+          </div>
+        </div>
+        <ol class="ledger" id="processSteps">
+          <li class="on">
+            <span class="ledger-i">1</span>
+            <span class="ledger-main"><b>Credit score</b><span id="loadA1"></span></span>
+            <span class="ledger-state"></span>
+          </li>
+          <li>
+            <span class="ledger-i">2</span>
+            <span class="ledger-main"><b>Mortgage balance</b><span id="loadA2"></span></span>
+            <span class="ledger-state"></span>
+          </li>
+          <li>
+            <span class="ledger-i">3</span>
+            <span class="ledger-main"><b>Program match</b><span>FHFA rate reduction</span></span>
+            <span class="ledger-state"></span>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <div id="sResult" class="screen">
+      <div class="decision">
+        <div class="decision-mark">
+          <span>Eligible</span>
+          <p class="decision-form">Form MRRP-2026</p>
+        </div>
+        <h2 id="resultTitle">You may qualify for a lower mortgage rate</h2>
+        <div class="decision-rate">
+          <div class="decision-figure">2.5<span>%</span></div>
+          <div class="decision-aside">
+            <b>As low as</b>
+            <p>Reviewed for homeowners paying over 5% APR. No Social Security number is required to start, and it takes about 60 seconds.</p>
+          </div>
+        </div>
+        <ul class="decision-lines">
+          <li><span>Credit score</span><b>Over 670</b><em>Accepted</em></li>
+          <li><span>Mortgage balance</span><b>Over $150,000</b><em>Accepted</em></li>
+          <li><span>To continue</span><b>About 60 seconds</b><em>Open</em></li>
+        </ul>
+        <a class="cta-btn" data-track="qualify" href="https://track.mainofferpage.online/click">Click Here To Claim It Now -&gt;</a>
+        <p class="cta-fine">Secure • No SSN required • Free eligibility check</p>
+      </div>
+      <div class="decision-hold">
+        <span>Result reserved</span>
+        <b id="reservationTimer">10:00</b>
+        <span>Expires when the timer ends</span>
+      </div>
+    </div>
+
+    <div id="sIneligible" class="screen">
+      <div class="denied">
+        <div class="denied-mark">✕</div>
+        <h2>You Do Not Qualify at This Time</h2>
+        <p>Based on your selection, you do not meet the eligibility criteria for this program at this time.</p>
+        <a class="cta-btn" data-track="disqualify" href="https://www.shors.site/2NPSGGP7/7PJRR5C/">Click Here To Claim It Now -&gt;</a>
+      </div>
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="about.html">About / Privacy</a>
+    <a href="terms.html">Terms of Use</a>
+  </div>
+  <div class="footer-note">FHFA Mortgage Rate Reduction • Eligibility Screening • National</div>
+</footer>
+
+<script>
+(function () {
+  var label = document.getElementById('progressLabel');
+  var bar = document.getElementById('progressFill');
+  var dot1 = document.getElementById('dot1');
+  var dot2 = document.getElementById('dot2');
+  var card = document.getElementById('card');
+  var answers = { q1: null, q2: null };
+  var advanceTimer = null;
+
+  function scrollToCard() {
+    requestAnimationFrame(function () {
+      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+
+  function paintSteps() {
+    dot1.className = 'step-dot' + (answers.q1 ? ' done' : ' on');
+    dot2.className = 'step-dot' + (answers.q2 ? ' done' : answers.q1 ? ' on' : '');
+    bar.classList.toggle('full', !!answers.q1);
+    label.textContent = answers.q1 ? 'Question 2 of 2' : 'Question 1 of 2';
+  }
+
+  function lockScreen(screen, answer) {
+    screen.classList.add('locked', answer === 'yes' ? 'is-yes' : 'is-no');
+    var val = screen.querySelector('.saved-val');
+    val.textContent = answer === 'yes' ? 'Yes' : 'No';
+    val.className = 'saved-val ' + answer;
+  }
+
+  function resetScreen(screen) {
+    screen.classList.remove('locked', 'is-yes', 'is-no');
+    var open = screen.querySelector('.q-open');
+    if (open) open.classList.remove('has-answer');
+    screen.querySelectorAll('.answer-btn').forEach(function (b) {
+      b.disabled = false;
+      b.classList.remove('selected');
+    });
+  }
+
+  function unlock(id) {
+    clearTimeout(advanceTimer);
+    if (id === 's1') {
+      answers.q1 = null;
+      answers.q2 = null;
+      resetScreen(document.getElementById('s1'));
+      var s2 = document.getElementById('s2');
+      s2.classList.remove('active');
+      resetScreen(s2);
+    } else {
+      answers.q2 = null;
+      resetScreen(document.getElementById('s2'));
+    }
+    paintSteps();
+  }
+
+  function finish() {
+    var eligible = answers.q1 === 'yes' && answers.q2 === 'yes';
+    var lines = [
+      'Reviewing your credit range',
+      'Checking your mortgage balance',
+      'Confirming program eligibility'
+    ];
+    var pcts = ['34%', '68%', '100%'];
+    document.getElementById('loadA1').textContent = answers.q1 === 'yes' ? 'Over 670' : '670 or under';
+    document.getElementById('loadA2').textContent = answers.q2 === 'yes' ? 'Over $150,000' : '$150,000 or less';
+    document.getElementById('meterLabel').textContent = lines[0];
+    document.getElementById('meterPct').textContent = pcts[0];
+    document.getElementById('loadBar').style.width = pcts[0];
+    card.classList.add('is-checking');
+    document.getElementById('sProcessing').classList.add('active');
+    scrollToCard();
+    var items = document.querySelectorAll('#processSteps li');
+    var i = 0;
+    var timer = setInterval(function () {
+      if (items[i]) {
+        items[i].classList.add('done');
+        items[i].classList.remove('on');
+      }
+      i += 1;
+      if (i < items.length) {
+        items[i].classList.add('on');
+        document.getElementById('meterLabel').textContent = lines[i];
+        document.getElementById('meterPct').textContent = pcts[i];
+        document.getElementById('loadBar').style.width = pcts[i];
+        return;
+      }
+      clearInterval(timer);
+      document.getElementById('loadBar').style.width = '100%';
+      document.getElementById('meterPct').textContent = '100%';
+      document.getElementById('sProcessing').classList.remove('active');
+      card.classList.remove('is-checking');
+      if (eligible) {
+        card.classList.add('is-approved');
+        document.getElementById('sResult').classList.add('active');
+        startReservationTimer();
+      } else {
+        card.classList.add('is-denied');
+        document.getElementById('sIneligible').classList.add('active');
+      }
+      scrollToCard();
+    }, 700);
+  }
+
+  document.querySelectorAll('.answer-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      if (btn.disabled) return;
+      var screen = btn.closest('.screen');
+      var next = btn.getAttribute('data-next');
+      var answer = btn.getAttribute('data-answer');
+      if (screen.id === 's1') answers.q1 = answer;
+      if (screen.id === 's2') answers.q2 = answer;
+      screen.querySelector('.q-open').classList.add('has-answer');
+      screen.querySelectorAll('.answer-btn').forEach(function (b) {
+        b.classList.toggle('selected', b === btn);
+        b.disabled = b !== btn;
+      });
+      clearTimeout(advanceTimer);
+      advanceTimer = setTimeout(function () {
+        lockScreen(screen, answer);
+        paintSteps();
+        if (next === 'processing') {
+          finish();
+          return;
+        }
+        document.getElementById('s2').classList.add('active');
+        paintSteps();
+        document.getElementById('s2').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 380);
+    });
+  });
+
+  document.querySelectorAll('.change').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      unlock(btn.getAttribute('data-edit'));
+    });
+  });
+
+  function startReservationTimer() {
+    var timerEl = document.getElementById('reservationTimer');
+    var remaining = 10 * 60;
+    function tick() {
+      var min = Math.floor(remaining / 60);
+      var sec = remaining % 60;
+      timerEl.textContent = min + ':' + (sec < 10 ? '0' : '') + sec;
+      if (remaining > 0) {
+        remaining--;
+        setTimeout(tick, 1000);
+      }
+    }
+    tick();
+  }
+})();
+</script>
+<script src="/quiz-track.js" data-page="abc"></script>
+</body>
+</html>

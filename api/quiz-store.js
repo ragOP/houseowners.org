@@ -5,7 +5,7 @@ export const QUESTIONS = {
   q2: 'Is your current mortgage balance over $150k?'
 };
 
-const PAGES = new Set(['glo2', 'glo2b', 'tobe']);
+const PAGES = new Set(['glo2', 'glo2b', 'tobe', 'abc']);
 const ANSWERS = new Set(['yes', 'no']);
 const SESSION = /^[a-zA-Z0-9-]{16,80}$/;
 
@@ -141,7 +141,8 @@ export function summarize(events) {
   const byPage = {
     glo2: { total: 0, qualified: 0, disqualified: 0, inProgress: 0 },
     glo2b: { total: 0, qualified: 0, disqualified: 0, inProgress: 0 },
-    tobe: { total: 0, qualified: 0, disqualified: 0, inProgress: 0 }
+    tobe: { total: 0, qualified: 0, disqualified: 0, inProgress: 0 },
+    abc: { total: 0, qualified: 0, disqualified: 0, inProgress: 0 }
   };
   const comboMap = new Map();
   events.forEach((event) => {
