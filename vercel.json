@@ -5,6 +5,8 @@
     { "source": "/glo222b", "destination": "/glo2b.html" },
     { "source": "/tobe", "destination": "/tobe.html" },
     { "source": "/abc", "destination": "/abc.html" },
+    { "source": "/glott", "destination": "/glott.html" },
+    { "source": "/glott2", "destination": "/glott2.html" },
     { "source": "/add", "destination": "/add.html" }
   ]
 }

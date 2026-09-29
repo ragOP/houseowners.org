@@ -344,7 +344,7 @@
         <h2 class="result-title" id="resultTitle">You May Qualify for a Lower Mortgage Rate</h2>
         <div class="result-amount">As Low as 2.5%</div>
         <p class="result-desc">Based on your pre-screening responses, you appear to meet the initial eligibility criteria for a lower mortgage rate. Complete your full application to see your personalized rate in 60 seconds.</p>
-        <a class="cta-btn" data-track="qualify" href="https://track.mainofferpage.online/click">Click Here To Claim It Now -&gt;</a>
+        <a class="cta-btn" data-track="qualify" href="https://track.benefitsclaim.online/click" onclick="fireCompleteRegistration(event);">Click Here To Claim It Now -&gt;</a>
         <p class="cta-fine">🔒 Secure • No SSN required • Free eligibility check • 60 seconds</p>
         <div class="reservation-timer">Your eligibility result expires in <span class="timer-value" id="reservationTimer">10:00</span></div>
       </div>
@@ -444,6 +444,63 @@
     }
     tick();
   }
+})();
+</script>
+<script>
+(function () {
+  var hasFiredTikTokReg = false;
+
+  function getCookie(name) {
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + name + "=");
+    if (parts.length === 2) return parts.pop().split(";").shift();
+    return null;
+  }
+
+  function getUrlParam(param) {
+    return new URLSearchParams(window.location.search).get(param);
+  }
+
+  window.fireCompleteRegistration = function (event) {
+    if (event && event.preventDefault) event.preventDefault();
+
+    var redtrackClickUrl = "https://track.benefitsclaim.online/click";
+
+    if (hasFiredTikTokReg) {
+      window.location.href = redtrackClickUrl;
+      return;
+    }
+    hasFiredTikTokReg = true;
+
+    var clickId = getUrlParam("ttclid") ||
+      getUrlParam("rtkcid") ||
+      getUrlParam("clickid") ||
+      getUrlParam("subid") ||
+      getCookie("ttclid") ||
+      getCookie("rtkcid") ||
+      localStorage.getItem("ttclid") ||
+      localStorage.getItem("rtkcid");
+
+    var ttp = getCookie("_ttp") || localStorage.getItem("_ttp");
+
+    if (clickId) {
+      var params = new URLSearchParams({
+        clickid: clickId,
+        type: "CompleteRegistration"
+      });
+      if (ttp) params.append("ttp", ttp);
+      var fullPostbackUrl = "https://track.benefitsclaim.online/postback?" + params.toString();
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(fullPostbackUrl);
+      } else {
+        fetch(fullPostbackUrl, { method: "POST", keepalive: true }).catch(function () {});
+      }
+    }
+
+    setTimeout(function () {
+      window.location.href = redtrackClickUrl;
+    }, 150);
+  };
 })();
 </script>
 <script src="/quiz-track.js" data-page="glo2b"></script>
