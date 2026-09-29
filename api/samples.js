@@ -1,6 +1,6 @@
 import { randomBytes } from 'crypto';
 import { del, list, put } from '@vercel/blob';
-import { listEvents } from './quiz-store.js';
+import { listEvents, resultFor } from './quiz-store.js';
 
 const PAGES = new Set(['glo2', 'glo2b', 'mix']);
 const RANGES = new Set(['today', 'yesterday', '7', '14']);
@@ -67,19 +67,39 @@ function bounds(range, now) {
 }
 
 function scenario() {
+  const answers = {
+    q1: null,
+    q2: null,
+    q3: null,
+    qualifyReached: false,
+    disqualifyReached: false,
+    debtReached: false,
+    sleepReached: false,
+    qualifyClick: false,
+    disqualifyClick: false,
+    debtClick: false,
+    sleepClick: false
+  };
   const roll = Math.random();
-  if (roll < 0.22) {
-    return { q1: null, q2: null, qualifyReached: false, disqualifyReached: false, qualifyClick: false, disqualifyClick: false };
-  }
+  if (roll < 0.22) return answers;
   if (roll < 0.4) {
-    return { q1: Math.random() < 0.65 ? 'yes' : 'no', q2: null, qualifyReached: false, disqualifyReached: false, qualifyClick: false, disqualifyClick: false };
+    answers.q1 = Math.random() < 0.65 ? 'yes' : 'no';
+    return answers;
   }
   if (roll < 0.68) {
-    return { q1: 'yes', q2: 'yes', qualifyReached: true, disqualifyReached: false, qualifyClick: Math.random() < 0.55, disqualifyClick: false };
+    answers.q1 = 'yes';
+    answers.q2 = 'yes';
+    answers.qualifyReached = true;
+    answers.qualifyClick = Math.random() < 0.55;
+    return answers;
   }
-  const q1 = Math.random() < 0.5 ? 'yes' : 'no';
-  const q2 = q1 === 'yes' ? 'no' : (Math.random() < 0.5 ? 'yes' : 'no');
-  return { q1, q2, qualifyReached: false, disqualifyReached: true, qualifyClick: false, disqualifyClick: Math.random() < 0.35 };
+  answers.q1 = Math.random() < 0.5 ? 'yes' : 'no';
+  if (answers.q1 === 'yes') answers.q2 = 'no';
+  answers.q3 = Math.random() < 0.5 ? 'yes' : 'no';
+  const kind = answers.q3 === 'yes' ? 'debt' : 'sleep';
+  answers[kind + 'Reached'] = true;
+  answers[kind + 'Click'] = Math.random() < 0.35;
+  return answers;
 }
 
 export function buildSampleRecords(input, now = new Date()) {
@@ -93,19 +113,13 @@ export function buildSampleRecords(input, now = new Date()) {
   for (let i = 0; i < count; i++) {
     const stamp = new Date(start + Math.random() * span).toISOString();
     const answers = scenario();
-    const finished = answers.q1 && answers.q2;
     const [ip, place] = PLACES[Math.floor(Math.random() * PLACES.length)];
     const chosen = page === 'mix' ? (Math.random() < 0.5 ? 'glo2' : 'glo2b') : page;
     records.push({
       session: 'sample' + randomBytes(16).toString('hex'),
       page: chosen,
-      q1: answers.q1,
-      q2: answers.q2,
-      result: finished ? (answers.q1 === 'yes' && answers.q2 === 'yes' ? 'qualified' : 'disqualified') : null,
-      qualifyReached: answers.qualifyReached,
-      disqualifyReached: answers.disqualifyReached,
-      qualifyClick: answers.qualifyClick,
-      disqualifyClick: answers.disqualifyClick,
+      ...answers,
+      result: resultFor(chosen, answers.q1, answers.q2, answers.q3),
       ip,
       place,
       country: 'US',

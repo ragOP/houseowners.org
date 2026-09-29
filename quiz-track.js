@@ -13,11 +13,17 @@
   var state = {
     q1: null,
     q2: null,
+    q3: null,
     qualifyReached: false,
     disqualifyReached: false,
+    debtReached: false,
+    sleepReached: false,
     qualifyClick: false,
-    disqualifyClick: false
+    disqualifyClick: false,
+    debtClick: false,
+    sleepClick: false
   };
+  var CLICKS = { qualify: 'qualify', disqualify: 'disqualify', 'debt-yes': 'debt', 'debt-no': 'sleep' };
 
   function newId() {
     if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
@@ -36,17 +42,22 @@
         page: page,
         q1: state.q1,
         q2: state.q2,
+        q3: state.q3,
         qualifyReached: state.qualifyReached,
         disqualifyReached: state.disqualifyReached,
+        debtReached: state.debtReached,
+        sleepReached: state.sleepReached,
         qualifyClick: state.qualifyClick,
-        disqualifyClick: state.disqualifyClick
+        disqualifyClick: state.disqualifyClick,
+        debtClick: state.debtClick,
+        sleepClick: state.sleepClick
       }),
       keepalive: true
     }).catch(function () {});
   }
 
   function markReached(kind) {
-    var field = kind === 'qualify' ? 'qualifyReached' : 'disqualifyReached';
+    var field = kind + 'Reached';
     if (state[field]) return;
     state[field] = true;
     send();
@@ -69,18 +80,18 @@
   watch('sResult', 'qualify');
   watch('noResult', 'disqualify');
   watch('sIneligible', 'disqualify');
+  watch('debtYesResult', 'debt');
+  watch('sDebtYes', 'debt');
+  watch('sleepStudyResult', 'sleep');
+  watch('sSleepStudy', 'sleep');
 
   document.addEventListener('click', function (event) {
     var link = event.target.closest('a[data-track]');
     if (link) {
-      var track = link.getAttribute('data-track');
-      if (track === 'qualify') {
-        state.qualifyClick = true;
-        state.qualifyReached = true;
-        send();
-      } else if (track === 'disqualify') {
-        state.disqualifyClick = true;
-        state.disqualifyReached = true;
+      var kind = CLICKS[link.getAttribute('data-track')];
+      if (kind) {
+        state[kind + 'Click'] = true;
+        state[kind + 'Reached'] = true;
         send();
       }
       return;
@@ -91,7 +102,7 @@
     if (page === 'glo2') {
       var q = btn.getAttribute('data-q');
       var value = btn.getAttribute('data-v');
-      if ((q !== 'q1' && q !== 'q2') || (value !== 'yes' && value !== 'no')) return;
+      if ((q !== 'q1' && q !== 'q2' && q !== 'q3') || (value !== 'yes' && value !== 'no')) return;
       state[q] = value;
       send();
       return;
@@ -103,6 +114,7 @@
     if (!screen) return;
     if (screen.id === 's1') state.q1 = answer;
     else if (screen.id === 's2') state.q2 = answer;
+    else if (screen.id === 'sDebt') state.q3 = answer;
     else return;
     send();
   });

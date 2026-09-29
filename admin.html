@@ -22,6 +22,10 @@
     --red-bg: #fdecee;
     --amber: #8a5a12;
     --amber-bg: #fff4dc;
+    --purple: #6b3fa0;
+    --purple-bg: #f1e9fb;
+    --orange: #b35a00;
+    --orange-bg: #fff0e0;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; }
@@ -190,6 +194,8 @@
   .nums .no b { color: var(--red); }
   .nums.good b { color: var(--green); }
   .nums.bad b { color: var(--red); }
+  .nums.debt b { color: var(--purple); }
+  .nums.sleep b { color: var(--orange); }
   .bar {
     display: flex;
     height: 8px;
@@ -227,6 +233,8 @@
   .visit.qualified::before { background: var(--green); }
   .visit.disqualified::before { background: var(--red); }
   .visit.progress::before { background: #e0a100; }
+  .visit.debt::before { background: var(--purple); }
+  .visit.sleep::before { background: var(--orange); }
   .visit-top {
     display: flex;
     align-items: flex-start;
@@ -318,6 +326,8 @@
   .result.qualified { background: var(--green-bg); color: var(--green); }
   .result.disqualified { background: var(--red-bg); color: var(--red); }
   .result.progress { background: var(--amber-bg); color: var(--amber); }
+  .result.debt { background: var(--purple-bg); color: var(--purple); }
+  .result.sleep { background: var(--orange-bg); color: var(--orange); }
   h2 {
     margin: 22px 4px 8px;
     font-size: 12px;
@@ -388,6 +398,8 @@
   var range = "today";
   var zone = "America/New_York";
   var periods = { today: "Today", yesterday: "Yesterday", "7": "Last 7 days", "14": "Last 14 days" };
+  var debtPages = { glo2: true, glo2b: true };
+  var q3Fallback = "Do you have over $8k in credit card debt?";
 
   function parts(iso) {
     var bits = new Intl.DateTimeFormat("en-US", {
@@ -465,6 +477,12 @@
     if (saw(event, "qualifyReached", "qualified")) {
       return '<div class="result qualified">Congratulations' + (event.qualifyClick ? " · button clicked" : "") + "</div>";
     }
+    if (saw(event, "debtReached", "debt")) {
+      return '<div class="result debt">Debt relief' + (event.debtClick ? " · button clicked" : "") + "</div>";
+    }
+    if (saw(event, "sleepReached", "sleep")) {
+      return '<div class="result sleep">Sleep study' + (event.sleepClick ? " · button clicked" : "") + "</div>";
+    }
     if (saw(event, "disqualifyReached", "disqualified")) {
       return '<div class="result disqualified">Disqualification' + (event.disqualifyClick ? " · button clicked" : "") + "</div>";
     }
@@ -474,6 +492,8 @@
 
   function tone(event) {
     if (saw(event, "qualifyReached", "qualified")) return "qualified";
+    if (saw(event, "debtReached", "debt")) return "debt";
+    if (saw(event, "sleepReached", "sleep")) return "sleep";
     if (saw(event, "disqualifyReached", "disqualified")) return "disqualified";
     return "progress";
   }
@@ -515,8 +535,12 @@
       return inRange(event.startedAt || event.updatedAt);
     });
     var total = events.length;
-    var q1yes = 0, q1no = 0, q1none = 0, q2yes = 0, q2no = 0, q2none = 0;
+    var q3Text = questions.q3 || q3Fallback;
+    var showDebt = filter === "all" || debtPages[filter];
+    var showOld = filter === "all" || !debtPages[filter];
+    var q1yes = 0, q1no = 0, q1none = 0, q2yes = 0, q2no = 0, q2none = 0, q3yes = 0, q3no = 0, q3none = 0;
     var qualReached = 0, qualClick = 0, disReached = 0, disClick = 0;
+    var debtReached = 0, debtClick = 0, sleepReached = 0, sleepClick = 0;
     events.forEach(function (event) {
       if (event.q1 === "yes") q1yes += 1;
       else if (event.q1 === "no") q1no += 1;
@@ -524,19 +548,29 @@
       if (event.q2 === "yes") q2yes += 1;
       else if (event.q2 === "no") q2no += 1;
       else q2none += 1;
+      if (event.q3 === "yes") q3yes += 1;
+      else if (event.q3 === "no") q3no += 1;
+      else q3none += 1;
       if (saw(event, "qualifyReached", "qualified")) qualReached += 1;
       if (event.qualifyClick) qualClick += 1;
       if (saw(event, "disqualifyReached", "disqualified")) disReached += 1;
       if (event.disqualifyClick) disClick += 1;
+      if (saw(event, "debtReached", "debt")) debtReached += 1;
+      if (event.debtClick) debtClick += 1;
+      if (saw(event, "sleepReached", "sleep")) sleepReached += 1;
+      if (event.sleepClick) sleepClick += 1;
     });
 
     document.getElementById("questions").innerHTML =
       '<p class="leadline">' + periods[range] + " · " + total + (total === 1 ? " visitor" : " visitors") + "</p>" +
       questionBlock("Question 1", questions.q1, q1yes, q1no, q1none, total) +
-      questionBlock("Question 2", questions.q2, q2yes, q2no, q2none, total);
+      questionBlock("Question 2", questions.q2, q2yes, q2no, q2none, total) +
+      (showDebt ? questionBlock("Question 3 · glo2 / glo2b", q3Text, q3yes, q3no, q3none, total) : "");
     document.getElementById("outcomes").innerHTML =
       outcomeBlock("Congratulations", qualReached, qualClick, total, "good") +
-      outcomeBlock("Disqualification", disReached, disClick, total, "bad");
+      (showDebt ? outcomeBlock("Debt relief", debtReached, debtClick, total, "debt") : "") +
+      (showDebt ? outcomeBlock("Sleep study", sleepReached, sleepClick, total, "sleep") : "") +
+      (showOld ? outcomeBlock("Disqualification", disReached, disClick, total, "bad") : "");
 
     var list = document.getElementById("list");
     if (!events.length) {
@@ -551,6 +585,7 @@
           '<div class="qa">' +
             '<div class="qa-row"><div class="q">' + esc(questions.q1) + '</div>' + answer(event.q1) + '</div>' +
             '<div class="qa-row"><div class="q">' + esc(questions.q2) + '</div>' + answer(event.q2) + '</div>' +
+            (debtPages[event.page] || event.q3 ? '<div class="qa-row"><div class="q">' + esc(q3Text) + '</div>' + answer(event.q3) + '</div>' : '') +
           '</div>' +
           resultBlock(event) +
         '</article>';

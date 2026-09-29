@@ -2,10 +2,12 @@ import { get, list, put } from '@vercel/blob';
 
 export const QUESTIONS = {
   q1: 'Is your credit score over 670?',
-  q2: 'Is your current mortgage balance over $150k?'
+  q2: 'Is your current mortgage balance over $150k?',
+  q3: 'Do you have over $8k in credit card debt?'
 };
 
 const PAGES = new Set(['glo2', 'glo2b', 'tobe', 'abc']);
+const DEBT_PAGES = new Set(['glo2', 'glo2b']);
 const ANSWERS = new Set(['yes', 'no']);
 const SESSION = /^[a-zA-Z0-9-]{16,80}$/;
 
@@ -21,20 +23,39 @@ export function parseEvent(body) {
   const session = body.session;
   const q1 = body.q1 == null || body.q1 === '' ? null : body.q1;
   const q2 = body.q2 == null || body.q2 === '' ? null : body.q2;
+  const q3 = body.q3 == null || body.q3 === '' ? null : body.q3;
   if (!PAGES.has(page) || !SESSION.test(String(session || ''))) return null;
   if (q1 != null && !ANSWERS.has(q1)) return null;
   if (q2 != null && !ANSWERS.has(q2)) return null;
+  if (q3 != null && !ANSWERS.has(q3)) return null;
   if (q2 && !q1) return null;
+  if (q3 && !q1) return null;
   return {
     page,
     session: String(session),
     q1,
     q2,
+    q3,
     qualifyReached: readFlag(body.qualifyReached),
     disqualifyReached: readFlag(body.disqualifyReached),
     qualifyClick: readFlag(body.qualifyClick),
-    disqualifyClick: readFlag(body.disqualifyClick)
+    disqualifyClick: readFlag(body.disqualifyClick),
+    debtReached: readFlag(body.debtReached),
+    sleepReached: readFlag(body.sleepReached),
+    debtClick: readFlag(body.debtClick),
+    sleepClick: readFlag(body.sleepClick)
   };
+}
+
+export function resultFor(page, q1, q2, q3) {
+  if (q1 === 'yes' && q2 === 'yes') return 'qualified';
+  if (DEBT_PAGES.has(page)) {
+    if (q3 === 'yes') return 'debt';
+    if (q3 === 'no') return 'sleep';
+    return null;
+  }
+  if (q1 && q2) return 'disqualified';
+  return null;
 }
 
 function keepAnswer(incoming, previous) {
@@ -67,23 +88,26 @@ async function readEvent(pathname) {
 export function buildRecord(existing, event, now) {
   const q1 = keepAnswer(event.q1, existing && existing.q1);
   const q2 = keepAnswer(event.q2, existing && existing.q2);
-  let result = null;
-  if (q1 && q2) result = q1 === 'yes' && q2 === 'yes' ? 'qualified' : 'disqualified';
+  const q3 = keepAnswer(event.q3, existing && existing.q3);
+  const page = existing && existing.page ? existing.page : event.page;
   const record = {
     session: event.session,
-    page: existing && existing.page ? existing.page : event.page,
+    page,
     q1,
     q2,
-    result,
+    q3,
+    result: resultFor(page, q1, q2, q3),
     qualifyClick: Boolean((existing && existing.qualifyClick) || event.qualifyClick),
     disqualifyClick: Boolean((existing && existing.disqualifyClick) || event.disqualifyClick),
+    debtClick: Boolean((existing && existing.debtClick) || event.debtClick),
+    sleepClick: Boolean((existing && existing.sleepClick) || event.sleepClick),
     startedAt: existing && existing.startedAt ? existing.startedAt : now,
     updatedAt: now
   };
-  const qualifyReached = mergeReached(existing, 'qualifyReached', event.qualifyReached);
-  const disqualifyReached = mergeReached(existing, 'disqualifyReached', event.disqualifyReached);
-  if (qualifyReached !== null) record.qualifyReached = qualifyReached;
-  if (disqualifyReached !== null) record.disqualifyReached = disqualifyReached;
+  ['qualifyReached', 'disqualifyReached', 'debtReached', 'sleepReached'].forEach((key) => {
+    const reached = mergeReached(existing, key, event[key]);
+    if (reached !== null) record[key] = reached;
+  });
   return record;
 }
 
@@ -114,14 +138,11 @@ export async function listEvents() {
     const page = await list({ prefix: 'quiz/', limit: 1000, cursor });
     blobs.push(...page.blobs);
     cursor = page.hasMore ? page.cursor : undefined;
-    if (blobs.length >= 1000) break;
   } while (cursor);
 
-  blobs.sort((a, b) => new Date(b.uploadedAt) - new Date(a.uploadedAt));
-  const newest = blobs.slice(0, 300);
   const events = [];
-  for (let i = 0; i < newest.length; i += 20) {
-    const batch = newest.slice(i, i + 20);
+  for (let i = 0; i < blobs.length; i += 40) {
+    const batch = blobs.slice(i, i + 40);
     const rows = await Promise.all(batch.map(async (blob) => {
       try {
         return await readEvent(blob.pathname);
@@ -138,26 +159,21 @@ export async function listEvents() {
 }
 
 export function summarize(events) {
-  const byPage = {
-    glo2: { total: 0, qualified: 0, disqualified: 0, inProgress: 0 },
-    glo2b: { total: 0, qualified: 0, disqualified: 0, inProgress: 0 },
-    tobe: { total: 0, qualified: 0, disqualified: 0, inProgress: 0 },
-    abc: { total: 0, qualified: 0, disqualified: 0, inProgress: 0 }
-  };
+  const bucket = () => ({ total: 0, qualified: 0, disqualified: 0, debt: 0, sleep: 0, inProgress: 0 });
+  const byPage = { glo2: bucket(), glo2b: bucket(), tobe: bucket(), abc: bucket() };
   const comboMap = new Map();
   events.forEach((event) => {
-    const bucket = byPage[event.page];
-    if (!bucket) return;
-    bucket.total += 1;
-    if (event.result === 'qualified') bucket.qualified += 1;
-    else if (event.result === 'disqualified') bucket.disqualified += 1;
-    else bucket.inProgress += 1;
-    const key = [event.page, event.q1 || '', event.q2 || '', event.result || 'in-progress'].join('|');
+    const counts = byPage[event.page];
+    if (!counts) return;
+    counts.total += 1;
+    if (event.result && event.result in counts) counts[event.result] += 1;
+    else counts.inProgress += 1;
+    const key = [event.page, event.q1 || '', event.q2 || '', event.q3 || '', event.result || 'in-progress'].join('|');
     comboMap.set(key, (comboMap.get(key) || 0) + 1);
   });
   const combos = Array.from(comboMap.entries()).map(([key, count]) => {
-    const [page, q1, q2, result] = key.split('|');
-    return { page, q1: q1 || null, q2: q2 || null, result: result === 'in-progress' ? null : result, count };
+    const [page, q1, q2, q3, result] = key.split('|');
+    return { page, q1: q1 || null, q2: q2 || null, q3: q3 || null, result: result === 'in-progress' ? null : result, count };
   }).sort((a, b) => b.count - a.count);
   return { total: events.length, byPage, combos };
 }
