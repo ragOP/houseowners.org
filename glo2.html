@@ -461,6 +461,14 @@
         </div>
       </div>
 
+      <div class="quiz hidden" id="quiz3">
+        <h2><span id="quiz3Num">2</span>. Do you have over $8k in credit card debt?</h2>
+        <div class="btns">
+          <button class="btn btn-yes" type="button" data-q="q3" data-v="yes">YES</button>
+          <button class="btn btn-no" type="button" data-q="q3" data-v="no">NO</button>
+        </div>
+      </div>
+
     </section>
 
     <div class="mc" id="processing">
@@ -483,6 +491,18 @@
       <a class="mc-cta" data-track="disqualify" href="https://www.shors.site/2NPSGGP7/7PJRR5C/">Click Here To Claim It Now -&gt;</a>
     </div>
 
+    <div class="mc" id="debtYesResult">
+      <div class="mc-highlight">While you don't qualify for a lower mortgage rate today, based on your answers, you DO qualify to claim a significant debt reduction under the economic relief program!</div>
+      <p class="mc-sub">Click below to claim now:</p>
+      <a class="mc-cta" data-track="debt-yes" href="https://www.nz91nyfbo.com/ZZ2GX/4MQCFX/">Click Here To Claim It Now -&gt;</a>
+    </div>
+
+    <div class="mc" id="sleepStudyResult">
+      <div class="mc-highlight">While you don't qualify for a lower mortgage rate today, based on your answers, you DO qualify to join a 3-day sleep research study in your area that will pay you <b>$3600</b>!</div>
+      <div class="mc-pill">Get Paid $3,600</div>
+      <a class="mc-cta" data-track="debt-no" href="https://www.gumbixyz.com/8XFSC8/2ZNH3GS/">Click Here To Claim It Now -&gt;</a>
+    </div>
+
     <footer>
       <a href="about.html">Privacy Policy</a>
       <span class="sep">|</span>
@@ -491,14 +511,18 @@
   </main>
 
   <script>
-    var answers = { q1: null, q2: null };
+    var answers = { q1: null, q2: null, q3: null };
     var quiz = document.getElementById("quiz");
     var quiz2 = document.getElementById("quiz2");
+    var quiz3 = document.getElementById("quiz3");
+    var quiz3Num = document.getElementById("quiz3Num");
     var lander = document.getElementById("lander");
     var processing = document.getElementById("processing");
     var statusMessage = document.getElementById("statusMessage");
     var yesResult = document.getElementById("yesResult");
     var noResult = document.getElementById("noResult");
+    var debtYesResult = document.getElementById("debtYesResult");
+    var sleepStudyResult = document.getElementById("sleepStudyResult");
     var steps = ["Reviewing Your Answers...", "Matching With Best Options...", "Confirming Eligibility..."];
 
     function show(el) { el.classList.add("show"); }
@@ -517,9 +541,14 @@
         var q = btn.getAttribute("data-q");
         answers[q] = btn.getAttribute("data-v");
 
-        if (q === "q1") {
-          quiz.classList.add("hidden");
-          quiz2.classList.remove("hidden");
+        if (q === "q1" || (q === "q2" && answers.q2 === "no")) {
+          btn.closest(".quiz").classList.add("hidden");
+          var nextQuiz = quiz2;
+          if (answers[q] === "no") {
+            nextQuiz = quiz3;
+            quiz3Num.textContent = q === "q1" ? "2" : "3";
+          }
+          nextQuiz.classList.remove("hidden");
           scrollToBottom();
           return;
         }
@@ -538,8 +567,8 @@
           }
           clearInterval(timer);
           hide(processing);
-          if (answers.q1 === "yes" && answers.q2 === "yes") show(yesResult);
-          else show(noResult);
+          if (q === "q3") show(answers.q3 === "yes" ? debtYesResult : sleepStudyResult);
+          else show(yesResult);
           window.scrollTo({ top: 0, behavior: "smooth" });
         }, 800);
       });

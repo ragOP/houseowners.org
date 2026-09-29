@@ -198,6 +198,7 @@
   }
   .result-badge.ineligible .check { background: #e31c3d; }
   .result-title { font-size: 24px; font-weight: 700; color: #1b2a4a; margin: 0 0 8px; line-height: 1.25; }
+  .result-title.result-title-sm { font-size: 19px; line-height: 1.35; }
   .result-amount { font-size: 40px; font-weight: 700; color: #2e8540; margin: 16px 0; }
   .result-desc { font-size: 15px; color: #5b616b; margin: 0 0 24px; line-height: 1.6; }
 
@@ -266,6 +267,7 @@
     .answer-btn { padding: 18px 22px; font-size: 17px; }
     .answers-split { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .result-title { font-size: 28px; }
+    .result-title.result-title-sm { font-size: 21px; }
     .result-amount { font-size: 48px; }
     .cta-btn { padding: 20px 28px; font-size: 20px; }
   }
@@ -317,8 +319,8 @@
         <p class="q-label">Question 1 of 2</p>
         <p class="q-text">Is your credit score over 670?</p>
         <div class="answers answers-split">
-          <button type="button" class="answer-btn" data-next="2" data-answer="yes"><span class="radio"></span>YES</button>
-          <button type="button" class="answer-btn" data-next="2" data-answer="no"><span class="radio"></span>NO</button>
+          <button type="button" class="answer-btn" data-next="2" data-step="2" data-total="2" data-answer="yes"><span class="radio"></span>YES</button>
+          <button type="button" class="answer-btn" data-next="Debt" data-step="2" data-total="2" data-answer="no"><span class="radio"></span>NO</button>
         </div>
       </div>
 
@@ -326,8 +328,17 @@
         <p class="q-label">Question 2 of 2</p>
         <p class="q-text">Is your current mortgage balance over $150k?</p>
         <div class="answers answers-split">
-          <button type="button" class="answer-btn" data-next="processing" data-answer="yes"><span class="radio"></span>YES</button>
-          <button type="button" class="answer-btn" data-next="processing" data-answer="no"><span class="radio"></span>NO</button>
+          <button type="button" class="answer-btn" data-next="processing" data-result="Result" data-answer="yes"><span class="radio"></span>YES</button>
+          <button type="button" class="answer-btn" data-next="Debt" data-step="3" data-total="3" data-answer="no"><span class="radio"></span>NO</button>
+        </div>
+      </div>
+
+      <div id="sDebt" class="screen">
+        <p class="q-label">Question 2 of 2</p>
+        <p class="q-text">Do you have over $8k in credit card debt?</p>
+        <div class="answers answers-split">
+          <button type="button" class="answer-btn" data-next="processing" data-result="DebtYes" data-answer="yes"><span class="radio"></span>YES</button>
+          <button type="button" class="answer-btn" data-next="processing" data-result="SleepStudy" data-answer="no"><span class="radio"></span>NO</button>
         </div>
       </div>
 
@@ -355,6 +366,20 @@
         <p class="result-desc">Based on your selection, you do not meet the eligibility criteria for this program at this time.</p>
         <a class="cta-btn" data-track="disqualify" href="https://www.shors.site/2NPSGGP7/7PJRR5C/">Click Here To Claim It Now -&gt;</a>
       </div>
+
+      <div id="sDebtYes" class="screen">
+        <h2 class="result-title result-title-sm">While you don't qualify for a lower mortgage rate today, based on your answers, you DO qualify to claim a significant debt reduction under the economic relief program!</h2>
+        <p class="result-desc">Click below to claim now</p>
+        <a class="cta-btn" data-track="debt-yes" href="https://www.nz91nyfbo.com/ZZ2GX/4MQCFX/">Click Here To Claim It Now -&gt;</a>
+        <p class="cta-fine">🔒 Secure • Free eligibility check • Under 60 seconds</p>
+      </div>
+
+      <div id="sSleepStudy" class="screen">
+        <h2 class="result-title result-title-sm">While you don't qualify for a lower mortgage rate today, based on your answers, you DO qualify to join a 3-day sleep research study in your area that will pay you $3600!</h2>
+        <div class="result-amount">$3,600</div>
+        <a class="cta-btn" data-track="debt-no" href="https://www.gumbixyz.com/8XFSC8/2ZNH3GS/">Click Here To Claim It Now -&gt;</a>
+        <p class="cta-fine">🔒 Secure • Limited spots available</p>
+      </div>
     </div>
   </div>
 </main>
@@ -373,7 +398,6 @@
   var label = document.getElementById('progressLabel');
   var resultTitle = document.getElementById('resultTitle');
   var total = 2;
-  var answers = { q1: null, q2: null };
 
   function scrollToBottom() {
     requestAnimationFrame(function () {
@@ -389,10 +413,7 @@
       if (btn.disabled) return;
       var screen = btn.closest('.screen');
       var next = btn.getAttribute('data-next');
-      var answer = btn.getAttribute('data-answer');
-      if (screen.id === 's1') answers.q1 = answer;
-      if (screen.id === 's2') answers.q2 = answer;
-      var result = (answers.q1 === 'yes' && answers.q2 === 'yes') ? 'eligible' : 'ineligible';
+      var result = btn.getAttribute('data-result');
       screen.querySelectorAll('.answer-btn').forEach(function (b) { b.disabled = true; });
       btn.classList.add('selected');
 
@@ -406,21 +427,23 @@
           setTimeout(function () {
             proc.classList.remove('active');
             document.getElementById('progressRow').style.display = 'none';
-            if (result === 'ineligible') {
-              document.getElementById('sIneligible').classList.add('active');
-            } else {
+            if (result === 'Result') {
               resultTitle.textContent = 'You May Qualify for a Lower Mortgage Rate';
-              document.getElementById('sResult').classList.add('active');
               startReservationTimer();
             }
+            document.getElementById('s' + result).classList.add('active');
             scrollToBottom();
           }, 2200);
         } else {
           var target = document.getElementById('s' + next);
-          if (/^\d+$/.test(next)) {
-            var nextNum = parseInt(next, 10);
+          var step = btn.getAttribute('data-step');
+          if (step) {
+            var nextNum = parseInt(step, 10);
+            total = parseInt(btn.getAttribute('data-total'), 10) || total;
             fill.style.width = (nextNum / total * 100) + '%';
             label.textContent = nextNum + ' of ' + total;
+            var qLabel = target && target.querySelector('.q-label');
+            if (qLabel) qLabel.textContent = 'Question ' + nextNum + ' of ' + total;
           }
           if (target) target.classList.add('active');
           scrollToBottom();
