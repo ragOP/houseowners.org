@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "y3rt3ntclc");
+</script>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#1b2a4a">
+<title>See If You Qualify For A New Government Program | Houseowners.org</title>
+<link rel="preload" as="image" href="hero.webp" type="image/webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1b2a4a;
+    --navy-2: #24386a;
+    --ink: #111827;
+    --muted: #4b5563;
+    --line: #e5e7eb;
+    --bg: #f3f4f6;
+    --green: #15803d;
+    --amber-bg: #fef3cd;
+    --amber-ink: #856404;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+  }
+  button { font-family: inherit; }
+
+  /* ── Header ── */
+  .topbar {
+    background: var(--navy);
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    padding-top: env(safe-area-inset-top);
+  }
+  .topbar-inner {
+    max-width: 560px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: .1px;
+  }
+  .brand svg { width: 26px; height: 26px; fill: #fff; flex-shrink: 0; }
+  /* ── Page ── */
+  .page {
+    flex: 1;
+    width: 100%;
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 22px 16px 28px;
+    background: #fff;
+  }
+  h1 {
+    font-size: 27px;
+    line-height: 1.15;
+    font-weight: 800;
+    letter-spacing: -.4px;
+    margin: 0 0 8px;
+  }
+  .lede { font-size: 16px; color: var(--muted); margin: 0 0 16px; }
+  .hero {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 18px;
+    background: #dbe4ee;
+  }
+
+  /* ── Quiz card ── */
+  .card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 16px 20px;
+    box-shadow: 0 2px 10px rgba(17,24,39,.06);
+    scroll-margin-top: 76px;
+  }
+  .step-label { font-size: 14px; color: var(--muted); font-weight: 500; margin: 0 0 8px; }
+  .progress { height: 6px; background: var(--line); border-radius: 99px; overflow: hidden; margin-bottom: 20px; }
+  .progress-fill { height: 100%; width: 50%; background: var(--navy-2); border-radius: 99px; transition: width .4s ease; }
+
+  .screen { display: none; }
+  .screen.active { display: block; animation: fadeUp .3s ease; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .screen.active, .cta::after { animation: none; } }
+
+  .q {
+    font-size: 23px;
+    line-height: 1.2;
+    font-weight: 800;
+    letter-spacing: -.2px;
+    margin: 0 0 18px;
+  }
+  .answers { display: flex; flex-direction: column; gap: 12px; }
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 54px;
+    padding: 14px 18px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--navy);
+    color: #fff;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .15s ease, transform .06s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn:hover { background: var(--navy-2); }
+  .btn:active { transform: scale(.985); }
+  .btn:focus-visible { outline: 3px solid #93c5fd; outline-offset: 2px; }
+  .btn:disabled { cursor: default; }
+  .btn.selected { background: var(--navy-2); box-shadow: inset 0 0 0 2px #93c5fd; }
+
+  /* processing */
+  .processing { text-align: center; padding: 26px 0 10px; }
+  .spinner {
+    width: 42px; height: 42px; margin: 0 auto 16px;
+    border: 4px solid var(--line); border-top-color: var(--navy-2);
+    border-radius: 50%; animation: spin .8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .processing .bold { font-weight: 700; font-size: 17px; margin: 0 0 4px; }
+  .processing p { color: var(--muted); margin: 0; }
+
+  /* results */
+  .badge {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: #e7f4e4; border: 1px solid #94d082; color: #216e1f;
+    padding: 5px 12px; border-radius: 6px;
+    font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px;
+    margin-bottom: 12px;
+  }
+  .result-title { font-size: 23px; line-height: 1.2; font-weight: 800; margin: 0 0 8px; }
+  .result-title.sm { font-size: 19px; line-height: 1.35; }
+  .amount { font-size: 34px; line-height: 1.1; font-weight: 800; color: var(--green); margin: 10px 0 14px; }
+  .result-desc { font-size: 15.5px; color: var(--muted); margin: 0 0 20px; }
+  .cta {
+    position: relative; overflow: hidden;
+    display: block; width: 100%;
+    background: var(--green); color: #fff;
+    border-radius: 8px; padding: 17px 12px;
+    font-size: min(18px, 4.2vw); font-weight: 700; text-align: center; text-decoration: none;
+    white-space: nowrap; letter-spacing: -.1px;
+    box-shadow: 0 8px 20px rgba(21,128,61,.3);
+  }
+  .cta::after {
+    content: ""; position: absolute; top: 0; left: -120%;
+    width: 55%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.45), transparent);
+    transform: skewX(-20deg); animation: shine 3.4s infinite; pointer-events: none;
+  }
+  @keyframes shine { 0% { left: -120%; } 55%, 100% { left: 140%; } }
+  .fine { text-align: center; font-size: 12.5px; color: var(--muted); margin: 12px 0 0; }
+  .timer {
+    text-align: center; margin-top: 14px; padding: 10px 14px;
+    background: var(--amber-bg); border: 1px solid #ffeaa7; border-radius: 8px;
+    font-size: 14px; color: var(--amber-ink); font-weight: 600;
+  }
+  .timer b { font-variant-numeric: tabular-nums; }
+
+  .trust {
+    display: flex; justify-content: center; flex-wrap: wrap; gap: 6px 16px;
+    font-size: 13px; color: var(--muted); margin-top: 16px;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    background: var(--navy);
+    color: #aeb6c7;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.6;
+    padding: 20px 16px calc(20px + env(safe-area-inset-bottom));
+  }
+  .footer a { color: #d7deea; margin: 0 8px; }
+  .footer p { max-width: 520px; margin: 8px auto 0; }
+
+  @media (min-width: 600px) {
+    .page { margin: 24px auto 32px; border-radius: 14px; box-shadow: 0 2px 14px rgba(17,24,39,.06); padding: 28px 28px 32px; }
+    h1 { font-size: 32px; }
+    .q { font-size: 25px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="/">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 11.5h3V21h5.5v-6h3v6H19v-9.5h3z"/></svg>
+      Houseowners.org
+    </a>
+  </div>
+</header>
+
+<main class="page">
+  <h1>See If You Qualify For A New Government Program</h1>
+  <p class="lede">Find out if you're eligible in just a few quick questions.</p>
+  <picture>
+    <source srcset="hero.webp" type="image/webp">
+    <img class="hero" src="hero.jpg" alt="Single-family home" width="1200" height="665" fetchpriority="high" decoding="async">
+  </picture>
+
+  <section class="card" id="card">
+    <div id="progressWrap">
+      <p class="step-label" id="stepLabel">Question 1 of 2</p>
+      <div class="progress"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+
+    <div class="screen active" id="s1">
+      <h2 class="q">Is your credit score over 670?</h2>
+      <div class="answers">
+        <button type="button" class="btn" data-answer="yes" data-next="2" data-step="2" data-total="2">Yes</button>
+        <button type="button" class="btn" data-answer="no" data-next="Debt" data-step="2" data-total="2">No</button>
+      </div>
+    </div>
+
+    <div class="screen" id="s2">
+      <h2 class="q">Is your current mortgage balance over $150k?</h2>
+      <div class="answers">
+        <button type="button" class="btn" data-answer="yes" data-result="Qualify">Yes</button>
+        <button type="button" class="btn" data-answer="no" data-next="Debt" data-step="3" data-total="3">No</button>
+      </div>
+    </div>
+
+    <div class="screen" id="sDebt">
+      <h2 class="q">Do you have over $8k in credit card debt?</h2>
+      <div class="answers">
+        <button type="button" class="btn" data-answer="yes" data-result="DebtYes">Yes</button>
+        <button type="button" class="btn" data-answer="no" data-result="SleepStudy">No</button>
+      </div>
+    </div>
+
+    <div class="screen" id="sProcessing">
+      <div class="processing">
+        <div class="spinner"></div>
+        <p class="bold">Checking eligibility…</p>
+        <p>Reviewing your responses against program requirements</p>
+      </div>
+    </div>
+
+    <div class="screen" id="sQualify">
+      <div class="badge">✓ Eligible</div>
+      <h2 class="result-title">You May Qualify for a Lower Mortgage Rate</h2>
+      <div class="amount">As Low as 2.5%</div>
+      <p class="result-desc">Based on your pre-screening responses, you appear to meet the initial eligibility criteria for a lower mortgage rate. Complete your full application to see your personalized rate in 60 seconds.</p>
+      <a class="cta" data-track="qualify" href="https://track.mainofferpage.online/click">Click Here To Claim It Now -&gt;</a>
+      <p class="fine">🔒 Secure • No SSN required • Free eligibility check • 60 seconds</p>
+      <div class="timer">Your eligibility result expires in <b id="timer">10:00</b></div>
+    </div>
+
+    <div class="screen" id="sDebtYes">
+      <h2 class="result-title sm">While you don't qualify for a lower mortgage rate today, based on your answers, you DO qualify to claim a significant debt reduction under the economic relief program!</h2>
+      <p class="result-desc">Click below to claim now</p>
+      <a class="cta" data-track="debt-yes" href="https://www.nz91nyfbo.com/ZZ2GX/4MQCFX/">Click Here To Claim It Now -&gt;</a>
+      <p class="fine">🔒 Secure • Free eligibility check • Under 60 seconds</p>
+    </div>
+
+    <div class="screen" id="sSleepStudy">
+      <h2 class="result-title sm">While you don't qualify for a lower mortgage rate today, based on your answers, you DO qualify to join a 3-day sleep research study in your area that will pay you $3600!</h2>
+      <div class="amount">$3,600</div>
+      <a class="cta" data-track="debt-no" href="https://www.gumbixyz.com/8XFSC8/2ZNH3GS/">Click Here To Claim It Now -&gt;</a>
+      <p class="fine">🔒 Secure • Limited spots available</p>
+    </div>
+  </section>
+
+  <div class="trust">
+    <span>🔒 Secure &amp; private</span>
+    <span>⏱ Takes under 60 seconds</span>
+    <span>✓ Free to check</span>
+  </div>
+</main>
+
+<footer class="footer">
+  <div>
+    <a href="about.html">About / Privacy</a>
+    <a href="terms.html">Terms of Use</a>
+  </div>
+  <p>&copy; 2026 Houseowners.org · This site is a privately owned marketing site and is not affiliated with any government agency. Answers are a pre-screening only and are not an offer of credit. This is an advertisement.</p>
+</footer>
+
+<script>
+(function () {
+  var card = document.getElementById('card');
+  var label = document.getElementById('stepLabel');
+  var fill = document.getElementById('progressFill');
+
+  function setProgress(n, total) {
+    label.textContent = 'Question ' + n + ' of ' + total;
+    fill.style.width = (n / total * 100) + '%';
+  }
+
+  function fitCtas() {
+    document.querySelectorAll('.screen.active .cta').forEach(function (a) {
+      a.style.fontSize = '';
+      var size = parseFloat(getComputedStyle(a).fontSize);
+      while (a.scrollWidth > a.clientWidth && size > 11) {
+        size -= 0.5;
+        a.style.fontSize = size + 'px';
+      }
+    });
+  }
+  window.addEventListener('resize', fitCtas);
+
+  function keepCardInView() {
+    var top = card.getBoundingClientRect().top;
+    if (top < 60 || top > window.innerHeight * 0.45) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function show(id) {
+    document.querySelectorAll('.screen.active').forEach(function (s) { s.classList.remove('active'); });
+    document.getElementById('s' + id).classList.add('active');
+    keepCardInView();
+  }
+
+  document.querySelectorAll('.btn[data-answer]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var screen = btn.closest('.screen');
+      if (screen.dataset.done) return;
+      screen.dataset.done = '1';
+      btn.classList.add('selected');
+      var next = btn.getAttribute('data-next');
+      var result = btn.getAttribute('data-result');
+
+      setTimeout(function () {
+        if (result) {
+          fill.style.width = '100%';
+          show('Processing');
+          setTimeout(function () {
+            document.getElementById('progressWrap').style.display = 'none';
+            show(result);
+            fitCtas();
+            if (result === 'Qualify') startTimer();
+          }, 2200);
+          return;
+        }
+        setProgress(parseInt(btn.getAttribute('data-step'), 10), parseInt(btn.getAttribute('data-total'), 10));
+        show(next);
+      }, 250);
+    });
+  });
+
+  function startTimer() {
+    var el = document.getElementById('timer');
+    var remaining = 10 * 60;
+    (function tick() {
+      el.textContent = Math.floor(remaining / 60) + ':' + ('0' + remaining % 60).slice(-2);
+      if (remaining-- > 0) setTimeout(tick, 1000);
+    })();
+  }
+})();
+</script>
+</body>
+</html>
