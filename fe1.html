@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Mortgage Rate Reduction Program — Eligibility Check</title>
+    <meta name="description" content="Answer 2 quick questions to see if you qualify for a lower mortgage rate.">
+    <link href="/fequiz/css/flipdown.min.css" rel="stylesheet" media="all">
+    <link href="/fequiz/css/style-fequizchat.css" rel="stylesheet" media="all">
+
+    <!-- Start Chat v1.0 -->
+    <link href="/fequiz/css/chat.css" rel="stylesheet" media="all">
+    <script src="/fequiz/js/chat.min.js"></script>
+    <!-- End Chat-->
+
+    <style>
+        body {
+            background: #eef2f7;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* Top urgency strip */
+        .fe-alert {
+            background: linear-gradient(90deg, #b91c1c, #dc2626);
+            color: #fff;
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: .04em;
+            text-align: center;
+            padding: 8px 12px;
+        }
+
+        .fe-alert .fe-alert-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #fff;
+            margin-right: 8px;
+            vertical-align: middle;
+            animation: fe-blink 1s infinite;
+        }
+
+        @keyframes fe-blink {
+            50% {
+                opacity: .2;
+            }
+        }
+
+        .fe-headline {
+            max-width: 42rem;
+            margin: 0 auto;
+            padding: 20px 16px 8px;
+            text-align: center;
+        }
+
+        .fe-headline h1 {
+            color: #0f172a;
+            font-weight: 800;
+            font-size: 1.35rem;
+            line-height: 1.3;
+        }
+
+        .fe-headline h1 span {
+            color: #16a34a;
+        }
+
+        .fe-headline p {
+            color: #475569;
+            font-size: .95rem;
+            margin-top: 8px;
+        }
+
+        /* Chat card */
+        .fe-card {
+            max-width: 28rem;
+            margin: 12px auto 0;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, .08), 0 2px 6px rgba(15, 23, 42, .05);
+            overflow: hidden;
+        }
+
+        .fe-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: #0f2a5c;
+            color: #fff;
+        }
+
+        .fe-card-header .fe-avatar {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .fe-card-header .fe-avatar img {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, .7);
+            display: block;
+        }
+
+        .fe-card-header .fe-avatar::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            bottom: 1px;
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background: #22c55e;
+            border: 2px solid #0f2a5c;
+        }
+
+        .fe-card-header .fe-name {
+            font-weight: 700;
+            font-size: 15px;
+            line-height: 1.2;
+        }
+
+        .fe-card-header .fe-name svg {
+            display: inline-block;
+            vertical-align: -2px;
+            margin-left: 2px;
+        }
+
+        .fe-card-header .fe-status {
+            font-size: 12px;
+            color: #bfdbfe;
+        }
+
+        .fe-card-header .fe-secure {
+            margin-left: auto;
+            font-size: 11px;
+            color: #bfdbfe;
+            text-align: right;
+            line-height: 1.3;
+        }
+
+        #chat-container-main {
+            background: #f8fafc;
+        }
+
+        /* Agent bubbles */
+        .rtchat-agent-block .rtchat-agent-block-panel .rtchat-agent-block-message {
+            background: #fff;
+            color: #1e293b;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px 16px 16px 4px;
+            box-shadow: 0 1px 2px rgba(15, 23, 42, .05);
+            line-height: 1.45;
+            animation: fe-pop .25s ease-out;
+        }
+
+        /* User bubbles */
+        .rtchat-user-block .rtchat-user-block-panel .rtchat-user-block-message {
+            background: linear-gradient(135deg, #16a34a, #15803d);
+            border-radius: 16px 16px 4px 16px;
+            font-weight: 600;
+            animation: fe-pop .25s ease-out;
+        }
+
+        @keyframes fe-pop {
+            from {
+                opacity: 0;
+                transform: translateY(6px) scale(.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        /* Answer buttons */
+        .rtchat-agent-block .rtchat-agent-block-panel .rtchat-agent-block-option {
+            background: linear-gradient(180deg, #22c55e, #16a34a);
+            border-radius: 12px;
+            box-shadow: 0 4px 0 #15803d, 0 6px 14px rgba(22, 163, 74, .3);
+            font-size: 17px;
+            letter-spacing: .03em;
+            transition: transform .1s, box-shadow .1s;
+        }
+
+        .rtchat-agent-block .rtchat-agent-block-panel .rtchat-agent-block-option:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 #15803d, 0 3px 8px rgba(22, 163, 74, .3);
+        }
+
+        .rtchat-agent-block .rtchat-agent-block-panel .rtchat-agent-block-options-container-horizontal button {
+            min-width: 110px;
+        }
+
+        #ClaimNow {
+            background: linear-gradient(180deg, #f97316, #ea580c);
+            box-shadow: 0 4px 0 #c2410c, 0 6px 14px rgba(234, 88, 12, .35);
+            animation: fe-pulse 1.6s infinite;
+        }
+
+        @keyframes fe-pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Typing indicator: bouncing wave */
+        .rtchat-agent-block .rtchat-typing {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px 16px 16px 4px;
+            padding: 12px 14px;
+        }
+
+        .rtchat-agent-block .rtchat-typing .rtchat-typing-animation {
+            display: inline-flex;
+            align-items: center;
+            height: 10px;
+        }
+
+        .rtchat-agent-block .rtchat-typing .rtchat-typing-dot {
+            width: 7px;
+            height: 7px;
+            margin-right: 5px;
+            background-color: #0f2a5c;
+            animation: fe-typing-bounce 1.2s infinite ease-in-out;
+        }
+
+        .rtchat-agent-block .rtchat-typing .rtchat-typing-dot:last-child {
+            margin-right: 0;
+        }
+
+        .rtchat-agent-block .rtchat-typing .rtchat-typing-dot:nth-child(2) {
+            animation-delay: .15s;
+        }
+
+        .rtchat-agent-block .rtchat-typing .rtchat-typing-dot:nth-child(3) {
+            animation-delay: .3s;
+        }
+
+        @keyframes fe-typing-bounce {
+
+            0%,
+            60%,
+            100% {
+                transform: translateY(0);
+                opacity: .35;
+            }
+
+            30% {
+                transform: translateY(-5px);
+                opacity: 1;
+            }
+        }
+
+        /* Trust row */
+        .fe-trust {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 6px 16px;
+            max-width: 28rem;
+            margin: 14px auto 0;
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        /* Countdown bar */
+        .bottom-security-icons {
+            background: #0f2a5c;
+            color: #fff;
+            box-shadow: 0 -4px 14px rgba(15, 23, 42, .15);
+        }
+
+        .bottom-security-icons .fe-countdown-label {
+            color: #fde68a !important;
+        }
+
+        .bottom-security-icons .fe-countdown-sub {
+            color: #cbd5e1 !important;
+        }
+    </style>
+
+    <!-- Microsoft Clarity Tag -->
+    <script type="text/javascript">
+        (function (c, l, a, r, i, t, y) {
+            c[a] = c[a] || function () {
+                (c[a].q = c[a].q || []).push(arguments)
+            };
+            t = l.createElement(r);
+            t.async = 1;
+            t.src = "https://www.clarity.ms/tag/" + i;
+            y = l.getElementsByTagName(r)[0];
+            y.parentNode.insertBefore(t, y);
+        })(window, document, "clarity", "script", "y3rt3ntclc");
+    </script>
+
+    <script src="/fequiz/js/flipdown.min.js"></script>
+</head>
+
+<body style="">
+    <main id="main-page" class="min-h-screen">
+        <div class="fe-alert">
+            <span class="fe-alert-dot"></span>WARNING: SCREENING CLOSES AT 7PM ET
+        </div>
+
+        <div class="fe-headline">
+            <h1>New Mortgage Rate Reduction Program Lets Homeowners Lower Their Rate to as Low as <span>2.5%</span></h1>
+            <p>Answer 2 quick questions below to check your eligibility.</p>
+        </div>
+
+        <div class="fe-card">
+            <div class="fe-card-header">
+                <div class="fe-avatar"><img src="/fequiz/js/img/avatar/agent.jpg" alt="Sarah"></div>
+                <div>
+                    <div class="fe-name">Sarah
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="#60a5fa" aria-hidden="true">
+                            <path
+                                d="M12 1l3 2.2 3.7-.2 1.1 3.5 3 2.2-1.2 3.5 1.2 3.5-3 2.2-1.1 3.5-3.7-.2L12 23l-3-2.2-3.7.2-1.1-3.5-3-2.2L2.4 12 1.2 8.5l3-2.2L5.3 2.8 9 3z" />
+                            <path d="M10.5 15.5l-3-3 1.4-1.4 1.6 1.6 4.6-4.6 1.4 1.4z" fill="#0f2a5c" />
+                        </svg>
+                    </div>
+                    <div class="fe-status">Program Assistant • Online now</div>
+                </div>
+                <div class="fe-secure">🔒 Secure<br>check</div>
+            </div>
+
+            <div id="chat-container-main" style="padding-bottom: 90px;">
+                <div class="p-4">
+                    <div class="space-y-4">
+                        <div id="chat-container" class="chat-container pt-2 pb-2 rtchat-container">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="fe-trust">
+            <span>✔ Free to check</span>
+            <span>✔ No SSN required</span>
+            <span>✔ Takes 60 seconds</span>
+        </div>
+
+        <div id="bottom-security-icons" class="bottom-security-icons bottom-security-icons-fixed"
+            style="visibility: unset;">
+            <div id="flipdown" class="flipdown flipdown-sm flipdown__theme-light"></div>
+            <div>
+                <div class="fe-countdown-label" style="font-size:13px;line-height:13px;font-weight:600;">left to claim
+                </div>
+                <div class="fe-countdown-sub" style="font-size:13px;line-height:13px;margin-top:2px;font-weight:600;">
+                    <span>Your spot is only</span><span class="space">&nbsp;</span><span>guaranteed for this
+                        long!</span>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div id="tcpa" class="pt-2 hidden">
+        <div
+            class="mx-auto max-w-7xl overflow-hidden px-6 lg:px-8 text-sm sm:text-md leading-5 sm:leading-6 text-gray-500">
+            <div class="tcpa-container text-xs text-center leading-5 text-gray-500"></div>
+        </div>
+    </div>
+    <div class="separator" style="height:0px;width:100%;padding-top:20px;"></div>
+    <footer id="main-footer" class="bg-gray-100 border-t border-t-1 border-t-gray-200 mt-8">
+        <div
+            class="mx-auto max-w-7xl overflow-hidden px-6 py-8 lg:px-8 text-sm sm:text-md leading-5 sm:leading-6 text-gray-500">
+            <p class="text-center pb-8">
+                &copy; 2026 Houseowners News. Sarah is an automated assistant, not a live person. This site is a
+                privately owned marketing site — not a lender or government agency, and not affiliated with the FHFA.
+                Answers are a pre-screening only and are not an offer of credit; rates and eligibility vary by
+                individual situation. This is an advertisement.
+            </p>
+            <p class="text-center pb-4 text-blue-400">
+                <span><a href="about.html" target="_blank">About / Privacy</a>
+                    |
+                    <a href="terms.html" target="_blank">Terms of Use</a></span>
+            </p>
+        </div>
+    </footer>
+
+    <script src="/fequiz/js/jquery-3.7.0.min.js"></script>
+    <script src="/fequiz/js/fequiz.js"></script>
+
+    <script>
+        (function () {
+            let oWindow = $(window);
+            let oDocument = $(document);
+            let oChatContainerMain = $("#chat-container-main");
+            let oBottomSecurityIcons = $("#bottom-security-icons");
+            let oFooter = $("#main-footer");
+
+            function setPosition() {
+                let iBottomScrollPosition = (document.body.clientHeight || document.documentElement.clientHeight) + oDocument.scrollTop();
+
+                if (iBottomScrollPosition >= Math.max(oFooter.offset().top, oFooter.position().top)) {
+                    oBottomSecurityIcons.addClass("bottom-security-icons-absolute").removeClass("bottom-security-icons-fixed");
+                } else {
+                    oBottomSecurityIcons.removeClass("bottom-security-icons-absolute").addClass("bottom-security-icons-fixed");
+                }
+
+                oBottomSecurityIcons.css("visibility", "unset");
+            };
+
+            function setPadding() {
+                oChatContainerMain.css("padding-bottom", (oBottomSecurityIcons.outerHeight() + 20) + "px");
+            };
+
+            oWindow.on("scroll", function () {
+                setPadding();
+                setPosition();
+            });
+
+            oWindow.on("resize", function () {
+                setPadding();
+                setPosition();
+            });
+
+            document.addEventListener("chat/before-scroll", function (ev) {
+                $(ev.detail.element).attr("style", "scroll-margin-bottom:" + (oBottomSecurityIcons.outerHeight() + 20) + "px!important;");
+            });
+
+            document.addEventListener("chat/after-scroll", function (ev) {
+                setTimeout(function () {
+                    $(ev.detail.element).attr("style", "");
+                }, 300);
+            });
+
+            document.addEventListener("chat/render", function () {
+                setPadding();
+                setPosition();
+            });
+
+            setPadding();
+            setPosition();
+
+            $(document).ready(function () {
+                setPadding();
+                setPosition();
+            });
+        })();
+
+        /* Countdown */
+        (function () {
+
+            /* unix timestamp (in seconds) */
+            var iSeconds = (new Date().getTime() / 1000) + 120 /* 2 minutes */ + 1;
+
+            oFlipDown = new FlipDown(iSeconds, "flipdown", {
+                headings: ["", "", "", ""],
+                theme: "light"
+            }).start();
+        })();
+    </script>
+
+
+
+</body>
+
+</html>

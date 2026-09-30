@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#ff5f4a">
+    <title>Mortgage Rate Reduction Program — Eligibility Check</title>
+    <meta name="description" content="Answer 2 quick questions to see if you qualify for a lower mortgage rate.">
+    <link href="/fequiz/css/style-fequizchat.css" rel="stylesheet" media="all">
+
+    <!-- Start Chat v1.0 -->
+    <link href="/fequiz/css/chat.css" rel="stylesheet" media="all">
+    <script src="/fequiz/js/chat.min.js"></script>
+    <!-- End Chat-->
+
+    <style>
+        body {
+            overflow-x: clip;
+            min-height: 100vh;
+            min-height: 100dvh;
+            color: #111;
+            font-size: 16px;
+            background: linear-gradient(165deg, #ff8a1f 0%, #ff4f6d 45%, #8b3dff 100%) fixed;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        button {
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .fe-wrap {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: calc(14px + env(safe-area-inset-top)) 14px 0;
+        }
+
+        /* Header with ring countdown */
+        .fe-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            color: #fff;
+        }
+
+        .fe-tag {
+            display: inline-block;
+            background: #111;
+            color: #fde047;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            padding: 5px 10px;
+            border-radius: 8px;
+            transform: rotate(-2deg);
+        }
+
+        .fe-ring {
+            position: relative;
+            width: 58px;
+            height: 58px;
+            flex-shrink: 0;
+        }
+
+        .fe-ring svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .fe-ring circle {
+            fill: none;
+            stroke-width: 5;
+        }
+
+        .fe-ring .fe-ring-bg {
+            stroke: rgba(255, 255, 255, .3);
+        }
+
+        .fe-ring .fe-ring-fg {
+            stroke: #fde047;
+            stroke-linecap: round;
+            transition: stroke-dashoffset .25s linear;
+        }
+
+        .fe-ring.is-urgent .fe-ring-fg {
+            stroke: #fff;
+        }
+
+        .fe-ring-text {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            font-size: 13px;
+            font-weight: 800;
+            font-variant-numeric: tabular-nums;
+            color: #fff;
+            line-height: 1;
+        }
+
+        .fe-ring-label {
+            text-align: right;
+            font-size: 11px;
+            font-weight: 700;
+            line-height: 1.2;
+            color: rgba(255, 255, 255, .9);
+        }
+
+        .fe-timer {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .fe-wrap h1 {
+            margin-top: 14px;
+            color: #fff;
+            font-size: 30px;
+            line-height: 1.12;
+            font-weight: 900;
+            letter-spacing: -.02em;
+            text-shadow: 0 3px 0 rgba(0, 0, 0, .15);
+        }
+
+        .fe-wrap h1 mark {
+            background: #fde047;
+            color: #111;
+            padding: 0 6px;
+            border-radius: 6px;
+            text-shadow: none;
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
+        }
+
+        .fe-card {
+            margin-top: 18px;
+            background: #fff;
+            border: 3px solid #111;
+            border-radius: 24px;
+            box-shadow: 6px 6px 0 #111;
+            overflow: hidden;
+        }
+
+        .fe-card-head {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-bottom: 3px solid #111;
+            background: #fef9c3;
+        }
+
+        .fe-card-head img {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 2px solid #111;
+        }
+
+        .fe-card-name {
+            font-weight: 900;
+            font-size: 16px;
+            line-height: 1.1;
+        }
+
+        .fe-card-role {
+            font-size: 12px;
+            font-weight: 600;
+            color: #57534e;
+        }
+
+        .fe-card-emoji {
+            margin-left: auto;
+            font-size: 22px;
+            animation: fe-wave 2s infinite;
+            transform-origin: 70% 70%;
+        }
+
+        @keyframes fe-wave {
+
+            0%,
+            60%,
+            100% {
+                transform: rotate(0);
+            }
+
+            10%,
+            30% {
+                transform: rotate(14deg);
+            }
+
+            20%,
+            40% {
+                transform: rotate(-8deg);
+            }
+        }
+
+        #chat-container-main {
+            padding: 4px 12px 18px;
+        }
+
+        /* Chat overrides: chunky outlined bubbles */
+        .rtchat-agent-block {
+            width: 100%;
+        }
+
+        .rtchat-agent-block .rtchat-agent-block-avatar img,
+        .rtchat-user-block .rtchat-user-block-avatar img {
+            width: 30px;
+            border: 2px solid #111;
+        }
+
+        .rtchat-agent-block .rtchat-agent-block-panel {
+            flex: 1;
+            min-width: 0;
+            margin-left: 8px;
+        }
+
+        .rtchat-agent-block .rtchat-agent-block-panel .rtchat-agent-block-message {
+            max-width: 90%;
+            background: #fff;
+            color: #111;
+            border: 2px solid #111;
+            border-radius: 16px 16px 16px 4px;
+            box-shadow: 3px 3px 0 #111;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.45;
+            padding: 10px 14px;
+            overflow-wrap: anywhere;
+            scroll-margin-bottom: 40px;
+            animation: fe-bounce-in .35s cubic-bezier(.3, 1.6, .5, 1);
+        }
+
+        .rtchat-user-block .rtchat-user-block-panel {
+            margin-right: 8px;
+            max-width: 80%;
+        }
+
+        .rtchat-user-block .rtchat-user-block-panel .rtchat-user-block-message {
+            background: #fde047;
+            color: #111;
+            border: 2px solid #111;
+            border-radius: 16px 16px 4px 16px;
+            box-shadow: 3px 3px 0 #111;
+            font-size: 16px;
+            font-weight: 900;
+            padding: 10px 18px;
+            scroll-margin-bottom: 40px;
+            animation: fe-bounce-in .35s cubic-bezier(.3, 1.6, .5, 1);
+        }
+
+        @keyframes fe-bounce-in {
+            from {
+                opacity: 0;
+                transform: scale(.85);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        .rtchat-agent-block .rtchat-agent-block-panel .rtchat-agent-block-options-container-horizontal {
+            display: flex;
+            gap: 12px;
+            width: 100%;
+            max-width: 340px;
+            padding: 0 4px 4px 0;
+            margin-top: 14px;
+            background: transparent;
+            border: 0;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .rtchat-agent-block .rtchat-agent-block-panel .rtchat-agent-block-options-container-horizontal button {
+            flex: 1;
+            margin: 0;
+            min-width: 0;
+            min-height: 56px;
+            scroll-margin-bottom: 40px;
+        }
+
+        .rtchat-agent-block .rtchat-agent-block-panel .rtchat-agent-block-option {
+            color: #111;
+            background: #fff;
+            border: 3px solid #111;
+            border-radius: 14px;
+            box-shadow: 4px 4px 0 #111;
+            font-size: 19px;
+            font-weight: 900;
+            padding: 12px 10px;
+            transition: transform .08s, box-shadow .08s;
+        }
+
+        .rtchat-agent-block-options-container-horizontal button:first-child:not(:only-child) {
+            background: #86efac !important;
+        }
+
+        .rtchat-agent-block-options-container-horizontal button:last-child:not(:only-child) {
+            background: #fda4af !important;
+        }
+
+        .rtchat-agent-block .rtchat-agent-block-panel .rtchat-agent-block-option:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0 0 0 #111;
+        }
+
+        #ClaimNow {
+            background: #fde047;
+            font-size: 17px;
+            line-height: 1.25;
+            padding: 16px 12px;
+            animation: fe-jiggle 1.4s infinite;
+        }
+
+        @keyframes fe-jiggle {
+
+            0%,
+            100% {
+                transform: rotate(0) scale(1);
+            }
+
+            25% {
+                transform: rotate(-1.5deg) scale(1.03);
+            }
+
+            75% {
+                transform: rotate(1.5deg) scale(1.03);
+            }
+        }
+
+        /* Typing indicator: rainbow bounce */
+        .rtchat-agent-block .rtchat-typing {
+            background: #fff;
+            border: 2px solid #111;
+            border-radius: 16px 16px 16px 4px;
+            box-shadow: 3px 3px 0 #111;
+            padding: 12px 16px;
+            scroll-margin-bottom: 40px;
+        }
+
+        .rtchat-agent-block .rtchat-typing .rtchat-typing-animation {
+            height: 14px;
+            align-items: flex-end;
+            gap: 5px;
+        }
+
+        .rtchat-agent-block .rtchat-typing .rtchat-typing-dot {
+            width: 10px;
+            height: 10px;
+            margin: 0;
+            border: 2px solid #111;
+            background: #ff4f6d;
+            animation: fe-rainbow 1s infinite ease-in-out;
+        }
+
+        .rtchat-agent-block .rtchat-typing .rtchat-typing-dot:nth-child(2) {
+            background: #fde047;
+            animation-delay: .15s;
+        }
+
+        .rtchat-agent-block .rtchat-typing .rtchat-typing-dot:nth-child(3) {
+            background: #8b3dff;
+            animation-delay: .3s;
+        }
+
+        @keyframes fe-rainbow {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-6px);
+            }
+        }
+
+        .fe-trust {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .fe-trust span {
+            background: rgba(255, 255, 255, .95);
+            border: 2px solid #111;
+            border-radius: 999px;
+            padding: 5px 12px;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .fe-footer {
+            max-width: 480px;
+            margin: 24px auto 0;
+            padding: 16px 16px calc(20px + env(safe-area-inset-bottom));
+            font-size: 11px;
+            line-height: 1.55;
+            color: rgba(255, 255, 255, .85);
+            text-align: center;
+        }
+
+        .fe-footer a {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        /* Confetti */
+        .fe-confetti {
+            position: fixed;
+            top: -12px;
+            z-index: 100;
+            width: 9px;
+            height: 14px;
+            pointer-events: none;
+            animation: fe-fall linear forwards;
+        }
+
+        @keyframes fe-fall {
+            to {
+                transform: translate3d(var(--dx), 105vh, 0) rotate(var(--rot));
+            }
+        }
+
+        @media (max-width: 360px) {
+            .fe-wrap h1 {
+                font-size: 25px;
+            }
+
+            .fe-ring-label {
+                display: none;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .fe-card-emoji,
+            #ClaimNow {
+                animation: none;
+            }
+        }
+    </style>
+
+    <!-- Microsoft Clarity Tag -->
+    <script type="text/javascript">
+        (function (c, l, a, r, i, t, y) {
+            c[a] = c[a] || function () {
+                (c[a].q = c[a].q || []).push(arguments)
+            };
+            t = l.createElement(r);
+            t.async = 1;
+            t.src = "https://www.clarity.ms/tag/" + i;
+            y = l.getElementsByTagName(r)[0];
+            y.parentNode.insertBefore(t, y);
+        })(window, document, "clarity", "script", "y3rt3ntclc");
+    </script>
+</head>
+
+<body>
+    <main id="main-page" class="fe-wrap">
+        <div class="fe-head">
+            <span class="fe-tag">⚠ Closes 7PM ET</span>
+            <div class="fe-timer">
+                <div class="fe-ring-label">Your spot<br>is held</div>
+                <div id="fe-ring" class="fe-ring">
+                    <svg viewBox="0 0 50 50" aria-hidden="true">
+                        <circle class="fe-ring-bg" cx="25" cy="25" r="21"></circle>
+                        <circle id="fe-ring-fg" class="fe-ring-fg" cx="25" cy="25" r="21"></circle>
+                    </svg>
+                    <div id="fe-ring-text" class="fe-ring-text">2:00</div>
+                </div>
+            </div>
+        </div>
+
+        <h1>Homeowners Can Now Lower Their Mortgage Rate to as Low as <mark>2.5%</mark></h1>
+
+        <div class="fe-card">
+            <div class="fe-card-head">
+                <img src="/fequiz/js/img/avatar/agent.jpg" alt="Sarah">
+                <div>
+                    <div class="fe-card-name">Sarah</div>
+                    <div class="fe-card-role">Automated assistant · 2 quick questions</div>
+                </div>
+                <span class="fe-card-emoji" aria-hidden="true">👋</span>
+            </div>
+            <div id="chat-container-main">
+                <div id="chat-container" class="chat-container pt-2 pb-2 rtchat-container"></div>
+            </div>
+        </div>
+
+        <div class="fe-trust">
+            <span>🔒 Secure</span>
+            <span>🪪 No SSN</span>
+            <span>⚡ 60 sec</span>
+        </div>
+    </main>
+
+    <div id="tcpa" class="hidden">
+        <div class="tcpa-container text-xs text-center leading-5 text-gray-500"></div>
+    </div>
+
+    <footer id="main-footer" class="fe-footer">
+        <p>
+            &copy; 2026 Houseowners News. Sarah is an automated assistant, not a live person. This site is a
+            privately owned marketing site — not a lender or government agency, and not affiliated with the FHFA.
+            Answers are a pre-screening only and are not an offer of credit; rates and eligibility vary by
+            individual situation. This is an advertisement.
+        </p>
+        <p style="margin-top:8px;">
+            <a href="about.html" target="_blank">About / Privacy</a>
+            |
+            <a href="terms.html" target="_blank">Terms of Use</a>
+        </p>
+    </footer>
+
+    <script src="/fequiz/js/jquery-3.7.0.min.js"></script>
+    <script src="/fequiz/js/fequiz.js"></script>
+
+    <script>
+        /* Ring countdown */
+        (function () {
+            var iTotal = 120;
+            var iEnd = Date.now() + iTotal * 1000;
+            var oRing = document.getElementById("fe-ring");
+            var oFg = document.getElementById("fe-ring-fg");
+            var oText = document.getElementById("fe-ring-text");
+            var fCirc = 2 * Math.PI * 21;
+
+            oFg.style.strokeDasharray = fCirc;
+
+            function tick() {
+                var fLeft = Math.max(0, (iEnd - Date.now()) / 1000);
+                var iSec = Math.ceil(fLeft);
+                var s = iSec % 60;
+                oFg.style.strokeDashoffset = fCirc * (1 - fLeft / iTotal);
+                oText.textContent = Math.floor(iSec / 60) + ":" + (s < 10 ? "0" : "") + s;
+                oRing.classList.toggle("is-urgent", iSec <= 30);
+                if (fLeft > 0) setTimeout(tick, 250);
+            }
+
+            tick();
+        })();
+
+        /* Confetti when the result button appears */
+        (function () {
+            var oContainer = document.getElementById("chat-container");
+            var aColors = ["#fde047", "#ff4f6d", "#8b3dff", "#22c55e", "#38bdf8", "#ff8a1f"];
+            var bFired = false;
+
+            function burst() {
+                if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+                for (var i = 0; i < 70; i++) {
+                    var el = document.createElement("span");
+                    el.className = "fe-confetti";
+                    el.style.left = (Math.random() * 100) + "vw";
+                    el.style.background = aColors[i % aColors.length];
+                    el.style.borderRadius = Math.random() > .5 ? "50%" : "2px";
+                    el.style.animationDuration = (2 + Math.random() * 1.8) + "s";
+                    el.style.animationDelay = (Math.random() * .4) + "s";
+                    el.style.setProperty("--dx", (Math.random() * 160 - 80) + "px");
+                    el.style.setProperty("--rot", (Math.random() * 900 - 450) + "deg");
+                    document.body.appendChild(el);
+                    setTimeout(el.remove.bind(el), 4500);
+                }
+            }
+
+            new MutationObserver(function (aList, oObserver) {
+                if (!bFired && document.getElementById("ClaimNow")) {
+                    bFired = true;
+                    oObserver.disconnect();
+                    burst();
+                }
+            }).observe(oContainer, { childList: true, subtree: true });
+        })();
+    </script>
+</body>
+
+</html>

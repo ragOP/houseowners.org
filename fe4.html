@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#ffffff">
+    <title>Mortgage Rate Reduction Program — Eligibility Check</title>
+    <meta name="description" content="Answer 2 quick questions to see if you qualify for a lower mortgage rate.">
+    <link href="/fequiz/css/style-fequizchat.css" rel="stylesheet" media="all">
+
+    <!-- Start Chat v1.0 -->
+    <link href="/fequiz/css/chat.css" rel="stylesheet" media="all">
+    <script src="/fequiz/js/chat.min.js"></script>
+    <!-- End Chat-->
+
+    <style>
+        body {
+            overflow-x: clip;
+            background: #fff;
+            color: #111827;
+            font-size: 16px;
+            padding-bottom: calc(64px + env(safe-area-inset-bottom));
+            -webkit-font-smoothing: antialiased;
+        }
+
+        button {
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .fe-serif {
+            font-family: Georgia, "Times New Roman", Times, serif;
+        }
+
+        /* Masthead */
+        .fe-mast {
+            border-bottom: 3px double #111827;
+            padding: calc(12px + env(safe-area-inset-top)) 16px 10px;
+            text-align: center;
+        }
+
+        .fe-mast-name {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: -.01em;
+            line-height: 1;
+        }
+
+        .fe-mast-meta {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 6px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: .12em;
+            color: #6b7280;
+        }
+
+        .fe-article {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 18px 16px 0;
+        }
+
+        .fe-kicker {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: #b91c1c;
+        }
+
+        .fe-article h1 {
+            margin-top: 6px;
+            font-size: 28px;
+            line-height: 1.18;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .fe-byline {
+            margin-top: 10px;
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        .fe-byline b {
+            color: #111827;
+        }
+
+        .fe-hero {
+            margin: 14px -16px 0;
+        }
+
+        .fe-hero img {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            display: block;
+        }
+
+        .fe-hero figcaption {
+            padding: 6px 16px 0;
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .fe-lede {
+            margin-top: 16px;
+            font-size: 19px;
+            line-height: 1.6;
+            color: #1f2937;
+        }
+
+        .fe-lede::first-letter {
+            float: left;
+            font-size: 56px;
+            line-height: .9;
+            padding: 4px 8px 0 0;
+            font-weight: 700;
+        }
+
+        .fe-alert {
+            margin-top: 18px;
+            padding: 10px 12px;
+            border-left: 4px solid #b91c1c;
+            background: #fef2f2;
+            font-size: 14px;
+            font-weight: 700;
+            color: #991b1b;
+        }
+
+        /* Embedded chat widget */
+        .fe-widget {
+            margin: 22px 0 0;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .fe-widget-head {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            background: #111827;
+            color: #fff;
+        }
+
+        .fe-widget-head img {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+        }
+
+        .fe-widget-title {
+            font-size: 15px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .fe-widget-sub {
+            font-size: 12px;
+            color: #9ca3af;
+        }
+
+        .fe-widget-sub::before {
+            content: "";
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            margin-right: 5px;
+            border-radius: 50%;
+            background: #22c55e;
+        }
+
+        #chat-container-main {
+            padding: 4px 12px 16px;
+            background: #fafafa;
+        }
+
+        /* Chat overrides */
+        .rtchat-agent-block {
+            width: 100%;
+        }
+
+        .rtchat-agent-block .rtchat-agent-block-avatar img,
+        .rtchat-user-block .rtchat-user-block-avatar img {
+            width: 28px;
+        }
+
+        .rtchat-agent-block .rtchat-agent-block-panel {
+            flex: 1;
+            min-width: 0;
+            margin-left: 8px;
+        }
+
+        .rtchat-agent-block .rtchat-agent-block-panel .rtchat-agent-block-message {
+            max-width: 90%;
+            background: #fff;
+            color: #111827;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px 14px 14px 14px;
+            font-size: 16px;
+            line-height: 1.5;
+            padding: 10px 14px;
+            overflow-wrap: anywhere;
+            scroll-margin-bottom: 110px;
+        }
+
+        .rtchat-user-block .rtchat-user-block-panel {
+            margin-right: 8px;
+            max-width: 80%;
+        }
+
+        .rtchat-user-block .rtchat-user-block-panel .rtchat-user-block-message {
+            background: #111827;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+            padding: 10px 18px;
+            border-radius: 14px 4px 14px 14px;
+            scroll-margin-bottom: 110px;
+        }
+
+        .rtchat-agent-block .rtchat-agent-block-panel .rtchat-agent-block-options-container-horizontal {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+            max-width: 340px;
+            padding: 0;
+            margin-top: 12px;
+            background: transparent;
+            border: 0;
+            border-radius: 0;
+        }
+
+        .rtchat-agent-block .rtchat-agent-block-panel .rtchat-agent-block-options-container-horizontal button {
+            flex: 1;
+            margin: 0;
+            min-width: 0;
+            min-height: 54px;
+            scroll-margin-bottom: 110px;
+        }
+
+        .rtchat-agent-block .rtchat-agent-block-panel .rtchat-agent-block-option {
+            background: #b91c1c;
+            color: #fff;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: .06em;
+            padding: 12px 10px;
+            box-shadow: 0 2px 0 #7f1d1d;
+            transition: transform .08s, background-color .15s;
+        }
+
+        .rtchat-agent-block .rtchat-agent-block-panel .rtchat-agent-block-option:active {
+            transform: translateY(2px);
+            box-shadow: none;
+        }
+
+        @media (hover: hover) {
+            .rtchat-agent-block .rtchat-agent-block-panel .rtchat-agent-block-option:hover {
+                background: #991b1b;
+            }
+        }
+
+        #ClaimNow {
+            background: #15803d;
+            box-shadow: 0 3px 0 #14532d;
+            font-size: 17px;
+            letter-spacing: .01em;
+            line-height: 1.25;
+            padding: 16px 12px;
+            animation: fe-nudge 2s infinite;
+        }
+
+        @keyframes fe-nudge {
+
+            0%,
+            80%,
+            100% {
+                transform: translateX(0);
+            }
+
+            85% {
+                transform: translateX(-4px);
+            }
+
+            90% {
+                transform: translateX(4px);
+            }
+
+            95% {
+                transform: translateX(-2px);
+            }
+        }
+
+        /* Typing indicator: classic sequential fade */
+        .rtchat-agent-block .rtchat-typing {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px 14px 14px 14px;
+            padding: 12px 14px;
+            scroll-margin-bottom: 110px;
+        }
+
+        .rtchat-agent-block .rtchat-typing .rtchat-typing-dot {
+            width: 8px;
+            height: 8px;
+            margin-right: 5px;
+            background: #111827;
+            animation: fe-fade 1.2s infinite;
+        }
+
+        .rtchat-agent-block .rtchat-typing .rtchat-typing-dot:last-child {
+            margin-right: 0;
+        }
+
+        .rtchat-agent-block .rtchat-typing .rtchat-typing-dot:nth-child(2) {
+            animation-delay: .2s;
+        }
+
+        .rtchat-agent-block .rtchat-typing .rtchat-typing-dot:nth-child(3) {
+            animation-delay: .4s;
+        }
+
+        @keyframes fe-fade {
+
+            0%,
+            60%,
+            100% {
+                opacity: .15;
+            }
+
+            30% {
+                opacity: 1;
+            }
+        }
+
+        .fe-share {
+            display: flex;
+            gap: 8px;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #6b7280;
+            flex-wrap: wrap;
+        }
+
+        .fe-share span {
+            border: 1px solid #e5e7eb;
+            border-radius: 999px;
+            padding: 4px 10px;
+        }
+
+        .fe-footer {
+            max-width: 640px;
+            margin: 28px auto 0;
+            padding: 16px;
+            border-top: 1px solid #e5e7eb;
+            font-size: 11px;
+            line-height: 1.55;
+            color: #6b7280;
+            text-align: center;
+        }
+
+        .fe-footer a {
+            color: #1d4ed8;
+        }
+
+        /* Bottom countdown bar */
+        .fe-bar {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 50;
+            background: #111827;
+            color: #fff;
+            padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 -4px 16px rgba(0, 0, 0, .2);
+        }
+
+        .fe-bar-text {
+            font-size: 13px;
+            line-height: 1.25;
+            color: #d1d5db;
+        }
+
+        .fe-bar-text b {
+            color: #fff;
+            display: block;
+            font-size: 14px;
+        }
+
+        .fe-bar-time {
+            font-variant-numeric: tabular-nums;
+            font-weight: 800;
+            font-size: 22px;
+            color: #fff;
+            background: #b91c1c;
+            border-radius: 6px;
+            padding: 4px 10px;
+            min-width: 84px;
+            text-align: center;
+        }
+
+        @media (min-width: 640px) {
+            .fe-hero {
+                margin: 14px 0 0;
+            }
+
+            .fe-hero figcaption {
+                padding-left: 0;
+            }
+
+            .fe-article h1 {
+                font-size: 34px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .fe-article h1 {
+                font-size: 24px;
+            }
+
+            .fe-lede {
+                font-size: 17px;
+            }
+        }
+    </style>
+
+    <!-- Microsoft Clarity Tag -->
+    <script type="text/javascript">
+        (function (c, l, a, r, i, t, y) {
+            c[a] = c[a] || function () {
+                (c[a].q = c[a].q || []).push(arguments)
+            };
+            t = l.createElement(r);
+            t.async = 1;
+            t.src = "https://www.clarity.ms/tag/" + i;
+            y = l.getElementsByTagName(r)[0];
+            y.parentNode.insertBefore(t, y);
+        })(window, document, "clarity", "script", "y3rt3ntclc");
+    </script>
+</head>
+
+<body>
+    <header class="fe-mast">
+        <div class="fe-mast-name fe-serif">Houseowners News</div>
+        <div class="fe-mast-meta"><span>Personal Finance</span><span>•</span><span>Advertisement</span></div>
+    </header>
+
+    <main id="main-page" class="fe-article">
+        <span class="fe-kicker">Mortgage Rates</span>
+        <h1 class="fe-serif">New Mortgage Rate Reduction Program Lets Homeowners Lower Their Rate to as Low as 2.5%</h1>
+        <div class="fe-byline">By <b>Houseowners News</b> · Updated today · 2 min read</div>
+
+        <figure class="fe-hero">
+            <img src="/hero.webp" alt="A suburban brick home" width="1024" height="567">
+            <figcaption>Homeowners can check eligibility in about 60 seconds.</figcaption>
+        </figure>
+
+        <p class="fe-lede fe-serif">
+            Lenders are reviewing homeowners for a lower mortgage rate under the Mortgage Rate Reduction Program.
+            Our automated assistant below asks two quick questions to see if you may qualify.
+        </p>
+
+        <div class="fe-alert">⚠ Screening closes at 7PM ET today.</div>
+
+        <section class="fe-widget" aria-label="Eligibility check">
+            <div class="fe-widget-head">
+                <img src="/fequiz/js/img/avatar/agent.jpg" alt="Sarah">
+                <div>
+                    <div class="fe-widget-title">Eligibility Check with Sarah</div>
+                    <div class="fe-widget-sub">Automated assistant · Online</div>
+                </div>
+            </div>
+            <div id="chat-container-main">
+                <div id="chat-container" class="chat-container pt-2 pb-2 rtchat-container"></div>
+            </div>
+        </section>
+
+        <div class="fe-share">
+            <span>🔒 Secure</span>
+            <span>No SSN required</span>
+            <span>Free to check</span>
+        </div>
+    </main>
+
+    <div id="tcpa" class="hidden">
+        <div class="tcpa-container text-xs text-center leading-5 text-gray-500"></div>
+    </div>
+
+    <footer id="main-footer" class="fe-footer">
+        <p>
+            &copy; 2026 Houseowners News. Sarah is an automated assistant, not a live person. This site is a
+            privately owned marketing site — not a lender or government agency, and not affiliated with the FHFA.
+            Answers are a pre-screening only and are not an offer of credit; rates and eligibility vary by
+            individual situation. This is an advertisement.
+        </p>
+        <p style="margin-top:8px;">
+            <a href="about.html" target="_blank">About / Privacy</a>
+            |
+            <a href="terms.html" target="_blank">Terms of Use</a>
+        </p>
+    </footer>
+
+    <div class="fe-bar">
+        <div class="fe-bar-text"><b>Your spot is reserved</b>Only guaranteed for this long</div>
+        <div id="fe-bar-time" class="fe-bar-time">2:00</div>
+    </div>
+
+    <script src="/fequiz/js/jquery-3.7.0.min.js"></script>
+
+    <script>
+        /* Let the article be read first: only auto-scroll the chat once the widget is on screen */
+        (function () {
+            var oWidget = document.querySelector(".fe-widget");
+            if (!("IntersectionObserver" in window)) return;
+            window.chat.scrollToBottom = false;
+            new IntersectionObserver(function (aEntries, oObserver) {
+                if (aEntries[0].isIntersecting) {
+                    window.chat.scrollToBottom = true;
+                    oObserver.disconnect();
+                }
+            }, { rootMargin: "0px 0px -35% 0px" }).observe(oWidget);
+        })();
+    </script>
+
+    <script src="/fequiz/js/fequiz.js"></script>
+
+    <script>
+        /* Countdown */
+        (function () {
+            var oTime = document.getElementById("fe-bar-time");
+            var iEnd = Date.now() + 120 * 1000;
+
+            function tick() {
+                var iLeft = Math.max(0, Math.ceil((iEnd - Date.now()) / 1000));
+                var s = iLeft % 60;
+                oTime.textContent = Math.floor(iLeft / 60) + ":" + (s < 10 ? "0" : "") + s;
+                if (iLeft > 0) setTimeout(tick, 250);
+            }
+
+            tick();
+        })();
+    </script>
+</body>
+
+</html>
