@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "y3rt3ntclc");
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Quick Question — Are You Overpaying on Your Mortgage?</title>
+<meta name="description" content="Chat with Ava for 30 seconds to see if you qualify for a lower mortgage rate.">
+<style>
+  :root{
+    --brand:#0b2e59; --bubble-user:#0a7cff;
+    --cta:#16a34a;
+    --call:#e63946; --call-dark:#c92f3c;
+    --bg:#e9eef5; --bot:#ffffff;
+    --ink:#101828; --muted:#6b7890; --line:#dfe6f0;
+    --hilite:#ffe600;
+    --amber-bg:#fff7e0; --amber-ink:#8a5b00;
+    --radius:20px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0; height:100%}
+  body{font:16px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink); background:var(--bg); -webkit-font-smoothing:antialiased;
+    display:flex; flex-direction:column; min-height:100dvh}
+  .app{max-width:520px; width:100%; margin:0 auto; display:flex; flex-direction:column; flex:1}
+
+  /* ── ALERT STRIP ── */
+  .alert{background:linear-gradient(90deg,#c81e2b,#e63946); color:#fff; text-align:center;
+    font-size:12.5px; font-weight:800; padding:8px 14px}
+
+  /* ── CHAT HEADER ── */
+  .chead{display:flex; align-items:center; gap:11px; padding:11px 16px; background:#fff;
+    border-bottom:1px solid var(--line); position:sticky; top:0; z-index:5}
+  .avatar{width:44px; height:44px; border-radius:50%; background:linear-gradient(135deg,var(--brand),#3b82f6);
+    color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:18px;
+    flex:0 0 auto; position:relative; overflow:hidden}
+  .avatar img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+  .who{font-weight:800; font-size:15px; line-height:1.15}
+  .status{font-size:12px; color:var(--cta); font-weight:700; display:flex; align-items:center; gap:5px}
+  .dot{width:8px; height:8px; border-radius:50%; background:var(--cta); display:inline-block; animation:blink 1.4s infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+  .hcall{margin-left:auto; display:flex; align-items:center; gap:6px; background:var(--call); color:#fff;
+    text-decoration:none; font-size:13px; font-weight:800; padding:8px 13px; border-radius:9px; white-space:nowrap}
+  .hcall svg{width:13px; height:13px; fill:#fff}
+
+  .helped{text-align:center; font-size:11.5px; color:var(--muted); background:#fff;
+    border-bottom:1px solid var(--line); padding:5px 10px}
+  .helped b{color:var(--ink)}
+
+  /* ── THREAD ── */
+  .thread{flex:1; overflow-y:auto; padding:16px 14px 10px; display:flex; flex-direction:column; gap:10px}
+  .row{display:flex; gap:8px; align-items:flex-end; max-width:88%}
+  .row.bot{align-self:flex-start}
+  .row.user{align-self:flex-end; flex-direction:row-reverse}
+  .miniav{width:28px; height:28px; border-radius:50%; background:linear-gradient(135deg,var(--brand),#3b82f6);
+    flex:0 0 auto; color:#fff; font:800 12px/28px system-ui; text-align:center; position:relative; overflow:hidden}
+  .miniav img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+  .bubble{padding:11px 15px; border-radius:var(--radius); font-size:15.5px; line-height:1.42;
+    box-shadow:0 1px 1px rgba(16,32,64,.06)}
+  .bot .bubble{background:var(--bot); border-bottom-left-radius:6px}
+  .user .bubble{background:var(--bubble-user); color:#fff; border-bottom-right-radius:6px}
+  .bubble mark{background:var(--hilite); padding:0 3px; border-radius:3px;
+    -webkit-box-decoration-break:clone; box-decoration-break:clone}
+  .reveal{animation:pop .26s ease}
+  @keyframes pop{from{opacity:0; transform:translateY(8px) scale(.98)}to{opacity:1; transform:none}}
+
+  /* typing indicator */
+  .typing .bubble{display:flex; gap:4px; padding:14px 16px}
+  .typing span{width:7px; height:7px; border-radius:50%; background:#b9c4d6; animation:tblink 1.2s infinite}
+  .typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}
+  @keyframes tblink{0%,60%,100%{opacity:.3; transform:translateY(0)}30%{opacity:1; transform:translateY(-3px)}}
+
+  /* in-thread call card */
+  .callcard{align-self:stretch; max-width:100%; background:#fff; border:2px solid var(--brand);
+    border-radius:16px; box-shadow:5px 5px 0 var(--brand); padding:18px 16px; text-align:center; animation:pop .3s ease}
+  .cc-badge{display:inline-flex; align-items:center; gap:6px; background:var(--cta); color:#fff;
+    font-size:11px; font-weight:800; letter-spacing:.07em; text-transform:uppercase; padding:4px 12px;
+    border-radius:40px; margin-bottom:10px}
+  .cc-badge i{width:7px; height:7px; border-radius:50%; background:#fff; animation:blink 1.4s infinite}
+  .cc-h{font-size:19px; font-weight:900; line-height:1.2; margin:0 0 4px}
+  .cc-h mark{background:var(--hilite); padding:0 3px}
+  .cc-sub{font-size:13.5px; color:var(--muted); margin:0 0 12px}
+  .cc-sub b{color:var(--ink)}
+  .holdbox{background:var(--amber-bg); border:1.5px dashed #e0b64d; border-radius:10px; padding:8px 12px;
+    font-size:13.5px; font-weight:700; color:var(--amber-ink); margin-bottom:12px}
+  .holdbox b{font-variant-numeric:tabular-nums; font-size:15px}
+  .bignum{display:block; font-size:29px; font-weight:900; color:var(--call); text-decoration:none; margin-bottom:10px}
+  .callbtn{display:flex; align-items:center; justify-content:center; gap:10px; width:100%; min-height:58px;
+    border-radius:13px; background:var(--call); color:#fff; font-size:18px; font-weight:900; text-decoration:none;
+    box-shadow:0 9px 24px rgba(230,57,70,.45); animation:pulse 1.8s ease-in-out infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 9px 24px rgba(230,57,70,.45); transform:scale(1)}
+    50%{box-shadow:0 11px 32px rgba(230,57,70,.68); transform:scale(1.015)}}
+  @media (prefers-reduced-motion:reduce){.callbtn{animation:none}.reveal{animation:none}.dock .dcall{animation:none}}
+  .callbtn svg{width:20px; height:20px; fill:#fff}
+  .cc-meta{display:flex; justify-content:center; flex-wrap:wrap; gap:4px 13px; font-size:12px; color:var(--muted); margin-top:10px}
+  .cc-meta span{display:flex; align-items:center; gap:4px}
+  .cc-meta svg{width:12px; height:12px; fill:var(--cta)}
+  .closednote{display:none; font-size:13px; color:var(--amber-ink); background:var(--amber-bg);
+    border-radius:9px; padding:8px 11px; margin-top:10px; font-weight:600}
+
+  /* ── CHIP DOCK ── */
+  .dock{padding:10px 14px calc(14px + env(safe-area-inset-bottom)); background:#fff;
+    border-top:1px solid var(--line); position:sticky; bottom:0; z-index:5}
+  .chips{display:flex; flex-wrap:wrap; gap:9px}
+  .chip{flex:1 1 auto; min-width:46%; min-height:52px; padding:13px 16px; border-radius:26px;
+    border:2px solid var(--bubble-user); background:#fff; color:var(--bubble-user); font-size:16px;
+    font-weight:800; font-family:inherit; cursor:pointer; transition:transform .06s, background .15s}
+  .chip:hover{background:#eef5ff}
+  .chip:active{transform:scale(.98)}
+  .chip.hot{background:var(--cta); border-color:var(--cta); color:#fff; box-shadow:0 6px 18px rgba(22,163,74,.4)}
+  .dcall{display:none; align-items:center; justify-content:center; gap:10px; width:100%; min-height:56px;
+    border-radius:13px; background:var(--call); color:#fff; font-size:17px; font-weight:900; text-decoration:none;
+    box-shadow:0 8px 22px rgba(230,57,70,.45); animation:pulse 1.8s ease-in-out infinite}
+  .dcall svg{width:19px; height:19px; fill:#fff; animation:ring 1.6s ease-in-out infinite}
+  @keyframes ring{0%,100%{transform:rotate(0)}10%{transform:rotate(-14deg)}20%{transform:rotate(12deg)}30%{transform:rotate(-8deg)}40%{transform:rotate(0)}}
+  .dsub{display:none; text-align:center; font-size:11px; color:var(--muted); margin-top:6px; font-weight:600}
+
+  .disc{font-size:10.5px; color:var(--muted); text-align:center; padding:8px 16px 12px; line-height:1.55; background:#fff}
+  .disc a{color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="app">
+	<div class="logo"><img alt="Houseowners News" src="/logo.png" class="navbar1_logo" style="height:35px; margin:10px 0px; filter:brightness(0); opacity:.8;"></div>
+  <div class="alert">🚨 EXPOSED: rates dropped AGAIN — 93% of homeowners never make the one free check that lowers theirs</div>
+
+  <div class="chead">
+    <div class="avatar" id="avatar">A</div>
+    <div>
+      <div class="who">Ava — Rate Check Assistant</div>
+      <div class="status"><span class="dot"></span> Online now</div>
+    </div>
+    <a class="hcall" id="headCta" href="#" data-track="qualify">
+      <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+      Claim now
+    </a>
+  </div>
+  <div class="helped">🔥 <b id="helpedNum">217</b> homeowners checked their rate today</div>
+
+  <div class="thread" id="thread"></div>
+
+  <div class="dock" id="dock">
+    <div class="chips" id="chips"></div>
+    <a class="dcall" id="dockCall" href="#">
+      <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+      <span>CLICK HERE TO CLAIM IT NOW</span>
+    </a>
+    <div class="dsub" id="dockSub"></div>
+  </div>
+
+  <div class="disc">
+	&copy; 2026 Houseowners News<br /><br />
+    Ava is an automated assistant, not a live person. This site is a privately owned marketing site — not a lender or government agency. Answers are a pre-screening only and are not an offer of credit; rates and eligibility vary by individual situation. This is an advertisement.
+    &nbsp;<a href="about.html">Privacy</a> · <a href="terms.html">Terms</a>
+  </div>
+</div>
+
+<script>
+var LINKS = {
+  qualify: 'https://track.mainofferpage.online/click',
+  debt:    'https://www.nz91nyfbo.com/ZZ2GX/4MQCFX/',
+  sleep:   'https://www.gumbixyz.com/8XFSC8/2ZNH3GS/'
+};
+
+var GEO = (function(){
+  var p = new URLSearchParams(location.search);
+  return p.get('city') || p.get('state') || 'your area';
+})();
+
+document.getElementById('headCta').href = LINKS.qualify;
+
+var thread = document.getElementById('thread'),
+    chipsEl = document.getElementById('chips');
+
+function scrollDown(){ thread.scrollTop = thread.scrollHeight; }
+function av(){ return '<div class="miniav">A</div>'; }
+
+function botRow(html){
+  var row = document.createElement('div'); row.className = 'row bot reveal';
+  row.innerHTML = av() + '<div class="bubble">' + html + '</div>';
+  thread.appendChild(row); scrollDown();
+}
+function userRow(text){
+  var row = document.createElement('div'); row.className = 'row user reveal';
+  row.innerHTML = '<div class="bubble">' + text + '</div>';
+  thread.appendChild(row); scrollDown();
+}
+function typing(ms, cb){
+  var t = document.createElement('div'); t.className = 'row bot typing';
+  t.innerHTML = av() + '<div class="bubble"><span></span><span></span><span></span></div>';
+  thread.appendChild(t); scrollDown();
+  setTimeout(function(){ t.remove(); cb(); }, ms);
+}
+
+/* Bot messages in sequence: each item is a string or {text, pause} */
+function say(msgs, done){
+  if (!msgs.length) { if (done) done(); return; }
+  var m = msgs[0], text = m.text || m;
+  var delay = m.pause || Math.min(700 + String(text).length * 12, 1700);
+  typing(delay, function(){ botRow(text); say(msgs.slice(1), done); });
+}
+
+function ask(question, onAnswer){
+  say([question], function(){
+    chipsEl.innerHTML = '';
+    [{t:"👍 YES", v:"yes", hot:true}, {t:"NO", v:"no"}].forEach(function(o){
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'chip' + (o.hot ? ' hot' : ''); b.textContent = o.t;
+      b.setAttribute('data-answer', o.v);
+      b.addEventListener('click', function(){
+        chipsEl.innerHTML = '';
+        userRow(o.t);
+        onAnswer(o.v);
+      });
+      chipsEl.appendChild(b);
+    });
+  });
+}
+
+/* ── Flow (same logic as glo2b) ──
+   Q1 credit > 670?  YES → Q2 mortgage > $150k?  YES → qualify
+                     NO  → debt question          NO  → debt question
+   Debt > $8k?       YES → debt offer   NO → sleep study offer            */
+function start(){
+  say([
+    "Real talk 👋 — lenders in " + GEO + " are quietly lowering rates for homeowners this year… and they're <mark>betting you won't ask</mark>.",
+    "Two quick questions. That's all I need. 👇"
+  ], askCredit);
+}
+function askCredit(){
+  ask("Is your credit score over <b>670</b>?", function(a){
+    if (a === 'yes') askMortgage(); else askDebt();
+  });
+}
+function askMortgage(){
+  ask("Is your current mortgage balance over <b>$150k</b>?", function(a){
+    if (a === 'yes') checking('qualify'); else askDebt();
+  });
+}
+function askDebt(){
+  ask("Do you have over <b>$8k</b> in credit card debt?", function(a){
+    checking(a === 'yes' ? 'debt' : 'sleep');
+  });
+}
+function checking(result){
+  say([{ text: "Checking eligibility for homeowners in " + GEO + "… 🔎", pause: 1400 }].concat(RESULTS[result].lead), function(){
+    typing(900, function(){ renderCard(result); });
+  });
+}
+
+var RESULTS = {
+  qualify: {
+    lead: [
+      "Good news… you <mark>may qualify</mark> 🎉 Based on your answers, you appear to meet the initial eligibility criteria for a lower mortgage rate.",
+      "Complete your full application to see your personalized rate in 60 seconds. Tap below. 👇"
+    ],
+    badge: 'Eligible',
+    title: 'You May Qualify for a <mark>Lower Mortgage Rate</mark>',
+    sub: 'Based on your pre-screening · takes ~60 seconds · <b>no SSN required</b>',
+    big: 'As Low as 2.5%',
+    hold: 'Your eligibility result expires in',
+    meta: ['Secure', 'Free eligibility check', '60 seconds'],
+    track: 'qualify',
+    dockSub: '⏳ Your eligibility result expires in 10 minutes'
+  },
+  debt: {
+    lead: [
+      "You don't qualify for a lower mortgage rate today… <b>BUT</b> based on your answers, you <mark>DO qualify</mark> to claim a significant debt reduction under the economic relief program! 🎉",
+      "Tap below to claim now. 👇"
+    ],
+    badge: 'You qualify',
+    title: 'Claim Your <mark>Debt Reduction</mark> Under the Economic Relief Program',
+    sub: 'Free eligibility check · takes <b>under 60 seconds</b>',
+    hold: 'Your spot is held for',
+    meta: ['Secure', 'Free eligibility check', 'Under 60 seconds'],
+    track: 'debt-yes',
+    dockSub: '⏳ Your spot is held for 10 minutes'
+  },
+  sleep: {
+    lead: [
+      "You don't qualify for a lower mortgage rate today… <b>BUT</b> based on your answers, you <mark>DO qualify</mark> to join a 3-day sleep research study in " + GEO + " that will pay you <b>$3,600</b>! 🎉",
+      "Spots are limited. Tap below to claim yours. 👇"
+    ],
+    badge: 'You qualify',
+    title: 'Join a 3-Day <mark>Sleep Research Study</mark> in Your Area',
+    sub: 'Paid study · <b>limited spots available</b>',
+    big: '$3,600',
+    hold: 'Your spot is held for',
+    meta: ['Secure', 'Limited spots', 'Paid study'],
+    track: 'debt-no',
+    dockSub: '⏳ Limited spots — your spot is held for 10 minutes'
+  }
+};
+
+var ARROW = '<svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>';
+var CHECK = '<svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>';
+
+function renderCard(key){
+  var r = RESULTS[key], link = LINKS[key];
+  var card = document.createElement('div'); card.className = 'callcard';
+  card.innerHTML =
+    '<div class="cc-badge"><i></i>' + r.badge + '</div>' +
+    '<p class="cc-h">' + r.title + '</p>' +
+    '<p class="cc-sub">' + r.sub + '</p>' +
+    '<div class="holdbox" id="holdbox">⏳ ' + r.hold + ': <b id="holdTimer">10:00</b></div>' +
+    (r.big ? '<a class="bignum" href="' + link + '" data-track="' + r.track + '">' + r.big + '</a>' : '') +
+    '<a class="callbtn" href="' + link + '" data-track="' + r.track + '">' + ARROW + 'CLICK HERE TO CLAIM IT NOW</a>' +
+    '<div class="cc-meta">' + r.meta.map(function(m){ return '<span>' + CHECK + m + '</span>'; }).join('') + '</div>';
+  thread.appendChild(card); scrollDown();
+
+  chipsEl.style.display = 'none';
+  var dock = document.getElementById('dockCall');
+  dock.href = link;
+  dock.setAttribute('data-track', r.track);
+  dock.style.display = 'flex';
+  var head = document.getElementById('headCta');
+  head.href = link;
+  head.setAttribute('data-track', r.track);
+  var sub = document.getElementById('dockSub');
+  sub.textContent = r.dockSub;
+  sub.style.display = 'block';
+  if (navigator.vibrate) navigator.vibrate(35);
+  startHold();
+}
+
+function startHold(){
+  var end = Date.now() + 10 * 60 * 1000;
+  var box = document.getElementById('holdbox'), t = document.getElementById('holdTimer');
+  function tick(){
+    var left = Math.max(0, Math.round((end - Date.now()) / 1000));
+    t.textContent = Math.floor(left/60) + ':' + ('0' + left%60).slice(-2);
+    if (left <= 0) { box.innerHTML = '⚠️ Your result has expired — claim NOW to grab the next opening'; return; }
+    setTimeout(tick, 500);
+  }
+  tick();
+}
+
+start();
+
+/* ── Tab-title nag: when they switch tabs, the title keeps calling them back ── */
+(function(){
+  var orig = document.title, flick = null;
+  document.addEventListener('visibilitychange', function(){
+    if (document.hidden) {
+      var on = false;
+      flick = setInterval(function(){
+        document.title = (on = !on) ? '🏠 Your rate check is waiting…' : '⏳ Your result is about to expire…';
+      }, 1400);
+    } else {
+      clearInterval(flick); document.title = orig;
+    }
+  });
+})();
+
+/* ── "Checked today" counter: deterministic by date+minute (no random) ── */
+(function(){
+  var d = new Date();
+  var base = 160 + (d.getDate() * 7) % 40;
+  var n = base + Math.floor((d.getHours() * 60 + d.getMinutes()) / 12);
+  document.getElementById('helpedNum').textContent = n;
+})();
+</script>
+</body>
+</html>

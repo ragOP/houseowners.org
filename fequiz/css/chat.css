@@ -1,0 +1,222 @@
+/**
+ * Chat v1.0.1
+ *
+ * - Added 150px to scroll margin bottom
+ * - Added support for input
+ */
+.rtchat-container *,
+.rtchat-container ::before,
+.rtchat-container ::after {
+    box-sizing: border-box;
+    outline-style: none !important;
+    outline: 0 !important;
+}
+
+.rtchat-container>*:first-child {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+/* Typing animation */
+.rtchat-agent-block .rtchat-typing {
+    padding: 0.75rem;
+    display: inline-block;
+    background-color: rgb(229 231 235 / 1);
+    border-radius: 0.5rem;
+    margin-top: 0.5rem;
+    scroll-margin-bottom: 150px;
+}
+
+.rtchat-agent-block .rtchat-typing .rtchat-typing-animation {
+    display: inline-flex;
+    align-items: center;
+}
+
+.rtchat-agent-block .rtchat-typing .rtchat-typing-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #a7a7a7;
+    border-radius: 50%;
+    margin-right: 4px;
+    animation: rtchat_typing_animation 1s infinite;
+}
+
+@keyframes rtchat_typing_animation {
+    0% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+
+    100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+}
+
+/**
+  * Agent
+  */
+.rtchat-agent-block {
+    display: flex;
+    padding-top: 1rem;
+    width: 80%;
+    align-items: flex-end;
+}
+
+.rtchat-agent-block .rtchat-agent-block-avatar {
+    flex-shrink: 0;
+}
+
+.rtchat-agent-block .rtchat-agent-block-avatar img {
+    border-radius: 9999px;
+    width: 2rem;
+    height: auto;
+    max-width: 100%;
+    display: block;
+}
+
+.rtchat-agent-block .rtchat-agent-block-panel {
+    margin-left: 0.75rem;
+}
+
+.rtchat-agent-block .rtchat-agent-block-panel .rtchat-agent-block-message {
+    padding: 0.75rem;
+    background-color: rgb(229 231 235 / 1);
+    color: rgb(31 41 55 / 1);
+    border-radius: 0.5rem;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin-top: 0.5rem;
+    cursor: default;
+    scroll-margin-bottom: 150px;
+}
+
+.rtchat-agent-block .rtchat-agent-block-panel .rtchat-agent-block-message:first-child {
+    margin-top: 0;
+}
+
+.rtchat-agent-block .rtchat-agent-block-panel .rtchat-agent-block-option {
+    color: rgb(255 255 255 / 1);
+    font-weight: 600;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    background-color: rgb(59 130 246 / 1);
+    border-radius: 9999px;
+    cursor: pointer;
+}
+
+.rtchat-agent-block .rtchat-agent-block-panel .rtchat-agent-block-select,
+.rtchat-agent-block .rtchat-agent-block-panel .rtchat-agent-block-input {
+    font-weight: 600;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    background-color: #ffffff;
+    border-radius: 9999px;
+    cursor: pointer;
+}
+
+.rtchat-agent-block .rtchat-agent-block-panel .rtchat-agent-block-input-option {
+    margin-top: 10px;
+}
+
+.rtchat-agent-block .rtchat-agent-block-panel .rtchat-agent-block-options-container-horizontal {
+    padding-top: 0;
+    padding-left: 0.375rem;
+    padding-right: 0.375rem;
+    text-align: center;
+}
+
+.rtchat-agent-block .rtchat-agent-block-panel .rtchat-agent-block-options-container-horizontal button {
+    margin-top: 0.75rem;
+    margin-left: 0.375rem;
+    margin-right: 0.375rem;
+    min-width: 90px;
+}
+
+.rtchat-agent-block .rtchat-agent-block-panel .rtchat-agent-block-options-container-horizontal button,
+.rtchat-agent-block .rtchat-agent-block-panel .rtchat-agent-block-options-container-horizontal button:focus,
+.rtchat-agent-block .rtchat-agent-block-panel .rtchat-agent-block-options-container-horizontal button:active {
+    outline-style: none !important;
+    outline: 0 !important;
+}
+
+.rtchat-agent-block .rtchat-agent-block-panel .rtchat-agent-block-options-container-vertical {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    row-gap: 0.75rem;
+}
+
+/**
+  * User
+  */
+.rtchat-user-block {
+    display: flex;
+    padding-top: 1rem;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.rtchat-user-block .rtchat-user-block-avatar {
+    flex-shrink: 0;
+}
+
+.rtchat-user-block .rtchat-user-block-avatar img {
+    border-radius: 9999px;
+    width: 2rem;
+    height: auto;
+    max-width: 100%;
+    display: block;
+}
+
+.rtchat-user-block .rtchat-user-block-panel {
+    margin-right: 0.75rem;
+}
+
+.rtchat-user-block .rtchat-user-block-panel .rtchat-user-block-message {
+    padding: 0.75rem;
+    background-color: rgb(59 130 246 / 1);
+    border-radius: 0.5rem;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin-top: 0;
+    color: rgb(255 255 255 / 1);
+    cursor: default;
+    scroll-margin-bottom: 150px;
+}
+
+/**
+  * Chat closed
+  */
+.rtchat-disconnected {
+    padding-top: 1.25rem;
+    align-items: center;
+    display: flex;
+    position: relative;
+    white-space: nowrap;
+}
+
+.rtchat-disconnected .rtchat-disconnected-line {
+    border-color: rgb(229 231 235 / 1);
+    border-top-width: 1px;
+    border-top-style: solid;
+    flex-grow: 1;
+}
+
+.rtchat-disconnected .rtchat-disconnected-text {
+    color: rgb(209 213 219 / 1);
+    font-size: 0.75rem;
+    line-height: 1rem;
+    flex-shrink: 1;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    cursor: default;
+}

@@ -8,6 +8,8 @@
     { "source": "/rac", "destination": "/rac.html" },
     { "source": "/glott", "destination": "/glott.html" },
     { "source": "/glott2", "destination": "/glott2.html" },
-    { "source": "/add", "destination": "/add.html" }
+    { "source": "/add", "destination": "/add.html" },
+    { "source": "/ctc", "destination": "/ctc.html" },
+    { "source": "/fequiz", "destination": "/fequiz.html" }
   ]
 }
