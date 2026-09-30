@@ -349,6 +349,68 @@
     font-size: 14px;
     font-weight: 560;
   }
+  .filters.metrics {
+    margin: 8px 2px 4px;
+    flex-wrap: wrap;
+  }
+  .filters.metrics button {
+    flex: 1 1 auto;
+    min-height: 36px;
+    padding: 0 10px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+  .chart { padding: 6px 4px 0; }
+  .chart svg { display: block; width: 100%; height: auto; }
+  .compare {
+    margin: 0;
+    padding: 10px 8px 2px;
+    font-size: 14px;
+    font-weight: 560;
+    color: var(--muted);
+  }
+  .compare b { color: var(--ink); font-weight: 700; }
+  .delta { font-weight: 700; }
+  .delta.up { color: var(--green); }
+  .delta.down { color: var(--red); }
+  .money {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 6px;
+  }
+  .money > div { padding: 12px 8px; min-width: 0; }
+  .money > div:nth-child(odd) { border-right: 1px solid var(--line); }
+  .money > div:nth-child(-n + 2) { border-bottom: 1px solid var(--line); }
+  .money b {
+    display: block;
+    font-family: Fraunces, Georgia, serif;
+    font-size: 26px;
+    font-weight: 560;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+  .money span {
+    display: block;
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .money .pos b, .camp .pos { color: var(--green); }
+  .money .neg b, .camp .neg { color: var(--red); }
+  .camps { margin-top: 8px; }
+  .camp {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+    align-items: center;
+    padding: 11px 8px;
+    border-top: 1px solid var(--line);
+  }
+  .camp-name { font-size: 14px; font-weight: 700; line-height: 1.25; min-width: 0; overflow-wrap: anywhere; }
+  .camp-meta { margin-top: 3px; font-size: 12px; font-weight: 560; color: var(--muted); }
+  .camp-profit { font-family: Fraunces, Georgia, serif; font-size: 20px; font-weight: 560; letter-spacing: -0.03em; }
+  .note { margin: 8px 8px 4px; font-size: 12px; font-weight: 560; color: var(--muted); }
   .combo b {
     font-family: Fraunces, Georgia, serif;
     font-size: 22px;
@@ -387,6 +449,19 @@
     </div>
     <section class="sheet report" id="questions" aria-label="Question rates"></section>
     <section class="sheet report" id="outcomes" aria-label="Result rates"></section>
+    <h2>Day by day</h2>
+    <section class="sheet report" aria-label="Day by day stats">
+      <div class="filters metrics" id="metrics" role="group" aria-label="Metric"></div>
+      <div id="trend"></div>
+    </section>
+    <h2>Campaign profit</h2>
+    <section class="sheet report" aria-label="Campaign profit">
+      <div class="filters metrics" id="scopes" role="group" aria-label="Campaigns">
+        <button type="button" data-scope="glo" aria-pressed="true">GLO campaigns</button>
+        <button type="button" data-scope="all" aria-pressed="false">All campaigns</button>
+      </div>
+      <div id="profit"><p class="status">Loading profit from Pulse…</p></div>
+    </section>
     <h2>Visits</h2>
     <div id="list"></div>
   </div>
@@ -400,6 +475,20 @@
   var periods = { today: "Today", yesterday: "Yesterday", "7": "Last 7 days", "14": "Last 14 days" };
   var debtPages = { glo2: true, glo2b: true };
   var q3Fallback = "Do you have over $8k in credit card debt?";
+  var metric = "visitors";
+  var scope = "glo";
+  var profitData = null;
+  var profitError = false;
+  var weekday = new Intl.DateTimeFormat("en-US", { timeZone: "UTC", weekday: "short" });
+  var clockFormat = new Intl.DateTimeFormat("en-US", { timeZone: "America/New_York", hour: "numeric", minute: "numeric", hourCycle: "h23" });
+  var metricDefs = [
+    { id: "visitors", label: "Visitors", count: function () { return true; } },
+    { id: "qualified", label: "Congrats", count: function (e) { return saw(e, "qualifyReached", "qualified"); } },
+    { id: "debt", label: "Debt relief", debt: true, count: function (e) { return saw(e, "debtReached", "debt"); } },
+    { id: "sleep", label: "Sleep study", debt: true, count: function (e) { return saw(e, "sleepReached", "sleep"); } },
+    { id: "disqualified", label: "Disqualified", old: true, count: function (e) { return saw(e, "disqualifyReached", "disqualified"); } },
+    { id: "clicks", label: "Clicked", count: function (e) { return Boolean(e.qualifyClick || e.disqualifyClick || e.debtClick || e.sleepClick); } }
+  ];
 
   function parts(iso) {
     var bits = new Intl.DateTimeFormat("en-US", {
@@ -528,6 +617,202 @@
       cell("", reached, "Reached", total) + cell("", clicked, "Button clicked", total) + "</div></div>";
   }
 
+  function chartDays() {
+    var today = dayKey(new Date().toISOString());
+    var count = range === "14" ? 14 : 7;
+    var focus = range === "yesterday" ? shiftKey(today, -1) : today;
+    var keys = [];
+    for (var i = count - 1; i >= 0; i--) keys.push(shiftKey(today, -i));
+    return { today: today, keys: keys, focus: focus, before: shiftKey(focus, -1) };
+  }
+
+  function rangeKeys() {
+    var days = chartDays();
+    if (range === "today" || range === "yesterday") return [days.focus];
+    return days.keys;
+  }
+
+  function dayLabel(key) {
+    var bits = key.split("-");
+    var date = new Date(Date.UTC(Number(bits[0]), Number(bits[1]) - 1, Number(bits[2])));
+    return { week: weekday.format(date), day: String(Number(bits[2])) };
+  }
+
+  function barChart(keys, values, focus, format, signed) {
+    var W = 480, H = 210, top = 24, bottom = 44, side = 4;
+    var nums = values.filter(function (v) { return v != null; });
+    var max = Math.max.apply(null, [0].concat(nums));
+    var min = Math.min.apply(null, [0].concat(nums));
+    if (max === min) max = min + 1;
+    var plot = H - top - bottom;
+    var y = function (v) { return top + (max - v) / (max - min) * plot; };
+    var slot = (W - side * 2) / keys.length;
+    var bw = Math.min(30, slot * 0.6);
+    var font = keys.length > 7 ? 10 : 12;
+    var y0 = y(0);
+    var out = '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Day by day chart">' +
+      '<line x1="' + side + '" x2="' + (W - side) + '" y1="' + y0 + '" y2="' + y0 + '" stroke="#e4ddd5" stroke-width="1"/>';
+    keys.forEach(function (key, i) {
+      var cx = side + slot * i + slot / 2;
+      var v = values[i];
+      var on = key === focus;
+      var ink = on ? "#1a1714" : "#6f675f";
+      var weight = on ? 700 : 560;
+      var label = dayLabel(key);
+      if (v == null) {
+        out += '<text x="' + cx + '" y="' + (y0 - 6) + '" text-anchor="middle" font-size="' + font + '" fill="#6f675f">…</text>';
+      } else {
+        var h = Math.max(Math.abs(y0 - y(v)), 2);
+        var color = signed ? (v < 0 ? "#b4232f" : "#1f7a45") : "#1d2a3a";
+        out += '<rect x="' + (cx - bw / 2) + '" y="' + (v < 0 ? y0 : y0 - h) + '" width="' + bw + '" height="' + h + '" rx="4" fill="' + color + '" opacity="' + (on ? 1 : 0.35) + '"/>' +
+          '<text x="' + cx + '" y="' + (v < 0 ? y0 + h + font + 2 : y0 - h - 6) + '" text-anchor="middle" font-size="' + font + '" font-weight="700" fill="' + ink + '">' + esc(format(v)) + "</text>";
+      }
+      out += '<text x="' + cx + '" y="' + (H - 22) + '" text-anchor="middle" font-size="' + font + '" font-weight="' + weight + '" fill="' + ink + '">' + label.week + "</text>" +
+        '<text x="' + cx + '" y="' + (H - 7) + '" text-anchor="middle" font-size="' + font + '" font-weight="' + weight + '" fill="' + ink + '">' + label.day + "</text>";
+    });
+    return out + "</svg>";
+  }
+
+  function compareLine(aLabel, a, bLabel, b, format, withDelta) {
+    var delta = "";
+    if (withDelta && a != null && b != null && b !== 0) {
+      var change = Math.round((a - b) / Math.abs(b) * 100);
+      delta = ' · <span class="delta ' + (change >= 0 ? "up" : "down") + '">' + (change >= 0 ? "▲ " : "▼ ") + Math.abs(change) + "%</span>";
+    }
+    return '<p class="compare">' + aLabel + " <b>" + (a == null ? "…" : format(a)) + "</b> · " +
+      bLabel + " <b>" + (b == null ? "…" : format(b)) + "</b>" + delta + "</p>";
+  }
+
+  function minuteOfDay(iso) {
+    var bits = clockFormat.formatToParts(new Date(iso));
+    var get = function (type) {
+      var found = bits.find(function (part) { return part.type === type; });
+      return found ? Number(found.value) : 0;
+    };
+    return get("hour") * 60 + get("minute");
+  }
+
+  function renderTrend(showDebt, showOld) {
+    var defs = metricDefs.filter(function (def) { return (!def.debt || showDebt) && (!def.old || showOld); });
+    if (!defs.some(function (def) { return def.id === metric; })) metric = "visitors";
+    var def = defs.filter(function (item) { return item.id === metric; })[0];
+    document.getElementById("metrics").innerHTML = defs.map(function (item) {
+      return '<button type="button" data-metric="' + item.id + '" aria-pressed="' + (item.id === metric) + '">' + item.label + "</button>";
+    }).join("");
+    var days = chartDays();
+    var isToday = days.focus === days.today;
+    var nowIso = new Date().toISOString();
+    var cutoff = minuteOfDay(nowIso);
+    var counts = {};
+    var soFar = 0;
+    days.keys.concat(days.before).forEach(function (key) { counts[key] = 0; });
+    data.events.forEach(function (event) {
+      if (filter !== "all" && event.page !== filter) return;
+      var stamp = event.startedAt || event.updatedAt;
+      var key = dayKey(stamp);
+      if (!(key in counts) || !def.count(event)) return;
+      counts[key] += 1;
+      if (isToday && key === days.before && minuteOfDay(stamp) <= cutoff) soFar += 1;
+    });
+    var now = parts(nowIso);
+    document.getElementById("trend").innerHTML =
+      (isToday
+        ? compareLine("Today so far", counts[days.focus], "yesterday by " + now.time + " " + now.ampm, soFar, String, true)
+        : compareLine("Yesterday", counts[days.focus], "day before", counts[days.before], String, true)) +
+      '<div class="chart">' + barChart(days.keys, days.keys.map(function (key) { return counts[key]; }), days.focus, String, false) + "</div>";
+  }
+
+  function money(v) {
+    return (v < 0 ? "-$" : "$") + Math.abs(v).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  function shortMoney(v) {
+    var abs = Math.abs(v);
+    var sign = v < 0 ? "-$" : "$";
+    if (abs >= 1000) return sign + (abs / 1000).toFixed(abs >= 10000 ? 0 : 1) + "k";
+    return sign + Math.round(abs);
+  }
+
+  function signClass(v) {
+    return v > 0 ? "pos" : v < 0 ? "neg" : "";
+  }
+
+  function inScope(row) {
+    return scope === "all" || /glo/i.test(row.name);
+  }
+
+  function renderProfit() {
+    var box = document.getElementById("profit");
+    if (!profitData) {
+      box.innerHTML = '<p class="status">' + (profitError ? "Could not load profit from Pulse. Tap refresh." : "Loading profit from Pulse…") + "</p>";
+      return;
+    }
+    var byDay = {};
+    profitData.days.forEach(function (day) { byDay[day.date] = day; });
+    function dayProfit(key) {
+      var day = byDay[key];
+      if (!day || !day.campaigns) return null;
+      return day.campaigns.filter(inScope).reduce(function (sum, row) { return sum + row.profit; }, 0);
+    }
+    var camps = {};
+    rangeKeys().forEach(function (key) {
+      var day = byDay[key];
+      if (!day || !day.campaigns) return;
+      day.campaigns.filter(inScope).forEach(function (row) {
+        var c = camps[row.name] || (camps[row.name] = { name: row.name, conversions: 0, revenue: 0, cost: 0, profit: 0 });
+        c.conversions += row.conversions;
+        c.revenue += row.revenue;
+        c.cost += row.cost;
+        c.profit += row.profit;
+      });
+    });
+    var list = Object.keys(camps).map(function (name) { return camps[name]; }).sort(function (a, b) { return b.profit - a.profit; });
+    var sum = function (field) { return list.reduce(function (total, row) { return total + row[field]; }, 0); };
+    var profit = sum("profit"), revenue = sum("revenue"), cost = sum("cost"), conversions = sum("conversions");
+    var days = chartDays();
+    var todayRow = byDay[days.today];
+    var notes = [];
+    if (todayRow && todayRow.fetchedAt) notes.push("From Pulse · updated " + parts(todayRow.fetchedAt).time + " " + parts(todayRow.fetchedAt).ampm);
+    if (profitData.missing) notes.push(profitData.missing + " of 14 days still loading, tap refresh in a minute");
+    else if (profitData.limited) notes.push("Pulse is busy, some days may be a few minutes old");
+
+    box.innerHTML =
+      '<div class="money">' +
+        '<div class="' + signClass(profit) + '"><b>' + money(profit) + "</b><span>Profit · " + periods[range] + "</span></div>" +
+        "<div><b>" + money(revenue) + "</b><span>Revenue · " + conversions + " conv</span></div>" +
+        "<div><b>" + money(cost) + "</b><span>Ad spend</span></div>" +
+        '<div class="' + signClass(profit) + '"><b>' + (cost ? Math.round(profit / cost * 100) + "%" : "—") + "</b><span>ROI</span></div>" +
+      "</div>" +
+      (days.focus === days.today
+        ? compareLine("Today so far", dayProfit(days.focus), "yesterday full day", dayProfit(days.before), money, false)
+        : compareLine("Yesterday", dayProfit(days.focus), "day before", dayProfit(days.before), money, true)) +
+      '<div class="chart">' + barChart(days.keys, days.keys.map(dayProfit), days.focus, shortMoney, true) + "</div>" +
+      '<div class="camps">' + (list.length ? list.map(function (row) {
+        return '<div class="camp"><div><div class="camp-name">' + esc(row.name) + '</div><div class="camp-meta">' +
+          row.conversions + " conv · " + money(row.revenue) + " revenue · " + money(row.cost) + " spend</div></div>" +
+          '<div class="camp-profit ' + signClass(row.profit) + '">' + money(row.profit) + "</div></div>";
+      }).join("") : '<p class="status">No campaign activity in this period.</p>') + "</div>" +
+      (notes.length ? '<p class="note">' + notes.join(" · ") + "</p>" : "");
+  }
+
+  function loadProfit() {
+    profitError = false;
+    renderProfit();
+    fetch("/api/profit", { cache: "no-store" })
+      .then(function (res) {
+        if (!res.ok) throw new Error("Could not load profit");
+        return res.json();
+      })
+      .then(function (json) {
+        profitData = json;
+        renderProfit();
+      })
+      .catch(function () {
+        profitError = true;
+        renderProfit();
+      });
+  }
+
   function render() {
     var questions = data.questions;
     var events = data.events.filter(function (event) {
@@ -571,6 +856,7 @@
       (showDebt ? outcomeBlock("Debt relief", debtReached, debtClick, total, "debt") : "") +
       (showDebt ? outcomeBlock("Sleep study", sleepReached, sleepClick, total, "sleep") : "") +
       (showOld ? outcomeBlock("Disqualification", disReached, disClick, total, "bad") : "");
+    renderTrend(showDebt, showOld);
 
     var list = document.getElementById("list");
     if (!events.length) {
@@ -615,7 +901,10 @@
       });
   }
 
-  document.getElementById("refresh").addEventListener("click", load);
+  document.getElementById("refresh").addEventListener("click", function () {
+    load();
+    loadProfit();
+  });
   document.getElementById("ranges").addEventListener("click", function (event) {
     var btn = event.target.closest("button");
     if (!btn) return;
@@ -624,6 +913,22 @@
       item.setAttribute("aria-pressed", item === btn ? "true" : "false");
     });
     if (data) render();
+    renderProfit();
+  });
+  document.getElementById("metrics").addEventListener("click", function (event) {
+    var btn = event.target.closest("button");
+    if (!btn) return;
+    metric = btn.getAttribute("data-metric");
+    if (data) render();
+  });
+  document.getElementById("scopes").addEventListener("click", function (event) {
+    var btn = event.target.closest("button");
+    if (!btn) return;
+    scope = btn.getAttribute("data-scope");
+    document.querySelectorAll("#scopes button").forEach(function (item) {
+      item.setAttribute("aria-pressed", item === btn ? "true" : "false");
+    });
+    renderProfit();
   });
   document.getElementById("filters").addEventListener("click", function (event) {
     var btn = event.target.closest("button");
@@ -635,6 +940,7 @@
     if (data) render();
   });
   load();
+  loadProfit();
 })();
 </script>
 </body>

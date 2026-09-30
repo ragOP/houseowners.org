@@ -72,7 +72,7 @@ function mergeReached(existing, key, incoming) {
   return null;
 }
 
-async function readEvent(pathname) {
+export async function readEvent(pathname) {
   const result = await get(pathname, { access: 'public', useCache: false });
   if (!result || result.statusCode !== 200 || !result.stream) return null;
   const reader = result.stream.getReader();

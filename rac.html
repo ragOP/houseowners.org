@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Answer two short questions to see if homeowner programs may be available. Private eligibility screening from Houseowners.org.">
+<title>See If You Qualify Today | Houseowners.org</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0B1F3A;
+    --ink: #10233F;
+    --blue: #1769E0;
+    --blue-bright: #1D73F5;
+    --cta: #1268E8;
+    --muted: #64748B;
+    --sub: #4B5563;
+    --line: #D8E1EC;
+    --track: #E6EDF5;
+    --ice: #EAF2FF;
+    --wash: #F5F8FC;
+    --secure: #F3F7FC;
+    --white: #fff;
+    --pad: 22px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: Inter, Arial, sans-serif;
+    background: var(--white);
+    color: var(--ink);
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  img { max-width: 100%; display: block; }
+  button, select { font-family: inherit; }
+  button { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  :focus { outline: none; }
+  :focus-visible {
+    outline: 3px solid var(--blue);
+    outline-offset: 2px;
+  }
+
+  .page {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: var(--white);
+    position: relative;
+  }
+
+  .header {
+    height: 76px;
+    padding: 0 var(--pad);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--white);
+    position: relative;
+    z-index: 30;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--navy);
+    text-decoration: none;
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .logo svg { flex: none; display: block; }
+  .burger {
+    width: 42px;
+    height: 42px;
+    border: 0;
+    border-radius: 12px;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 0;
+  }
+  .burger:hover { background: var(--wash); }
+  .burger span {
+    display: block;
+    width: 18px;
+    height: 1.6px;
+    border-radius: 2px;
+    background: var(--navy);
+  }
+
+  .menu {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    top: calc(100% - 6px);
+    background: var(--white);
+    border: 1px solid #E7EEF6;
+    border-radius: 16px;
+    box-shadow: 0 16px 40px rgba(15, 35, 65, 0.12);
+    padding: 6px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
+  }
+  .menu.open {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+  .menu button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: 0;
+    color: var(--navy);
+    font-size: 16px;
+    font-weight: 600;
+    padding: 13px 14px;
+    border-radius: 10px;
+  }
+  .menu button:hover { background: var(--wash); }
+
+  .scrim {
+    position: fixed;
+    inset: 0;
+    z-index: 25;
+    border: 0;
+    padding: 0;
+    background: transparent;
+  }
+
+  .hero {
+    position: relative;
+    padding: 28px 0 0;
+    background: var(--white);
+  }
+  .hero-copy { padding: 0 var(--pad); position: relative; z-index: 2; }
+  .eyebrow {
+    margin: 0 0 14px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--blue);
+    line-height: 1.45;
+  }
+  h1 {
+    margin: 0;
+    font-size: 42px;
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.038em;
+    color: var(--navy);
+  }
+  h1 span { color: var(--blue); }
+  .sub {
+    margin: 14px 0 0;
+    max-width: 280px;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--sub);
+  }
+
+  .hero-visual {
+    position: relative;
+    height: 228px;
+    margin-top: 6px;
+    pointer-events: none;
+  }
+  .hero-visual img {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 86%;
+    height: 220px;
+    object-fit: cover;
+    object-position: 62% 58%;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 26%);
+    mask-image: linear-gradient(90deg, transparent 0%, #000 26%);
+  }
+  .hero-visual::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 54px;
+    background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0) 100%);
+    z-index: 1;
+  }
+  .wave {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 58px;
+    z-index: 2;
+    display: block;
+  }
+
+  .benefits {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    padding: 2px 14px 18px;
+    background: var(--white);
+    position: relative;
+    z-index: 3;
+  }
+  .benefit { text-align: center; padding: 0 2px; }
+  .bubble {
+    width: 46px;
+    height: 46px;
+    margin: 0 auto 8px;
+    border-radius: 50%;
+    background: var(--ice);
+    display: grid;
+    place-items: center;
+    color: #165DCC;
+  }
+  .bubble svg { display: block; }
+  .benefit p {
+    margin: 0;
+    font-size: 13.5px;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+
+  .quiz-wrap {
+    padding: 2px 16px 8px;
+    background: linear-gradient(180deg, #fff 0%, var(--wash) 28px);
+  }
+  .card {
+    background: var(--white);
+    border-radius: 22px;
+    padding: 20px 18px 16px;
+    border: 1px solid rgba(216, 225, 236, 0.95);
+    box-shadow: 0 8px 30px rgba(15, 35, 65, 0.08);
+  }
+  .meta {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .meta b {
+    font-weight: 700;
+    color: var(--blue);
+    font-variant-numeric: tabular-nums;
+  }
+  .bar {
+    height: 8px;
+    border-radius: 100px;
+    background: var(--track);
+    overflow: hidden;
+  }
+  .bar span {
+    display: block;
+    height: 100%;
+    width: 50%;
+    border-radius: inherit;
+    background: var(--blue);
+    transition: width 420ms ease;
+  }
+  .deck {
+    position: relative;
+    overflow: hidden;
+    margin-top: 16px;
+    touch-action: pan-y;
+    transition: height 460ms cubic-bezier(.22, 1, .36, 1);
+  }
+  .track {
+    display: flex;
+    align-items: flex-start;
+    will-change: transform;
+    transition: transform 480ms cubic-bezier(.22, 1, .36, 1);
+  }
+  .track.is-dragging { transition: none; }
+  .pane {
+    flex: 0 0 100%;
+    min-width: 100%;
+    padding-top: 2px;
+  }
+  .edge {
+    position: absolute;
+    top: 8px;
+    z-index: 3;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .edge-yes { right: 0; color: #1268E8; background: #EAF2FF; }
+  .edge-no { left: 0; color: #0B1F3A; background: #F1F5F9; }
+  .gesture {
+    margin: 12px 0 0;
+    text-align: center;
+    color: #8AA0B8;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .back {
+    margin-top: 10px;
+    background: none;
+    border: 0;
+    padding: 4px 0;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .review { padding: 22px 4px 8px; }
+  .review-spin {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 3px solid #E6EDF5;
+    border-top-color: var(--blue);
+    animation: spin .7s linear infinite;
+    margin-bottom: 14px;
+  }
+  .review h2 {
+    margin: 0 0 6px;
+    font-size: 26px;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    color: var(--navy);
+  }
+  .review p { margin: 0; color: var(--sub); font-size: 15px; }
+  .checks {
+    list-style: none;
+    margin: 16px 0 0;
+    padding: 0;
+  }
+  .checks li {
+    position: relative;
+    padding: 7px 0 7px 26px;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .checks li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid #C5D4E8;
+  }
+  .pane.is-in .checks li::before {
+    border-color: var(--blue);
+    background: var(--blue);
+    box-shadow: inset 0 0 0 2px #fff;
+  }
+  .q {
+    margin: 20px 0 18px;
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    color: var(--navy);
+  }
+  .actions { display: flex; flex-direction: column; gap: 12px; }
+  .btn {
+    width: 100%;
+    height: 60px;
+    border-radius: 16px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease, border-color 180ms ease;
+  }
+  .btn .arrow { font-size: 22px; line-height: 1; font-weight: 500; }
+  .btn-yes {
+    border: 0;
+    background: var(--cta);
+    color: var(--white);
+    box-shadow:
+      0 0 0 1px rgba(30, 110, 235, 0.3),
+      0 8px 25px rgba(30, 110, 235, 0.35);
+    animation: yesGlow 3.4s ease-in-out infinite;
+  }
+  @keyframes yesGlow {
+    0%, 100% {
+      box-shadow:
+        0 0 0 1px rgba(30, 110, 235, 0.28),
+        0 8px 22px rgba(30, 110, 235, 0.32);
+    }
+    50% {
+      box-shadow:
+        0 0 0 1px rgba(30, 110, 235, 0.42),
+        0 12px 32px rgba(30, 110, 235, 0.46);
+    }
+  }
+  .btn-yes:hover {
+    background: var(--blue-bright);
+    transform: translateY(-1px);
+    animation: none;
+    box-shadow:
+      0 0 0 1px rgba(30, 110, 235, 0.45),
+      0 12px 30px rgba(30, 110, 235, 0.48);
+  }
+  .btn-yes:active {
+    transform: translateY(1px) scale(0.98);
+    animation: none;
+    box-shadow: 0 4px 12px rgba(30, 110, 235, 0.28);
+  }
+  .btn-no {
+    background: var(--white);
+    color: var(--navy);
+    border: 1px solid #CBD5E1;
+    box-shadow: none;
+  }
+  .btn-no:hover {
+    background: #F8FAFC;
+    border-color: #B7C3D3;
+    transform: translateY(-1px);
+  }
+  .btn-no:active { transform: translateY(1px) scale(0.98); }
+  .btn:disabled { cursor: default; }
+  .btn.is-loading {
+    transform: scale(0.98);
+    animation: none;
+    pointer-events: none;
+  }
+  .btn.is-loading .arrow { visibility: hidden; }
+  .btn.is-loading { position: relative; }
+  .spinner {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.35);
+    border-top-color: #fff;
+    animation: spin 0.7s linear infinite;
+    position: absolute;
+    right: 20px;
+  }
+  .btn-no .spinner {
+    border-color: rgba(11, 31, 58, 0.2);
+    border-top-color: var(--navy);
+  }
+  .spinner[hidden] { display: none; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .field { margin: 4px 0 14px; }
+  .select-wrap { position: relative; }
+  select {
+    width: 100%;
+    height: 56px;
+    border-radius: 14px;
+    border: 1px solid var(--line);
+    background: var(--white);
+    color: var(--ink);
+    font-size: 16px;
+    font-weight: 600;
+    padding: 0 44px 0 16px;
+    appearance: none;
+    -webkit-appearance: none;
+    transition: border-color 180ms ease, box-shadow 180ms ease;
+  }
+  select.is-empty { color: var(--muted); font-weight: 500; }
+  select:hover { border-color: #B7C6DA; }
+  select:focus-visible {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 4px rgba(23, 105, 224, 0.15);
+  }
+  select.is-error { border-color: #C24141; }
+  .chevron {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--navy);
+  }
+  .field-error {
+    margin: 8px 2px 0;
+    color: #9F2D2D;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .secure {
+    margin-top: 16px;
+    background: var(--secure);
+    border-radius: 14px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: #3E5570;
+  }
+  .secure svg { flex: none; margin-top: 1px; color: #165DCC; }
+  .secure p {
+    margin: 0;
+    font-size: 12.5px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .congrats { padding-top: 16px; }
+  .done-mark {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--ice);
+    color: var(--blue);
+    display: grid;
+    place-items: center;
+    margin-bottom: 14px;
+  }
+  .pane.is-in .done-mark { animation: pop .5s cubic-bezier(.2, 1.3, .4, 1); }
+  @keyframes pop {
+    from { transform: scale(.7); opacity: 0; }
+    to { transform: none; opacity: 1; }
+  }
+  .kicker {
+    margin: 0 0 6px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--blue);
+  }
+  .congrats h2 {
+    margin: 0 0 8px;
+    font-size: 32px;
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+    font-weight: 800;
+    color: var(--navy);
+  }
+  .congrats .lead {
+    margin: 0 0 18px;
+    color: var(--sub);
+    font-size: 16px;
+    line-height: 1.45;
+  }
+  a.btn { text-decoration: none; color: #fff; }
+  .cta-note {
+    margin: 10px 2px 0;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.4;
+  }
+  .summary {
+    margin-top: 16px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: var(--wash);
+    border: 1px solid #E6EDF5;
+  }
+  .summary div {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 13px;
+    padding: 4px 0;
+  }
+  .summary dt { color: var(--muted); font-weight: 500; }
+  .summary dd { margin: 0; color: var(--navy); font-weight: 700; text-align: right; }
+
+  .site-footer {
+    padding: 28px var(--pad) 36px;
+    text-align: center;
+    background: var(--wash);
+  }
+  .site-footer p {
+    margin: 0 auto;
+    max-width: 340px;
+    color: var(--muted);
+    font-size: 11.5px;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+  .legal {
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+  }
+  .legal button {
+    background: none;
+    border: 0;
+    padding: 0;
+    color: var(--muted);
+    font-size: 11.5px;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .sheet {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background: rgba(7, 26, 51, 0.48);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .sheet[hidden] { display: none; }
+  .sheet-card {
+    width: min(420px, 100%);
+    background: var(--white);
+    border-radius: 20px 20px 0 0;
+    padding: 18px 20px 28px;
+    max-height: min(78vh, 640px);
+    overflow: auto;
+    box-shadow: 0 -12px 40px rgba(0,0,0,.15);
+  }
+  .sheet-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .sheet-card h2 {
+    margin: 0;
+    font-size: 20px;
+    letter-spacing: -0.02em;
+    color: var(--navy);
+  }
+  .sheet-close {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    border: 0;
+    background: var(--wash);
+    color: var(--navy);
+    font-size: 20px;
+    line-height: 1;
+  }
+  .sheet-card p, .sheet-card li {
+    color: var(--sub);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .sheet-card ol { margin: 8px 0 0; padding-left: 18px; }
+  .sheet-card li + li { margin-top: 8px; }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (max-width: 360px) {
+    :root { --pad: 18px; }
+    .logo { font-size: 16px; }
+    h1 { font-size: 36px; }
+    .sub { font-size: 16px; max-width: 250px; }
+    .q { font-size: 26px; }
+    .benefit p { font-size: 12.5px; }
+    .hero-visual { height: 196px; }
+    .hero-visual img { height: 188px; width: 92%; }
+    .btn { font-size: 18px; height: 56px; }
+  }
+
+  @media (min-width: 768px) {
+    body {
+      background: #111827;
+    }
+    .page {
+      width: 420px;
+      max-width: 420px;
+      margin: 0 auto;
+      min-height: 100vh;
+      background: var(--white);
+      box-shadow: 0 0 60px rgba(0,0,0,.15);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+    .sheet { align-items: center; }
+    .sheet-card {
+      border-radius: 20px;
+      width: 380px;
+      margin-bottom: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="page" id="top">
+    <header class="header">
+      <a class="logo" href="#top">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5.2v-6.2H10.2V21H5a1 1 0 0 1-1-1v-9.5Z" stroke="#0B1F3A" stroke-width="1.8" stroke-linejoin="round"/>
+        </svg>
+        Houseowners.org
+      </a>
+      <button class="burger" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="menu" id="menu" aria-label="Site">
+        <button type="button" data-go="home">Home</button>
+        <button type="button" data-go="how">How It Works</button>
+        <button type="button" data-go="privacy">Privacy</button>
+        <button type="button" data-go="terms">Terms</button>
+      </nav>
+    </header>
+    <button class="scrim" id="scrim" type="button" hidden aria-label="Close menu"></button>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Homeowner programs<br>may be available</p>
+          <h1 id="hero-title">See If You<br><span>Qualify Today</span></h1>
+          <p class="sub">It only takes a few quick questions to see if you're eligible.</p>
+        </div>
+        <div class="hero-visual">
+          <img
+            src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1100&q=80"
+            alt="Bright American suburban home with a front yard"
+            width="1100"
+            height="734"
+            fetchpriority="high"
+            decoding="async"
+          >
+          <svg class="wave" viewBox="0 0 430 64" preserveAspectRatio="none" aria-hidden="true">
+            <path fill="#ffffff" d="M0,34 C70,62 130,10 210,28 C290,46 350,14 430,32 L430,64 L0,64 Z"/>
+          </svg>
+        </div>
+      </section>
+
+      <section class="benefits" aria-label="What to expect">
+        <div class="benefit">
+          <div class="bubble" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <ellipse cx="12" cy="7" rx="7" ry="3" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M5 7v4.2c0 1.7 3.1 3 7 3s7-1.3 7-3V7" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M5 11.2V15.4c0 1.7 3.1 3 7 3s7-1.3 7-3v-4.2" stroke="currentColor" stroke-width="1.8"/>
+            </svg>
+          </div>
+          <p>Lower<br>Monthly Costs</p>
+        </div>
+        <div class="benefit">
+          <div class="bubble" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5.2v-6H10.2V21H5a1 1 0 0 1-1-1v-9.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p>Keep Your<br>Home</p>
+        </div>
+        <div class="benefit">
+          <div class="bubble" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <path d="M12 3.5 5 6.2v5.3c0 4.2 2.9 7.1 7 8.5 4.1-1.4 7-4.3 7-8.5V6.2L12 3.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+              <path d="M8.8 12.1 11 14.2l4.2-4.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p>100%<br>Free to Check</p>
+        </div>
+      </section>
+
+      <section class="quiz-wrap" id="quiz" aria-labelledby="q1">
+        <article class="card">
+          <div class="meta">
+            <span id="stepLabel">Question 1 of 2</span>
+            <b id="stepPct">50%</b>
+          </div>
+          <div class="bar" id="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-label="Progress">
+            <span id="barFill"></span>
+          </div>
+
+          <div class="deck" id="deck">
+            <div class="edge edge-no" id="edgeNo">No</div>
+            <div class="edge edge-yes" id="edgeYes">Yes</div>
+            <div class="track" id="track">
+              <div class="pane">
+                <h2 class="q" id="q1" tabindex="-1">Is your credit score<br>over 670?</h2>
+                <div class="actions">
+                  <button class="btn btn-yes" id="yesBtn" type="button">
+                    <span>Yes</span>
+                    <span class="arrow" aria-hidden="true">→</span>
+                  </button>
+                  <button class="btn btn-no" id="noBtn" type="button">
+                    <span>No</span>
+                    <span class="arrow" aria-hidden="true">→</span>
+                  </button>
+                </div>
+                <p class="gesture" id="gesture1">Swipe right for Yes, left for No</p>
+              </div>
+
+              <div class="pane">
+                <h2 class="q" id="q2" tabindex="-1">In which state is your home located?</h2>
+                <form id="stateForm">
+                  <div class="field">
+                    <label class="sr-only" for="state">Select your state</label>
+                    <div class="select-wrap">
+                      <select id="state" name="state" class="is-empty">
+                        <option value="" selected>Select your state</option>
+                      </select>
+                      <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </div>
+                    <p class="field-error" id="stateError" hidden>Select your state to continue.</p>
+                  </div>
+                  <button class="btn btn-yes" id="continueBtn" type="submit">
+                    <span>Continue</span>
+                    <span class="arrow" aria-hidden="true">→</span>
+                  </button>
+                </form>
+                <button class="back" id="backBtn" type="button">Back</button>
+                <p class="gesture">Swipe left to continue, right to go back</p>
+              </div>
+
+              <div class="pane" id="reviewPane">
+                <div class="review">
+                  <div class="review-spin" aria-hidden="true"></div>
+                  <h2>Reviewing your answers</h2>
+                  <p>One moment while this check finishes.</p>
+                  <ul class="checks">
+                    <li>Credit score</li>
+                    <li>Home state</li>
+                    <li>Next step</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="pane" id="donePane">
+                <div class="congrats">
+                  <div class="done-mark" aria-hidden="true">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+                      <path d="M5 12.5 9.2 17 19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                  <p class="kicker" id="congratsKicker">Congratulations</p>
+                  <h2 id="congratsTitle" tabindex="-1">You may qualify</h2>
+                  <p class="lead" id="congratsLead">Homeowner programs may be available based on your answers.</p>
+                  <a class="btn btn-yes" id="claimBtn" href="https://track.mainofferpage.online/click">
+                    <span>Click Here To Claim It Now</span>
+                    <span class="arrow" aria-hidden="true">→</span>
+                  </a>
+                  <p class="cta-note">Continuing does not approve a loan or guarantee a lower payment.</p>
+                  <div class="summary">
+                    <div><dt>Credit score over 670</dt><dd id="sumCredit">—</dd></div>
+                    <div><dt>Home state</dt><dd id="sumState">—</dd></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="secure" id="secure">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <rect x="5" y="10" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M8 10V8a4 4 0 0 1 8 0v2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+            <p>Your information is safe and secure and will never be shared.</p>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Houseowners.org is a private website that provides an eligibility screening service and is not affiliated with any government agency.</p>
+      <div class="legal">
+        <button type="button" id="privacyLink">Privacy Policy</button>
+        <button type="button" id="termsLink">Terms</button>
+      </div>
+    </footer>
+
+    <div class="sheet" id="sheet" hidden>
+      <div class="sheet-card" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+        <div class="sheet-top">
+          <h2 id="sheetTitle">Privacy</h2>
+          <button class="sheet-close" id="sheetClose" type="button" aria-label="Close">×</button>
+        </div>
+        <div id="sheetBody"></div>
+      </div>
+    </div>
+  </div>
+
+<script>
+(function () {
+  var STATES = [
+    "Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware",
+    "District of Columbia","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa",
+    "Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota",
+    "Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey",
+    "New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon",
+    "Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah",
+    "Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"
+  ];
+
+  var answers = { credit: null, state: "" };
+
+  var menuBtn = document.getElementById("menuBtn");
+  var menu = document.getElementById("menu");
+  var scrim = document.getElementById("scrim");
+  var deck = document.getElementById("deck");
+  var track = document.getElementById("track");
+  var edgeYes = document.getElementById("edgeYes");
+  var edgeNo = document.getElementById("edgeNo");
+  var yesBtn = document.getElementById("yesBtn");
+  var noBtn = document.getElementById("noBtn");
+  var stateForm = document.getElementById("stateForm");
+  var stateSelect = document.getElementById("state");
+  var stateError = document.getElementById("stateError");
+  var continueBtn = document.getElementById("continueBtn");
+  var backBtn = document.getElementById("backBtn");
+  var stepLabel = document.getElementById("stepLabel");
+  var stepPct = document.getElementById("stepPct");
+  var barFill = document.getElementById("barFill");
+  var progress = document.getElementById("progress");
+  var secure = document.getElementById("secure");
+  var index = 0;
+  var busy = false;
+  var reviewTimer = null;
+  var dragging = false;
+  var pointerId = null;
+  var startX = 0;
+  var startY = 0;
+  var dx = 0;
+  var axis = null;
+  var sheet = document.getElementById("sheet");
+  var sheetTitle = document.getElementById("sheetTitle");
+  var sheetBody = document.getElementById("sheetBody");
+  var sheetClose = document.getElementById("sheetClose");
+  var lastFocus = null;
+
+  STATES.forEach(function (name) {
+    var opt = document.createElement("option");
+    opt.value = name;
+    opt.textContent = name;
+    stateSelect.appendChild(opt);
+  });
+
+  function setMenu(open) {
+    menu.classList.toggle("open", open);
+    menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    menuBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    scrim.hidden = !open;
+  }
+
+  menuBtn.addEventListener("click", function () {
+    setMenu(!menu.classList.contains("open"));
+  });
+  scrim.addEventListener("click", function () { setMenu(false); });
+
+  var sheets = {
+    how: {
+      title: "How It Works",
+      html: "<ol><li>Answer whether your credit score is over 670. You can tap or swipe.</li><li>Choose the state where your home is located.</li><li>If a match may be available, continue to the next step.</li></ol><p>Checking takes a few moments. This is a private screening, not an application for a government program.</p>"
+    },
+    privacy: {
+      title: "Privacy Policy",
+      html: "<p>Houseowners.org uses the answers you submit on this page only to run this eligibility screening. The answers stay in this session in your browser and are not sold from this page.</p><p>Do not submit sensitive account numbers, Social Security numbers, or passwords here. This site is not a government website.</p>"
+    },
+    terms: {
+      title: "Terms",
+      html: "<p>Houseowners.org is a private website that offers an eligibility screening. Completing these questions does not create an account, approve financing, or promise a lower monthly payment.</p><p>Houseowners.org is not affiliated with any government agency. Program availability depends on information you provide and on the provider you may later choose to contact.</p>"
+    }
+  };
+
+  function openSheet(key) {
+    var data = sheets[key];
+    if (!data) return;
+    setMenu(false);
+    lastFocus = document.activeElement;
+    sheetTitle.textContent = data.title;
+    sheetBody.innerHTML = data.html;
+    sheet.hidden = false;
+    sheetClose.focus();
+  }
+
+  function closeSheet() {
+    sheet.hidden = true;
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  sheetClose.addEventListener("click", closeSheet);
+  sheet.addEventListener("click", function (e) {
+    if (e.target === sheet) closeSheet();
+  });
+
+  menu.addEventListener("click", function (e) {
+    var btn = e.target.closest("button");
+    if (!btn) return;
+    var go = btn.getAttribute("data-go");
+    if (go === "home") {
+      setMenu(false);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (go === "how") {
+      openSheet("how");
+    } else if (go === "privacy") {
+      openSheet("privacy");
+    } else if (go === "terms") {
+      openSheet("terms");
+    }
+  });
+
+  document.getElementById("privacyLink").addEventListener("click", function () { openSheet("privacy"); });
+  document.getElementById("termsLink").addEventListener("click", function () { openSheet("terms"); });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "Escape") return;
+    if (!sheet.hidden) closeSheet();
+    else setMenu(false);
+  });
+
+  function deckWidth() {
+    return deck.clientWidth || 1;
+  }
+
+  function paint(extra) {
+    var x = -index * deckWidth() + (extra || 0);
+    track.style.transform = "translate3d(" + x + "px,0,0)";
+  }
+
+  function fitHeight() {
+    var pane = track.children[index];
+    if (!pane) return;
+    deck.style.height = pane.offsetHeight + "px";
+  }
+
+  function setEdges(amount) {
+    var fade = Math.max(0, Math.min(1, Math.abs(amount) / 90));
+    edgeYes.style.opacity = amount > 0 ? String(fade) : "0";
+    edgeNo.style.opacity = amount < 0 ? String(fade) : "0";
+  }
+
+  function setProgress(step) {
+    var pct = step === 0 ? 50 : 100;
+    var label = step === 0 ? "Question 1 of 2" : step === 1 ? "Question 2 of 2" : step === 2 ? "Reviewing" : "Complete";
+    stepLabel.textContent = label;
+    stepPct.textContent = pct + "%";
+    barFill.style.width = pct + "%";
+    progress.setAttribute("aria-valuenow", String(pct));
+    secure.hidden = step > 1;
+    if (step === 0) {
+      edgeYes.textContent = "Yes";
+      edgeNo.textContent = "No";
+    } else if (step === 1) {
+      edgeYes.textContent = "Back";
+      edgeNo.textContent = "Next";
+    }
+  }
+
+  function goTo(next) {
+    if (next < 0 || next > 3) return;
+    index = next;
+    track.classList.remove("is-dragging");
+    setEdges(0);
+    paint(0);
+    setProgress(next);
+    if (next === 3) track.children[3].classList.add("is-in");
+    if (next === 2) track.children[2].classList.add("is-in");
+    if (next < 2) {
+      track.children[2].classList.remove("is-in");
+      track.children[3].classList.remove("is-in");
+      busy = false;
+      if (reviewTimer) {
+        window.clearTimeout(reviewTimer);
+        reviewTimer = null;
+      }
+    }
+    Array.prototype.forEach.call(track.children, function (pane, i) {
+      var on = i === next;
+      pane.setAttribute("aria-hidden", on ? "false" : "true");
+      pane.inert = !on;
+    });
+    fitHeight();
+    if (next >= 2) {
+      document.getElementById("quiz").scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+    var focusId = next === 0 ? "q1" : next === 1 ? "q2" : next === 3 ? "congratsTitle" : "";
+    var node = focusId && document.getElementById(focusId);
+    if (node) node.focus({ preventScroll: true });
+  }
+
+  function answerCredit(isYes) {
+    if (busy || index !== 0) return;
+    answers.credit = isYes;
+    goTo(1);
+  }
+
+  function fillResult() {
+    var qualified = !!answers.credit;
+    document.getElementById("congratsKicker").textContent = "Congratulations";
+    document.getElementById("congratsTitle").textContent = qualified ? "You may qualify" : "Your check is complete";
+    document.getElementById("congratsLead").textContent = qualified
+      ? "Homeowner programs may be available for a home in " + answers.state + "."
+      : "Your answers for " + answers.state + " are saved. You can still continue to see what may be available.";
+    document.getElementById("sumCredit").textContent = qualified ? "Yes" : "No";
+    document.getElementById("sumState").textContent = answers.state;
+  }
+
+  function finish() {
+    if (busy || index !== 1) return;
+    if (!stateSelect.value) {
+      stateSelect.classList.add("is-error");
+      stateError.hidden = false;
+      paint(0);
+      stateSelect.focus();
+      return;
+    }
+    answers.state = stateSelect.value;
+    fillResult();
+    busy = true;
+    goTo(2);
+    reviewTimer = window.setTimeout(function () {
+      reviewTimer = null;
+      busy = false;
+      goTo(3);
+    }, 1100);
+  }
+
+  yesBtn.addEventListener("click", function () { answerCredit(true); });
+  noBtn.addEventListener("click", function () { answerCredit(false); });
+  backBtn.addEventListener("click", function () { if (!busy) goTo(0); });
+
+  stateSelect.addEventListener("change", function () {
+    stateSelect.classList.toggle("is-empty", !stateSelect.value);
+    stateSelect.classList.remove("is-error");
+    stateError.hidden = true;
+  });
+
+  stateForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    finish();
+  });
+
+  deck.addEventListener("pointerdown", function (e) {
+    if (busy || index > 1) return;
+    if (e.target.closest("button, a, select, label, option")) return;
+    dragging = true;
+    axis = null;
+    dx = 0;
+    pointerId = e.pointerId;
+    startX = e.clientX;
+    startY = e.clientY;
+    deck.setPointerCapture(e.pointerId);
+  });
+
+  deck.addEventListener("pointermove", function (e) {
+    if (!dragging || e.pointerId !== pointerId) return;
+    var moveX = e.clientX - startX;
+    var moveY = e.clientY - startY;
+    if (!axis) {
+      if (Math.abs(moveX) < 8 && Math.abs(moveY) < 8) return;
+      axis = Math.abs(moveX) > Math.abs(moveY) ? "x" : "y";
+      if (axis === "y") {
+        dragging = false;
+        track.classList.remove("is-dragging");
+        paint(0);
+        setEdges(0);
+        return;
+      }
+      track.classList.add("is-dragging");
+    }
+    if (axis !== "x") return;
+    dx = moveX;
+    paint(dx);
+    setEdges(dx);
+  }, { passive: true });
+
+  function endDrag(e) {
+    if (!dragging || (e && e.pointerId !== pointerId)) return;
+    dragging = false;
+    track.classList.remove("is-dragging");
+    var threshold = Math.min(84, deckWidth() * 0.2);
+    var passed = axis === "x" && Math.abs(dx) > threshold;
+    if (passed && index === 0) answerCredit(dx > 0);
+    else if (passed && index === 1 && dx > 0) goTo(0);
+    else if (passed && index === 1) finish();
+    else paint(0);
+    setEdges(0);
+    dx = 0;
+    axis = null;
+  }
+
+  deck.addEventListener("pointerup", endDrag);
+  deck.addEventListener("pointercancel", endDrag);
+
+  track.addEventListener("transitionend", function (e) {
+    if (e.propertyName === "transform") fitHeight();
+  });
+
+  window.addEventListener("resize", function () {
+    paint(0);
+    fitHeight();
+  });
+
+  if (window.ResizeObserver) {
+    var observer = new ResizeObserver(function () { fitHeight(); });
+    Array.prototype.forEach.call(track.children, function (pane) { observer.observe(pane); });
+  }
+
+  paint(0);
+  setProgress(0);
+  Array.prototype.forEach.call(track.children, function (pane, i) {
+    pane.setAttribute("aria-hidden", i === 0 ? "false" : "true");
+    pane.inert = i !== 0;
+  });
+  fitHeight();
+})();
+</script>
+</body>
+</html>

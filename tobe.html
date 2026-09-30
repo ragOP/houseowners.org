@@ -6,7 +6,7 @@
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t. src="https://www.clarity.ms/tag/"+i;
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "y3rt3ntclc");
 </script>
@@ -153,11 +153,24 @@
     padding: 5px 10px;
   }
 
-  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
-  .progress-track { flex: 1; height: 8px; background: #d6d7d9; border-radius: 4px; overflow: hidden; }
-  .progress-fill { height: 100%; width: 50%; background: linear-gradient(90deg, #0071bc, #205493); border-radius: 4px; transition: width .45s ease; }
-  .progress-label { font-size: 13px; color: #5b616b; white-space: nowrap; min-width: 80px; text-align: right; font-weight: 700; }
-  .divider { border: none; border-top: 1px solid #dfe1e2; margin: 0 0 24px; }
+  .progress-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .step-track { display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0; }
+  .step-dot {
+    width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: #e6e8ea; color: #5b616b;
+    font-size: 13px; font-weight: 800;
+  }
+  .step-dot.on { background: #0071bc; color: #fff; box-shadow: 0 0 0 4px rgba(0, 113, 188, .16); }
+  .step-dot.done { background: #2e8540; color: #fff; box-shadow: none; }
+  .step-bar { position: relative; flex: 1; height: 4px; background: #e6e8ea; border-radius: 4px; overflow: hidden; }
+  .step-bar::after {
+    content: ""; position: absolute; inset: 0 auto 0 0; width: 0;
+    background: #2e8540; transition: width .35s ease;
+  }
+  .step-bar.full::after { width: 100%; }
+  .progress-label { font-size: 13px; color: #1b2a4a; white-space: nowrap; font-weight: 800; }
+  .divider { border: none; border-top: 1px solid #dfe1e2; margin: 0 0 16px; }
 
   .screen { display: none; }
   .screen.active { display: block; animation: fadeUp .35s ease; }
@@ -166,33 +179,41 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  .q-label {
-    font-size: 11px; color: #0071bc; text-transform: uppercase;
-    letter-spacing: .8px; margin: 0 0 8px; font-weight: 800;
+  .quiz-panel {
+    background: #f4f7fb;
+    border: 1px solid #e3e8ee;
+    border-radius: 14px;
+    padding: 18px 14px 14px;
+    text-align: center;
   }
-  .q-text { font-size: 22px; font-weight: 800; color: #1b2a4a; margin: 0 0 8px; line-height: 1.25; }
-  .q-note { font-size: 14px; color: #5b616b; margin: 0 0 20px; }
-  .answers { display: flex; flex-direction: column; gap: 10px; }
+  .q-text { font-size: 22px; font-weight: 800; color: #1b2a4a; margin: 0 0 6px; line-height: 1.25; }
+  .q-note { font-size: 14px; color: #5b616b; margin: 0 0 16px; }
+  .answers { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
   .answer-btn {
-    display: flex; align-items: center; gap: 12px; width: 100%;
-    background: #fff; border: 2px solid #5b616b; border-radius: 8px;
-    padding: 16px 18px; font-size: 16px; font-weight: 700; color: #1b2a4a;
-    cursor: pointer; transition: border-color .15s ease, background .15s ease, transform .15s ease;
-    text-align: left; font-family: inherit;
+    display: flex; align-items: center; justify-content: center;
+    width: 100%; min-height: 64px;
+    border: none; border-radius: 10px;
+    padding: 14px 12px; font-size: 20px; font-weight: 800; letter-spacing: .3px;
+    cursor: pointer; font-family: inherit;
+    touch-action: manipulation;
+    transition: background .15s ease, transform .12s ease, box-shadow .15s ease, opacity .15s ease;
   }
-  .answer-btn:hover { border-color: #0071bc; background: #e7f2fa; transform: translateY(-1px); }
-  .answer-btn .radio {
-    width: 22px; height: 22px; border: 2px solid #5b616b;
-    border-radius: 50%; flex-shrink: 0; position: relative;
+  .answer-yes {
+    background: #146c2e; color: #fff;
+    box-shadow: 0 2px 0 #0d4f21, 0 8px 16px rgba(20, 108, 46, .22);
   }
-  .answer-btn:hover .radio { border-color: #0071bc; }
-  .answer-btn.selected { border-color: #0071bc; background: #e7f2fa; }
-  .answer-btn.selected .radio { border-color: #0071bc; background: #0071bc; }
-  .answer-btn.selected .radio::after {
-    content: ""; position: absolute; top: 4px; left: 4px;
-    width: 10px; height: 10px; background: #fff; border-radius: 50%;
+  .answer-no { background: #e6eaef; color: #1b2a4a; }
+  @media (hover: hover) {
+    .answer-btn:hover { transform: translateY(-1px); }
+    .answer-yes:hover { background: #188338; }
+    .answer-no:hover { background: #d5dbe3; }
   }
+  .answer-btn:active { transform: scale(.98); }
+  .answer-btn:focus-visible { outline: 3px solid #fdb81e; outline-offset: 2px; }
+  .answer-btn.selected.answer-yes { background: #0f5a26; }
+  .answer-btn.selected.answer-no { background: #c5ccd4; }
+  .answer-btn:disabled:not(.selected) { opacity: .45; }
 
   .processing-text { text-align: center; padding: 28px 0 12px; }
   .spinner {
@@ -460,8 +481,13 @@
 
   @media (max-width: 560px) {
     .cycle-pill { display: none; }
-    .card-header, .card-body { padding-left: 20px; padding-right: 20px; }
+    .card-header, .card-body { padding-left: 16px; padding-right: 16px; }
+    .card-header { padding-top: 18px; }
+    .form-number, .trust-row, .divider { display: none; }
     .card-title { font-size: 22px; }
+    .card-subtitle { font-size: 15px; margin-bottom: 0; }
+    .main { padding: 16px 12px 28px; }
+    .card-body { padding-top: 14px; padding-bottom: 18px; }
     .site-header { padding: 12px 16px; }
     .gov-banner, .alert-bar { padding-left: 16px; padding-right: 16px; }
     .congrats-title { font-size: 30px; }
@@ -485,9 +511,9 @@
     .card-header { padding: 36px 40px 0; }
     .card-body { padding: 24px 40px 40px; }
     .card-title { font-size: 32px; }
-    .q-text { font-size: 24px; }
-    .answer-btn { padding: 18px 22px; font-size: 17px; }
-    .answers-split { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .q-text { font-size: 26px; }
+    .answer-btn { min-height: 72px; font-size: 22px; }
+    .quiz-panel { padding: 22px 18px 18px; }
     .celebrate-banner { padding: 42px 40px 36px; }
     .congrats-title { font-size: 46px; max-width: 18ch; }
     .celebrate-body { padding: 28px 40px 0; }
@@ -554,28 +580,30 @@
     </div>
     <div class="card-body">
       <div class="progress-row" id="progressRow">
-        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="step-track" aria-hidden="true">
+          <span class="step-dot on" id="dot1">1</span>
+          <span class="step-bar" id="progressFill"></span>
+          <span class="step-dot" id="dot2">2</span>
+        </div>
         <div class="progress-label" id="progressLabel">1 of 2</div>
       </div>
       <hr class="divider">
 
-      <div id="s1" class="screen active">
-        <p class="q-label">Question 1 of 2</p>
+      <div id="s1" class="screen active quiz-panel">
         <p class="q-text">Is your credit score over 670?</p>
         <p class="q-note">An estimate is fine. This check does not pull your credit.</p>
-        <div class="answers answers-split">
-          <button type="button" class="answer-btn" data-next="2" data-answer="yes"><span class="radio"></span>YES</button>
-          <button type="button" class="answer-btn" data-next="2" data-answer="no"><span class="radio"></span>NO</button>
+        <div class="answers">
+          <button type="button" class="answer-btn answer-yes" data-next="2" data-answer="yes">Yes</button>
+          <button type="button" class="answer-btn answer-no" data-next="2" data-answer="no">No</button>
         </div>
       </div>
 
-      <div id="s2" class="screen">
-        <p class="q-label">Question 2 of 2</p>
+      <div id="s2" class="screen quiz-panel">
         <p class="q-text">Is your current mortgage balance over $150k?</p>
         <p class="q-note">Use the remaining balance, not the original loan amount.</p>
-        <div class="answers answers-split">
-          <button type="button" class="answer-btn" data-next="processing" data-answer="yes"><span class="radio"></span>YES</button>
-          <button type="button" class="answer-btn" data-next="processing" data-answer="no"><span class="radio"></span>NO</button>
+        <div class="answers">
+          <button type="button" class="answer-btn answer-yes" data-next="processing" data-answer="yes">Yes</button>
+          <button type="button" class="answer-btn answer-no" data-next="processing" data-answer="no">No</button>
         </div>
       </div>
 
@@ -656,16 +684,25 @@
 
 <script>
 (function () {
-  var fill = document.getElementById('progressFill');
   var label = document.getElementById('progressLabel');
   var resultTitle = document.getElementById('resultTitle');
   var card = document.getElementById('card');
   var total = 2;
   var answers = { q1: null, q2: null };
 
-  function scrollToCard() {
+  function setProgress(step) {
+    [document.getElementById('dot1'), document.getElementById('dot2')].forEach(function (dot, index) {
+      var n = index + 1;
+      dot.className = 'step-dot' + (n < step ? ' done' : n === step ? ' on' : '');
+    });
+    document.getElementById('progressFill').classList.toggle('full', step > 1);
+    label.textContent = Math.min(step, total) + ' of ' + total;
+  }
+
+  function scrollToActive() {
     requestAnimationFrame(function () {
-      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      var active = document.querySelector('.screen.active') || card;
+      active.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
   }
 
@@ -721,10 +758,9 @@
       setTimeout(function () {
         screen.classList.remove('active');
         if (next === 'processing') {
-          fill.style.width = '100%';
-          label.textContent = total + ' of ' + total;
+          setProgress(3);
           document.getElementById('sProcessing').classList.add('active');
-          scrollToCard();
+          scrollToActive();
           runProcessingSteps(function () {
             document.getElementById('sProcessing').classList.remove('active');
             document.getElementById('progressRow').style.display = 'none';
@@ -738,17 +774,13 @@
               burstConfetti();
               startReservationTimer();
             }
-            scrollToCard();
+            scrollToActive();
           });
         } else {
           var target = document.getElementById('s' + next);
-          if (/^\d+$/.test(next)) {
-            var nextNum = parseInt(next, 10);
-            fill.style.width = (nextNum / total * 100) + '%';
-            label.textContent = nextNum + ' of ' + total;
-          }
+          if (/^\d+$/.test(next)) setProgress(parseInt(next, 10));
           if (target) target.classList.add('active');
-          scrollToCard();
+          scrollToActive();
         }
       }, 280);
     });
