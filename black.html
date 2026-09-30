@@ -220,9 +220,28 @@
   .stat span { display: block; font-size: 12px; color: var(--muted); line-height: 1.3; }
 
   /* ── Testimonial ── */
+  .quotes { margin-top: 16px; }
+  .quote-track {
+    display: flex; gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+  .quote-track::-webkit-scrollbar { display: none; }
+  .quote-dots { display: flex; justify-content: center; gap: 8px; margin-top: 12px; }
+  .quote-dots button {
+    width: 8px; height: 8px; padding: 0; border: 0; border-radius: 99px;
+    background: rgba(255,255,255,.25); cursor: pointer;
+    transition: width .25s ease, background .25s ease;
+  }
+  .quote-dots button.on { width: 22px; background: var(--gold); }
   .quote {
+    flex: 0 0 100%;
+    scroll-snap-align: center;
     display: flex; gap: 14px; align-items: flex-start;
-    margin-top: 16px;
     background: #f6f3ec;
     color: #1f2937;
     border-radius: 16px;
@@ -369,12 +388,37 @@
       </div>
     </section>
 
-    <section class="quote">
-      <img src="images/black-avatar.jpg" alt="" width="56" height="56" loading="lazy">
-      <div>
-        <p>“I was able to lower my monthly payment. The process was easy and only took a few minutes.”</p>
-        <div class="stars">★★★★★</div>
-        <div class="who">Linda M., Ohio</div>
+    <section class="quotes" aria-label="What homeowners say">
+      <div class="quote-track" id="quoteTrack">
+        <div class="quote">
+          <img src="images/black-avatar.jpg" alt="" width="56" height="56" loading="lazy">
+          <div>
+            <p>“I was able to lower my monthly payment. The process was easy and only took a few minutes.”</p>
+            <div class="stars">★★★★★</div>
+            <div class="who">Linda M., Ohio</div>
+          </div>
+        </div>
+        <div class="quote">
+          <img src="images/black-avatar-2.jpg" alt="" width="56" height="56" loading="lazy">
+          <div>
+            <p>“I didn't think I'd qualify with my credit. Two questions later I was looking at a much better rate.”</p>
+            <div class="stars">★★★★★</div>
+            <div class="who">Robert T., Florida</div>
+          </div>
+        </div>
+        <div class="quote">
+          <img src="images/black-avatar-3.jpg" alt="" width="56" height="56" loading="lazy">
+          <div>
+            <p>“Quick, simple and no pressure. I wish I had checked sooner — it's been a real relief for our budget.”</p>
+            <div class="stars">★★★★★</div>
+            <div class="who">Denise W., Georgia</div>
+          </div>
+        </div>
+      </div>
+      <div class="quote-dots" id="quoteDots">
+        <button type="button" aria-label="Testimonial 1" class="on"></button>
+        <button type="button" aria-label="Testimonial 2"></button>
+        <button type="button" aria-label="Testimonial 3"></button>
       </div>
     </section>
   </main>
@@ -452,6 +496,35 @@
       }, 250);
     });
   });
+
+  (function testimonials() {
+    var track = document.getElementById('quoteTrack');
+    var dots = document.querySelectorAll('#quoteDots button');
+    var count = dots.length, current = 0, resumeAt = 0;
+
+    function step() { return track.clientWidth + 12; }
+    function goTo(i) { track.scrollTo({ left: i * step() }); }
+    function pause() { resumeAt = Date.now() + 8000; }
+
+    track.addEventListener('scroll', function () {
+      var i = Math.round(track.scrollLeft / step());
+      if (i === current) return;
+      current = i;
+      dots.forEach(function (d, j) { d.classList.toggle('on', j === i); });
+    }, { passive: true });
+
+    ['touchstart', 'pointerdown', 'wheel'].forEach(function (ev) {
+      track.addEventListener(ev, pause, { passive: true });
+    });
+    dots.forEach(function (d, j) {
+      d.addEventListener('click', function () { pause(); goTo(j); });
+    });
+
+    setInterval(function () {
+      if (Date.now() < resumeAt || document.hidden) return;
+      goTo((current + 1) % count);
+    }, 4500);
+  })();
 
   function startTimer() {
     var el = document.getElementById('timer');
