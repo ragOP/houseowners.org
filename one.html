@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0b1220">
+<title>Mortgage Rate Reduction — Eligibility Check</title>
+<meta name="description" content="Answer 2 quick questions to see if you qualify for a lower mortgage rate.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+  (function (c, l, a, r, i, t, y) {
+    c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+    t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+    y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+  })(window, document, "clarity", "script", "y3rt3ntclc");
+</script>
+<style>
+  :root {
+    --bg: #0b1220;
+    --card: #1a2336;
+    --card-border: rgba(255,255,255,.08);
+    --text: #f8fafc;
+    --muted: #94a3b8;
+    --blue: #2f6fff;
+    --glow: 0 0 0 2px #60a5fa, 0 12px 32px rgba(47,111,255,.55);
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+  }
+  button { font-family: inherit; }
+  a { color: #93c5fd; }
+
+  .app {
+    max-width: 430px;
+    min-height: 100vh;
+    min-height: 100dvh;
+    margin: 0 auto;
+    padding: calc(10px + env(safe-area-inset-top)) 20px calc(16px + env(safe-area-inset-bottom));
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: #cbd5e1;
+  }
+  .brand i {
+    font-style: normal;
+    width: 22px; height: 22px;
+    border-radius: 6px;
+    background: var(--blue);
+    display: grid; place-items: center;
+    font-size: 12px; color: #fff;
+  }
+
+  .warn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 10px 0 8px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(239, 68, 68, .12);
+    border: 1px solid rgba(248, 113, 113, .35);
+    color: #fca5a5;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .warn::before {
+    content: "";
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #f87171;
+    box-shadow: 0 0 8px #f87171;
+    animation: blink 1.2s infinite;
+  }
+  @keyframes blink { 50% { opacity: .25; } }
+
+  .headline {
+    margin: 0 0 6px;
+    font-size: 22px;
+    line-height: 1.15;
+    font-weight: 800;
+    letter-spacing: -.03em;
+  }
+  .headline span { color: #4ade80; }
+  .lede {
+    margin: 0 0 14px;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.4;
+  }
+
+  .quiz {
+    background: #111827;
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 16px 16px 18px;
+  }
+
+  .topbar {
+    display: grid;
+    grid-template-columns: 36px 1fr 36px;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .back {
+    width: 36px; height: 36px;
+    border: 0; background: transparent; color: var(--text);
+    font-size: 24px; line-height: 1; padding: 0; cursor: pointer;
+  }
+  .back.is-off { visibility: hidden; pointer-events: none; }
+  .qcount {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #e2e8f0;
+    white-space: nowrap;
+  }
+
+  .bars {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .bars span {
+    height: 6px;
+    border-radius: 99px;
+    background: #2a3548;
+  }
+  .bars span.on:nth-child(1) { background: #f59e0b; }
+  .bars span.on:nth-child(2) { background: #22c55e; }
+  .bars span.on:nth-child(3) { background: #38bdf8; }
+
+  h2 {
+    margin: 0 0 6px;
+    font-size: 24px;
+    line-height: 1.2;
+    font-weight: 800;
+    letter-spacing: -.03em;
+  }
+  .sub {
+    margin: 0 0 16px;
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .opt {
+    min-height: 84px;
+    padding: 16px 12px;
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    background: var(--card);
+    color: var(--text);
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: .04em;
+    cursor: pointer;
+    transition: background .15s, box-shadow .15s, transform .12s;
+  }
+  .opt.selected {
+    background: var(--blue);
+    border-color: transparent;
+    box-shadow: var(--glow);
+  }
+  .opt:active { transform: scale(.98); }
+
+  .result { text-align: center; padding: 8px 4px 4px; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 12px; border-radius: 99px;
+    background: rgba(34,197,94,.15); color: #86efac;
+    font-size: 13px; font-weight: 700;
+  }
+  .result h2 { font-size: 24px; }
+  .amount {
+    font-size: 40px; font-weight: 800; color: #86efac;
+    letter-spacing: -.04em; margin: 8px 0 12px;
+  }
+  .result p { color: var(--muted); font-size: 15px; line-height: 1.5; margin: 0; }
+  .cta {
+    display: flex; align-items: center; justify-content: center;
+    width: 100%; min-height: 54px; margin-top: 18px;
+    border-radius: 14px; text-decoration: none;
+    background: linear-gradient(180deg, #3b82f6, #2563eb);
+    color: #fff; font-size: 17px; font-weight: 700;
+    box-shadow: 0 10px 24px rgba(37,99,235,.35);
+  }
+  .processing { text-align: center; padding: 36px 8px 20px; }
+  .spin {
+    width: 42px; height: 42px; margin: 0 auto 16px;
+    border: 3px solid #2a3548; border-top-color: #3b82f6;
+    border-radius: 50%; animation: spin .8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .privacy {
+    margin: 12px 0 0;
+    text-align: center;
+    font-size: 12px;
+    color: #64748b;
+  }
+
+  .review {
+    margin-top: 16px;
+    padding: 14px;
+    border-radius: 16px;
+    background: #111827;
+    border: 1px solid var(--card-border);
+  }
+  .review-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .review-top img {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255,255,255,.12);
+  }
+  .review-name { font-size: 14px; font-weight: 700; }
+  .review-meta { font-size: 12px; color: var(--muted); }
+  .stars { color: #fbbf24; letter-spacing: 1px; font-size: 13px; }
+  .review p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.45;
+    color: #e2e8f0;
+  }
+  .review-verified {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #86efac;
+    font-weight: 600;
+  }
+
+  .legal {
+    margin-top: 22px;
+    font-size: 11px;
+    line-height: 1.5;
+    color: #64748b;
+    text-align: center;
+  }
+
+  .is-hidden { display: none !important; }
+
+  @media (min-width: 480px) {
+    body { background: #070b14; }
+    .app {
+      margin: 24px auto;
+      border-radius: 28px;
+      background: var(--bg);
+      box-shadow: 0 20px 60px rgba(0,0,0,.45);
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="brand"><i>⌂</i> Houseowners News</div>
+      <div class="warn">Screening closes at 7PM ET</div>
+      <h1 class="headline">New Mortgage Rate Reduction Program Lets Homeowners Lower Their Rate to as Low as <span>2.5%</span></h1>
+      <p class="lede">Answer 2 quick questions to see if you qualify.</p>
+    </header>
+
+    <section class="quiz" id="quiz">
+      <div class="topbar" id="topbar">
+        <button type="button" class="back is-off" id="back" aria-label="Back">‹</button>
+        <div class="qcount" id="qcount">Question 1 of 2</div>
+        <span></span>
+      </div>
+      <div class="bars" id="bars" aria-hidden="true">
+        <span class="on"></span><span></span>
+      </div>
+      <div id="stage"></div>
+      <p class="privacy" id="privacy">Your information is private</p>
+    </section>
+
+    <aside class="review" id="review">
+      <div class="review-top">
+        <img src="images/black-avatar.jpg" alt="" width="44" height="44">
+        <div>
+          <div class="review-name">Linda M., Ohio</div>
+          <div class="review-meta"><span class="stars">★★★★★</span> · Homeowner</div>
+        </div>
+      </div>
+      <p>“I was able to lower my monthly payment. The process was easy and only took a few minutes.”</p>
+      <div class="review-verified">✔ Verified eligibility check</div>
+    </aside>
+
+    <footer class="legal">
+      <p>
+        © 2026 Houseowners News. This site is a privately owned marketing site — not a lender or government agency,
+        and not affiliated with the FHFA. Answers are a pre-screening only and are not an offer of credit.
+        Rates and eligibility vary. This is an advertisement.
+      </p>
+      <p><a href="about.html" target="_blank">About / Privacy</a> · <a href="terms.html" target="_blank">Terms of Use</a></p>
+    </footer>
+  </div>
+
+<script>
+(function () {
+  var LINKS = {
+    qualify: "https://track.mainofferpage.online/click",
+    debt: "https://www.nz91nyfbo.com/ZZ2GX/4MQCFX/",
+    sleep: "https://www.gumbixyz.com/8XFSC8/2ZNH3GS/"
+  };
+
+  var SCREENS = {
+    credit: {
+      n: 1, total: 2,
+      title: "Is your credit score over 670?",
+      sub: "Select the option that best matches.",
+      options: [
+        { label: "YES", next: "mortgage" },
+        { label: "NO", next: "debt" }
+      ]
+    },
+    mortgage: {
+      n: 2, total: 2,
+      title: "Is your current mortgage balance over $150k?",
+      sub: "Select the option that best matches.",
+      options: [
+        { label: "YES", result: "qualify" },
+        { label: "NO", next: "debt3" }
+      ]
+    },
+    debt: {
+      n: 2, total: 2,
+      title: "Do you have over $8k in credit card debt?",
+      sub: "Select the option that best matches.",
+      options: [
+        { label: "YES", result: "debt" },
+        { label: "NO", result: "sleep" }
+      ]
+    },
+    debt3: {
+      n: 3, total: 3,
+      title: "Do you have over $8k in credit card debt?",
+      sub: "Select the option that best matches.",
+      options: [
+        { label: "YES", result: "debt" },
+        { label: "NO", result: "sleep" }
+      ]
+    }
+  };
+
+  var history = [];
+  var current = "credit";
+  var busy = false;
+  var stage = document.getElementById("stage");
+  var backBtn = document.getElementById("back");
+  var qcount = document.getElementById("qcount");
+  var bars = document.getElementById("bars");
+  var topbar = document.getElementById("topbar");
+  var privacy = document.getElementById("privacy");
+  var review = document.getElementById("review");
+
+  function setBars(n, total) {
+    bars.innerHTML = "";
+    bars.style.gridTemplateColumns = "repeat(" + total + ", 1fr)";
+    for (var i = 1; i <= total; i++) {
+      var el = document.createElement("span");
+      if (i <= n) el.className = "on";
+      bars.appendChild(el);
+    }
+  }
+
+  function renderQuestion(id) {
+    var q = SCREENS[id];
+    current = id;
+    busy = false;
+    qcount.textContent = "Question " + q.n + " of " + q.total;
+    backBtn.classList.toggle("is-off", history.length === 0);
+    topbar.classList.remove("is-hidden");
+    bars.classList.remove("is-hidden");
+    privacy.classList.remove("is-hidden");
+    review.classList.remove("is-hidden");
+    setBars(q.n, q.total);
+
+    var html = "<h2>" + q.title + "</h2><p class=\"sub\">" + q.sub + "</p><div class=\"grid\">";
+    q.options.forEach(function (opt, i) {
+      html += "<button type=\"button\" class=\"opt\" data-i=\"" + i + "\">" + opt.label + "</button>";
+    });
+    html += "</div>";
+    stage.innerHTML = html;
+
+    stage.querySelectorAll(".opt").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        if (busy) return;
+        busy = true;
+        var opt = q.options[parseInt(btn.getAttribute("data-i"), 10)];
+        btn.classList.add("selected");
+        setTimeout(function () {
+          if (opt.result) {
+            showProcessing(opt.result);
+            return;
+          }
+          history.push(id);
+          renderQuestion(opt.next);
+        }, 180);
+      });
+    });
+  }
+
+  function showProcessing(kind) {
+    topbar.classList.add("is-hidden");
+    bars.classList.add("is-hidden");
+    privacy.classList.add("is-hidden");
+    stage.innerHTML = "<div class=\"processing\"><div class=\"spin\"></div><h2>Checking eligibility…</h2><p class=\"sub\">Reviewing your responses against program requirements</p></div>";
+    setTimeout(function () { showResult(kind); }, 1800);
+  }
+
+  function showResult(kind) {
+    privacy.classList.add("is-hidden");
+    var html = "<div class=\"result\">";
+    if (kind === "qualify") {
+      html += "<div class=\"badge\">Eligible</div>";
+      html += "<h2>You may qualify for a lower mortgage rate</h2>";
+      html += "<div class=\"amount\">As low as 2.5%</div>";
+      html += "<p>Based on your answers, you appear to meet the initial eligibility criteria. Complete your full application to see your personalized rate in 60 seconds.</p>";
+      html += "<a class=\"cta\" id=\"ClaimNow\" href=\"" + LINKS.qualify + "\">Click Here To Claim It Now →</a>";
+      html += "<p class=\"privacy\">🔒 Secure • No SSN required • 60 seconds</p>";
+    } else if (kind === "debt") {
+      html += "<h2>While you don't qualify for a lower mortgage rate today, you DO qualify to claim a significant debt reduction under the economic relief program!</h2>";
+      html += "<p style=\"margin-top:10px\">Tap the button below to claim now.</p>";
+      html += "<a class=\"cta\" id=\"ClaimNow\" href=\"" + LINKS.debt + "\">Click Here To Claim It Now →</a>";
+    } else {
+      html += "<h2>While you don't qualify for a lower mortgage rate today, you DO qualify to join a 3-day sleep research study in your area that will pay you $3,600!</h2>";
+      html += "<div class=\"amount\">$3,600</div>";
+      html += "<p>Limited spots available — tap below to claim yours.</p>";
+      html += "<a class=\"cta\" id=\"ClaimNow\" href=\"" + LINKS.sleep + "\">Click Here To Claim It Now →</a>";
+    }
+    html += "</div>";
+    stage.innerHTML = html;
+  }
+
+  backBtn.addEventListener("click", function () {
+    if (!history.length || busy) return;
+    renderQuestion(history.pop());
+  });
+
+  renderQuestion("credit");
+})();
+</script>
+</body>
+</html>
