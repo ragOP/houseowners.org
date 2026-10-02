@@ -22,7 +22,8 @@
     }
 
     function qualify() {
-        chat.showMessage("Checking eligibility… reviewing your responses against program requirements 🔎");
+        chat.showMessage("Checking eligibility…");
+        chat.showMessage("Reviewing your responses against program requirements...");
         chat.showMessage("🎉 Good news! You may qualify for a lower mortgage rate — as low as 2.5%!");
         chat.showMessage("Based on your answers, you appear to meet the initial eligibility criteria. Complete your full application to see your personalized rate in 60 seconds.");
         chat.showMessage("🔒 Secure • No SSN required • Free eligibility check • 60 seconds");
@@ -30,14 +31,15 @@
     }
 
     function debtYes() {
-        chat.showMessage("Checking eligibility… reviewing your responses against program requirements 🔎");
-        chat.showMessage("While you don't qualify for a lower mortgage rate today, based on your answers, you DO qualify to claim a significant debt reduction under the economic relief program! 🎉");
+        chat.showMessage("Checking eligibility…");
+        chat.showMessage("Reviewing your responses against program requirements...");
         chat.showMessage("Tap the button below to claim now.");
         claimButton(LINKS.debt);
     }
 
     function sleepStudy() {
-        chat.showMessage("Checking eligibility… reviewing your responses against program requirements 🔎");
+        chat.showMessage("Checking eligibility…");
+        chat.showMessage("Reviewing your responses against program requirements...");
         chat.showMessage("While you don't qualify for a lower mortgage rate today, based on your answers, you DO qualify to join a 3-day sleep research study in your area that will pay you $3,600! 🎉");
         chat.showMessage("Limited spots available — tap the button below to claim yours.");
         claimButton(LINKS.sleep);
@@ -57,9 +59,9 @@
     }
 
     chat.showMessage("Hi 👋");
-    chat.showMessage("I'm Sarah with Houseowners News.");
-    chat.showMessage("Lenders are reviewing homeowners for a lower mortgage rate under the Mortgage Rate Reduction Program. Answer 2 quick questions to see if you qualify 😊");
-    chat.showMessage("Question 1 of 2: Is your credit score over 670?");
+    chat.showMessage("I'm Sarah with GovRateAlerts.");
+    chat.showMessage("I'll ask you 2 quick questions to check if you qualify for claiming the lowest rate on your mortgage today! Please be honest 👇");
+    chat.showMessage("Q1. Is your credit score over 670?");
     chat.showOptions(["YES", "NO"]);
 
     chat.waitResponse(function (credit) {
@@ -67,7 +69,7 @@
             askDebt();
             return;
         }
-        chat.showMessage("Question 2 of 2: Is your current mortgage balance over $150k?");
+        chat.showMessage("Q2. Is your current mortgage balance over $150k?");
         chat.showOptions(["YES", "NO"]);
         chat.waitResponse(function (mortgage) {
             if (mortgage == "YES") qualify();
