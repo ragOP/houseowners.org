@@ -289,6 +289,37 @@
         .bottom-security-icons .fe-countdown-sub {
             color: #cbd5e1 !important;
         }
+        @media (max-width: 600px) {
+    #bottom-security-icons {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 10px !important;
+    }
+
+    #bottom-security-icons > div:last-child {
+        width: 135px !important;
+        flex-shrink: 0 !important;
+        text-align: left !important;
+    }
+
+    #bottom-security-icons .fe-countdown-label {
+        white-space: nowrap !important;
+        margin-top: 0 !important;
+        line-height: 16px !important;
+    }
+
+    #bottom-security-icons .fe-countdown-sub {
+        white-space: normal !important;
+        line-height: 15px !important;
+        margin: 2px 0 0 !important;
+    }
+
+    #bottom-security-icons .fe-countdown-sub span {
+        display: inline !important;
+        white-space: normal !important;
+    }
+}
     </style>
 
     <!-- Microsoft Clarity Tag -->
@@ -354,15 +385,14 @@
             <span>✔ Takes 60 seconds</span>
         </div>
 
-        <div id="bottom-security-icons" class="bottom-security-icons bottom-security-icons-fixed"
+        <div id="bottom-security-icons" class="bottom-security-icons bottom-security-icons-absolute"
             style="visibility: unset;">
             <div id="flipdown" class="flipdown flipdown-sm flipdown__theme-light"></div>
             <div>
-                <div class="fe-countdown-label" style="font-size:13px;line-height:13px;font-weight:600;">left to claim
+                <div class="fe-countdown-label" style="font-size:13px;line-height:13px;font-weight:600;margin-top: 10px;">left to claim
                 </div>
-                <div class="fe-countdown-sub" style="font-size:13px;line-height:13px;margin-top:2px;font-weight:600;">
-                    <span>Your spot is only</span><span class="space">&nbsp;</span><span>guaranteed for this
-                        long!</span>
+                <div class="fe-countdown-sub" style="font-size:13px;line-height:13px;font-weight:600;">
+                    <span>Your spot is only</span><span class="space"></span><span> &nbsp;  guaranteed for this  long!</span>
                 </div>
             </div>
         </div>

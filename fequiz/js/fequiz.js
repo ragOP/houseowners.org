@@ -7,7 +7,7 @@
 
     var chat = window.chat;
 
-    chat.wait = function (callback, delay = 575) {
+    chat.wait = function (callback, delay = 605) {
         if (typeof callback === 'function') {
             setTimeout(callback, delay);
         }
