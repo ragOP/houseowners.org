@@ -25,7 +25,7 @@
         chat.showMessage("Checking eligibility…");
         chat.showMessage("Reviewing your responses against program requirements...");
         chat.showMessage("🎉 Good news! You may qualify for a lower mortgage rate — as low as 2.5%!");
-        chat.showMessage("Based on your answers, you appear to meet the initial eligibility criteria. Complete your full application to see your personalized rate in 60 seconds.");
+        chat.showMessage("Based on your answers, you appear to meet the initial eligibility criteria. Complete your full application to see your personalized rate in 60 seconds👇");
         // chat.showMessage("🔒 Secure • No SSN required • Free eligibility check • 60 seconds");
         claimButton(LINKS.qualify);
     }
