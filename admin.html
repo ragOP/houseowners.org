@@ -444,6 +444,8 @@
       <button type="button" data-page="all" aria-pressed="true">All</button>
       <button type="button" data-page="glo2" aria-pressed="false">glo2</button>
       <button type="button" data-page="glo2b" aria-pressed="false">glo2b</button>
+      <button type="button" data-page="glo3b" aria-pressed="false">glo3b</button>
+      <button type="button" data-page="glo4b" aria-pressed="false">glo4b</button>
       <button type="button" data-page="tobe" aria-pressed="false">tobe</button>
       <button type="button" data-page="abc" aria-pressed="false">abc</button>
     </div>
@@ -473,7 +475,7 @@
   var range = "today";
   var zone = "America/New_York";
   var periods = { today: "Today", yesterday: "Yesterday", "7": "Last 7 days", "14": "Last 14 days" };
-  var debtPages = { glo2: true, glo2b: true };
+  var debtPages = { glo2: true, glo2b: true, glo3b: true, glo4b: true };
   var q3Fallback = "Do you have over $8k in credit card debt?";
   var metric = "visitors";
   var scope = "glo";
@@ -850,7 +852,7 @@
       '<p class="leadline">' + periods[range] + " · " + total + (total === 1 ? " visitor" : " visitors") + "</p>" +
       questionBlock("Question 1", questions.q1, q1yes, q1no, q1none, total) +
       questionBlock("Question 2", questions.q2, q2yes, q2no, q2none, total) +
-      (showDebt ? questionBlock("Question 3 · glo2 / glo2b", q3Text, q3yes, q3no, q3none, total) : "");
+      (showDebt ? questionBlock("Question 3 · glo2 / glo2b / glo3b / glo4b", q3Text, q3yes, q3no, q3none, total) : "");
     document.getElementById("outcomes").innerHTML =
       outcomeBlock("Congratulations", qualReached, qualClick, total, "good") +
       (showDebt ? outcomeBlock("Debt relief", debtReached, debtClick, total, "debt") : "") +

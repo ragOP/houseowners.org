@@ -3,6 +3,8 @@
     { "source": "/roof1", "destination": "/roof1.html" },
     { "source": "/wp", "destination": "/wp.html" },
     { "source": "/glo222b", "destination": "/glo2b.html" },
+    { "source": "/glo3b", "destination": "/glo3b.html" },
+    { "source": "/glo4b", "destination": "/glo4b.html" },
     { "source": "/tobe", "destination": "/tobe.html" },
     { "source": "/abc", "destination": "/abc.html" },
     { "source": "/rac", "destination": "/rac.html" },

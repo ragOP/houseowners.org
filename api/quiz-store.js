@@ -6,8 +6,8 @@ export const QUESTIONS = {
   q3: 'Do you have over $8k in credit card debt?'
 };
 
-const PAGES = new Set(['glo2', 'glo2b', 'tobe', 'abc']);
-const DEBT_PAGES = new Set(['glo2', 'glo2b']);
+const PAGES = new Set(['glo2', 'glo2b', 'glo3b', 'glo4b', 'tobe', 'abc']);
+const DEBT_PAGES = new Set(['glo2', 'glo2b', 'glo3b', 'glo4b']);
 const ANSWERS = new Set(['yes', 'no']);
 const SESSION = /^[a-zA-Z0-9-]{16,80}$/;
 
@@ -160,7 +160,7 @@ export async function listEvents() {
 
 export function summarize(events) {
   const bucket = () => ({ total: 0, qualified: 0, disqualified: 0, debt: 0, sleep: 0, inProgress: 0 });
-  const byPage = { glo2: bucket(), glo2b: bucket(), tobe: bucket(), abc: bucket() };
+  const byPage = { glo2: bucket(), glo2b: bucket(), glo3b: bucket(), glo4b: bucket(), tobe: bucket(), abc: bucket() };
   const comboMap = new Map();
   events.forEach((event) => {
     const counts = byPage[event.page];
