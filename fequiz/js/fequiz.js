@@ -14,7 +14,7 @@
     };
 
     function claimButton(link) {
-        chat.showOptions(["Click Here To Claim It Now ->"], chat.position.HORIZONTAL, false, function () {
+        chat.showOptions(["Click Here To Claim It Now"], chat.position.HORIZONTAL, false, function () {
             chat.goToPage(link, false);
         }, null, function (block, option) {
             option.setAttribute("id", "ClaimNow");
