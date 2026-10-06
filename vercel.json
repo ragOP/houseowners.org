@@ -11,6 +11,7 @@
     { "source": "/add", "destination": "/add.html" },
     { "source": "/ctc", "destination": "/ctc.html" },
     { "source": "/fequiz", "destination": "/fequiz.html" },
+    { "source": "/ch3", "destination": "/ch3.html" },
     { "source": "/gov1", "destination": "/gov1.html" },
     { "source": "/black", "destination": "/black.html" }
   ]
