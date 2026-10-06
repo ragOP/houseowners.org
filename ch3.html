@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <title>Seguro de Gastos Finales — Verifique Su Elegibilidad</title>
-    <meta name="description" content="Responda 2 preguntas rápidas para ver opciones de seguro de gastos finales.">
+    <title>Mortgage Rate Reduction Program — Eligibility Check</title>
+    <meta name="description" content="Answer 2 quick questions to see if you qualify for a lower mortgage rate.">
     <link href="/fequiz/css/flipdown.min.css" rel="stylesheet" media="all">
     <link href="/fequiz/css/style-fequizchat.css" rel="stylesheet" media="all">
 
@@ -323,15 +323,15 @@
 <body>
     <main id="main-page" class="min-h-screen">
         <div class="fe-alert">
-            <span class="fe-alert-dot"></span>COTIZACIONES DISPONIBLES HOY
+            <span class="fe-alert-dot"></span>WARNING: SCREENING CLOSES AT 7PM ET
         </div>
 
         <div class="fe-headline">
             <h1>
-                Personas mayores de 50 años pueden ver opciones de seguro de gastos finales con cobertura de hasta
-                <span>$40,000</span> para gastos funerarios y deudas pendientes
+                Homeowners are rushing to claim their "Lowest Possible Mortgage Rate" on the official portal in 60 seconds, rates as low as
+                <span>2.5%</span>
             </h1>
-            <p>Responda 2 preguntas rápidas para ver si califica.</p>
+            <p>Answer 2 quick questions below to check your eligibility.</p>
         </div>
 
         <div class="fe-card">
@@ -339,9 +339,9 @@
                 <div class="fe-avatar"><img src="/fequiz/js/img/avatar/agent.jpg" alt="Sarah"></div>
                 <div>
                     <div class="fe-name">Sarah</div>
-                    <div class="fe-status">Asistente automatizada • En línea</div>
+                    <div class="fe-status">Program Assistant • Online now</div>
                 </div>
-                <div class="fe-secure">🔒 Verificación<br>segura</div>
+                <div class="fe-secure">🔒 Secure<br>check</div>
             </div>
 
             <div id="chat-container-main" style="padding-bottom: 90px;">
@@ -355,20 +355,19 @@
         </div>
 
         <div class="fe-trust">
-            <span>✔ Gratis</span>
-            <span>✔ Sin compromiso</span>
-            <span>✔ Toma 60 segundos</span>
+            <span>✔ Free to check</span>
+            <span>✔ No SSN required</span>
+            <span>✔ Takes 60 seconds</span>
         </div>
 
         <div id="bottom-security-icons" class="bottom-security-icons bottom-security-icons-absolute"
             style="visibility: unset;">
             <div id="flipdown" class="flipdown flipdown-sm flipdown__theme-light"></div>
             <div>
-                <div class="fe-countdown-label" style="font-size:13px;line-height:13px;font-weight:600;margin-top: 10px;">
-                    para completar
+                <div class="fe-countdown-label" style="font-size:13px;line-height:13px;font-weight:600;margin-top: 10px;">left to claim
                 </div>
                 <div class="fe-countdown-sub" style="font-size:13px;line-height:13px;font-weight:600;">
-                    Su sesión de verificación
+                    <span>Your spot is only</span><span class="space"></span><span> &nbsp;  guaranteed for this  long!</span>
                 </div>
             </div>
         </div>
@@ -378,78 +377,23 @@
     <footer id="main-footer" class="bg-gray-100 border-t border-t-1 border-t-gray-200 mt-8">
         <div
             class="mx-auto max-w-7xl overflow-hidden px-6 py-8 lg:px-8 text-sm sm:text-md leading-5 sm:leading-6 text-gray-500">
-            <p class="text-center pb-6 text-xs">
-                Sarah es una asistente automatizada, no una persona real. Este es un sitio de mercadeo privado y un
-                anuncio. No somos una aseguradora ni una agencia del gobierno, y no estamos afiliados con Medicare ni
-                con ningún programa gubernamental. La cobertura, las primas y la elegibilidad dependen de la aseguradora,
-                su edad, su salud y su estado. Las respuestas son solo una pre-evaluación y no garantizan cobertura.
+            <p class="text-center pb-8">
+                &copy; 2026 Houseowners News. Sarah is an automated assistant, not a live person. This site is a
+                privately owned marketing site — not a lender or government agency, and not affiliated with the FHFA.
+                Answers are a pre-screening only and are not an offer of credit; rates and eligibility vary by
+                individual situation. This is an advertisement.
             </p>
             <p class="text-center pb-4 text-blue-400">
-                <span><a href="about.html" target="_blank">Acerca de / Privacidad</a>
+                <span><a href="about.html" target="_blank">About / Privacy</a>
                     |
-                    <a href="terms.html" target="_blank">Términos de Uso</a></span>
+                    <a href="terms.html" target="_blank">Terms of Use</a></span>
             </p>
         </div>
     </footer>
 
     <script src="/fequiz/js/jquery-3.7.0.min.js"></script>
 
-    <script>
-        (function () {
-            var PHONE = { display: "+1 (XXX) XXX-XXXX", tel: "+1XXXXXXXXXX" };
-            var LINKS = { senior81: "https://example.com/REPLACE-81-PLUS-OFFER" };
-
-            var chat = window.chat;
-
-            chat.wait = function (callback, delay = 605) {
-                if (typeof callback === 'function') {
-                    setTimeout(callback, delay);
-                }
-            };
-
-            function callNow() {
-                chat.showMessage("Revisando sus respuestas…");
-                chat.showMessage("🎉 ¡Buenas noticias! Según sus respuestas, puede calificar para opciones de seguro de gastos finales.");
-                chat.showMessage("Toque el botón de abajo para hablar con un agente licenciado y ver su cotización. Solo toma unos minutos. 👇");
-                chat.showOptions(["📞 Llamar " + PHONE.display], chat.position.HORIZONTAL, false, function () {
-                    chat.clickLink("tel:" + PHONE.tel);
-                    if (window.fbq) fbq('track', 'Lead');
-                }, null, function (block, option) {
-                    option.setAttribute("id", "CallNow");
-                });
-            }
-
-            function senior81() {
-                chat.showMessage("Revisando sus respuestas…");
-                chat.showMessage("🎉 ¡Gracias! Encontramos opciones que pueden estar disponibles para su grupo de edad.");
-                chat.showMessage("Toque el botón de abajo para continuar. 👇");
-                chat.showOptions(["Ver Mis Opciones ->"], chat.position.HORIZONTAL, false, function () {
-                    chat.goToPage(LINKS.senior81, false);
-                }, null, function (block, option) {
-                    option.setAttribute("id", "ClaimNow");
-                });
-            }
-
-            chat.showMessage("Hola 👋");
-            chat.showMessage("Soy Sarah, una asistente automatizada.");
-            chat.showMessage("¿Quiere ver si califica para un seguro de gastos finales con cobertura de hasta $40,000? Toque \"Sí\" para comenzar. 😊");
-            chat.showOptions(["Sí"]);
-
-            chat.waitResponse(function () {
-                chat.showMessage("¿Cuál es su rango de edad?");
-                chat.showOptions(["50-75", "76-80", "81+"], chat.position.VERTICAL);
-                chat.waitResponse(function (age) {
-                    if (age == "81+") senior81();
-                    else callNow();
-                });
-            });
-
-            chat.start(
-                document.getElementById("chat-container"),
-                document.getElementById("main")
-            );
-        })();
-    </script>
+    <script src="/fequiz/js/fequiz.js"></script>
 
     <script>
         (function () {
