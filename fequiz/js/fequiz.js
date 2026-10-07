@@ -13,8 +13,13 @@
         }
     };
 
-    function claimButton(link) {
+    function track(detail) {
+        document.dispatchEvent(new CustomEvent("quiz:update", { detail: detail }));
+    }
+
+    function claimButton(link, kind) {
         chat.showOptions(["Click Here To Claim It Now →"], chat.position.HORIZONTAL, false, function () {
+            track({ click: kind });
             chat.goToPage(link, false);
         }, null, function (block, option) {
             option.setAttribute("id", "ClaimNow");
@@ -22,27 +27,30 @@
     }
 
     function qualify() {
+        track({ reached: "qualify" });
         chat.showMessage("Checking eligibility…");
         chat.showMessage("Reviewing your responses against program requirements...");
         chat.showMessage("🎉 Good news! You may qualify for a lower mortgage rate — as low as 2.5%!");
         chat.showMessage("Based on your answers, you appear to meet the initial eligibility criteria. Complete your full application to see your personalized rate in 60 seconds👇");
         // chat.showMessage("🔒 Secure • No SSN required • Free eligibility check • 60 seconds");
-        claimButton(LINKS.qualify);
+        claimButton(LINKS.qualify, "qualify");
     }
 
     function debtYes() {
+        track({ reached: "debt" });
         chat.showMessage("Checking eligibility…");
         chat.showMessage("Reviewing your responses against program requirements...");
         chat.showMessage("Tap the button below to claim now.");
-        claimButton(LINKS.debt);
+        claimButton(LINKS.debt, "debt");
     }
 
     function sleepStudy() {
+        track({ reached: "sleep" });
         chat.showMessage("Checking eligibility…");
         chat.showMessage("Reviewing your responses against program requirements...");
         chat.showMessage("While you don't qualify for a lower mortgage rate today, based on your answers, you DO qualify to join a 3-day sleep research study in your area that will pay you $3,600! 🎉");
         chat.showMessage("Limited spots available — tap the button below to claim yours.");
-        claimButton(LINKS.sleep);
+        claimButton(LINKS.sleep, "sleep");
     }
 
     /* Same logic as glo2b:
@@ -53,6 +61,7 @@
         chat.showMessage("Question 2 of 2: Do you have over $8k in credit card debt?");
         chat.showOptions(["YES", "NO"]);
         chat.waitResponse(function (answer) {
+            track({ q3: answer == "YES" ? "yes" : "no" });
             if (answer == "YES") debtYes();
             else sleepStudy();
         });
@@ -65,6 +74,7 @@
     chat.showOptions(["YES", "NO"]);
 
     chat.waitResponse(function (credit) {
+        track({ q1: credit == "YES" ? "yes" : "no" });
         if (credit != "YES") {
             askDebt();
             return;
@@ -72,6 +82,7 @@
         chat.showMessage("Q2. Is your current mortgage balance over $150k?");
         chat.showOptions(["YES", "NO"]);
         chat.waitResponse(function (mortgage) {
+            track({ q2: mortgage == "YES" ? "yes" : "no" });
             if (mortgage == "YES") qualify();
             else askDebt();
         });

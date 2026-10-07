@@ -162,6 +162,7 @@
   </div>
 </div>
 
+<script src="/quiz-track.js" data-page="ctc"></script>
 <script>
 var LINKS = {
   qualify: 'https://track.mainofferpage.online/click',
@@ -234,22 +235,29 @@ function start(){
     "Two quick questions. That's all I need. 👇"
   ], askCredit);
 }
+function report(detail){
+  document.dispatchEvent(new CustomEvent('quiz:update', { detail: detail }));
+}
 function askCredit(){
   ask("Is your credit score over <b>670</b>?", function(a){
+    report({ q1: a });
     if (a === 'yes') askMortgage(); else askDebt();
   });
 }
 function askMortgage(){
   ask("Is your current mortgage balance over <b>$150k</b>?", function(a){
+    report({ q2: a });
     if (a === 'yes') checking('qualify'); else askDebt();
   });
 }
 function askDebt(){
   ask("Do you have over <b>$8k</b> in credit card debt?", function(a){
+    report({ q3: a });
     checking(a === 'yes' ? 'debt' : 'sleep');
   });
 }
 function checking(result){
+  report({ reached: result === 'debt' ? 'debt' : result === 'sleep' ? 'sleep' : 'qualify' });
   say([{ text: "Checking eligibility for homeowners in " + GEO + "… 🔎", pause: 1400 }].concat(RESULTS[result].lead), function(){
     typing(900, function(){ renderCard(result); });
   });

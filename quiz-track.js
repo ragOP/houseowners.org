@@ -1,7 +1,8 @@
 (function () {
   var script = document.currentScript;
   var page = script && script.getAttribute('data-page');
-  if (page !== 'glo2' && page !== 'glo2b' && page !== 'glo3b' && page !== 'glo4b' && page !== 'glo5' && page !== 'tobe' && page !== 'abc') return;
+  var PAGES = { glo2: 1, glo2b: 1, glo3b: 1, glo4b: 1, glo5: 1, glott: 1, glott2: 1, tobe: 1, abc: 1, black: 1, gov1: 1, fequiz: 1, ch3: 1, ctc: 1 };
+  if (!PAGES[page]) return;
 
   var key = 'quiz-session-' + page;
   var session = sessionStorage.getItem(key);
@@ -78,6 +79,7 @@
 
   watch('yesResult', 'qualify');
   watch('sResult', 'qualify');
+  watch('sQualify', 'qualify');
   watch('noResult', 'disqualify');
   watch('sIneligible', 'disqualify');
   watch('debtYesResult', 'debt');
@@ -99,7 +101,7 @@
 
     var btn = event.target.closest('button');
     if (!btn) return;
-    if (page === 'glo2' || page === 'glo5') {
+    if (page === 'glo2' || page === 'glo5' || page === 'glott') {
       var q = btn.getAttribute('data-q');
       var value = btn.getAttribute('data-v');
       if ((q !== 'q1' && q !== 'q2' && q !== 'q3') || (value !== 'yes' && value !== 'no')) return;
@@ -116,6 +118,19 @@
     else if (screen.id === 's2') state.q2 = answer;
     else if (screen.id === 'sDebt') state.q3 = answer;
     else return;
+    send();
+  });
+
+  document.addEventListener('quiz:update', function (event) {
+    var detail = event.detail || {};
+    ['q1', 'q2', 'q3'].forEach(function (key) {
+      if (detail[key] === 'yes' || detail[key] === 'no') state[key] = detail[key];
+    });
+    if (detail.reached && state[detail.reached + 'Reached'] != null) state[detail.reached + 'Reached'] = true;
+    if (detail.click && state[detail.click + 'Click'] != null) {
+      state[detail.click + 'Click'] = true;
+      state[detail.click + 'Reached'] = true;
+    }
     send();
   });
 
