@@ -1,6 +1,6 @@
 import { randomBytes } from 'crypto';
 import { del, list, put } from '@vercel/blob';
-import { listEvents, resultFor } from './quiz-store.js';
+import { forgetSessions, indexRecords, listEvents, resultFor } from './quiz-store.js';
 
 const PAGES = new Set(['glo2', 'glo2b', 'mix']);
 const RANGES = new Set(['today', 'yesterday', '7', '14']);
@@ -166,6 +166,7 @@ export async function addSamples(input) {
       contentType: 'application/json',
       cacheControlMaxAge: 60
     })));
+    await indexRecords(batch);
   }
   return records;
 }
@@ -180,6 +181,7 @@ export async function removeSamples() {
   for (let i = 0; i < paths.length; i += 50) {
     await del(paths.slice(i, i + 50));
   }
+  await forgetSessions(paths.map((pathname) => String(pathname).split('/').pop().replace(/\.json$/, '')));
   return paths.length;
 }
 

@@ -111,6 +111,163 @@ export function buildRecord(existing, event, now) {
   return record;
 }
 
+const DAY_PREFIX = 'quiz-days/';
+const READY_PATH = DAY_PREFIX + '_ready.json';
+const ZONE = 'America/New_York';
+const DAY_SPAN = 16;
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+export function etDay(iso) {
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return etDay(new Date().toISOString());
+  return new Intl.DateTimeFormat('en-CA', {
+    timeZone: ZONE,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  }).format(date);
+}
+
+function shiftDay(key, days) {
+  const [y, m, d] = key.split('-').map(Number);
+  return new Date(Date.UTC(y, m - 1, d + days)).toISOString().slice(0, 10);
+}
+
+function recentDayKeys() {
+  const today = etDay(new Date().toISOString());
+  return Array.from({ length: DAY_SPAN }, (_, i) => shiftDay(today, -i));
+}
+
+function dayPath(key) {
+  return DAY_PREFIX + key + '.json';
+}
+
+const blobPut = (pathname, body) => put(pathname, body, {
+  access: 'public',
+  addRandomSuffix: false,
+  allowOverwrite: true,
+  contentType: 'application/json',
+  cacheControlMaxAge: 0
+});
+
+async function readSafe(pathname) {
+  try {
+    return await readEvent(pathname);
+  } catch (err) {
+    return null;
+  }
+}
+
+async function writeDay(doc) {
+  await blobPut(dayPath(doc.date), JSON.stringify(doc));
+}
+
+async function mergeDay(key, mutate) {
+  const pathname = dayPath(key);
+  for (let attempt = 0; attempt < 6; attempt++) {
+    const current = await readSafe(pathname);
+    const doc = current && current.bySession ? current : { date: key, bySession: {} };
+    const stamp = mutate(doc);
+    if (!stamp) return;
+    doc.updatedAt = new Date().toISOString();
+    await writeDay(doc);
+    const check = await readSafe(pathname);
+    if (stamp(check)) return;
+    await wait(40 * (attempt + 1));
+  }
+}
+
+export async function indexRecords(records) {
+  const groups = new Map();
+  (records || []).forEach((record) => {
+    if (!record || !record.session || !record.startedAt) return;
+    const key = etDay(record.startedAt);
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(record);
+  });
+  for (const [key, rows] of groups) {
+    await mergeDay(key, (doc) => {
+      rows.forEach((record) => {
+        const prev = doc.bySession[record.session];
+        if (prev && String(prev.updatedAt) > String(record.updatedAt)) return;
+        doc.bySession[record.session] = record;
+      });
+      return (check) => rows.every((record) => {
+        const saved = check && check.bySession && check.bySession[record.session];
+        return saved && String(saved.updatedAt) >= String(record.updatedAt);
+      });
+    });
+  }
+}
+
+export async function forgetSessions(sessions) {
+  const drop = new Set(sessions || []);
+  if (!drop.size) return;
+  for (const key of recentDayKeys()) {
+    await mergeDay(key, (doc) => {
+      let changed = false;
+      drop.forEach((session) => {
+        if (doc.bySession[session]) {
+          delete doc.bySession[session];
+          changed = true;
+        }
+      });
+      if (!changed) return null;
+      return (check) => !check || !check.bySession || Array.from(drop).every((session) => !check.bySession[session]);
+    });
+  }
+}
+
+async function listSessionBlobs() {
+  const blobs = [];
+  let cursor;
+  do {
+    const page = await list({ prefix: 'quiz/', limit: 1000, cursor });
+    blobs.push(...page.blobs);
+    cursor = page.hasMore ? page.cursor : undefined;
+  } while (cursor);
+  return blobs;
+}
+
+async function readAllSessions() {
+  const blobs = await listSessionBlobs();
+  const events = [];
+  for (let i = 0; i < blobs.length; i += 40) {
+    const batch = blobs.slice(i, i + 40);
+    const rows = await Promise.all(batch.map((blob) => readSafe(blob.pathname)));
+    rows.forEach((row) => {
+      if (row && row.session && PAGES.has(row.page)) events.push(row);
+    });
+  }
+  return events;
+}
+
+async function rebuildDayIndex() {
+  const started = Date.now();
+  const events = await readAllSessions();
+  const groups = new Map();
+  events.forEach((event) => {
+    const key = etDay(event.startedAt || event.updatedAt);
+    if (!groups.has(key)) groups.set(key, { date: key, bySession: {} });
+    const bucket = groups.get(key).bySession;
+    const prev = bucket[event.session];
+    if (!prev || String(prev.updatedAt) <= String(event.updatedAt)) bucket[event.session] = event;
+  });
+  for (const doc of groups.values()) await writeDay(doc);
+  const fresh = (await listSessionBlobs()).filter((blob) => new Date(blob.uploadedAt).getTime() >= started - 1000);
+  for (let i = 0; i < fresh.length; i += 40) {
+    const rows = await Promise.all(fresh.slice(i, i + 40).map((blob) => readSafe(blob.pathname)));
+    await indexRecords(rows.filter((row) => row && row.session && PAGES.has(row.page)));
+  }
+  await blobPut(READY_PATH, JSON.stringify({
+    rebuiltAt: new Date().toISOString(),
+    events: events.length,
+    days: groups.size
+  }));
+}
+
+let rebuilding = null;
+
 export async function saveEvent(event) {
   const pathname = `quiz/${event.session}.json`;
   const now = new Date().toISOString();
@@ -128,32 +285,23 @@ export async function saveEvent(event) {
     contentType: 'application/json',
     cacheControlMaxAge: 60
   });
+  await indexRecords([record]);
   return record;
 }
 
 export async function listEvents() {
-  const blobs = [];
-  let cursor;
-  do {
-    const page = await list({ prefix: 'quiz/', limit: 1000, cursor });
-    blobs.push(...page.blobs);
-    cursor = page.hasMore ? page.cursor : undefined;
-  } while (cursor);
-
+  if (!await readSafe(READY_PATH)) {
+    if (!rebuilding) rebuilding = rebuildDayIndex().finally(() => { rebuilding = null; });
+    await rebuilding;
+  }
+  const docs = await Promise.all(recentDayKeys().map((key) => readSafe(dayPath(key))));
   const events = [];
-  for (let i = 0; i < blobs.length; i += 40) {
-    const batch = blobs.slice(i, i + 40);
-    const rows = await Promise.all(batch.map(async (blob) => {
-      try {
-        return await readEvent(blob.pathname);
-      } catch (err) {
-        return null;
-      }
-    }));
-    rows.forEach((row) => {
+  docs.forEach((doc) => {
+    if (!doc || !doc.bySession) return;
+    Object.values(doc.bySession).forEach((row) => {
       if (row && PAGES.has(row.page)) events.push(row);
     });
-  }
+  });
   events.sort((a, b) => String(b.updatedAt).localeCompare(String(a.updatedAt)));
   return events;
 }
