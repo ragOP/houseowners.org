@@ -1,7 +1,7 @@
 (function () {
   var script = document.currentScript;
   var page = script && script.getAttribute('data-page');
-  if (page !== 'glo2' && page !== 'glo2b' && page !== 'glo3b' && page !== 'glo4b' && page !== 'tobe' && page !== 'abc') return;
+  if (page !== 'glo2' && page !== 'glo2b' && page !== 'glo3b' && page !== 'glo4b' && page !== 'glo5' && page !== 'tobe' && page !== 'abc') return;
 
   var key = 'quiz-session-' + page;
   var session = sessionStorage.getItem(key);
@@ -99,7 +99,7 @@
 
     var btn = event.target.closest('button');
     if (!btn) return;
-    if (page === 'glo2') {
+    if (page === 'glo2' || page === 'glo5') {
       var q = btn.getAttribute('data-q');
       var value = btn.getAttribute('data-v');
       if ((q !== 'q1' && q !== 'q2' && q !== 'q3') || (value !== 'yes' && value !== 'no')) return;
