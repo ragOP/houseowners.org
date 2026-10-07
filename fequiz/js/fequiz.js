@@ -17,12 +17,19 @@
         document.dispatchEvent(new CustomEvent("quiz:update", { detail: detail }));
     }
 
+    var TRACK = { qualify: "qualify", debt: "debt-yes", sleep: "debt-no" };
+
     function claimButton(link, kind) {
-        chat.showOptions(["Click Here To Claim It Now →"], chat.position.HORIZONTAL, false, function () {
-            track({ click: kind });
-            chat.goToPage(link, false);
-        }, null, function (block, option) {
-            option.setAttribute("id", "ClaimNow");
+        chat.showOptions(["Click Here To Claim It Now →"], chat.position.HORIZONTAL, false, null, null, function (block, option) {
+            var a = document.createElement("a");
+            a.id = "ClaimNow";
+            a.href = link;
+            a.className = option.className;
+            a.setAttribute("data-option-id", option.getAttribute("data-option-id") || "");
+            a.setAttribute("data-option-index", option.getAttribute("data-option-index") || "0");
+            a.setAttribute("data-track", TRACK[kind] || kind);
+            a.textContent = option.textContent;
+            option.replaceWith(a);
         });
     }
 
