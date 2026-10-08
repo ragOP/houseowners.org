@@ -1,7 +1,7 @@
 (function () {
   var script = document.currentScript;
   var page = script && script.getAttribute('data-page');
-  var PAGES = { glo2: 1, glo2b: 1, glo3b: 1, glo4b: 1, glo5: 1, glott: 1, glott2: 1, tobe: 1, abc: 1, black: 1, gov1: 1, fequiz: 1, ch3: 1, ctc: 1 };
+  var PAGES = { glo2: 1, glo2b: 1, glo3b: 1, glo4b: 1, glo5: 1, glott: 1, glott2: 1, tobe: 1, abc: 1, black: 1, gov1: 1, fequiz: 1, ch3: 1, ctc: 1, simple2: 1 };
   if (!PAGES[page]) return;
 
   var key = 'quiz-session-' + page;

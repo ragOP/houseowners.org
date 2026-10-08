@@ -6,8 +6,8 @@ export const QUESTIONS = {
   q3: 'Do you have over $8k in credit card debt?'
 };
 
-const PAGES = new Set(['glo2', 'glo2b', 'glo3b', 'glo4b', 'glo5', 'glott', 'glott2', 'tobe', 'abc', 'black', 'gov1', 'fequiz', 'ch3', 'ctc']);
-const DEBT_PAGES = new Set(['glo2', 'glo2b', 'glo3b', 'glo4b', 'glo5', 'black', 'gov1', 'fequiz', 'ch3', 'ctc']);
+const PAGES = new Set(['glo2', 'glo2b', 'glo3b', 'glo4b', 'glo5', 'glott', 'glott2', 'tobe', 'abc', 'black', 'gov1', 'fequiz', 'ch3', 'ctc', 'simple2']);
+const DEBT_PAGES = new Set(['glo2', 'glo2b', 'glo3b', 'glo4b', 'glo5', 'black', 'gov1', 'fequiz', 'ch3', 'ctc', 'simple2']);
 const ANSWERS = new Set(['yes', 'no']);
 const SESSION = /^[a-zA-Z0-9-]{16,80}$/;
 

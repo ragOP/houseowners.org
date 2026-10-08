@@ -16,6 +16,7 @@
     { "source": "/fequiz", "destination": "/fequiz.html" },
     { "source": "/ch3", "destination": "/ch3.html" },
     { "source": "/gov1", "destination": "/gov1.html" },
-    { "source": "/black", "destination": "/black.html" }
+    { "source": "/black", "destination": "/black.html" },
+    { "source": "/simple2", "destination": "/simple2.html" }
   ]
 }
