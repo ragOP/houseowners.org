@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<!--
+  Refi bridge page v2 (1–3% / end of day angle)
+  Destination for EVERY CTA: https://govratealerts.com/  (same tab)
+  No form fields, inputs, quizzes, or PII capture on this page BY DESIGN.
+  GovRateAlerts asks all qualifying questions; this page only builds trust.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>2026 Rate Review — Drop Your Home Loan Interest By 1–3%</title>
+<meta name="description" content="Smart homeowners are dropping their mortgage interest by 1–3%. Here's how you can do it too — often by end of the day. Free to check, about a minute.">
+<meta name="theme-color" content="#0b3d6b">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0b3d6b; --navy-2:#0f4c84; --red:#b3141b; --green:#12a03a; --green-d:#0d8a30;
+    --ink:#16202b; --muted:#56616d; --line:#e3e6ea; --bg:#f4f5f7; --card:#fff; --star:#f5b301;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:Poppins,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;
+    padding-bottom:calc(84px + env(safe-area-inset-bottom));}
+  a{color:inherit}
+  .adv-strip{background:#fff;text-align:center;font-size:11px;letter-spacing:.04em;color:#6b7480;padding:3px 0;border-bottom:1px solid var(--line)}
+  .topbar{background:var(--navy);color:#fff;border-bottom:4px solid var(--red)}
+  .topbar .in{max-width:720px;margin:0 auto;padding:11px 18px;display:flex;align-items:center;justify-content:center;gap:9px}
+  .wordmark{font-weight:700;font-size:17px;letter-spacing:.01em}
+  .wordmark span{opacity:.75;font-weight:500}
+  .counter-bar{background:#fff;border-bottom:1px solid var(--line);text-align:center;font-size:13.5px;padding:8px 14px;color:#2a3540}
+  .counter-bar b{color:var(--green-d);font-variant-numeric:tabular-nums}
+  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#1fbf4b;margin-right:7px;vertical-align:1px;box-shadow:0 0 0 0 rgba(31,191,75,.6);animation:pulse 1.8s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(31,191,75,.55)}70%{box-shadow:0 0 0 8px rgba(31,191,75,0)}100%{box-shadow:0 0 0 0 rgba(31,191,75,0)}}
+  @media (prefers-reduced-motion:reduce){.dot{animation:none}}
+
+  main{max-width:640px;margin:0 auto;padding:0 16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:22px 18px;margin:16px 0}
+  .hero{text-align:center;padding-top:20px}
+  .kicker{display:inline-block;background:var(--red);color:#fff;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;padding:3px 9px;border-radius:3px}
+  .rating{display:flex;align-items:center;justify-content:center;gap:6px;font-size:13px;color:var(--muted);margin:12px 0 4px;flex-wrap:wrap}
+  .rating strong{color:var(--ink)}
+  .stars{color:var(--star);letter-spacing:1px;font-size:15px;line-height:1}
+  h1{font-size:23px;line-height:1.22;font-weight:800;color:var(--navy);margin:10px 0 10px;letter-spacing:-.015em}
+  h1 .nb{white-space:nowrap}
+  @media(min-width:520px){h1{font-size:28px}}
+  .dek{font-size:16px;color:#2f3a46;margin:0 auto 16px;max-width:520px}
+  .hero-svg{display:block;width:100%;max-width:360px;height:auto;margin:4px auto 16px}
+
+  .cta{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:58px;padding:14px 20px;
+    background:var(--green);color:#fff;text-decoration:none;font-weight:700;font-size:18.5px;border-radius:8px;
+    box-shadow:0 3px 0 var(--green-d),0 8px 18px rgba(18,160,58,.25);transition:transform .08s,background .15s}
+  .cta:hover{background:#14ad40}
+  .cta:active{transform:translateY(2px);box-shadow:0 1px 0 var(--green-d)}
+  .cta:focus-visible{outline:3px solid #ffb703;outline-offset:3px}
+  .cta svg{flex:none}
+  .cta-sub{font-size:13px;color:var(--muted);margin:9px 0 0;text-align:center}
+  .secure{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;font-size:12.5px;color:#3c4752;margin-top:12px}
+  .secure span{display:inline-flex;align-items:center;gap:5px}
+  .secure svg{color:var(--green-d)}
+
+  .press{margin:18px -18px -22px;padding:14px 12px 16px;background:#f7f8f9;border-top:1px solid var(--line);border-radius:0 0 10px 10px}
+  .press p{margin:0 0 8px;font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:#8a939c;text-align:center}
+  .logos{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px 20px;filter:grayscale(1);opacity:.72}
+  .lg{color:#333;line-height:1;user-select:none}
+  .lg-cnn{font:900 22px/1 "Arial Black",Arial,sans-serif;letter-spacing:-1px}
+  .lg-fox{font:900 20px/1 Impact,"Arial Black",sans-serif;letter-spacing:1px}
+  .lg-fox small{display:block;font:700 7px/1 Arial,sans-serif;letter-spacing:2px;margin-top:1px}
+  .lg-usa{display:inline-flex;align-items:center;gap:5px;font:800 14px/1 Arial,sans-serif;letter-spacing:.5px}
+  .lg-usa i{width:16px;height:16px;border-radius:50%;background:#333;display:inline-block}
+  .lg-nyt{font:700 19px/1 "Old English Text MT","UnifrakturMaguntia",Georgia,serif;font-style:italic}
+  .lg-cnbc{font:800 16px/1 Arial,sans-serif;letter-spacing:.5px}
+  .lg-yahoo{font:900 19px/1 Arial,sans-serif;font-style:italic}
+
+  h2{font-size:21px;line-height:1.25;color:var(--navy);margin:0 0 14px;font-weight:700}
+  .steps{list-style:none;margin:0;padding:0;counter-reset:s}
+  .steps li{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-top:1px dashed var(--line)}
+  .steps li:first-child{border-top:0;padding-top:2px}
+  .num{flex:none;width:34px;height:34px;border-radius:50%;background:var(--navy);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:16px}
+  .steps p{margin:5px 0 0;font-size:16px;font-weight:500}
+
+  .why{list-style:none;margin:0 0 18px;padding:0}
+  .why li{position:relative;padding:0 0 0 32px;margin:0 0 14px;font-size:15.5px}
+  .why li::before{content:"";position:absolute;left:0;top:2px;width:21px;height:21px;border-radius:50%;
+    background:var(--green) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23fff' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round' d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/13px no-repeat}
+  .why small{color:var(--muted);font-size:12.5px}
+
+  .trust-line{display:flex;align-items:center;gap:12px;background:#eef6f0;border:1px solid #cfe8d6;border-radius:8px;padding:12px 14px;margin:0 0 14px}
+  .trust-line .big{font-size:30px;font-weight:800;color:var(--ink);line-height:1}
+  .trust-line div p{margin:2px 0 0;font-size:13px;color:#33503d}
+
+  .reviews{display:grid;gap:12px}
+  .review{background:#fff;border:1px solid var(--line);border-radius:10px;padding:15px 16px}
+  .review .stars{font-size:15px}
+  .review blockquote{margin:8px 0 10px;font-size:15.5px;line-height:1.5}
+  .who{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted)}
+  .av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px}
+  .who b{color:var(--ink);font-weight:600;display:block;line-height:1.2}
+  .verified{color:var(--green-d);font-weight:600}
+
+  .closer{background:#fffbea;border:1px solid #f3e2a3;border-left:5px solid #e7b416;border-radius:8px;padding:16px;margin:0 0 18px;font-size:16px}
+  .closer p{margin:0}
+
+  footer{max-width:640px;margin:8px auto 0;padding:20px 16px 26px;text-align:center;font-size:12px;color:#6b7480;border-top:1px solid var(--line)}
+  footer p{margin:0 0 10px}
+  footer nav a{color:#4a5560;margin:0 8px}
+
+  .sticky{position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(255,255,255,.97);border-top:1px solid var(--line);
+    box-shadow:0 -6px 18px rgba(0,0,0,.08);padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+    transform:translateY(110%);transition:transform .25s ease}
+  .sticky.show{transform:none}
+  .sticky .cta{min-height:54px;font-size:17px;max-width:640px;margin:0 auto}
+
+  .overlay{position:fixed;inset:0;background:rgba(10,20,30,.55);display:none;align-items:center;justify-content:center;z-index:80;padding:20px}
+  .overlay:target{display:flex}
+  .overlay .box{background:#fff;border-radius:10px;max-width:520px;width:100%;padding:20px;font-size:14px;max-height:80vh;overflow:auto}
+  .overlay h3{margin:0 0 8px;color:var(--navy)}
+  .overlay .close{display:inline-block;margin-top:12px;font-weight:600;color:var(--navy-2)}
+
+  @media (max-width:400px){ .cta{font-size:16.5px;padding:14px 14px;gap:8px} h1{font-size:25px} }
+  @media (min-width:700px){
+    body{padding-bottom:0}
+    h1{font-size:36px}
+    .dek{font-size:17px}
+    .card{padding:30px 34px}
+    .press{margin:22px -34px -30px}
+    .cta{max-width:460px;margin:0 auto}
+    .reviews{grid-template-columns:1fr 1fr}
+    .sticky{display:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="adv-strip">Advertorial</div>
+<header class="topbar">
+  <div class="in">
+    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12 3 2 11h3v9h5v-6h4v6h5v-9h3z"/></svg>
+    <div class="wordmark">2026 Rate Review <span>· Rate Check</span></div>
+  </div>
+</header>
+<div class="counter-bar" role="status" aria-live="off">
+  <span class="dot" aria-hidden="true"></span><b id="count">12,847</b> homeowners checked this week
+</div>
+
+<main>
+  <section class="card hero" aria-labelledby="h1">
+    <span class="kicker">Advertorial</span>
+    <div class="rating" aria-label="Rated 4.8 out of 5">
+      <strong>4.8</strong><span class="stars" aria-hidden="true">★★★★★</span><span>2,316 reviews</span>
+    </div>
+    <h1 id="h1">Here's How You Can Drop Your Home Loan Interest By 1–3% By End Of The Day</h1>
+    <p class="dek">Smart homeowners are dropping their mortgage interest by 1–3%. Here's how you can do it too.</p>
+
+    <!-- Inline hero graphic: house + rate dropping -->
+    <svg class="hero-svg" viewBox="0 0 360 170" role="img" aria-label="Illustration of a home with mortgage interest dropping 1 to 3 percent">
+      <rect x="0" y="0" width="360" height="170" rx="12" fill="#eef3f8"/>
+      <g transform="translate(26,32)">
+        <path d="M60 0 0 46h14v68h92V46h14z" fill="#0b3d6b"/>
+        <rect x="46" y="70" width="28" height="44" rx="2" fill="#f4f5f7"/>
+        <rect x="22" y="56" width="18" height="18" rx="2" fill="#cfe0f0"/>
+        <rect x="80" y="56" width="18" height="18" rx="2" fill="#cfe0f0"/>
+        <rect x="86" y="8" width="12" height="24" fill="#0b3d6b"/>
+      </g>
+      <g transform="translate(170,26)">
+        <rect width="166" height="120" rx="10" fill="#fff" stroke="#dbe3ea"/>
+        <text x="14" y="24" font-family="Poppins,Arial,sans-serif" font-size="11" fill="#56616d" font-weight="600">INTEREST</text>
+        <text x="14" y="48" font-family="Poppins,Arial,sans-serif" font-size="20" fill="#b3141b" font-weight="800" text-decoration="line-through">1–3%</text>
+        <polyline points="16,62 50,66 80,76 112,82 148,90" fill="none" stroke="#12a03a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M151 91l-13 1 5-10z" fill="#12a03a"/>
+        <text x="14" y="111" font-family="Poppins,Arial,sans-serif" font-size="12" fill="#0d8a30" font-weight="700">Drop by end of day?</text>
+      </g>
+    </svg>
+
+    <a class="cta" href="https://govratealerts.com/" data-cta="hero">
+      Click Here To Start
+      <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M5 12h13M13 6l6 6-6 6"/></svg>
+    </a>
+    <p class="cta-sub">Continues to the rate check — many people finish today</p>
+    <div class="secure">
+      <span><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5z"/></svg>Free to check</span>
+      <span><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 5v5.4l4 2.4-1 1.6-5-3V7z"/></svg>About a minute</span>
+      <span><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17 9V7a5 5 0 0 0-10 0v2H5v13h14V9zM9 7a3 3 0 0 1 6 0v2H9z"/></svg>Secure next step</span>
+    </div>
+
+    <div class="press" aria-label="As seen on">
+      <p>As seen on</p>
+      <div class="logos" aria-hidden="true">
+        <span class="lg lg-cnn">CNN</span>
+        <span class="lg lg-fox">FOX<small>BUSINESS</small></span>
+        <span class="lg lg-usa"><i></i>USA TODAY</span>
+        <span class="lg lg-nyt">The New York Times</span>
+        <span class="lg lg-cnbc">CNBC</span>
+        <span class="lg lg-yahoo">yahoo!</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="card" aria-labelledby="how">
+    <h2 id="how">How it works</h2>
+    <ol class="steps">
+      <li><span class="num" aria-hidden="true">1</span><p>Tap the button below</p></li>
+      <li><span class="num" aria-hidden="true">2</span><p>Answer a few quick questions on the next page</p></li>
+      <li><span class="num" aria-hidden="true">3</span><p>See if you can drop your interest by 1–3% — often by end of the day</p></li>
+    </ol>
+  </section>
+
+  <section class="card" aria-labelledby="why">
+    <h2 id="why">Why people check</h2>
+    <ul class="why">
+      <li>Banks don’t usually call you to lower your rate. The difference is often their cut, not “just interest.”</li>
+      <li>Smart homeowners who check often drop their mortgage interest by <strong>1–3%</strong>. <small>Results vary.</small></li>
+      <li>The check takes about a minute, and you can start today — many people finish by end of the day.</li>
+    </ul>
+    <a class="cta" href="https://govratealerts.com/" data-cta="mid">
+      Click Here To Start
+      <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M5 12h13M13 6l6 6-6 6"/></svg>
+    </a>
+    <p class="cta-sub">Continues to the rate check — many people finish today</p>
+  </section>
+
+  <section class="card" aria-labelledby="rev">
+    <h2 id="rev">What homeowners are saying</h2>
+    <div class="trust-line">
+      <div class="big">4.8</div>
+      <div>
+        <span class="stars" aria-label="4.8 out of 5 stars">★★★★★</span>
+        <p>Trusted by homeowners looking to drop 1–3% in 2026</p>
+      </div>
+    </div>
+    <div class="reviews">
+      <figure class="review" style="margin:0">
+        <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+        <blockquote>“I didn’t know I could drop my interest like that. I checked in the morning and had my number the same day.”</blockquote>
+        <figcaption class="who"><span class="av" style="background:#0f4c84" aria-hidden="true">D</span><span><b>Denise R.</b><span class="verified">✓ Homeowner</span></span></figcaption>
+      </figure>
+      <figure class="review" style="margin:0">
+        <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+        <blockquote>“Same house, same loan — my interest came down. That’s the 1–3% people are talking about.”</blockquote>
+        <figcaption class="who"><span class="av" style="background:#7a4b1e" aria-hidden="true">M</span><span><b>Mark T.</b><span class="verified">✓ Homeowner</span></span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="card" aria-label="Worth checking">
+    <div class="closer"><p>Your bank isn’t going to bring this up first. If you’ve had your mortgage a while and they’ve never called to lower the rate, this is how you can drop your interest by 1–3% — starting today.</p></div>
+    <a class="cta" href="https://govratealerts.com/" data-cta="closer">
+      Click Here To Start
+      <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M5 12h13M13 6l6 6-6 6"/></svg>
+    </a>
+    <p class="cta-sub">Continues to the rate check — many people finish today</p>
+  </section>
+</main>
+
+<footer>
+  <p>This page is an advertorial for information only. It is not a lender, a government program, or a guarantee of savings. The next page asks a few questions to check available rates. Results vary. Testimonials reflect individual experiences and are not typical. Publication names are shown for topic awareness and do not imply endorsement.</p>
+  <nav><a href="#privacy">Privacy</a>·<a href="#terms">Terms</a></nav>
+  <p style="margin-top:10px">© 2026 Rate Check · 2026 Rate Review</p>
+</footer>
+
+<div class="sticky" id="sticky">
+  <a class="cta" href="https://govratealerts.com/" data-cta="sticky">
+    Click Here To Start
+    <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M5 12h13M13 6l6 6-6 6"/></svg>
+  </a>
+</div>
+
+<div class="overlay" id="privacy" role="dialog" aria-labelledby="pt"><div class="box">
+  <h3 id="pt">Privacy</h3>
+  <p>This page does not collect personal information and has no forms. Clicking a button takes you to the rate check at govratealerts.com, which has its own privacy policy that applies to any information you choose to provide there.</p>
+  <a class="close" href="#">Close</a>
+</div></div>
+<div class="overlay" id="terms" role="dialog" aria-labelledby="tt"><div class="box">
+  <h3 id="tt">Terms</h3>
+  <p>This advertorial is for general information only and is not financial advice, a loan offer, or a government program. Rates, savings, and eligibility depend on your situation and lender terms. Results vary.</p>
+  <a class="close" href="#">Close</a>
+</div></div>
+
+<script>
+(function(){
+  // Live-feel counter: base number + small ticks
+  var el=document.getElementById('count'), n=12847;
+  function fmt(x){return x.toLocaleString('en-US')}
+  function tick(){ n+=1+Math.floor(Math.random()*3); el.textContent=fmt(n); setTimeout(tick,3500+Math.random()*4500); }
+  setTimeout(tick,2500);
+
+  // Sticky mobile CTA: show after hero CTA scrolls out of view
+  var sticky=document.getElementById('sticky'), hero=document.querySelector('[data-cta="hero"]');
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(e){ sticky.classList.toggle('show',!e[0].isIntersecting && e[0].boundingClientRect.top<0); }).observe(hero);
+  } else { sticky.classList.add('show'); }
+
+  // Pass ad click params (utm_*, gclid, fbclid, etc.) through to the destination
+  var qs=location.search;
+  if(qs && qs.length>1){
+    document.querySelectorAll('a[href^="https://govratealerts.com/"]').forEach(function(a){ a.href='https://govratealerts.com/'+qs; });
+  }
+})();
+</script>
+</body>
+</html>

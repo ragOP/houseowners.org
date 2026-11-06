@@ -17,6 +17,8 @@
     { "source": "/ch3", "destination": "/ch3.html" },
     { "source": "/gov1", "destination": "/gov1.html" },
     { "source": "/black", "destination": "/black.html" },
-    { "source": "/simple2", "destination": "/simple2.html" }
+    { "source": "/simple2", "destination": "/simple2.html" },
+    { "source": "/vc1", "destination": "/vc1.html" },
+    { "source": "/vc2", "destination": "/vc2.html" }
   ]
 }
